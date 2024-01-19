@@ -1,3 +1,5 @@
+  import 'dart:io';
+
 import 'package:biori/pages/javiEditText.dart';
 import 'package:biori/pages/register_page.dart';
 import 'package:flutter/gestures.dart';
@@ -42,16 +44,20 @@ class _LoginPageState extends State<LoginPage> {
     return JaviForms.inputBaseWidget(
       context,
       "username",
-      "Username",
+      "Email corporativo",
       (onValidateVal) {
+        final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
         if (onValidateVal.isEmpty) {
-          return 'Username can\'t be empty.';
+          return 'Email no puede estar vacío.';
+        } else if (!regExp.hasMatch(onValidateVal)) {
+          return 'El email ha de ser el corporativo.';
         }
+        print (regExp.hasMatch(onValidateVal));
 
         return null;
       },
       (onSavedVal) => {username = onSavedVal},
-      prefixIcon: const Icon(Icons.person),
+      prefixIcon: const Icon(Icons.email),
     );
   }
 
@@ -62,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
       "Password",
       (onValidateVal) {
         if (onValidateVal.isEmpty) {
-          return 'password can\'t be empty.';
+          return 'La contraseña no puede estar vacía.';
         }
 
         return null;
@@ -80,6 +86,19 @@ class _LoginPageState extends State<LoginPage> {
       ),
       obscureText: hidePassword,
     );
+  }
+
+  _submitForm() {
+    if (globalFormKey.currentState!.validate()) {
+      globalFormKey.currentState!.save();
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login enviado'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 
   Widget _loginUI(BuildContext context) {
@@ -162,12 +181,10 @@ class _LoginPageState extends State<LoginPage> {
             height: 20,
           ),
           Center(
-            child: FormHelper.submitButton(
+            child: JaviForms.submitButton(
+              context,
               "Login",
-              () {},
-              btnColor: Theme.of(context).primaryColor,
-              txtColor: Colors.white,
-              borderColor: Theme.of(context).primaryColor,
+              _submitForm,
             ),
           ),
           const SizedBox(

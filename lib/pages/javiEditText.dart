@@ -26,7 +26,19 @@ class JaviForms {
       textColor: Theme.of(context).primaryColor,
     );
   }
+
+  static Widget submitButton (BuildContext context, String text, Function action) {
+    return FormHelper.submitButton(
+      "Login",
+      action,
+      btnColor: Theme.of(context).primaryColor,
+      txtColor: Colors.white,
+      borderColor: Theme.of(context).primaryColor,
+    );
+  }
 }
+
+
 
 class JaviPaddings{
   static const S = 4;
