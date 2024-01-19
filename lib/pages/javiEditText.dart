@@ -41,10 +41,10 @@ class JaviForms {
 
 
 class JaviPaddings{
-  static const S = 4;
-  static const M = 8;
-  static const L = 12;
-  static const XL = 16;
+  static const double S = 4;
+  static const double M = 8;
+  static const double L = 12;
+  static const double XL = 20;
 }
 
 class JaviStyle{
