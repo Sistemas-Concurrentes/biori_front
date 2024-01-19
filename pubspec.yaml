@@ -32,6 +32,8 @@ dependencies:
     sdk: flutter
   api_cache_manager: ^1.0.2
   snippet_coder_utils: ^1.0.9
+  http: ^0.13.3
+
 
 
 
@@ -51,6 +53,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
+# For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
@@ -65,7 +68,6 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
