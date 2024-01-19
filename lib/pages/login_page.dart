@@ -128,8 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.only(left: 20.0),
                     child: Text(
                       "Biori",
-                      style: TextStyle(
-                          fontSize: 28.0, fontWeight: FontWeight.bold),
+                      style: JaviStyle.titulo,
                     ),
                   ),
                 ),
@@ -139,13 +138,13 @@ class _LoginPageState extends State<LoginPage> {
 
           Padding(
             padding: const EdgeInsets.only(
-              top: 20.0,
+              top: JaviPaddings.XL,
             ),
             child: usernameEditText()
           ),
           Padding(
             padding: const EdgeInsets.only(
-              top: 20.0,
+              top: JaviPaddings.XL,
             ),
             child:passwordEditText()
           ),
@@ -153,8 +152,8 @@ class _LoginPageState extends State<LoginPage> {
             alignment: Alignment.bottomRight,
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 10.0,
-                right: 20.0,
+                top: JaviPaddings.L,
+                right: JaviPaddings.XL,
               ),
               child: RichText(
                 text: TextSpan(
@@ -178,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: JaviPaddings.XL,
           ),
           Center(
             child: JaviForms.submitButton(
@@ -188,21 +187,15 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           const SizedBox(
-            height: 20,
+            height: JaviPaddings.L,
           ),
           RichText(
             text: TextSpan(
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 14.0,
-              ),
+              style: JaviStyle.subcomentarios,
               children: <TextSpan>[
                 const TextSpan(
                   text: "¿No tienes una cuenta? ",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14.0,
-                  ),
+                  style: JaviStyle.granada1,
                 ),
                 TextSpan(
                   text: "Registrate",

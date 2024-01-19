@@ -53,10 +53,19 @@ class JaviStyle{
     color: Colors.white,
   );
 
+  static const TextStyle subcomentarios = TextStyle(
+    fontSize: 14,
+    color: Colors.grey,
+  );
+
   static const TextStyle url = TextStyle(
     color: Colors.black,
     fontSize: 14.0,
     decoration: TextDecoration.underline,
+  );
+
+  static const TextStyle titulo = TextStyle(
+  fontSize: 28.0, fontWeight: FontWeight.bold,
   );
 
 }
