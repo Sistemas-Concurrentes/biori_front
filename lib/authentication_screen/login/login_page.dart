@@ -1,8 +1,10 @@
-import 'package:biori/pages/javiEditText.dart';
-import 'package:biori/pages/register_page.dart';
+import 'package:biori/authentication_screen/login/user_stories/DoLogin.dart';
+import 'package:biori/style/javiEditText.dart';
+import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,67 +36,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  Widget usernameEditText() {
-    return JaviForms.inputBaseWidget(
-      context,
-      "username",
-      "Email corporativo",
-      (onValidateVal) {
-        final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
-        if (onValidateVal.isEmpty) {
-          return 'Email no puede estar vacío.';
-        } else if (!regExp.hasMatch(onValidateVal)) {
-          return 'El email ha de ser el corporativo.';
-        }
-        print (regExp.hasMatch(onValidateVal));
-
-        return null;
-      },
-      (onSavedVal) => {username = onSavedVal},
-      prefixIcon: const Icon(Icons.email),
-    );
-  }
-
-  Widget passwordEditText() {
-    return JaviForms.inputBaseWidget(
-      context,
-      "password",
-      "Password",
-      (onValidateVal) {
-        if (onValidateVal.isEmpty) {
-          return 'La contraseña no puede estar vacía.';
-        }
-
-        return null;
-      },
-      (onSavedVal) => {password = onSavedVal},
-      prefixIcon: const Icon(Icons.password),
-      suffixIcon: IconButton(
-        onPressed: () {
-          setState(() {
-            hidePassword = !hidePassword;
-          });
-        },
-        color: Theme.of(context).primaryColor.withOpacity(0.4),
-        icon: Icon(hidePassword ? Icons.visibility_off : Icons.visibility),
-      ),
-      obscureText: hidePassword,
-    );
-  }
-
-  _submitForm() {
-    if (globalFormKey.currentState!.validate()) {
-      globalFormKey.currentState!.save();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login enviado'),
-          duration: Duration(seconds: 2),
-        ),
-      );
-    }
   }
 
   Widget _loginUI(BuildContext context) {
@@ -212,6 +153,76 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
 
-class _myEditText {}
+  Widget usernameEditText() {
+    return JaviForms.inputBaseWidget(
+      context,
+      "username",
+      "Email corporativo",
+      (onValidateVal) {
+        final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
+        if (onValidateVal.isEmpty) {
+          return 'Email no puede estar vacío.';
+        } else if (!regExp.hasMatch(onValidateVal)) {
+          return 'El email ha de ser el corporativo.';
+        }
+
+        return null;
+      },
+      (onSavedVal) => {username = onSavedVal},
+      prefixIcon: const Icon(Icons.email),
+    );
+  }
+
+  Widget passwordEditText() {
+    return JaviForms.inputBaseWidget(
+      context,
+      "password",
+      "Password",
+      (onValidateVal) {
+        if (onValidateVal.isEmpty) {
+          return 'La contraseña no puede estar vacía.';
+        }
+
+        return null;
+      },
+      (onSavedVal) => {password = onSavedVal},
+      prefixIcon: const Icon(Icons.password),
+      suffixIcon: IconButton(
+        onPressed: () {
+          setState(() {
+            hidePassword = !hidePassword;
+          });
+        },
+        color: Theme.of(context).primaryColor.withOpacity(0.4),
+        icon: Icon(hidePassword ? Icons.visibility_off : Icons.visibility),
+      ),
+      obscureText: hidePassword,
+    );
+  }
+
+  _submitForm() async {
+    if (!globalFormKey.currentState!.validate()) {
+      return;
+    }
+    globalFormKey.currentState!.save();
+
+    Output output = await DoLogin().run(username, password);
+
+    if (output == Output.success) {
+      // Navigate to home Page
+    } else {
+      _errorSesionSnackBar();
+    }
+
+  }
+
+
+  _errorSesionSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Error al iniciar sesión'),
+      ),
+    );
+  }
+}
