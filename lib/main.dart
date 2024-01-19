@@ -1,5 +1,5 @@
-import 'package:biori/pages/login_page.dart';
-import 'package:biori/pages/register_page.dart';
+import 'package:biori/authentication_screen/login/login_page.dart';
+import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
 
