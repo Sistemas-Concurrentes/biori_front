@@ -1,12 +1,8 @@
-  import 'dart:io';
-
 import 'package:biori/pages/javiEditText.dart';
 import 'package:biori/pages/register_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
-import 'package:snippet_coder_utils/hex_color.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
