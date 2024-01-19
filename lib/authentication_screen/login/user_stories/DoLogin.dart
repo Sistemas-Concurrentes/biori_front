@@ -8,8 +8,6 @@ enum Output {
 }
 
 class DoLogin {
-
-
   Future<Output> run(username, password) async {
     Output output = Output.error;
 

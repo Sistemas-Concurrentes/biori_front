@@ -214,7 +214,6 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       _errorSesionSnackBar();
     }
-
   }
 
 
