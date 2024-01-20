@@ -4,7 +4,7 @@ import 'package:snippet_coder_utils/FormHelper.dart';
 class JaviForms {
   static Widget inputBaseWidget(BuildContext context, String keyName,
       String hintText, Function onValidate, Function onSaved, {
-        Icon? prefixIcon, Widget? suffixIcon, bool obscureText = false
+        Icon? prefixIcon, Widget? suffixIcon, bool obscureText = false, isNumeric = false
   }) {
 
     return FormHelper.inputFieldWidget(
@@ -23,6 +23,7 @@ class JaviForms {
       obscureText: obscureText,
       hintColor: Theme.of(context).primaryColor,
       textColor: Theme.of(context).primaryColor,
+      isNumeric: isNumeric,
     );
   }
 
@@ -35,7 +36,62 @@ class JaviForms {
       borderColor: Theme.of(context).primaryColor,
     );
   }
+
+  static Widget introducirFecha(BuildContext context, TextEditingController controller, String label) {
+    double paddingLeft = 20;
+    double paddingRight = 20;
+    double paddingTop = 0;
+    double paddingBottom = 0;
+
+    return Padding(
+        padding: EdgeInsets.only(
+        left: paddingLeft,
+        right: paddingRight,
+        top: paddingTop,
+        bottom: paddingBottom,
+      ),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          filled: true,
+          prefixIcon: Icon(Icons.calendar_today),
+          fillColor: Theme.of(context).scaffoldBackgroundColor,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),
+          ),
+
+        ),
+        onTap: ()  {
+          _selectDate(context, controller);
+        },
+        readOnly: true,
+      )
+    );
+  }
+
+  static Future _selectDate(BuildContext context, TextEditingController controller) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2100)
+    );
+
+    if(picked != null) {
+      controller.text = picked.toString().split(" ")[0];
+    }
+
+
+  }
+
 }
+
 
 
 
