@@ -1,5 +1,4 @@
 import 'package:biori/style/javiEditText.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
