@@ -52,13 +52,13 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(
               top: JaviPaddings.XL,
             ),
-            child: usernameEditText()
+            child: usernameEditText(_onValidateUsername),
           ),
           Padding(
             padding: const EdgeInsets.only(
               top: JaviPaddings.XL,
             ),
-            child:passwordEditText()
+            child:passwordEditText(_onValidatePassword)
           ),
           Align(
             alignment: Alignment.bottomRight,
@@ -129,38 +129,23 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget usernameEditText() {
+  Widget usernameEditText(Function onValidate) {
     return JaviForms.inputBaseWidget(
       context,
       "username",
       "Email corporativo",
-      (onValidateVal) {
-        final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
-        if (onValidateVal.isEmpty) {
-          return 'Email no puede estar vacío.';
-        } else if (!regExp.hasMatch(onValidateVal)) {
-          return 'El email ha de ser el corporativo.';
-        }
-
-        return null;
-      },
+      onValidate,
       (onSavedVal) => {username = onSavedVal},
       prefixIcon: const Icon(Icons.email),
     );
   }
 
-  Widget passwordEditText() {
+  Widget passwordEditText(Function onValidate) {
     return JaviForms.inputBaseWidget(
       context,
       "password",
       "Password",
-      (onValidateVal) {
-        if (onValidateVal.isEmpty) {
-          return 'La contraseña no puede estar vacía.';
-        }
-
-        return null;
-      },
+      onValidate,
       (onSavedVal) => {password = onSavedVal},
       prefixIcon: const Icon(Icons.password),
       suffixIcon: IconButton(
@@ -189,6 +174,25 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       _errorSesionSnackBar();
     }
+  }
+
+  _onValidateUsername(String onValidateVal) {
+    final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
+    if (onValidateVal.isEmpty) {
+      return 'Email no puede estar vacío.';
+    } else if (!regExp.hasMatch(onValidateVal)) {
+      return 'El email ha de ser el corporativo.';
+    }
+
+    return null;
+  }
+
+  _onValidatePassword(String onValidateVal) {
+    if (onValidateVal.isEmpty) {
+      return 'La contraseña no puede estar vacía.';
+    }
+
+    return null;
   }
 
 
