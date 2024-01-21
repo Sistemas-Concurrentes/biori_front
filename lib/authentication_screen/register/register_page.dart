@@ -1,3 +1,5 @@
+import 'package:biori/authentication_screen/login/login_page.dart';
+import 'package:biori/authentication_screen/register/user_stories/DoRegister.dart';
 import 'package:biori/style/javiEditText.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -60,6 +62,21 @@ class _RegisterPageState extends State<RegisterPage> {
           paddedWidget(passwordEditText(_onValidateConfirmPassword)),
           paddedWidget(timeEditText()),
           paddedWidget(phoneNumberEditText(_onValidatePhoneNumber)),
+          paddedWidget(JaviForms.submitButton(
+              context,
+              "Register",
+              _submitForm,
+            ),
+          ),
+          paddedWidget(WidgetsJavi().informacionSecundaria(context, "¿Ya tienes cuenta? ", "Login",
+            (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const LoginPage()),
+              );
+            }),
+          ),
         ],
       ),
     );
@@ -149,6 +166,21 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  _submitForm() async {
+    if (!globalFormKey.currentState!.validate()) {
+      return;
+    }
+    globalFormKey.currentState!.save();
+
+    Output output = await DoRegister().run(username, password, nombre, apellidos, fechaNacimiento, numeroTelefono);
+
+    if (output == Output.success) {
+      // Navigate to home Page
+    } else {
+      _errorSesionSnackBar();
+    }
+  }
+
   _onValidateUsername(String onValidateVal) {
     final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
     if (onValidateVal.isEmpty) {
@@ -208,5 +240,13 @@ class _RegisterPageState extends State<RegisterPage> {
       return 'Introduce un número de teléfono válido';
     }
     return null;
+  }
+
+  _errorSesionSnackBar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Error al registrar el usuario'),
+      ),
+    );
   }
 }
