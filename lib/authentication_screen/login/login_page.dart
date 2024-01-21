@@ -101,29 +101,14 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: JaviPaddings.L,
           ),
-          RichText(
-            text: TextSpan(
-              style: JaviStyle.subcomentarios,
-              children: <TextSpan>[
-                const TextSpan(
-                  text: "¿No tienes una cuenta? ",
-                  style: JaviStyle.granada1,
-                ),
-                TextSpan(
-                  text: "Registrate",
-                  style: JaviStyle.url,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
-                      );
-                    },
-                ),
-              ],
-            ),
-          ),
+          WidgetsJavi().informacionSecundaria(context, "¿No tienes cuenta?", "Registrate",
+                  (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterPage()),
+                );
+              }),
         ],
       ),
     );
