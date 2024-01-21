@@ -27,9 +27,9 @@ class JaviForms {
     );
   }
 
-  static Widget submitButton (BuildContext context, String text, Function action) {
+  static Widget submitButton (BuildContext context, String keyName, Function action) {
     return FormHelper.submitButton(
-      "Login",
+      keyName,
       action,
       btnColor: Theme.of(context).primaryColor,
       txtColor: Colors.white,
