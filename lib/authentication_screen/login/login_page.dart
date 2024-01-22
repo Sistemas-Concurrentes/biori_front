@@ -1,4 +1,5 @@
 import 'package:biori/authentication_screen/login/user_stories/DoLogin.dart';
+import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javiEditText.dart';
 import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:flutter/gestures.dart';
@@ -62,35 +63,9 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: JaviPaddings.L,
-                right: JaviPaddings.XL,
-              ),
-              child: RichText(
-                text: TextSpan(
-                  style: JaviStyle.granada1,
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: "Forgot Password?",
-                      style: JaviStyle.url,
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RegisterPage()),
-                          );
-                        },
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            child: WidgetsJavi().informacionSecundaria(context, "¿Olvidaste la contraseña?", "Recuperar", registerRoute),
           ),
-          const SizedBox(
-            height: JaviPaddings.XL,
-          ),
+
           Center(
             child: JaviForms.submitButton(
               context,
@@ -101,14 +76,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: JaviPaddings.L,
           ),
-          WidgetsJavi().informacionSecundaria(context, "¿No tienes cuenta?", "Registrate",
-                  (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegisterPage()),
-                );
-              }),
+          WidgetsJavi().informacionSecundaria(context, "¿No tienes cuenta?", "Registrate", registerRoute),
         ],
       ),
     );

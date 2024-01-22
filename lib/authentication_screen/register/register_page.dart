@@ -1,5 +1,5 @@
-import 'package:biori/authentication_screen/login/login_page.dart';
 import 'package:biori/authentication_screen/register/user_stories/DoRegister.dart';
+import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javiEditText.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -68,15 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
               _submitForm,
             ),
           ),
-          paddedWidget(WidgetsJavi().informacionSecundaria(context, "¿Ya tienes cuenta? ", "Login",
-            (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const LoginPage()),
-              );
-            }),
-          ),
+          paddedWidget(WidgetsJavi().informacionSecundaria(context, "¿Ya tienes cuenta? ", "Login", loginRoute)),
         ],
       ),
     );

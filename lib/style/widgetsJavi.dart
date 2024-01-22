@@ -1,6 +1,6 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'javiEditText.dart';
 
@@ -44,24 +44,27 @@ class WidgetsJavi {
     );
   }
 
-  RichText informacionSecundaria(BuildContext context, String textoSinUrl, String textoRedirigir, Function redirigir){
-    return RichText(
-      text: TextSpan(
-        style: JaviStyle.subcomentarios,
-        children: <TextSpan>[
-          TextSpan(
-            text: textoSinUrl,
-            style: JaviStyle.granada1,
-          ),
-          TextSpan(
-            text: textoRedirigir,
-            style: JaviStyle.url,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                redirigir();
-              },
-          ),
-        ],
+  Container informacionSecundaria(BuildContext context, String textoSinUrl, String textoRedirigir, String rutaRedirigir){
+    return Container(
+      padding: const EdgeInsets.fromLTRB(JaviPaddings.M, JaviPaddings.M, JaviPaddings.M, JaviPaddings.M),
+      child: RichText(
+        text: TextSpan(
+          style: JaviStyle.subcomentarios,
+          children: <TextSpan>[
+            TextSpan(
+              text: textoSinUrl,
+              style: JaviStyle.granada1,
+            ),
+            TextSpan(
+              text: textoRedirigir,
+              style: JaviStyle.url,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  context.go(rutaRedirigir);
+                },
+            ),
+          ],
+        ),
       ),
     );
   }
