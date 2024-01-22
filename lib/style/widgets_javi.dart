@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'javiEditText.dart';
+import 'javi_edit_text.dart';
 
 class WidgetsJavi {
   Container bioriContainer(context) {

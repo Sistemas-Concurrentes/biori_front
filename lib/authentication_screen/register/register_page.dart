@@ -1,10 +1,10 @@
-import 'package:biori/authentication_screen/register/user_stories/DoRegister.dart';
+import 'package:biori/authentication_screen/register/user_stories/do_register.dart';
 import 'package:biori/router/route_constants.dart';
-import 'package:biori/style/javiEditText.dart';
+import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
-import '../../style/widgetsJavi.dart';
+import '../../style/widgets_javi.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
