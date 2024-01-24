@@ -3,30 +3,30 @@
     "@title": {
         "description": "We are learning about internationalization"
     },
-    "olvidadoContrasena": "¿Olvidaste tu contraseña?",
-    "recuperar":"Recuperar",
-    "sinCuenta": "¿No tienes una cuenta?",
-    "registrate": "Regístrate",
-    "nombre": "Nombre",
-    "apellidos": "Apellidos",
-    "emailCorporativo": "Email corporativo",
-    "contrasena": "Contraseña",
-    "confirmarContrasena": "Confirmar contraseña",
-    "fechaNacimiento": "Fecha de nacimiento",
-    "numeroTelefono": "Número de teléfono",
+    "olvidadoContrasena": "Forgot your password?",
+    "recuperar":"Recover",
+    "sinCuenta": "Don't have an account?",
+    "registrate": "Register",
+    "nombre": "Name",
+    "apellidos": "Surname",
+    "emailCorporativo": "Email UGR",
+    "contrasena": "Password",
+    "confirmarContrasena": "Confirm password",
+    "fechaNacimiento": "Birth date",
+    "numeroTelefono": "Phone number",
 
-    "emailVacio": "El email no puede estar vacío",
-    "emailNoCorporativo": "El email ha de ser el de la UGR",
-    "nombreVacio": "El nombre no puede estar vacío",
-    "apellidosVacio": "Los apellidos no pueden estar vacíos",
-    "contrasenaVacia": "La contraseña no puede estar vacía",
-    "contrasenaNoCoincide": "Las contraseñas no coinciden",
-    "contrasenaCorta": "La contraseña ha de tener al menos 8 caracteres",
-    "numeroTelefonoVacio": "El número de teléfono no puede estar vacío",
-    "numeroTelefonoNoValido": "El número de teléfono ha de ser válido",
+    "emailVacio": "Email cannot be empty",
+    "emailNoCorporativo": "Email must be from UGR",
+    "nombreVacio": "Name cannot be empty",
+    "apellidosVacio": "Surname cannot be empty",
+    "contrasenaVacia": "Password cannot be empty",
+    "contrasenaNoCoincide": "Passwords do not match",
+    "contrasenaCorta": "Password must be at least 8 characters long",
+    "numeroTelefonoVacio": "Phone number cannot be empty",
+    "numeroTelefonoNoValido": "Phone number must be valid",
 
-    "errorRegistro": "Error al registrarse",
-    "errorLogin": "Error al iniciar sesión"
+    "errorRegistro": "Error registering user",
+    "errorLogin": "Error logging in"
 
 
 
