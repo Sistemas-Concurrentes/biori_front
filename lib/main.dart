@@ -3,6 +3,8 @@ import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: "Biori",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: HexColor("#b9aa97")),
         secondaryHeaderColor: HexColor("#919888"),
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routerConfig: CustomRouter().router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
 
     );
   }

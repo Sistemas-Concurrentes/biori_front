@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 import '../../style/widgets_javi.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -63,7 +64,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Align(
             alignment: Alignment.bottomRight,
-            child: WidgetsJavi().informacionSecundaria(context, "¿Olvidaste la contraseña?", "Recuperar", registerRoute),
+            child: WidgetsJavi().informacionSecundaria(context, AppLocalizations.of(context)!.olvidadoContrasena,
+                AppLocalizations.of(context)!.recuperar, registerRoute),
           ),
 
           Center(
@@ -76,7 +78,8 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: JaviPaddings.L,
           ),
-          WidgetsJavi().informacionSecundaria(context, "¿No tienes cuenta?", "Registrate", registerRoute),
+          WidgetsJavi().informacionSecundaria(context, AppLocalizations.of(context)!.sinCuenta,
+              AppLocalizations.of(context)!.registrate, registerRoute),
         ],
       ),
     );
@@ -86,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
     return JaviForms.inputBaseWidget(
       context,
       "username",
-      "Email corporativo",
+      AppLocalizations.of(context)!.emailCorporativo,
       onValidate,
       (onSavedVal) => {username = onSavedVal},
       prefixIcon: const Icon(Icons.email),
@@ -97,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
     return JaviForms.inputBaseWidget(
       context,
       "password",
-      "Password",
+      AppLocalizations.of(context)!.contrasena,
       onValidate,
       (onSavedVal) => {password = onSavedVal},
       prefixIcon: const Icon(Icons.password),
@@ -132,9 +135,9 @@ class _LoginPageState extends State<LoginPage> {
   _onValidateUsername(String onValidateVal) {
     final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
     if (onValidateVal.isEmpty) {
-      return 'Email no puede estar vacío.';
+      return AppLocalizations.of(context)!.emailVacio;
     } else if (!regExp.hasMatch(onValidateVal)) {
-      return 'El email ha de ser el corporativo.';
+      return AppLocalizations.of(context)!.emailNoCorporativo;
     }
 
     return null;
@@ -142,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _onValidatePassword(String onValidateVal) {
     if (onValidateVal.isEmpty) {
-      return 'La contraseña no puede estar vacía.';
+      return AppLocalizations.of(context)!.contrasenaVacia;
     }
 
     return null;
@@ -151,8 +154,8 @@ class _LoginPageState extends State<LoginPage> {
 
   _errorSesionSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Error al iniciar sesión'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.errorLogin),
       ),
     );
   }

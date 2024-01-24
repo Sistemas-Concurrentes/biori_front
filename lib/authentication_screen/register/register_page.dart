@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 import '../../style/widgets_javi.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -88,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return JaviForms.inputBaseWidget(
       context,
       "username",
-      "Email corporativo",
+      AppLocalizations.of(context)!.emailCorporativo,
       onValidate,
           (onSavedVal) => {username = onSavedVal},
       prefixIcon: const Icon(Icons.email),
@@ -100,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return JaviForms.inputBaseWidget(
       context,
       "nombre",
-      "Nombre",
+      AppLocalizations.of(context)!.nombre,
       onValidate,
           (onSavedVal) => {username = onSavedVal},
       prefixIcon: const Icon(Icons.abc),
@@ -111,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return JaviForms.inputBaseWidget(
       context,
       "apellidos",
-      "Apellidos",
+      AppLocalizations.of(context)!.apellidos,
       onValidate,
           (onSavedVal) => {username = onSavedVal},
       prefixIcon: const Icon(Icons.abc),
@@ -122,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return JaviForms.inputBaseWidget(
       context,
       "password",
-      "Password",
+      AppLocalizations.of(context)!.contrasena,
       onValidate,
       (onSavedVal) => {password = onSavedVal},
       prefixIcon: const Icon(Icons.password),
@@ -143,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return JaviForms.introducirFecha(
       context,
       _timeController,
-      "Fecha de nacimiento",
+      AppLocalizations.of(context)!.fechaNacimiento,
     );
   }
 
@@ -151,7 +153,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return JaviForms.inputBaseWidget(
     context,
     "numeroTelefono",
-    "Número de teléfono",
+    AppLocalizations.of(context)!.numeroTelefono,
     onValidate,
       (onSavedVal) => {username = onSavedVal},
     prefixIcon: const Icon(Icons.phone),
@@ -176,9 +178,9 @@ class _RegisterPageState extends State<RegisterPage> {
   _onValidateUsername(String onValidateVal) {
     final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
     if (onValidateVal.isEmpty) {
-      return 'Email no puede estar vacío.';
+      return AppLocalizations.of(context)!.emailVacio;
     } else if (!regExp.hasMatch(onValidateVal)) {
-      return 'El email ha de ser el corporativo.';
+      return AppLocalizations.of(context)!.emailNoCorporativo;
     }
 
     return null;
@@ -186,9 +188,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onValidatePassword(String onValidateVal) {
     if (onValidateVal.isEmpty) {
-      return 'Password no puede estar vacío.';
+      return AppLocalizations.of(context)!.contrasenaVacia;
     } else if (onValidateVal.length < 8) {
-      return 'Password ha de tener al menos 8 caracteres.';
+      return AppLocalizations.of(context)!.contrasenaCorta;
     }
 
     return null;
@@ -196,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onValidateNombre(String onValidateVal) {
     if (onValidateVal.isEmpty) {
-      return 'Nombre no puede estar vacío.';
+      return AppLocalizations.of(context)!.nombreVacio;
     }
 
     return null;
@@ -204,7 +206,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onValidateApellidos(String onValidateVal) {
     if (onValidateVal.isEmpty) {
-      return 'Apellidos no puede estar vacío.';
+      return AppLocalizations.of(context)!.apellidosVacio;
     }
 
     return null;
@@ -212,11 +214,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onValidateConfirmPassword(String onValidateVal) {
     if (onValidateVal.isEmpty) {
-      return 'Password no puede estar vacío.';
+      return AppLocalizations.of(context)!.contrasenaVacia;
     } else if (onValidateVal.length < 8) {
-      return 'Password ha de tener al menos 8 caracteres.';
+      return AppLocalizations.of(context)!.contrasenaCorta;
     } else if (onValidateVal != password) {
-      return 'Las contraseñas no coinciden.';
+      return AppLocalizations.of(context)!.contrasenaNoCoincide;
     }
 
     return null;
@@ -224,20 +226,20 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _onValidatePhoneNumber(String onValidateVal) {
     String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-    RegExp regExp = new RegExp(pattern);
+    RegExp regExp = RegExp(pattern);
     if (onValidateVal.isEmpty) {
-      return 'Introduzca un número de teléfono';
+      return AppLocalizations.of(context)!.numeroTelefonoVacio;
     }
     else if (!regExp.hasMatch(onValidateVal)) {
-      return 'Introduce un número de teléfono válido';
+      return AppLocalizations.of(context)!.numeroTelefonoNoValido;
     }
     return null;
   }
 
   _errorSesionSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Error al registrar el usuario'),
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.errorRegistro),
       ),
     );
   }
