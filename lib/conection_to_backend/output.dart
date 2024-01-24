@@ -1,0 +1,4 @@
+enum Output {
+  success,
+  error,
+}

@@ -1,39 +1,20 @@
 import 'dart:convert';
+import 'package:biori/conection_to_backend/requests.dart';
 import 'package:biori/style/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:biori/conection_to_backend/output.dart';
 
-enum Output {
-  success,
-  error,
-}
 
 class DoLogin {
   Future<Output> run(username, password) async {
-    Output output = Output.error;
 
-    http.Response login = await loginUser(username, password);
+    final data = {
+      "username": username,
+      "password": password,
+    };
 
-    if (login.statusCode == 200){
-      output = Output.success;
-    }
-
-    return output;
+    return await Requests.loginRequestReturnsOutput(data);
 
   }
-
-
-  Future<http.Response> loginUser(String username, String password) {
-    return http.post(
-      Uri.parse(Constants.URI),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'username': username,
-        'password': password,
-      }),
-    );
-  }
-
 
 }
