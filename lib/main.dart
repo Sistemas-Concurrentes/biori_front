@@ -1,9 +1,6 @@
-import 'package:biori/authentication_screen/login/login_page.dart';
-import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
