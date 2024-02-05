@@ -10,12 +10,9 @@ class Requests{
   static String register = "$url/auth/register";
 
   static Future<http.Response> postRequestReturnsOutput(uri,data) async {
-    return http.post(
+    return await http.post(
         Uri.parse(uri),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(data),
+        body: data,
       );
 
   }
@@ -23,6 +20,7 @@ class Requests{
   static Future<Output> loginRequestReturnsOutput(data) async {
     http.Response response = await postRequestReturnsOutput(login, data);
 
+    print(response.statusCode);
     return response.statusCode == 200 ? Output.success : Output.error;
 
   }
@@ -30,6 +28,7 @@ class Requests{
   static Future<Output> registerRequestReturnsOutput(data) async {
     http.Response response = await postRequestReturnsOutput(register, data);
 
+    print(response.statusCode);
     return response.statusCode == 200 ? Output.success : Output.error;
 
   }

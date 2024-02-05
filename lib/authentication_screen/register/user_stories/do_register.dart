@@ -3,10 +3,10 @@ import 'package:biori/conection_to_backend/output.dart';
 
 
 class DoRegister {
-  Future<Output> run(nombre, apellidos, username, password, fecha_nacimiento,
+  Future<Output> run(nombre, apellidos, username, password, fechaNacimiento,
       telefono) async {
-    String fechaNacimientoString = fecha_nacimiento.toIso8601String();
-    final data = {
+    String fechaNacimientoString = fechaNacimiento.toIso8601String();
+    Map<String, dynamic>data = {
       "nombre": nombre,
       "apellidos": apellidos,
       "username": username,

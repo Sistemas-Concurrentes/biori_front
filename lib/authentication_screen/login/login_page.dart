@@ -124,9 +124,12 @@ class _LoginPageState extends State<LoginPage> {
     globalFormKey.currentState!.save();
 
     Output output = await DoLogin().run(username, password);
-
     if (output == Output.success) {
-      // Navigate to home Page
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("login success"),
+        ),
+      );
     } else {
       _errorSesionSnackBar();
     }
