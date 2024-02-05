@@ -6,8 +6,8 @@ import 'package:biori/conection_to_backend/output.dart';
 
 class Requests{
   static String url = Constants.URI;
-  static String login = "$url/login";
-  static String register = "$url/register";
+  static String login = "$url/auth/login";
+  static String register = "$url/auth/register";
 
   static Future<http.Response> postRequestReturnsOutput(uri,data) async {
     return http.post(
