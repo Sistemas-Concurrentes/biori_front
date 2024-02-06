@@ -221,6 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _onValidateConfirmPassword(String onValidateVal) {
+    return null;
     if (onValidateVal.isEmpty) {
       return AppLocalizations.of(context)!.contrasenaVacia;
     } else if (onValidateVal.length < 8) {
