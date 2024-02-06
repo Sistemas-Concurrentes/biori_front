@@ -166,7 +166,15 @@ class _RegisterPageState extends State<RegisterPage> {
     }
     globalFormKey.currentState!.save();
 
-    Output output = await DoRegister().run(username, password, nombre, apellidos, fechaNacimiento, numeroTelefono);
+    setState(() {
+      isApiCallProcess = true;
+    });
+
+    Output output = await DoRegister().run(username, password, nombre, apellidos, _timeController.text, numeroTelefono);
+
+    setState(() {
+      isApiCallProcess = false;
+    });
 
     if (output == Output.success) {
       // Navigate to home Page
