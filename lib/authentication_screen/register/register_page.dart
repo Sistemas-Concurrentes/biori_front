@@ -234,7 +234,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _onValidatePhoneNumber(String onValidateVal) {
-    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    String pattern = r'(^(?:[+0]9)?[0-9]{9,12}$)';
     RegExp regExp = RegExp(pattern);
     if (onValidateVal.isEmpty) {
       return AppLocalizations.of(context)!.numeroTelefonoVacio;
