@@ -22,12 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
   bool hidePassword = true;
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
 
-  TextEditingController _timeController = TextEditingController();
-
   String? username;
   String? nombre;
   String? apellidos;
-  DateTime? fechaNacimiento;
+  TextEditingController _timeController = TextEditingController();
   String? password;
   String? confirmPassword;
   String? numeroTelefono;
@@ -106,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
       "nombre",
       AppLocalizations.of(context)!.nombre,
       onValidate,
-          (onSavedVal) => {username = onSavedVal},
+          (onSavedVal) => {nombre = onSavedVal},
       prefixIcon: const Icon(Icons.abc),
     );
   }
@@ -117,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
       "apellidos",
       AppLocalizations.of(context)!.apellidos,
       onValidate,
-          (onSavedVal) => {username = onSavedVal},
+          (onSavedVal) => {apellidos = onSavedVal},
       prefixIcon: const Icon(Icons.abc),
     );
   }
@@ -157,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
     "numeroTelefono",
     AppLocalizations.of(context)!.numeroTelefono,
     onValidate,
-      (onSavedVal) => {username = onSavedVal},
+      (onSavedVal) => {numeroTelefono = onSavedVal},
     prefixIcon: const Icon(Icons.phone),
     );
   }
