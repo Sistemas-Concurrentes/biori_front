@@ -1,19 +1,13 @@
-import 'package:biori/conection_to_backend/requests.dart';
-import 'package:biori/conection_to_backend/output.dart';
+import 'package:biori/authentication_screen/register/dto/register_dto.dart';
+import 'package:biori/conection_to_backend/authentication_screen/requests.dart';
+import 'package:biori/conection_to_backend/authentication_screen/output.dart';
 
 
 class DoRegister {
   Future<Output> run(nombre, apellidos, username, password, fechaNacimiento,
       telefono) async {
-    String fechaNacimientoString = fechaNacimiento.toIso8601String();
-    Map<String, dynamic>data = {
-      "nombre": nombre,
-      "apellidos": apellidos,
-      "username": username,
-      "password": password,
-      "fecha_nacimiento": fechaNacimientoString,
-      "telefono": telefono
-    };
+    Map<String, dynamic>data = RegisterDto(name: nombre, surname: apellidos, username: username, password: password,
+        fechaNacimiento: fechaNacimiento, phone: telefono).toJson();
 
     return await Requests.registerRequestReturnsOutput(data);
   }
