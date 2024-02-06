@@ -3,7 +3,7 @@ import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
-import 'package:biori/conection_to_backend/output.dart';
+import 'package:biori/conection_to_backend/authentication_screen/output.dart';
 
 
 import '../../style/widgets_javi.dart';
