@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 import 'javi_edit_text.dart';
 
@@ -78,4 +79,12 @@ class WidgetsJavi {
     );
   }
 
+  Widget progressHudJavi(BuildContext context, bool isApiCallProcess, Widget child){
+    return ProgressHUD(
+      inAsyncCall: isApiCallProcess,
+      opacity: 0.3,
+      key: UniqueKey(),
+      child: child,
+    );
+  }
 }

@@ -2,7 +2,6 @@ import 'package:biori/authentication_screen/login/user_stories/do_login.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
-import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:biori/conection_to_backend/authentication_screen/output.dart';
 
 
@@ -29,14 +28,10 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: ProgressHUD(
-          inAsyncCall: isApiCallProcess,
-          opacity: 0.3,
-          key: UniqueKey(),
-          child: Form(
+        body: WidgetsJavi().progressHudJavi(context, isApiCallProcess, Form(
             key: globalFormKey,
             child: _loginUI(context),
-          ),
+          )
         ),
       ),
     );
