@@ -218,7 +218,6 @@ class _RegisterPageState extends State<RegisterPage> {
     Output output = await DoRegister().run(nombre, apellidos, username,
         password, _timeController.text, numeroTelefono);
 
-    await Future.delayed(const Duration(seconds: 2));
     _showLoadingBar(false);
 
     if (output == Output.success) {
