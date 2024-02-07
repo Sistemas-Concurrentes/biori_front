@@ -76,16 +76,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ],
       ),
     );
-
-  }
-
-  Widget paddedWidget(Widget child) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: JaviPaddings.L,
-      ),
-      child: child,
-    );
   }
 
   Widget usernameEditText(Function onValidate) {
@@ -162,45 +152,12 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  _submitForm() async {
-    if (!globalFormKey.currentState!.validate()) {
-      return;
-    }
-    globalFormKey.currentState!.save();
-
-    setState(() {
-      isApiCallProcess = true;
-    });
-
-    Output output = await DoRegister().run(username, password, nombre, apellidos, _timeController.text, numeroTelefono);
-
-    setState(() {
-      isApiCallProcess = false;
-    });
-
-    if (output == Output.success) {
-      // Navigate to home Page
-    } else {
-      _errorSesionSnackBar();
-    }
-  }
-
   _onValidateUsername(String onValidateVal) {
     final regExp = RegExp(r'^.*@(correo\.ugr\.es|ugr\.es)$');
     if (onValidateVal.isEmpty) {
       return AppLocalizations.of(context)!.emailVacio;
     } else if (!regExp.hasMatch(onValidateVal)) {
       return AppLocalizations.of(context)!.emailNoCorporativo;
-    }
-
-    return null;
-  }
-
-  _onValidatePassword(String onValidateVal) {
-    if (onValidateVal.isEmpty) {
-      return AppLocalizations.of(context)!.contrasenaVacia;
-    } else if (onValidateVal.length < 8) {
-      return AppLocalizations.of(context)!.contrasenaCorta;
     }
 
     return null;
@@ -214,6 +171,18 @@ class _RegisterPageState extends State<RegisterPage> {
     return null;
   }
 
+  _onValidatePassword(String onValidateVal) {
+    if (onValidateVal.isEmpty) {
+      return AppLocalizations.of(context)!.contrasenaVacia;
+    } else if (onValidateVal.length < 8) {
+      return AppLocalizations.of(context)!.contrasenaCorta;
+    }
+
+    password = onValidateVal;
+
+    return null;
+  }
+
   _onValidateApellidos(String onValidateVal) {
     if (onValidateVal.isEmpty) {
       return AppLocalizations.of(context)!.apellidosVacio;
@@ -223,12 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _onValidateConfirmPassword(String onValidateVal) {
-    return null;
-    if (onValidateVal.isEmpty) {
-      return AppLocalizations.of(context)!.contrasenaVacia;
-    } else if (onValidateVal.length < 8) {
-      return AppLocalizations.of(context)!.contrasenaCorta;
-    } else if (onValidateVal != password) {
+    if (onValidateVal != password) {
       return AppLocalizations.of(context)!.contrasenaNoCoincide;
     }
 
@@ -247,11 +211,45 @@ class _RegisterPageState extends State<RegisterPage> {
     return null;
   }
 
+  _submitForm() async {
+    if (!_validatedState()){
+      return;
+    }
+    globalFormKey.currentState!.save();
+
+    _showLoadingBar(true);
+
+    Output output = await DoRegister().run(nombre, apellidos, username,
+        password, _timeController.text, numeroTelefono);
+
+    await Future.delayed(const Duration(seconds: 2));
+    _showLoadingBar(false);
+
+    if (output == Output.success) {
+      // Navigate to home Page
+    } else {
+      _errorSesionSnackBar();
+    }
+  }
+
+  _validatedState(){
+    if (!globalFormKey.currentState!.validate() || _timeController.text.isEmpty){
+      return false;
+    }
+    return true;
+  }
+
   _errorSesionSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppLocalizations.of(context)!.errorRegistro),
       ),
     );
+  }
+
+  _showLoadingBar(bool show) {
+    setState(() {
+      isApiCallProcess = show;
+    });
   }
 }
