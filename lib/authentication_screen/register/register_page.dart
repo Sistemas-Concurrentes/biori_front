@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:biori/conection_to_backend/authentication_screen/output.dart';
 
-
 import '../../style/widgets_javi.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -30,8 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String? confirmPassword;
   String? numeroTelefono;
 
-
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _registerUI(BuildContext context){
+  Widget _registerUI(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -61,9 +57,11 @@ class _RegisterPageState extends State<RegisterPage> {
           WidgetsJavi().paddedWidget(nombreEditText(_onValidateNombre)),
           WidgetsJavi().paddedWidget(apellidosEditText(_onValidateApellidos)),
           WidgetsJavi().paddedWidget(passwordEditText(_onValidatePassword)),
-          WidgetsJavi().paddedWidget(passwordEditText(_onValidateConfirmPassword)),
+          WidgetsJavi()
+              .paddedWidget(passwordEditText(_onValidateConfirmPassword)),
           WidgetsJavi().paddedWidget(timeEditText()),
-          WidgetsJavi().paddedWidget(phoneNumberEditText(_onValidatePhoneNumber)),
+          WidgetsJavi()
+              .paddedWidget(phoneNumberEditText(_onValidatePhoneNumber)),
           WidgetsJavi().paddedWidget(
             JaviForms.submitButton(
               context,
@@ -84,11 +82,10 @@ class _RegisterPageState extends State<RegisterPage> {
       "username",
       AppLocalizations.of(context)!.emailCorporativo,
       onValidate,
-          (onSavedVal) => {username = onSavedVal},
+      (onSavedVal) => {username = onSavedVal},
       prefixIcon: const Icon(Icons.email),
     );
   }
-
 
   Widget nombreEditText(Function onValidate) {
     return JaviForms.inputBaseWidget(
@@ -96,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
       "nombre",
       AppLocalizations.of(context)!.nombre,
       onValidate,
-          (onSavedVal) => {nombre = onSavedVal},
+      (onSavedVal) => {nombre = onSavedVal},
       prefixIcon: const Icon(Icons.abc),
     );
   }
@@ -107,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
       "apellidos",
       AppLocalizations.of(context)!.apellidos,
       onValidate,
-          (onSavedVal) => {apellidos = onSavedVal},
+      (onSavedVal) => {apellidos = onSavedVal},
       prefixIcon: const Icon(Icons.abc),
     );
   }
@@ -143,12 +140,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget phoneNumberEditText(Function onValidate) {
     return JaviForms.inputBaseWidget(
-    context,
-    "numeroTelefono",
-    AppLocalizations.of(context)!.numeroTelefono,
-    onValidate,
+      context,
+      "numeroTelefono",
+      AppLocalizations.of(context)!.numeroTelefono,
+      onValidate,
       (onSavedVal) => {numeroTelefono = onSavedVal},
-    prefixIcon: const Icon(Icons.phone),
+      prefixIcon: const Icon(Icons.phone),
     );
   }
 
@@ -204,15 +201,14 @@ class _RegisterPageState extends State<RegisterPage> {
     RegExp regExp = RegExp(pattern);
     if (onValidateVal.isEmpty) {
       return AppLocalizations.of(context)!.numeroTelefonoVacio;
-    }
-    else if (!regExp.hasMatch(onValidateVal)) {
+    } else if (!regExp.hasMatch(onValidateVal)) {
       return AppLocalizations.of(context)!.numeroTelefonoNoValido;
     }
     return null;
   }
 
   _submitForm() async {
-    if (!_validatedState()){
+    if (!_validatedState()) {
       return;
     }
     globalFormKey.currentState!.save();
@@ -232,8 +228,9 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  _validatedState(){
-    if (!globalFormKey.currentState!.validate() || _timeController.text.isEmpty){
+  _validatedState() {
+    if (!globalFormKey.currentState!.validate() ||
+        _timeController.text.isEmpty) {
       return false;
     }
     return true;
