@@ -113,7 +113,10 @@ class _LoginPageState extends State<LoginPage> {
     }
     globalFormKey.currentState!.save();
 
+    _showLoading(true);
     Output output = await DoLogin().run(username, password);
+    _showLoading(false);
+
     if (output == Output.success) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -151,5 +154,11 @@ class _LoginPageState extends State<LoginPage> {
         content: Text(AppLocalizations.of(context)!.errorLogin),
       ),
     );
+  }
+
+  _showLoading(bool showLoading) {
+    setState(() {
+      isApiCallProcess = showLoading;
+    });
   }
 }
