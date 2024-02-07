@@ -50,18 +50,8 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           WidgetsJavi().bioriContainer(context),
 
-          Padding(
-            padding: const EdgeInsets.only(
-              top: JaviPaddings.XL,
-            ),
-            child: usernameEditText(_onValidateUsername),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: JaviPaddings.XL,
-            ),
-            child:passwordEditText(_onValidatePassword)
-          ),
+          WidgetsJavi().paddedWidget(usernameEditText(_onValidateUsername), topPadding:JaviPaddings.XL),
+          WidgetsJavi().paddedWidget(passwordEditText(_onValidatePassword), topPadding:JaviPaddings.XL),
           Align(
             alignment: Alignment.bottomRight,
             child: WidgetsJavi().informacionSecundaria(context, AppLocalizations.of(context)!.olvidadoContrasena,

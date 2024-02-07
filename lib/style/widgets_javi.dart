@@ -68,4 +68,14 @@ class WidgetsJavi {
       ),
     );
   }
+
+  Widget paddedWidget(Widget child, {double topPadding=JaviPaddings.L}) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: topPadding,
+      ),
+      child: child,
+    );
+  }
+
 }

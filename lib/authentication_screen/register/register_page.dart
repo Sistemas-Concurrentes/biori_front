@@ -57,20 +57,22 @@ class _RegisterPageState extends State<RegisterPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           WidgetsJavi().bioriContainer(context),
-          paddedWidget(usernameEditText(_onValidateUsername)),
-          paddedWidget(nombreEditText(_onValidateNombre)),
-          paddedWidget(apellidosEditText(_onValidateApellidos)),
-          paddedWidget(passwordEditText(_onValidatePassword)),
-          paddedWidget(passwordEditText(_onValidateConfirmPassword)),
-          paddedWidget(timeEditText()),
-          paddedWidget(phoneNumberEditText(_onValidatePhoneNumber)),
-          paddedWidget(JaviForms.submitButton(
+          WidgetsJavi().paddedWidget(usernameEditText(_onValidateUsername)),
+          WidgetsJavi().paddedWidget(nombreEditText(_onValidateNombre)),
+          WidgetsJavi().paddedWidget(apellidosEditText(_onValidateApellidos)),
+          WidgetsJavi().paddedWidget(passwordEditText(_onValidatePassword)),
+          WidgetsJavi().paddedWidget(passwordEditText(_onValidateConfirmPassword)),
+          WidgetsJavi().paddedWidget(timeEditText()),
+          WidgetsJavi().paddedWidget(phoneNumberEditText(_onValidatePhoneNumber)),
+          WidgetsJavi().paddedWidget(
+            JaviForms.submitButton(
               context,
               "Register",
               _submitForm,
             ),
           ),
-          paddedWidget(WidgetsJavi().informacionSecundaria(context, "¿Ya tienes cuenta? ", "Login", loginRoute)),
+          WidgetsJavi().paddedWidget(WidgetsJavi().informacionSecundaria(
+              context, "¿Ya tienes cuenta? ", "Login", loginRoute)),
         ],
       ),
     );
