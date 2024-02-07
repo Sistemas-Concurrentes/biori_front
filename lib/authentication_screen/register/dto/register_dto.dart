@@ -3,21 +3,21 @@ class RegisterDto{
   final String surname;
   final String username;
   final String password;
-  final String fechaNacimiento;
+  final String fechaNacimientoString;
   final String phone;
 
 
   RegisterDto({required this.name, required this.surname, required this.username,
-    required this.password, required this.fechaNacimiento, required this.phone});
+    required this.password, required this.fechaNacimientoString, required this.phone});
 
   Map<String, dynamic> toJson() {
     return {
-      "nombre": name,
-      "apellidos": surname,
+      "name": name,
+      "surname": surname,
       "user_name": username,
+      "birth_date": fechaNacimientoString,
       "password": password,
-      "fecha_nacimiento": fechaNacimiento,
-      "telefono": phone
+      "phone_number": phone
     };
   }
 }

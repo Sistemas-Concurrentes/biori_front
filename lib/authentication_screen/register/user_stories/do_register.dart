@@ -7,7 +7,7 @@ class DoRegister {
   Future<Output> run(nombre, apellidos, username, password, fechaNacimiento,
       telefono) async {
     Map<String, dynamic>data = RegisterDto(name: nombre, surname: apellidos, username: username, password: password,
-        fechaNacimiento: fechaNacimiento, phone: telefono).toJson();
+        fechaNacimientoString: fechaNacimiento, phone: telefono).toJson();
 
     return await Requests.registerRequestReturnsOutput(data);
   }
