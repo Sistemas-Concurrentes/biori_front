@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? nombre;
   String? apellidos;
   TextEditingController _timeController = TextEditingController();
+  String? fechaNacimiento;
   String? password;
   String? confirmPassword;
   String? numeroTelefono;
@@ -54,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
           WidgetsJavi().paddedWidget(passwordEditText(_onValidatePassword)),
           WidgetsJavi()
               .paddedWidget(passwordEditText(_onValidateConfirmPassword)),
-          WidgetsJavi().paddedWidget(timeEditText()),
+          WidgetsJavi().paddedWidget(timeEditText(_onValidateDate)),
           WidgetsJavi()
               .paddedWidget(phoneNumberEditText(_onValidatePhoneNumber)),
           WidgetsJavi().paddedWidget(
@@ -125,11 +126,13 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget timeEditText() {
+  Widget timeEditText(Function onValidate) {
     return JaviForms.introducirFecha(
       context,
       _timeController,
       AppLocalizations.of(context)!.fechaNacimiento,
+      onValidate,
+          (onSavedVal) => {fechaNacimiento = onSavedVal},
     );
   }
 
@@ -202,6 +205,13 @@ class _RegisterPageState extends State<RegisterPage> {
     return null;
   }
 
+  _onValidateDate(String onValidateVal) {
+    if (onValidateVal.isEmpty) {
+      return AppLocalizations.of(context)!.fechaNacimientoVacia;
+    }
+    return null;
+  }
+
   _submitForm() async {
     if (!_validatedState()) {
       return;
@@ -211,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _showLoadingBar(true);
 
     Output output = await DoRegister().run(nombre, apellidos, username,
-        password, _timeController.text, numeroTelefono);
+        password, fechaNacimiento, numeroTelefono);
 
     _showLoadingBar(false);
 
@@ -223,8 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _validatedState() {
-    if (!globalFormKey.currentState!.validate() ||
-        _timeController.text.isEmpty) {
+    if (!globalFormKey.currentState!.validate()) {
       return false;
     }
     return true;

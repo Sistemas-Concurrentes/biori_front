@@ -24,6 +24,7 @@
     "contrasenaCorta": "La contraseña ha de tener al menos 8 caracteres",
     "numeroTelefonoVacio": "El número de teléfono no puede estar vacío",
     "numeroTelefonoNoValido": "El número de teléfono ha de ser válido",
+    "fechaNacimientoVacia": "La fecha de nacimiento no puede estar vacía",
 
     "errorRegistro": "Error al registrarse",
     "errorLogin": "Error al iniciar sesión"

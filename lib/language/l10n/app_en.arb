@@ -24,6 +24,7 @@
     "contrasenaCorta": "Password must be at least 8 characters long",
     "numeroTelefonoVacio": "Phone number cannot be empty",
     "numeroTelefonoNoValido": "Phone number must be valid",
+    "fechaNacimientoVacia": "Birth date cannot be empty",
 
     "errorRegistro": "Error registering user",
     "errorLogin": "Error logging in"

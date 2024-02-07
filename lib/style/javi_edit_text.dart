@@ -37,7 +37,8 @@ class JaviForms {
     );
   }
 
-  static Widget introducirFecha(BuildContext context, TextEditingController controller, String label) {
+  static Widget introducirFecha(BuildContext context, TextEditingController controller, String label, Function onValidate,
+      Function onSaved) {
     double paddingLeft = 20;
     double paddingRight = 20;
     double paddingTop = 0;
@@ -50,7 +51,13 @@ class JaviForms {
         top: paddingTop,
         bottom: paddingBottom,
       ),
-      child: TextField(
+      child: TextFormField(
+        validator: (val){
+          return onValidate(val);
+        },
+        onSaved: (val){
+          onSaved(val);
+        },
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
