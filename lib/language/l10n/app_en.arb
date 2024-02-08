@@ -1,0 +1,34 @@
+{
+    "title": "Biori",
+    "@title": {
+        "description": "We are learning about internationalization"
+    },
+    "olvidadoContrasena": "Forgot your password?",
+    "recuperar":"Recover",
+    "sinCuenta": "Don't have an account?",
+    "registrate": "Register",
+    "nombre": "Name",
+    "apellidos": "Surname",
+    "emailCorporativo": "Email UGR",
+    "contrasena": "Password",
+    "confirmarContrasena": "Confirm password",
+    "fechaNacimiento": "Birth date",
+    "numeroTelefono": "Phone number",
+
+    "emailVacio": "Email cannot be empty",
+    "emailNoCorporativo": "Email must be from UGR",
+    "nombreVacio": "Name cannot be empty",
+    "apellidosVacio": "Surname cannot be empty",
+    "contrasenaVacia": "Password cannot be empty",
+    "contrasenaNoCoincide": "Passwords do not match",
+    "contrasenaCorta": "Password must be at least 8 characters long",
+    "numeroTelefonoVacio": "Phone number cannot be empty",
+    "numeroTelefonoNoValido": "Phone number must be valid",
+    "fechaNacimientoVacia": "Birth date cannot be empty",
+
+    "errorRegistro": "Error registering user",
+    "errorLogin": "Error logging in"
+
+
+
+}

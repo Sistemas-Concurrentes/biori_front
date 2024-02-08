@@ -1,0 +1,34 @@
+{
+    "title": "Biori",
+    "@title": {
+        "description": "We are learning about internationalization"
+    },
+    "olvidadoContrasena": "¿Olvidaste tu contraseña?",
+    "recuperar":"Recuperar",
+    "sinCuenta": "¿No tienes una cuenta?",
+    "registrate": "Regístrate",
+    "nombre": "Nombre",
+    "apellidos": "Apellidos",
+    "emailCorporativo": "Email corporativo",
+    "contrasena": "Contraseña",
+    "confirmarContrasena": "Confirmar contraseña",
+    "fechaNacimiento": "Fecha de nacimiento",
+    "numeroTelefono": "Número de teléfono",
+
+    "emailVacio": "El email no puede estar vacío",
+    "emailNoCorporativo": "El email ha de ser el de la UGR",
+    "nombreVacio": "El nombre no puede estar vacío",
+    "apellidosVacio": "Los apellidos no pueden estar vacíos",
+    "contrasenaVacia": "La contraseña no puede estar vacía",
+    "contrasenaNoCoincide": "Las contraseñas no coinciden",
+    "contrasenaCorta": "La contraseña ha de tener al menos 8 caracteres",
+    "numeroTelefonoVacio": "El número de teléfono no puede estar vacío",
+    "numeroTelefonoNoValido": "El número de teléfono ha de ser válido",
+    "fechaNacimientoVacia": "La fecha de nacimiento no puede estar vacía",
+
+    "errorRegistro": "Error al registrarse",
+    "errorLogin": "Error al iniciar sesión"
+
+
+
+}

@@ -1,7 +1,7 @@
-import 'package:biori/pages/login_page.dart';
-import 'package:biori/pages/register_page.dart';
+import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,21 +10,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: "Biori",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: HexColor("#b9aa97")),
         secondaryHeaderColor: HexColor("#919888"),
         scaffoldBackgroundColor: HexColor("#cbba9e"),
         useMaterial3: true,
       ),
-      routes: {
-        '/': (context) => const LoginPage(),
-        '/register': (context) => const RegisterPage(),
-      },
+      routerConfig: CustomRouter().router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+
     );
   }
 }
@@ -32,15 +31,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
