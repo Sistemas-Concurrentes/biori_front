@@ -8,24 +8,14 @@ import 'javi_edit_text.dart';
 class WidgetsJavi {
   Container bioriContainer(context) {
     return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
-      height: MediaQuery
-          .of(context)
-          .size
-          .height / 5,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height / 5,
       decoration: BoxDecoration(
-          color: Theme
-              .of(context)
-              .secondaryHeaderColor,
+          color: Theme.of(context).secondaryHeaderColor,
           borderRadius: BorderRadius.circular(18.0),
           boxShadow: const [
             BoxShadow(
-                color: Colors.black12,
-                offset: Offset(0, 2),
-                blurRadius: 6.0)
+                color: Colors.black12, offset: Offset(0, 2), blurRadius: 6.0)
           ]),
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +35,11 @@ class WidgetsJavi {
     );
   }
 
-  Container informacionSecundaria(BuildContext context, String textoSinUrl, String textoRedirigir, String rutaRedirigir){
+  Container informacionSecundaria(BuildContext context, String textoSinUrl,
+      String textoRedirigir, String rutaRedirigir) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(JaviPaddings.M, JaviPaddings.M, JaviPaddings.M, JaviPaddings.M),
+      padding: const EdgeInsets.fromLTRB(
+          JaviPaddings.M, JaviPaddings.M, JaviPaddings.M, JaviPaddings.M),
       child: RichText(
         text: TextSpan(
           style: JaviStyle.subcomentarios,
@@ -70,7 +62,7 @@ class WidgetsJavi {
     );
   }
 
-  Widget paddedWidget(Widget child, {double topPadding=JaviPaddings.L}) {
+  Widget paddedWidget(Widget child, {double topPadding = JaviPaddings.L}) {
     return Padding(
       padding: EdgeInsets.only(
         top: topPadding,
@@ -79,7 +71,8 @@ class WidgetsJavi {
     );
   }
 
-  Widget progressHudJavi(BuildContext context, bool isApiCallProcess, Widget child){
+  Widget progressHudJavi(
+      BuildContext context, bool isApiCallProcess, Widget child) {
     return ProgressHUD(
       inAsyncCall: isApiCallProcess,
       opacity: 0.3,

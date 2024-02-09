@@ -33,7 +33,10 @@ class _RegisterPageState extends State<RegisterPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: WidgetsJavi().progressHudJavi(context, isApiCallProcess, Form(
+        body: WidgetsJavi().progressHudJavi(
+          context,
+          isApiCallProcess,
+          Form(
             key: globalFormKey,
             child: _registerUI(context),
           ),
@@ -132,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _timeController,
       AppLocalizations.of(context)!.fechaNacimiento,
       onValidate,
-          (onSavedVal) => {fechaNacimiento = onSavedVal},
+      (onSavedVal) => {fechaNacimiento = onSavedVal},
     );
   }
 
@@ -220,8 +223,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     _showLoadingBar(true);
 
-    Output output = await DoRegister().run(nombre, apellidos, username,
-        password, fechaNacimiento, numeroTelefono);
+    Output output = await DoRegister().run(
+        nombre, apellidos, username, password, fechaNacimiento, numeroTelefono);
 
     _showLoadingBar(false);
 

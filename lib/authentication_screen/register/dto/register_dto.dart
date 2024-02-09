@@ -1,4 +1,4 @@
-class RegisterDto{
+class RegisterDto {
   final String name;
   final String surname;
   final String username;
@@ -6,9 +6,13 @@ class RegisterDto{
   final String fechaNacimientoString;
   final String phone;
 
-
-  RegisterDto({required this.name, required this.surname, required this.username,
-    required this.password, required this.fechaNacimientoString, required this.phone});
+  RegisterDto(
+      {required this.name,
+      required this.surname,
+      required this.username,
+      required this.password,
+      required this.fechaNacimientoString,
+      required this.phone});
 
   Map<String, dynamic> toJson() {
     return {

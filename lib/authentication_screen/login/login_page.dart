@@ -4,10 +4,8 @@ import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:biori/conection_to_backend/authentication_screen/output.dart';
 
-
 import '../../style/widgets_javi.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,11 +26,13 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: WidgetsJavi().progressHudJavi(context, isApiCallProcess, Form(
-            key: globalFormKey,
-            child: _loginUI(context),
-          )
-        ),
+        body: WidgetsJavi().progressHudJavi(
+            context,
+            isApiCallProcess,
+            Form(
+              key: globalFormKey,
+              child: _loginUI(context),
+            )),
       ),
     );
   }
@@ -44,15 +44,18 @@ class _LoginPageState extends State<LoginPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           WidgetsJavi().bioriContainer(context),
-
-          WidgetsJavi().paddedWidget(usernameEditText(_onValidateUsername), topPadding:JaviPaddings.XL),
-          WidgetsJavi().paddedWidget(passwordEditText(_onValidatePassword), topPadding:JaviPaddings.XL),
+          WidgetsJavi().paddedWidget(usernameEditText(_onValidateUsername),
+              topPadding: JaviPaddings.XL),
+          WidgetsJavi().paddedWidget(passwordEditText(_onValidatePassword),
+              topPadding: JaviPaddings.XL),
           Align(
             alignment: Alignment.bottomRight,
-            child: WidgetsJavi().informacionSecundaria(context, AppLocalizations.of(context)!.olvidadoContrasena,
-                AppLocalizations.of(context)!.recuperar, registerRoute),
+            child: WidgetsJavi().informacionSecundaria(
+                context,
+                AppLocalizations.of(context)!.olvidadoContrasena,
+                AppLocalizations.of(context)!.recuperar,
+                registerRoute),
           ),
-
           Center(
             child: JaviForms.submitButton(
               context,
@@ -63,8 +66,11 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: JaviPaddings.L,
           ),
-          WidgetsJavi().informacionSecundaria(context, AppLocalizations.of(context)!.sinCuenta,
-              AppLocalizations.of(context)!.registrate, registerRoute),
+          WidgetsJavi().informacionSecundaria(
+              context,
+              AppLocalizations.of(context)!.sinCuenta,
+              AppLocalizations.of(context)!.registrate,
+              registerRoute),
         ],
       ),
     );
@@ -141,7 +147,6 @@ class _LoginPageState extends State<LoginPage> {
 
     return null;
   }
-
 
   _errorSesionSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(

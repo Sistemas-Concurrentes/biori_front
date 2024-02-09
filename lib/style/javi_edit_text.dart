@@ -3,10 +3,11 @@ import 'package:snippet_coder_utils/FormHelper.dart';
 
 class JaviForms {
   static Widget inputBaseWidget(BuildContext context, String keyName,
-      String hintText, Function onValidate, Function onSaved, {
-        Icon? prefixIcon, Widget? suffixIcon, bool obscureText = false, isNumeric = false
-  }) {
-
+      String hintText, Function onValidate, Function onSaved,
+      {Icon? prefixIcon,
+      Widget? suffixIcon,
+      bool obscureText = false,
+      isNumeric = false}) {
     return FormHelper.inputFieldWidget(
       context,
       keyName,
@@ -27,7 +28,8 @@ class JaviForms {
     );
   }
 
-  static Widget submitButton (BuildContext context, String keyName, Function action) {
+  static Widget submitButton(
+      BuildContext context, String keyName, Function action) {
     return FormHelper.submitButton(
       keyName,
       action,
@@ -37,7 +39,11 @@ class JaviForms {
     );
   }
 
-  static Widget introducirFecha(BuildContext context, TextEditingController controller, String label, Function onValidate,
+  static Widget introducirFecha(
+      BuildContext context,
+      TextEditingController controller,
+      String label,
+      Function onValidate,
       Function onSaved) {
     double paddingLeft = 20;
     double paddingRight = 20;
@@ -46,70 +52,62 @@ class JaviForms {
 
     return Padding(
         padding: EdgeInsets.only(
-        left: paddingLeft,
-        right: paddingRight,
-        top: paddingTop,
-        bottom: paddingBottom,
-      ),
-      child: TextFormField(
-        validator: (val){
-          return onValidate(val);
-        },
-        onSaved: (val){
-          onSaved(val);
-        },
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          filled: true,
-          prefixIcon: Icon(Icons.calendar_today),
-          fillColor: Theme.of(context).scaffoldBackgroundColor,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Theme.of(context).primaryColor),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Theme.of(context).primaryColor),
-          ),
-
+          left: paddingLeft,
+          right: paddingRight,
+          top: paddingTop,
+          bottom: paddingBottom,
         ),
-        onTap: ()  {
-          _selectDate(context, controller);
-        },
-        readOnly: true,
-      )
-    );
+        child: TextFormField(
+          validator: (val) {
+            return onValidate(val);
+          },
+          onSaved: (val) {
+            onSaved(val);
+          },
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: label,
+            filled: true,
+            prefixIcon: Icon(Icons.calendar_today),
+            fillColor: Theme.of(context).scaffoldBackgroundColor,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+            ),
+          ),
+          onTap: () {
+            _selectDate(context, controller);
+          },
+          readOnly: true,
+        ));
   }
 
-  static Future _selectDate(BuildContext context, TextEditingController controller) async {
+  static Future _selectDate(
+      BuildContext context, TextEditingController controller) async {
     DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
-        lastDate: DateTime(2100)
-    );
+        lastDate: DateTime(2100));
 
-    if(picked != null) {
+    if (picked != null) {
       controller.text = picked.toString().split(" ")[0];
     }
-
-
   }
-
 }
 
-
-
-
-class JaviPaddings{
+class JaviPaddings {
   static const double S = 4;
   static const double M = 8;
   static const double L = 12;
   static const double XL = 20;
 }
 
-class JaviStyle{
+class JaviStyle {
   static const TextStyle granada1 = TextStyle(
     fontSize: 14,
     color: Colors.white,
@@ -127,7 +125,7 @@ class JaviStyle{
   );
 
   static const TextStyle titulo = TextStyle(
-  fontSize: 28.0, fontWeight: FontWeight.bold,
+    fontSize: 28.0,
+    fontWeight: FontWeight.bold,
   );
-
 }
