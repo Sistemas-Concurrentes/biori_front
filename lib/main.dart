@@ -1,7 +1,8 @@
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
-import 'package:snippet_coder_utils/hex_color.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,12 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: "Biori",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: HexColor("#b9aa97")),
-        secondaryHeaderColor: HexColor("#919888"),
-        scaffoldBackgroundColor: HexColor("#cbba9e"),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.theme,
       routerConfig: CustomRouter().router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
