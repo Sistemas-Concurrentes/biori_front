@@ -52,8 +52,8 @@ class WidgetsJavi {
               text: textoRedirigir,
               style: JaviStyle.url,
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  context.go(rutaRedirigir);
+                ..onTap = (){
+                  context.push(rutaRedirigir);
                 },
             ),
           ],
