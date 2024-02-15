@@ -27,8 +27,12 @@
     "fechaNacimientoVacia": "La fecha de nacimiento no puede estar vacía",
 
     "errorRegistro": "Error al registrarse",
-    "errorLogin": "Error al iniciar sesión"
+    "errorLogin": "Error al iniciar sesión",
 
+    "validationHintText": "Introduzca el código enviado a su email",
+    "validationCodeEmpty": "El código introducido no puede estar vacío",
+    "validationCodeNotNumber": "El código introducido ha de ser un número",
+    "send": "Send"
 
 
 }

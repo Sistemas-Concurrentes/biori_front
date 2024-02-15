@@ -27,8 +27,10 @@
     "fechaNacimientoVacia": "Birth date cannot be empty",
 
     "errorRegistro": "Error registering user",
-    "errorLogin": "Error logging in"
+    "errorLogin": "Error logging in",
 
-
-
+    "validationHintText": "Introduce the validation code sent to your email",
+    "validationCodeEmpty": "Validation code cannot be empty",
+    "validationCodeNotNumber": "Validation code must be a number",
+    "send": "Send"
 }
