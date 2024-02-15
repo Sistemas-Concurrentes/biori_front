@@ -1,4 +1,5 @@
 import 'package:biori/authentication_screen/login/login_page.dart';
+import 'package:biori/authentication_screen/login/validation/validation_page.dart';
 import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:biori/main_screen/main_screen.dart';
 import 'package:biori/router/route_constants.dart';
@@ -28,6 +29,11 @@ class CustomRouter {
           path: registerRoute,
           builder: (BuildContext context, GoRouterState state) {
             return const RegisterPage();
+          }),
+      GoRoute(
+          path: validationRoute,
+          builder: (BuildContext context, GoRouterState state) {
+            return const ValidationPage();
           }),
     ],
   );
