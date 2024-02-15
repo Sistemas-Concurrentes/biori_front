@@ -12,6 +12,7 @@ class Requests {
   static String url = Constants.URI;
   static String login = "$url/auth/login";
   static String register = "$url/auth/register";
+  static String validation = "$url/auth/validation";
 
   static Future<http.Response> postRequest(uri, data) async {
     try {
@@ -43,7 +44,11 @@ class Requests {
 
   static Future<Output> registerRequestReturnsOutput(data) async {
     http.Response response = await postRequest(register, data);
+    return response.statusCode == 200 ? Output.success : Output.error;
+  }
 
+  static Future<Output> validationRequestReturnsOutput(data) async {
+    http.Response response = await postRequest(validation, data);
     return response.statusCode == 200 ? Output.success : Output.error;
   }
 }
