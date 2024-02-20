@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _timeController,
       AppLocalizations.of(context)!.fechaNacimiento,
       onValidate,
-      (onSavedVal) => {fechaNacimiento = onSavedVal},
+      (onSavedVal) => {fechaNacimiento = JaviForms().stringSpainFormatToBdFormat(onSavedVal)},
     );
   }
 
@@ -248,6 +248,14 @@ class _RegisterPageState extends State<RegisterPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppLocalizations.of(context)!.errorRegistro),
+      ),
+    );
+  }
+
+  _userExistsSnackBar(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(AppLocalizations.of(context)!.usuarioYaExiste),
       ),
     );
   }
