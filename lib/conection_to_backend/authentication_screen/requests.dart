@@ -44,7 +44,14 @@ class Requests {
 
   static Future<Output> registerRequestReturnsOutput(data) async {
     http.Response response = await postRequest(register, data);
-    return response.statusCode == 200 ? Output.success : Output.error;
+
+    if (response.statusCode == 200) {
+      return Output.success;
+    } else if (response.statusCode == 409) {
+      return Output.userAlreadyExists;
+    } else {
+      return Output.error;
+    }
   }
 
   static Future<Output> validationRequestReturnsOutput(data) async {

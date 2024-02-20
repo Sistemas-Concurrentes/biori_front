@@ -230,6 +230,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (output == Output.success) {
       // Navigate to home Page
+    } else if (output == Output.userAlreadyExists) {
+      _userExistsSnackBar();
     } else {
       _errorSesionSnackBar();
     }
