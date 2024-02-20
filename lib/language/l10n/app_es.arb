@@ -27,6 +27,7 @@
     "fechaNacimientoVacia": "La fecha de nacimiento no puede estar vacía",
 
     "errorRegistro": "Error al registrarse",
+    "usuarioYaExiste": "El usuario ya existe",
     "errorLogin": "Error al iniciar sesión",
 
     "validationHintText": "Introduzca el código enviado a su email",

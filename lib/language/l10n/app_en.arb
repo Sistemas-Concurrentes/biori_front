@@ -27,6 +27,7 @@
     "fechaNacimientoVacia": "Birth date cannot be empty",
 
     "errorRegistro": "Error registering user",
+    "usuarioYaExiste": "User already exists",
     "errorLogin": "Error logging in",
 
     "validationHintText": "Introduce the validation code sent to your email",
