@@ -1,3 +1,4 @@
+import 'package:biori/authentication_screen/login/validation/user_stories/do_request_resend.dart';
 import 'package:biori/authentication_screen/login/validation/user_stories/do_validation.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +52,20 @@ class _ValidationPageState extends State<ValidationPage> {
               AppLocalizations.of(context)!.send,
               _submitForm,
             ),
+          ),
+
+          WidgetsJavi().paddedWidget(
+            Text(
+              AppLocalizations.of(context)!.spamValidation,
+              style: JaviStyle.subcomentarios,
+            ),
+            topPadding: JaviPaddings.XL,
+          ),
+          WidgetsJavi().paddedWidget(JaviForms.submitButton(
+            context,
+            AppLocalizations.of(context)!.resendCode,
+            _resendCode,
+          fontSize: 12)
           ),
         ],
       ),
@@ -109,11 +124,39 @@ class _ValidationPageState extends State<ValidationPage> {
     }
   }
 
+  _resendCode() async {
+    _showLoading(true);
+
+    final sharedPrefs = await SharedPreferences.getInstance();
+
+
+    String? jwt = sharedPrefs.getString('token');
+
+    Output output = await DoRequestResend().run(jwt);
+    _showLoading(false);
+
+    if (output == Output.success) {
+      _showMessageSnackBar(AppLocalizations.of(context)!.codigoEnviado);
+
+      // Enviar a mainpage
+    }
+    else{
+      _errorSesionSnackBar();
+    }
+  }
 
   _showLoading(bool showLoading) {
     setState(() {
       isApiCallProcess = showLoading;
     });
+  }
+
+  _showMessageSnackBar(String message){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 
   _errorSesionSnackBar() {
