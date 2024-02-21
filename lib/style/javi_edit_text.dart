@@ -29,13 +29,14 @@ class JaviForms {
   }
 
   static Widget submitButton(
-      BuildContext context, String keyName, Function action) {
+      BuildContext context, String keyName, Function action, {double fontSize = 16}) {
     return FormHelper.submitButton(
       keyName,
       action,
       btnColor: Theme.of(context).primaryColor,
       txtColor: Colors.white,
       borderColor: Theme.of(context).primaryColor,
+      fontSize: fontSize,
     );
   }
 
