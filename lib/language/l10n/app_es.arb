@@ -33,7 +33,10 @@
     "validationHintText": "Introduzca el código enviado a su email",
     "validationCodeEmpty": "El código introducido no puede estar vacío",
     "validationCodeNotNumber": "El código introducido ha de ser un número",
-    "send": "Send"
+    "send": "Send",
+    "resendCode": "Reenviar código",
+    "codigoEnviado": "Código enviado, compruebe su email",
+    "spamValidation": "¿No has recibido el código? Comprueba la carpeta de spam"
 
 
 }
