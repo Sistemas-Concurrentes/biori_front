@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:biori/authentication_screen/login/validation/dto/validation_dto_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:biori/style/constants.dart';
 import 'package:http/http.dart' as http;
@@ -13,11 +14,26 @@ class Requests {
   static String login = "$url/auth/login";
   static String register = "$url/auth/register";
   static String validation = "$url/auth/validation";
+  static String resend = "$url/auth/resend";
 
   static Future<http.Response> postRequest(uri, data) async {
     try {
       return await http.post(
         Uri.parse(uri),
+        body: data,
+      );
+    } catch (e) {
+      return http.Response('Conection failed', HttpStatus.internalServerError);
+    }
+  }
+
+  static Future<http.Response> postRequestWithHeader(uri, token, data) async {
+    try {
+      return await http.post(
+        Uri.parse(uri),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
         body: data,
       );
     } catch (e) {
@@ -33,8 +49,7 @@ class Requests {
       LoginDtoResult loginDtoResult = LoginDtoResult.fromJson(
           jsonDecode(response.body) as Map<String, dynamic>);
 
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('token', loginDtoResult.token);
+      await _saveToken(loginDtoResult.token);
 
       loginDtoResult.register_code == 0 ? output = Output.success : output = Output.userNotValidated;
     }
@@ -44,18 +59,40 @@ class Requests {
 
   static Future<Output> registerRequestReturnsOutput(data) async {
     http.Response response = await postRequest(register, data);
+    return _outputByStatusCode(response.statusCode);
 
+  }
+
+  static Future<Output> validationRequestReturnsOutput(data, token) async {
+    http.Response response = await postRequestWithHeader(validation, token, data);
     if (response.statusCode == 200) {
+      ValidationDtoResult validationDtoResult = ValidationDtoResult.fromJson(
+          jsonDecode(response.body) as Map<String, dynamic>);
+      await _saveToken(validationDtoResult.token);
+    }
+
+    return _outputByStatusCode(response.statusCode);
+  }
+
+  static Future<Output> doRequestResendReturnsOutput(String token) async {
+    http.Response response = await postRequestWithHeader(resend, token, {});
+    return _outputByStatusCode(response.statusCode);
+  }
+
+  static _saveToken(token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
+
+  static Output _outputByStatusCode(int statusCode) {
+    if (statusCode == 200) {
       return Output.success;
-    } else if (response.statusCode == 409) {
+    } else if (statusCode == 409) {
       return Output.userAlreadyExists;
     } else {
       return Output.error;
     }
   }
 
-  static Future<Output> validationRequestReturnsOutput(data) async {
-    http.Response response = await postRequest(validation, data);
-    return response.statusCode == 200 ? Output.success : Output.error;
-  }
+
 }
