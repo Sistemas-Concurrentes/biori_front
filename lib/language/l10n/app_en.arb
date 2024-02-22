@@ -33,6 +33,7 @@
     "validationHintText": "Introduce the validation code sent to your email",
     "validationCodeEmpty": "Validation code cannot be empty",
     "validationCodeNotNumber": "Validation code must be a number",
+    "validationError": "Validation Code is not correct",
     "send": "Send",
     "resendCode": "Resend code",
     "codigoEnviado": "Code sent, check your email",

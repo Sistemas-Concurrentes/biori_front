@@ -1,3 +1,4 @@
+import 'package:biori/global/globals.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -79,5 +80,10 @@ class WidgetsJavi {
       key: UniqueKey(),
       child: child,
     );
+  }
+
+  snackbarScaffold(String message) {
+    final SnackBar snackBar = SnackBar(content: Text(message));
+    snackbarKey.currentState?.showSnackBar(snackBar);
   }
 }

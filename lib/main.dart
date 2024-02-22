@@ -1,3 +1,4 @@
+import 'package:biori/global/globals.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +20,8 @@ class MyApp extends StatelessWidget {
       routerConfig: CustomRouter().router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      scaffoldMessengerKey: snackbarKey,
+
 
     );
   }

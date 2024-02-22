@@ -120,11 +120,7 @@ class _LoginPageState extends State<LoginPage> {
     _showLoading(false);
 
     if (output == Output.success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("login success"),
-        ),
-      );
+      WidgetsJavi().snackbarScaffold("Login correcto");
 
       // Enviar a mainpage
     } else if (output == Output.userNotValidated) {
@@ -155,11 +151,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _errorSesionSnackBar() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.errorLogin),
-      ),
-    );
+    WidgetsJavi().snackbarScaffold(
+        AppLocalizations.of(context)!.errorLogin);
   }
 
   _showLoading(bool showLoading) {

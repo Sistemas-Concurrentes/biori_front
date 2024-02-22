@@ -136,7 +136,7 @@ class _ValidationPageState extends State<ValidationPage> {
     _showLoading(false);
 
     if (output == Output.success) {
-      _showMessageSnackBar(AppLocalizations.of(context)!.codigoEnviado);
+      _showSuccessMessageSnackBar();
 
       // Enviar a mainpage
     }
@@ -151,19 +151,11 @@ class _ValidationPageState extends State<ValidationPage> {
     });
   }
 
-  _showMessageSnackBar(String message){
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
-    );
+  _showSuccessMessageSnackBar(){
+    WidgetsJavi().snackbarScaffold(AppLocalizations.of(context)!.codigoEnviado);
   }
 
   _errorSesionSnackBar() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.errorLogin),
-      ),
-    );
+    WidgetsJavi().snackbarScaffold(AppLocalizations.of(context)!.validationError);
   }
 }
