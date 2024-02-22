@@ -1,9 +1,8 @@
 import 'package:biori/global/globals.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:biori/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'app_theme.dart';
 
 void main() {
   runApp(const MyApp());

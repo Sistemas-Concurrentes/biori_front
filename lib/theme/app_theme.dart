@@ -1,4 +1,4 @@
-import 'package:biori/pallete.dart';
+import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
