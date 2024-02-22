@@ -1,6 +1,7 @@
 import 'package:biori/authentication_screen/login/login_page.dart';
 import 'package:biori/authentication_screen/login/validation/validation_page.dart';
 import 'package:biori/authentication_screen/register/register_page.dart';
+import 'package:biori/keys/globals.dart';
 import 'package:biori/main_screen/main_screen.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/splash_screen/splash_screen.dart';

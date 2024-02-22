@@ -1,4 +1,4 @@
-import 'package:biori/global/globals.dart';
+import 'package:biori/keys/globals.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/theme/app_theme.dart';
 import 'package:flutter/material.dart';

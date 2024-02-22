@@ -1,4 +1,4 @@
-import 'package:biori/global/globals.dart';
+import 'package:biori/keys/globals.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
