@@ -8,33 +8,82 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomRouter {
-  final router = GoRouter(
-    routes: <RouteBase>[
-      GoRoute(
+  static final CustomRouter _instance = CustomRouter._internal();
+  static late final GoRouter router;
+
+  static CustomRouter get instance => _instance;
+
+  factory CustomRouter() {
+    return _instance;
+  }
+
+  CustomRouter._internal() {
+    final routes = [
+        GoRoute(
           path: splashScreenRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const SplashScreen();
-          }),
-      GoRoute(
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return getPage(
+                child: const SplashScreen(),
+                state: state,
+            );
+          },
+        ),
+
+        GoRoute(
           path: mainScreenRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const MainScreen();
-          }),
-      GoRoute(
-          path: loginRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const LoginPage();
-          }),
-      GoRoute(
-          path: registerRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const RegisterPage();
-          }),
-      GoRoute(
-          path: validationRoute,
-          builder: (BuildContext context, GoRouterState state) {
-            return const ValidationPage();
-          }),
-    ],
-  );
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return getPage(
+                child: const MainScreen(),
+                state: state,
+            );
+          },
+        ),
+
+        GoRoute(
+            path: loginRoute,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return getPage(
+                  child: const LoginPage(),
+                  state: state,
+              );
+            },
+        ),
+
+        GoRoute(
+            path: registerRoute,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return getPage(
+                  child: const RegisterPage(),
+                  state: state,
+              );
+            },
+        ),
+
+        GoRoute(
+            path: validationRoute,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return getPage(
+                  child: const ValidationPage(),
+                  state: state,
+              );
+            },
+        ),
+    ];
+
+    router = GoRouter(
+      navigatorKey: parentNavigatorKey,
+      initialLocation: splashScreenRoute,
+      routes: routes,
+    );
+  }
+
+  static Page getPage({
+    required Widget child,
+    required GoRouterState state,
+  }) {
+    return MaterialPage(
+      key: state.pageKey,
+      child: child,
+    );
+  }
 }

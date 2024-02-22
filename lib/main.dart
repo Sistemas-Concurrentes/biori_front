@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
+  CustomRouter.instance; // Initialize the router
   runApp(const MyApp());
 }
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: "Biori",
       theme: AppTheme.theme,
-      routerConfig: CustomRouter().router,
+      routerConfig: CustomRouter.router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       scaffoldMessengerKey: snackbarKey,

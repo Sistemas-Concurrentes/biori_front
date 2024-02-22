@@ -46,13 +46,13 @@ class _ValidationPageState extends State<ValidationPage> {
           WidgetsJavi().bioriContainer(context),
           WidgetsJavi().paddedWidget(validationEditText(_onValidateValidationCode),
               topPadding: JaviPaddings.XL),
-          Center(
-            child: JaviForms.submitButton(
+          WidgetsJavi().paddedWidget(
+            JaviForms.submitButton(
               context,
               AppLocalizations.of(context)!.send,
               _submitForm,
             ),
-          ),
+            topPadding: JaviPaddings.XL),
 
           WidgetsJavi().paddedWidget(
             Text(
