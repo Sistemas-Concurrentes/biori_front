@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
       WidgetsJavi().snackbarScaffold("Login correcto");
 
       // Enviar a mainpage
-    } else if (output == Output.userNotValidated) {
+    } else if (output == Output.userNotValidated && mounted) {
       context.push(validationRoute);
 
     } else {
