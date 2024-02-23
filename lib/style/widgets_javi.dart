@@ -1,7 +1,7 @@
 import 'package:biori/keys/globals.dart';
+import 'package:biori/router/custom_router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 
 import 'javi_edit_text.dart';
@@ -54,7 +54,7 @@ class WidgetsJavi {
               style: JaviStyle.url,
               recognizer: TapGestureRecognizer()
                 ..onTap = (){
-                  context.push(rutaRedirigir);
+                  CustomRouter.router.push(rutaRedirigir);
                 },
             ),
           ],
