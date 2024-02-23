@@ -1,10 +1,11 @@
+import 'package:biori/keys/globals.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:biori/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'app_theme.dart';
-
 void main() {
+  CustomRouter.instance; // Initialize the router
   runApp(const MyApp());
 }
 
@@ -16,9 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: "Biori",
       theme: AppTheme.theme,
-      routerConfig: CustomRouter().router,
+      routerConfig: CustomRouter.router,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      scaffoldMessengerKey: snackbarKey,
+
 
     );
   }

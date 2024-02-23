@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
       _timeController,
       AppLocalizations.of(context)!.fechaNacimiento,
       onValidate,
-      (onSavedVal) => {fechaNacimiento = onSavedVal},
+      (onSavedVal) => {fechaNacimiento = JaviForms().stringSpainFormatToBdFormat(onSavedVal)},
     );
   }
 
@@ -230,6 +230,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
     if (output == Output.success) {
       // Navigate to home Page
+    } else if (output == Output.userAlreadyExists) {
+      _userExistsSnackBar();
     } else {
       _errorSesionSnackBar();
     }
@@ -243,11 +245,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _errorSesionSnackBar() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.errorRegistro),
-      ),
-    );
+    WidgetsJavi().snackbarScaffold(AppLocalizations.of(context)!.errorRegistro);
+  }
+
+  _userExistsSnackBar(){
+    WidgetsJavi().snackbarScaffold(AppLocalizations.of(context)!.usuarioYaExiste);
   }
 
   _showLoadingBar(bool show) {

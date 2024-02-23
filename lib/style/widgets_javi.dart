@@ -1,3 +1,4 @@
+import 'package:biori/keys/globals.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -52,8 +53,8 @@ class WidgetsJavi {
               text: textoRedirigir,
               style: JaviStyle.url,
               recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  context.go(rutaRedirigir);
+                ..onTap = (){
+                  context.push(rutaRedirigir);
                 },
             ),
           ],
@@ -79,5 +80,10 @@ class WidgetsJavi {
       key: UniqueKey(),
       child: child,
     );
+  }
+
+  snackbarScaffold(String message) {
+    final SnackBar snackBar = SnackBar(content: Text(message));
+    snackbarKey.currentState?.showSnackBar(snackBar);
   }
 }

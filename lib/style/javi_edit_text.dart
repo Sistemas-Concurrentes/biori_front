@@ -29,13 +29,14 @@ class JaviForms {
   }
 
   static Widget submitButton(
-      BuildContext context, String keyName, Function action) {
+      BuildContext context, String keyName, Function action, {double fontSize = 16}) {
     return FormHelper.submitButton(
       keyName,
       action,
       btnColor: Theme.of(context).primaryColor,
       txtColor: Colors.white,
       borderColor: Theme.of(context).primaryColor,
+      fontSize: fontSize,
     );
   }
 
@@ -92,13 +93,28 @@ class JaviForms {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
-        lastDate: DateTime(2100));
+        lastDate: DateTime(2100),
+    );
+
 
     if (picked != null) {
-      controller.text = picked.toString().split(" ")[0];
+      controller.text = _dateToSpainFormat(picked);
     }
   }
+
+  static String _dateToSpainFormat(DateTime date) {
+    var dateString = date.toString().split(" ");
+    var finalDate = dateString[0].split("-");
+    return "${finalDate[2]}/${finalDate[1]}/${finalDate[0]}";
+  }
+
+  String stringSpainFormatToBdFormat(String spainFormat) {
+    List<String> date = spainFormat.split("/");
+    return "${date[2]}-${date[1]}-${date[0]}";
+  }
 }
+
+
 
 class JaviPaddings {
   static const double S = 4;

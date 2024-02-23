@@ -3,6 +3,7 @@ import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:biori/conection_to_backend/authentication_screen/output.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../style/widgets_javi.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -119,11 +120,12 @@ class _LoginPageState extends State<LoginPage> {
     _showLoading(false);
 
     if (output == Output.success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("login success"),
-        ),
-      );
+      WidgetsJavi().snackbarScaffold("Login correcto");
+
+      // Enviar a mainpage
+    } else if (output == Output.userNotValidated && mounted) {
+      context.push(validationRoute);
+
     } else {
       _errorSesionSnackBar();
     }
@@ -149,11 +151,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _errorSesionSnackBar() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context)!.errorLogin),
-      ),
-    );
+    WidgetsJavi().snackbarScaffold(
+        AppLocalizations.of(context)!.errorLogin);
   }
 
   _showLoading(bool showLoading) {
