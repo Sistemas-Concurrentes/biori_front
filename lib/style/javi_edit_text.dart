@@ -1,3 +1,4 @@
+import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
@@ -143,5 +144,15 @@ class JaviStyle {
   static const TextStyle titulo = TextStyle(
     fontSize: 28.0,
     fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle tituloEvento = TextStyle(
+    fontSize: 18.0,
+    color: Pallete.secondaryColor,
+  );
+
+  static const TextStyle descripcion = TextStyle(
+    fontSize: 18.0,
+    color: Pallete.secondaryColor,
   );
 }
