@@ -77,7 +77,7 @@ class ReleasesWidgets{
                 endInscription == null
                     ? const TextSpan(text: '')
                     : TextSpan(
-                    text: _dateToString(endInscription!)),
+                    text: _dateToString(endInscription)),
               ],
             ),),
           ),
@@ -114,7 +114,7 @@ class ReleasesWidgets{
                   endInscription == null
                       ? const TextSpan(text: '')
                       : TextSpan(
-                      text: _dateToString(endInscription!)),
+                      text: _dateToString(endInscription)),
                 ],
               ),
             ),
