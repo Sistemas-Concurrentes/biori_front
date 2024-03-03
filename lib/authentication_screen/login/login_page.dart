@@ -120,9 +120,7 @@ class _LoginPageState extends State<LoginPage> {
     _showLoading(false);
 
     if (output == Output.success) {
-      WidgetsJavi().snackbarScaffold("Login correcto");
-
-      // Enviar a mainpage
+      CustomRouter.router.go(homePath);
     } else if (output == Output.userNotValidated) {
       CustomRouter.router.push(validationRoute);
     } else {
