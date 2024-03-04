@@ -35,25 +35,27 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
       ),
       body: SafeArea(
         child: Center(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: EventConstants.maxWidth,
-                  ),
-                  margin: const EdgeInsets.fromLTRB(
-                      EventConstants.margin, 0, EventConstants.margin, 0),
-                  decoration: const BoxDecoration(
-                    color: Pallete.backgroundColor,
-                    border: Border(
-                      bottom: BorderSide(
-                          width: EventConstants.widthBorderSeparator,
-                          color: Pallete.primaryColor),
+          child: Container(
+            constraints: const BoxConstraints(
+              maxWidth: EventConstants.maxWidth,
+            ),
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return Container(
+                    margin: const EdgeInsets.fromLTRB(
+                        EventConstants.margin, 0, EventConstants.margin, 0),
+                    decoration: const BoxDecoration(
+                      color: Pallete.backgroundColor,
+                      border: Border(
+                        bottom: BorderSide(
+                            width: EventConstants.widthBorderSeparator,
+                            color: Pallete.primaryColor),
+                      ),
                     ),
-                  ),
-                  child: allEvents[index]);
-            },
-            itemCount: allEvents.length,
+                    child: allEvents[index]);
+              },
+              itemCount: allEvents.length,
+            ),
           ),
         ),
       ),
