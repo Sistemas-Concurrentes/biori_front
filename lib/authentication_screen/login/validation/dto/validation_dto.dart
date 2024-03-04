@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class ValidationDto {
   String register_code;
   String token;
