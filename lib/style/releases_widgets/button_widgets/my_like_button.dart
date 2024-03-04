@@ -1,21 +1,24 @@
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 
 class MyLikeButton extends StatelessWidget {
   final int numberLikes;
   final bool isLiked;
-  final int idEvent;
-  final Function likeEvent;
+  final int id;
+  final ReleaseType releaseType;
+  final Function(int, ReleaseType) likeEvent;
 
   const MyLikeButton(
       {super.key,
       required this.numberLikes,
       required this.isLiked,
-      required this.idEvent,
+      required this.id,
+      required this.releaseType,
       required this.likeEvent});
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
-    likeEvent(idEvent);
+    likeEvent(id, releaseType);
     /// send your request here
     // final bool success= await sendRequest();
 

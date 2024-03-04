@@ -1,5 +1,5 @@
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/router/custom_router.dart';
-import 'package:biori/style/releases_widgets/button_widgets/categories_buttons.dart';
 import 'package:biori/style/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:biori/style/releases_widgets/releases_widgets.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import '../model/event_model.dart';
 class EventCard extends StatelessWidget {
   final scrollController = ScrollController();
   final EventModel eventModel;
-  final Function(int) likeEvent;
+  final Function(int, ReleaseType) likeEvent;
 
   EventCard(
       {super.key, required this.likeEvent, required this.eventModel});
@@ -38,7 +38,8 @@ class EventCard extends StatelessWidget {
     return Row(
       children: [
         MyLikeButton(
-            idEvent: eventModel.id,
+            id: eventModel.id,
+            releaseType: ReleaseType.event,
             numberLikes:eventModel.numberLikes,
             isLiked: eventModel.isLiked,
             likeEvent: likeEvent),

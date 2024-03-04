@@ -4,6 +4,7 @@ import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:biori/main_screen/home/event_detail/event_detail_page.dart';
 import 'package:biori/main_screen/home/home_page.dart';
 import 'package:biori/main_screen/bottom_navigation_bar.dart';
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/settings/setting_page.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/splash_screen/splash_screen.dart';
@@ -56,7 +57,7 @@ class CustomRouter {
 
                   final extra = state.extra as Map<String, dynamic>;
                   EventModel eventModel = extra['eventModel'] as EventModel;
-                  Function(int) likeEvent = extra['likeEvent'] as Function(int);
+                  Function(int, ReleaseType) likeEvent = extra['likeEvent'] as Function(int, ReleaseType);
 
                   return getPage(
                     child: EventDetailPage(eventModel: eventModel, likeEvent: likeEvent),

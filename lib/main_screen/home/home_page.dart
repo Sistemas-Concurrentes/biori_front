@@ -1,3 +1,4 @@
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> implements CardListenerInterface{
   late List<EventModel> eventsModels;
 
   @override
@@ -59,28 +60,40 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  likeEvent(int idEvent) {
+  @override
+  likeEvent(int idEvent, ReleaseType  releaseType) {
     setState(() {
-      eventsModels = eventsModels.map((eventModel) {
-        if (eventModel.id == idEvent) {
-          eventModel.isLiked
-              ? eventModel.numberLikes--
-              : eventModel.numberLikes++;
-          eventModel.isLiked = !eventModel.isLiked;
-        }
-        return eventModel;
-      }).toList();
+      if (releaseType == ReleaseType.event) {
+        eventsModels = eventsModels.map((eventModel) {
+          if (eventModel.id == idEvent) {
+            eventModel.isLiked
+                ? eventModel.numberLikes--
+                : eventModel.numberLikes++;
+            eventModel.isLiked = !eventModel.isLiked;
+          }
+          return eventModel;
+        }).toList();
+      }
+      else {
+
+      }
     });
   }
 
-  subscribeEvent(int idEvent) {
+  @override
+  subscribeEvent(int idEvent, ReleaseType releaseType) {
     setState(() {
-      eventsModels = eventsModels.map((eventModel) {
-        if (eventModel.id == idEvent) {
-          eventModel.isSubscribed = !eventModel.isSubscribed;
-        }
-        return eventModel;
-      }).toList();
+      if (releaseType == ReleaseType.event) {
+        eventsModels = eventsModels.map((eventModel) {
+          if (eventModel.id == idEvent) {
+            eventModel.isSubscribed = !eventModel.isSubscribed;
+          }
+          return eventModel;
+        }).toList();
+      }
+      else {
+
+      }
     });
   }
 

@@ -1,4 +1,4 @@
-import 'package:biori/style/releases_widgets/button_widgets/categories_buttons.dart';
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/style/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:biori/style/releases_widgets/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import '../user_stories/events/model/event_model.dart';
 
 class EventDetailPage extends StatelessWidget {
   final EventModel eventModel;
-  final Function(int) likeEvent;
+  final Function(int, ReleaseType) likeEvent;
 
   const EventDetailPage(
       {super.key, required this.eventModel, required this.likeEvent});
@@ -25,10 +25,11 @@ class EventDetailPage extends StatelessWidget {
           child: Column(
             children: [
               _eventCardRow(context),
-               //CategoriesButtons(),
+              //CategoriesButtons(),
               _eventCardDescription(context),
               MyLikeButton(
-                  idEvent: eventModel.id,
+                  id: eventModel.id,
+                  releaseType: ReleaseType.event,
                   numberLikes: eventModel.numberLikes,
                   isLiked: eventModel.isLiked,
                   likeEvent: likeEvent),
@@ -95,7 +96,9 @@ class EventDetailPage extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 text: '',
-                style: DefaultTextStyle.of(context).style,
+                style: DefaultTextStyle
+                    .of(context)
+                    .style,
                 children: <TextSpan>[
                   const TextSpan(
                       text: 'Fecha del evento: ',
@@ -108,12 +111,12 @@ class EventDetailPage extends StatelessWidget {
                   eventModel.endInscription == null
                       ? const TextSpan(text: '')
                       : const TextSpan(
-                          text: '\nFecha fin de inscripción: ',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      text: '\nFecha fin de inscripción: ',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                   eventModel.endInscription == null
                       ? const TextSpan(text: '')
                       : TextSpan(
-                          text: dateToString(eventModel.endInscription!)),
+                      text: dateToString(eventModel.endInscription!)),
                 ],
               ),
             ),
@@ -123,10 +126,10 @@ class EventDetailPage extends StatelessWidget {
     );
   }
 }
-
 String dateToString(DateTime date, {bool withHour = true}) {
   if (withHour) {
     return "${date.day}/${date.month}/${date.year}. ${date.hour}h";
   }
   return "${date.day}/${date.month}/${date.year}";
 }
+
