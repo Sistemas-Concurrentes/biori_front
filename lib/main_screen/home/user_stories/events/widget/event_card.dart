@@ -37,7 +37,7 @@ class EventCard extends StatelessWidget {
       onTap: () {
         CustomRouter.router.push("/eventDetail/${eventModel.id}", extra: {
           'eventModel': eventModel,
-          'likeEvent': cardListenerInterface.likeEvent
+          'cardListenerInterface': cardListenerInterface
         }).then((value) => null);
       },
     );

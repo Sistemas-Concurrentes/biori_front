@@ -1,4 +1,5 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/style/releases_widgets/button_widgets/categories_buttons.dart';
 import 'package:biori/style/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:biori/style/releases_widgets/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -7,31 +8,46 @@ import '../../../style/javi_edit_text.dart';
 import '../../../theme/pallete.dart';
 import '../user_stories/events/model/event_model.dart';
 
-class EventDetailPage extends StatelessWidget {
+class EventDetailPage extends StatefulWidget {
   final EventModel eventModel;
-  final Function(int, ReleaseType) likeEvent;
+  final CardListenerInterface cardListenerInterface;
 
   const EventDetailPage(
-      {super.key, required this.eventModel, required this.likeEvent});
+      {super.key, required this.eventModel, required this.cardListenerInterface});
 
+  @override
+  State<EventDetailPage> createState() => _EventDetailPageState();
+}
+
+class _EventDetailPageState extends State<EventDetailPage> implements CardListenerInterface{
+   late EventModel detailEventModel;
+  
+   @override
+  void initState() {
+    detailEventModel = widget.eventModel;
+    
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(eventModel.title),
+        title: Text(detailEventModel.title),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
               _eventCardRow(context),
-              //CategoriesButtons(),
+              CategoriesButtons(categories: detailEventModel.categories,
+                  subscribeEvent: subscribeCategory,
+                  releaseType: ReleaseType.event),
               _eventCardDescription(context),
               MyLikeButton(
-                  id: eventModel.id,
+                  id: detailEventModel.id,
                   releaseType: ReleaseType.event,
-                  numberLikes: eventModel.numberLikes,
-                  isLiked: eventModel.isLiked,
+                  numberLikes: detailEventModel.numberLikes,
+                  isLiked: detailEventModel.isLiked,
                   likeEvent: likeEvent),
               _moreInfo(context),
             ],
@@ -54,7 +70,7 @@ class EventDetailPage extends StatelessWidget {
             ),
             margin: const EdgeInsets.all(EventConstants.margin),
             child: Text(
-              eventModel.title,
+              detailEventModel.title,
               textAlign: TextAlign.center,
               style: JaviStyle.tituloEvento,
             ),
@@ -77,7 +93,7 @@ class EventDetailPage extends StatelessWidget {
             margin: const EdgeInsets.all(EventConstants.margin),
             padding: const EdgeInsets.all(EventConstants.padding),
             child: Text(
-              eventModel.description,
+              detailEventModel.description,
               textAlign: TextAlign.justify,
               style: JaviStyle.descripcion,
             ),
@@ -103,20 +119,20 @@ class EventDetailPage extends StatelessWidget {
                   const TextSpan(
                       text: 'Fecha del evento: ',
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: dateToString(eventModel.date)),
+                  TextSpan(text: dateToString(detailEventModel.date)),
                   const TextSpan(
                       text: '\nLugar: ',
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: eventModel.location),
-                  eventModel.endInscription == null
+                  TextSpan(text: detailEventModel.location),
+                  detailEventModel.endInscription == null
                       ? const TextSpan(text: '')
                       : const TextSpan(
                       text: '\nFecha fin de inscripción: ',
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  eventModel.endInscription == null
+                  detailEventModel.endInscription == null
                       ? const TextSpan(text: '')
                       : TextSpan(
-                      text: dateToString(eventModel.endInscription!)),
+                      text: dateToString(detailEventModel.endInscription!)),
                 ],
               ),
             ),
@@ -125,7 +141,29 @@ class EventDetailPage extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  likeEvent(int idEvent, ReleaseType  releaseType) {
+    setState(() {
+      widget.cardListenerInterface.likeEvent(idEvent, releaseType);
+    });
+  }
+
+   @override
+   subscribeCategory(int idEvent, ReleaseType releaseType) {
+     setState(() {
+       detailEventModel.categories = detailEventModel.categories.map((category) {
+         if (category.id == idEvent) {
+           category.isFollowed = !category.isFollowed;
+         }
+         return category;
+       }).toList();
+
+        widget.cardListenerInterface.subscribeCategory(idEvent, releaseType);
+     });
+   }
 }
+
 String dateToString(DateTime date, {bool withHour = true}) {
   if (withHour) {
     return "${date.day}/${date.month}/${date.year}. ${date.hour}h";

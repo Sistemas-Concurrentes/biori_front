@@ -13,7 +13,6 @@ import 'package:go_router/go_router.dart';
 
 import '../main_screen/home/user_stories/events/model/event_model.dart';
 
-
 class CustomRouter {
   static final CustomRouter _instance = CustomRouter._internal();
   static late final GoRouter router;
@@ -57,10 +56,11 @@ class CustomRouter {
 
                   final extra = state.extra as Map<String, dynamic>;
                   EventModel eventModel = extra['eventModel'] as EventModel;
-                  Function(int, ReleaseType) likeEvent = extra['likeEvent'] as Function(int, ReleaseType);
-
+                  CardListenerInterface cardListenerInterface =
+                      extra['cardListenerInterface'] as CardListenerInterface;
                   return getPage(
-                    child: EventDetailPage(eventModel: eventModel, likeEvent: likeEvent),
+                    child: EventDetailPage(
+                        eventModel: eventModel, cardListenerInterface: cardListenerInterface),
                     state: state,
                   );
                 },
