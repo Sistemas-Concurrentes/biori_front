@@ -4,31 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'model/categories_button_model.dart';
 
-class CategoriesButtons extends StatefulWidget {
-  const CategoriesButtons({super.key});
+class CategoriesButtons extends StatelessWidget {
+  final Function subscribeEvent;
+  final List<CategoriesButtonsModel> categories;
 
-  @override
-  State<CategoriesButtons> createState() => _CategoriesButtonsState();
-}
+  CategoriesButtons({super.key, required this.categories, required this.subscribeEvent});
 
-class _CategoriesButtonsState extends State<CategoriesButtons> {
-  final scrollController = ScrollController();
-  var backgroundColor = Pallete.scaffoldBackgroundColor;
-
-  List<CategoriesButtonsModel> categories = [];
-
-  void _getCategories() {
-    categories = CategoriesButtonsModel.getCategoriesButtons();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _getCategories();
-  }
 
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         Expanded(
@@ -37,13 +22,11 @@ class _CategoriesButtonsState extends State<CategoriesButtons> {
             margin: const EdgeInsets.fromLTRB(
                 EventConstants.margin, 0, EventConstants.margin, 0),
             child: Scrollbar(
-              controller: scrollController,
               thumbVisibility: true,
               child: ListView.separated(
-                controller: scrollController,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  backgroundColor = categories[index].isSelected
+                  Color backgroundColor = categories[index].isFollowed
                       ? Pallete.primaryColor
                       : Pallete.scaffoldBackgroundColor;
                   return Container(
@@ -51,9 +34,7 @@ class _CategoriesButtonsState extends State<CategoriesButtons> {
                         0, 0, 0, EventConstants.margin),
                     child: ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          categories[index].changeSelected();
-                        });
+                        subscribeEvent(categories[index].id);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: backgroundColor,

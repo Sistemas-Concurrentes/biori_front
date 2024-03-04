@@ -20,7 +20,7 @@ class EventCard extends StatelessWidget {
         child: Column(
           children: [
             ReleasesWidgets.releaseTitleRow(context, eventModel.title),
-            const CategoriesButtons(),
+            //const CategoriesButtons(),
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventModel.description),
             _ultimaLinea(context)

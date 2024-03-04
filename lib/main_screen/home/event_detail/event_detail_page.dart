@@ -25,7 +25,7 @@ class EventDetailPage extends StatelessWidget {
           child: Column(
             children: [
               _eventCardRow(context),
-              const CategoriesButtons(),
+               //CategoriesButtons(),
               _eventCardDescription(context),
               MyLikeButton(
                   idEvent: eventModel.id,

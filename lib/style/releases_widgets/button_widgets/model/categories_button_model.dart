@@ -2,25 +2,23 @@ import 'package:flutter/material.dart';
 
 class CategoriesButtonsModel {
   final String name;
-  bool isSelected;
+  final int id;
+  bool isFollowed;
 
   CategoriesButtonsModel({
     required this.name,
-    required this.isSelected,
+    required this.id,
+    this.isFollowed=false,
   });
 
   static List<CategoriesButtonsModel> getCategoriesButtons() {
     List<CategoriesButtonsModel> categories = [];
-    categories.add(CategoriesButtonsModel(name: "All", isSelected: true));
-    categories.add(CategoriesButtonsModel(name: "Music", isSelected: false));
-    categories.add(CategoriesButtonsModel(name: "Sports", isSelected: false));
-    categories.add(CategoriesButtonsModel(name: "Theater", isSelected: false));
-    categories.add(CategoriesButtonsModel(name: "Cinema", isSelected: false));
+    categories.add(CategoriesButtonsModel(name: "All", id: 9, isFollowed: true));
 
     return categories;
   }
 
   void changeSelected() {
-    isSelected = !isSelected;
+    isFollowed = !isFollowed;
   }
 }
