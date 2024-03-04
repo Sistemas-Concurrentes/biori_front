@@ -16,18 +16,28 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> implements CardListenerInterface{
   late List<EventModel> eventsModels;
+  late List<int> categoriesFollowedByUser;
 
   @override
   void initState() {
     eventsModels = EventRepository().getEvents();
+    categoriesFollowedByUser = EventRepository().getCategoriesFollowedByUser();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> allEvents = eventsModels
-        .map((eventModel) => EventCard(eventModel: eventModel, likeEvent: likeEvent))
-        .toList();
+    List<Widget> allEvents = eventsModels.map((eventModel) {
+      for (var category in eventModel.categories) {
+        if (categoriesFollowedByUser.contains(category.id)) {
+          category.isFollowed = true;
+        } else{
+          category.isFollowed = false;
+        }
+      }
+      return EventCard(eventModel: eventModel, cardListenerInterface: this);
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -86,12 +96,9 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
   subscribeCategory(int idEvent, ReleaseType releaseType) {
     setState(() {
       if (releaseType == ReleaseType.event) {
-        eventsModels = eventsModels.map((eventModel) {
-          if (eventModel.id == idEvent) {
-            eventModel.isSubscribed = !eventModel.isSubscribed;
-          }
-          return eventModel;
-        }).toList();
+        categoriesFollowedByUser.contains(idEvent)
+            ? categoriesFollowedByUser.remove(idEvent)
+            : categoriesFollowedByUser.add(idEvent);
       }
       else {
 

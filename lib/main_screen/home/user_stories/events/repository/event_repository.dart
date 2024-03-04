@@ -7,4 +7,9 @@ class EventRepository {
     EventsDatasource eventsDatasource = EventsDatasource();
     return eventsDatasource.getEvents();
   }
+
+  List<int> getCategoriesFollowedByUser() {
+    EventsDatasource eventsDatasource = EventsDatasource();
+    return eventsDatasource.getCategoriesFollowedByUser();
+  }
 }

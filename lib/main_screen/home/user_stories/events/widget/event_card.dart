@@ -1,5 +1,6 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:biori/style/releases_widgets/button_widgets/categories_buttons.dart';
 import 'package:biori/style/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:biori/style/releases_widgets/releases_widgets.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,12 @@ import '../model/event_model.dart';
 class EventCard extends StatelessWidget {
   final scrollController = ScrollController();
   final EventModel eventModel;
-  final Function(int, ReleaseType) likeEvent;
+  final CardListenerInterface cardListenerInterface;
 
   EventCard(
-      {super.key, required this.likeEvent, required this.eventModel});
+      {super.key,
+      required this.cardListenerInterface,
+      required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,11 @@ class EventCard extends StatelessWidget {
         child: Column(
           children: [
             ReleasesWidgets.releaseTitleRow(context, eventModel.title),
-            //const CategoriesButtons(),
+            CategoriesButtons(
+                categories: eventModel.categories,
+                subscribeEvent: cardListenerInterface.subscribeCategory,
+                releaseType: ReleaseType.event,
+              ),
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventModel.description),
             _ultimaLinea(context)
@@ -28,8 +35,10 @@ class EventCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        CustomRouter.router.push("/eventDetail/${eventModel.id}",
-            extra: {'eventModel': eventModel, 'likeEvent': likeEvent}).then((value) => null);
+        CustomRouter.router.push("/eventDetail/${eventModel.id}", extra: {
+          'eventModel': eventModel,
+          'likeEvent': cardListenerInterface.likeEvent
+        }).then((value) => null);
       },
     );
   }
@@ -40,9 +49,9 @@ class EventCard extends StatelessWidget {
         MyLikeButton(
             id: eventModel.id,
             releaseType: ReleaseType.event,
-            numberLikes:eventModel.numberLikes,
+            numberLikes: eventModel.numberLikes,
             isLiked: eventModel.isLiked,
-            likeEvent: likeEvent),
+            likeEvent: cardListenerInterface.likeEvent),
         ReleasesWidgets.moreInfoButton(context, eventModel.location,
             eventModel.date, eventModel.endInscription),
       ],

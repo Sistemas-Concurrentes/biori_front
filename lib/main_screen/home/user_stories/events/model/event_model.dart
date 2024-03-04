@@ -1,7 +1,9 @@
+import 'package:biori/style/releases_widgets/button_widgets/model/categories_button_model.dart';
+
 class EventModel {
   int id;
   String title;
-  String category;
+  List<CategoriesButtonsModel> categories ;
   String organizer;
   String description;
   DateTime date;
@@ -14,7 +16,7 @@ class EventModel {
   EventModel(
       {required this.id,
       required this.title,
-      required this.category,
+      required this.categories,
       required this.organizer,
       required this.description,
       required this.date,
