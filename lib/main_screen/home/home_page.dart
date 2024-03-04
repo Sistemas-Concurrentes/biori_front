@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
   }
 
   @override
-  subscribeEvent(int idEvent, ReleaseType releaseType) {
+  subscribeCategory(int idEvent, ReleaseType releaseType) {
     setState(() {
       if (releaseType == ReleaseType.event) {
         eventsModels = eventsModels.map((eventModel) {
