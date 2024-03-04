@@ -1,3 +1,4 @@
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/style/releases_widgets/constants/constants.dart';
 import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,10 @@ import 'model/categories_button_model.dart';
 class CategoriesButtons extends StatelessWidget {
   final Function subscribeEvent;
   final List<CategoriesButtonsModel> categories;
+  final ReleaseType releaseType;
+  final scrollController = ScrollController();
 
-  CategoriesButtons({super.key, required this.categories, required this.subscribeEvent});
+  CategoriesButtons({super.key, required this.categories, required this.subscribeEvent, required this.releaseType});
 
 
   @override
@@ -22,8 +25,10 @@ class CategoriesButtons extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(
                 EventConstants.margin, 0, EventConstants.margin, 0),
             child: Scrollbar(
+              controller: scrollController,
               thumbVisibility: true,
               child: ListView.separated(
+                controller: scrollController,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   Color backgroundColor = categories[index].isFollowed
@@ -34,7 +39,7 @@ class CategoriesButtons extends StatelessWidget {
                         0, 0, 0, EventConstants.margin),
                     child: ElevatedButton(
                       onPressed: () {
-                        subscribeEvent(categories[index].id);
+                        subscribeEvent(categories[index].id, releaseType);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: backgroundColor,
