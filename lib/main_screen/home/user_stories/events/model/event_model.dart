@@ -7,10 +7,11 @@ class EventModel {
   String organizer;
   String description;
   DateTime date;
+  String location;
+  DateTime lastUpdate;
+  bool isSubscribed;
   DateTime? endInscription;
   bool isLiked = false;
-  bool isSubscribed;
-  String location;
   int numberLikes;
 
   EventModel(
@@ -21,6 +22,7 @@ class EventModel {
       required this.description,
       required this.date,
       required this.location,
+        required this.lastUpdate,
       this.endInscription,
       this.isSubscribed = false,
       this.isLiked = false,

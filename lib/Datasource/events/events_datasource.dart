@@ -13,6 +13,7 @@ class EventsDatasource {
         organizer: "Organizador 1",
         description: "Descripcion 1",
         date: DateTime.now(),
+        lastUpdate: DateTime.now(),
         location: "Ubicacion 1",
         isSubscribed: true,
       ),
@@ -23,6 +24,7 @@ class EventsDatasource {
         organizer: "Organizador 2",
         description: "Descripcion 2",
         date: DateTime.now(),
+        lastUpdate: DateTime(2021, 10, 10),
         location: "Ubicacion 2",
         endInscription: DateTime.now(),
       ),
@@ -33,6 +35,7 @@ class EventsDatasource {
         organizer: "Organizador 3",
         description: "Descripcion 3",
         date: DateTime.now(),
+        lastUpdate: DateTime(2021, 10, 1),
         location: "Ubicacion 3",
       ),
     ];
