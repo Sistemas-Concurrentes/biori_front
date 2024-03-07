@@ -5,5 +5,5 @@ class EventConstants {
   static const double padding = 10;
   static const double borderRadius = 16;
   static const double maxWidth = 600;
-  static const double widthBorderSeparator = 1;
+  static const double widthBorderSeparator = 2;
 }

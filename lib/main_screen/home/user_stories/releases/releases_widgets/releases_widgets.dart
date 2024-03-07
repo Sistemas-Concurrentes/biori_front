@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../style/javi_edit_text.dart';
-import '../../../../../theme/pallete.dart';
 import 'constants/constants.dart';
 
 class ReleasesWidgets{
@@ -12,7 +11,6 @@ class ReleasesWidgets{
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(EventConstants.borderRadius),
             ),
             margin: const EdgeInsets.all(EventConstants.margin),
@@ -34,7 +32,6 @@ class ReleasesWidgets{
           child: Container(
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(EventConstants.margin),
             ),
             margin: const EdgeInsets.all(EventConstants.margin),

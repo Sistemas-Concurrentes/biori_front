@@ -4,6 +4,7 @@ import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/bu
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/releases_widgets.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
+import '../../../../../theme/pallete.dart';
 import '../model/event_model.dart';
 
 class EventCard extends StatelessWidget {
@@ -20,18 +21,23 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ReleasesWidgets.releaseTitleRow(context, eventModel.title),
-            CategoriesButtons(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Pallete.primaryColor.withOpacity(0.5),
+          ),
+          child: Column(
+            children: [
+              ReleasesWidgets.releaseTitleRow(context, eventModel.title),
+              CategoriesButtons(
                 categories: eventModel.categories,
                 subscribeEvent: cardListenerInterface.subscribeCategory,
                 releaseType: ReleaseType.event,
               ),
-            ReleasesWidgets.releaseDescriptionRow(
-                context, eventModel.description),
-            _ultimaLinea(context)
-          ],
+              ReleasesWidgets.releaseDescriptionRow(
+                  context, eventModel.description),
+              _ultimaLinea(context)
+            ],
+          ),
         ),
       ),
       onTap: () {

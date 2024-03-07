@@ -53,8 +53,6 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Container(
-                    margin: const EdgeInsets.fromLTRB(
-                        EventConstants.margin, 0, EventConstants.margin, 0),
                     decoration: const BoxDecoration(
                       color: Pallete.backgroundColor,
                       border: Border(
@@ -83,7 +81,6 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
       return eventModel;
     }).toList();
   }
-
 
   List<Widget> _getAllEventsOrderedByDate() {
     List<ReleaseModelInterface> allReleases = [];
