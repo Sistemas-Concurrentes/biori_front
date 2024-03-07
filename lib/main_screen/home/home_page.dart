@@ -16,12 +16,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> implements CardListenerInterface{
   late List<EventModel> eventsModels;
+  late List<AdvertisementModel> advertisementModels;
   late List<int> categoriesFollowedByUser;
+  late List<int> groupsSubscribedByUser;
 
   @override
   void initState() {
     eventsModels = EventRepository().getEvents();
+    advertisementModels = AdvertisementRepository().getAdvertisement();
     categoriesFollowedByUser = EventRepository().getCategoriesFollowedByUser();
+    groupsSubscribedByUser =
+        AdvertisementRepository().getGroupsSusbcribedByUser();
 
     super.initState();
   }
