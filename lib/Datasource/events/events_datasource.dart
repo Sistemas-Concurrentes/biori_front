@@ -43,6 +43,18 @@ class EventsDatasource {
         endInscription: DateTime(2024, 1, 10),
       ),
       EventModel(
+        id: 5,
+        title: "Sexualidad: Múltiples formas de sentirla y vivirla. IV Edición",
+        categories: [igualdad, cursos, sexualidad],
+        organizer: "Organizador 3",
+        description:
+        "Curso sobre la sexualidad impartido por la unidad de igualdad \nDATOS BÁSICOS \n- Fechas: 11, 12, 13, 18,19 Y 20 de diciembre de 2023.\n- Horario: de 17:00 a 20:00 h.\n- Lugar de celebración: Aula 25. Facultad de Trabajo Social.\n- Carga lectiva: 25 horas (18 presenciales 7 horas on line)\n- Personas destinatarias y número de plazas: 35 plazas dirigidas al estudiantado de la Universidad de Granada, con matrícula en el actual curso 2023/2024.\n- Créditos reconocidos: 1 ECTS\n- Certificados: La Unidad de Igualdad y Conciliación entregará un certificado de asistencia a quienes asistan como mínimo al 80% de las sesiones presenciales y realicen las actividades propuestas de la parte virtual.\n***ENLACE PARA MÁS INFORMACION A WEB UNIDAD IGUALDAD (APARTADO NOTICIAS) (aquí: inscripción, objetivos, contacto, toda la información de la programación)",
+        date: DateTime(2024, 7, 16),
+        lastUpdate: DateTime(2024, 1, 1),
+        location: "Facultad de Ciencias",
+        endInscription: DateTime(2023, 12, 31),
+      ),
+      EventModel(
         id: 4,
         title: "III CEEBI",
         categories: [conferencias, seminario],
@@ -145,5 +157,17 @@ CategoriesButtonsModel conferencias = CategoriesButtonsModel(
 CategoriesButtonsModel seminario = CategoriesButtonsModel(
   id: 15,
   name: "Voluntariado",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel cursos = CategoriesButtonsModel(
+  id: 16,
+  name: "Cursos",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel sexualidad = CategoriesButtonsModel(
+  id: 17,
+  name: "Sexualidad",
   isFollowed: false,
 );
