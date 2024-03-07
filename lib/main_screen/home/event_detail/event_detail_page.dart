@@ -1,12 +1,12 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
-import 'package:biori/style/releases_widgets/button_widgets/categories_buttons.dart';
-import 'package:biori/style/releases_widgets/button_widgets/my_like_button.dart';
-import 'package:biori/style/releases_widgets/constants/constants.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/categories_buttons.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../style/javi_edit_text.dart';
 import '../../../theme/pallete.dart';
 import '../user_stories/events/model/event_model.dart';
+import '../user_stories/releases/releases_widgets/constants/constants.dart';
 
 class EventDetailPage extends StatefulWidget {
   final EventModel eventModel;

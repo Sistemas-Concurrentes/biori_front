@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/pallete.dart';
-import '../javi_edit_text.dart';
+import '../../../../../style/javi_edit_text.dart';
+import '../../../../../theme/pallete.dart';
 import 'constants/constants.dart';
 
 class ReleasesWidgets{

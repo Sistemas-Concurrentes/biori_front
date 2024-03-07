@@ -1,7 +1,7 @@
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/releases_widgets.dart';
 import 'package:biori/style/javi_edit_text.dart';
-import 'package:biori/style/releases_widgets/releases_widgets.dart';
 import 'package:flutter/material.dart';
-import '../../../../../style/releases_widgets/constants/constants.dart';
 import '../../../../../theme/pallete.dart';
 import '../model/advertisement_model.dart';
 

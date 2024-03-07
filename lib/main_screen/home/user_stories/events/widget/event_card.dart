@@ -1,8 +1,8 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/categories_buttons.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/my_like_button.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/releases_widgets.dart';
 import 'package:biori/router/custom_router.dart';
-import 'package:biori/style/releases_widgets/button_widgets/categories_buttons.dart';
-import 'package:biori/style/releases_widgets/button_widgets/my_like_button.dart';
-import 'package:biori/style/releases_widgets/releases_widgets.dart';
 import 'package:flutter/material.dart';
 import '../model/event_model.dart';
 

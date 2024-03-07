@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class CategoriesButtonsModel {
   final String name;
   final int id;

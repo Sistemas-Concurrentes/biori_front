@@ -1,8 +1,8 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
-import 'package:biori/style/releases_widgets/constants/constants.dart';
 import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/constants.dart';
 import 'model/categories_button_model.dart';
 
 class CategoriesButtons extends StatelessWidget {

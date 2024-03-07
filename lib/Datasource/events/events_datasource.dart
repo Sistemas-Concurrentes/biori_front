@@ -1,4 +1,4 @@
-import 'package:biori/style/releases_widgets/button_widgets/model/categories_button_model.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
 
 import '../../main_screen/home/user_stories/events/model/event_model.dart';
 

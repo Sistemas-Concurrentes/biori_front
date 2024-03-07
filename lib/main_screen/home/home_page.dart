@@ -1,14 +1,14 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
-import 'package:biori/main_screen/home/user_stories/Releases/release_model_interface.dart';
+import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/advertisement/model/advertisement_model.dart';
 import 'package:biori/main_screen/home/user_stories/advertisement/repository/advertisement_repository.dart';
 import 'package:biori/main_screen/home/user_stories/advertisement/widget/advertisement_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../style/releases_widgets/constants/constants.dart';
 import '../../theme/pallete.dart';
 
 class HomePage extends StatefulWidget {
