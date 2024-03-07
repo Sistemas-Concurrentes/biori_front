@@ -63,7 +63,6 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
         Expanded(
           child: Container(
             alignment: Alignment.center,
-            height: EventConstants.heightButtons,
             decoration: BoxDecoration(
               color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(EventConstants.borderRadius),
