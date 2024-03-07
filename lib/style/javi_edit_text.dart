@@ -151,7 +151,7 @@ class JaviStyle {
   );
 
   static const TextStyle descripcion = TextStyle(
-    fontSize: 18.0,
+    fontSize: 15.0,
     color: Pallete.negro,
   );
   static const TextStyle informacionExtraCards = TextStyle(
