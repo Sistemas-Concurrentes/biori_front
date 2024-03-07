@@ -39,7 +39,6 @@ class AdvertisementCard extends StatelessWidget {
   Row _groupsAffectedRow(){
     String groups = _groupsToString();
     return Row(
-
       children: [
         Expanded(
           child: Container(
@@ -48,7 +47,7 @@ class AdvertisementCard extends StatelessWidget {
               color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(EventConstants.margin),
             ),
-            padding: const EdgeInsets.all(EventConstants.padding),
+            padding: const EdgeInsets.fromLTRB(EventConstants.padding, 0, EventConstants.padding, 0),
             child: Text(
               groups,
               textAlign: TextAlign.left,
