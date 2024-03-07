@@ -1,6 +1,7 @@
+import 'package:biori/main_screen/home/user_stories/Releases/release_model_interface.dart';
 import 'package:biori/style/releases_widgets/button_widgets/model/categories_button_model.dart';
 
-class EventModel {
+class EventModel implements ReleaseModelInterface{
   int id;
   String title;
   List<CategoriesButtonsModel> categories ;
@@ -8,6 +9,7 @@ class EventModel {
   String description;
   DateTime date;
   String location;
+  @override
   DateTime lastUpdate;
   bool isSubscribed;
   DateTime? endInscription;

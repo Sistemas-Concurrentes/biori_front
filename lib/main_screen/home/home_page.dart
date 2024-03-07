@@ -1,4 +1,8 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/main_screen/home/user_stories/Releases/release_model_interface.dart';
+import 'package:biori/main_screen/home/user_stories/advertisement/model/advertisement_model.dart';
+import 'package:biori/main_screen/home/user_stories/advertisement/repository/advertisement_repository.dart';
+import 'package:biori/main_screen/home/user_stories/advertisement/widget/advertisement_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
@@ -14,7 +18,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> implements CardListenerInterface{
+class _HomePageState extends State<HomePage> implements CardListenerInterface {
   late List<EventModel> eventsModels;
   late List<AdvertisementModel> advertisementModels;
   late List<int> categoriesFollowedByUser;
@@ -33,16 +37,8 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> allEvents = eventsModels.map((eventModel) {
-      for (var category in eventModel.categories) {
-        if (categoriesFollowedByUser.contains(category.id)) {
-          category.isFollowed = true;
-        } else{
-          category.isFollowed = false;
-        }
-      }
-      return EventCard(eventModel: eventModel, cardListenerInterface: this);
-    }).toList();
+    _updateEventsSubscribed();
+    List<Widget> allEvents = _getAllEventsOrderedByDate();
 
     return Scaffold(
       appBar: AppBar(
@@ -77,8 +73,42 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
     );
   }
 
+  _updateEventsSubscribed() {
+    eventsModels = eventsModels.map((eventModel) {
+      for (var category in eventModel.categories) {
+        categoriesFollowedByUser.contains(category.id)
+            ? category.isFollowed = true
+            : category.isFollowed = false;
+      }
+      return eventModel;
+    }).toList();
+  }
+
+
+  List<Widget> _getAllEventsOrderedByDate() {
+    List<ReleaseModelInterface> allReleases = [];
+
+    allReleases.addAll(eventsModels);
+    allReleases.addAll(advertisementModels);
+
+    allReleases.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
+
+    return allReleases.map((release) {
+      if (release is EventModel) {
+        return EventCard(
+          cardListenerInterface: this,
+          eventModel: release,
+        );
+      } else {
+        return AdvertisementCard(
+          advertisementModel: release as AdvertisementModel,
+        );
+      }
+    }).toList();
+  }
+
   @override
-  likeEvent(int idEvent, ReleaseType  releaseType) {
+  likeEvent(int idEvent, ReleaseType releaseType) {
     setState(() {
       if (releaseType == ReleaseType.event) {
         eventsModels = eventsModels.map((eventModel) {
@@ -90,10 +120,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
           }
           return eventModel;
         }).toList();
-      }
-      else {
-
-      }
+      } else {}
     });
   }
 
@@ -104,10 +131,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface{
         categoriesFollowedByUser.contains(idEvent)
             ? categoriesFollowedByUser.remove(idEvent)
             : categoriesFollowedByUser.add(idEvent);
-      }
-      else {
-
-      }
+      } else {}
     });
   }
 

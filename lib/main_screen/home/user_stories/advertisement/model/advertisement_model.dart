@@ -1,11 +1,13 @@
+import '../../Releases/release_model_interface.dart';
 
-class AdvertisementModel  {
+class AdvertisementModel implements ReleaseModelInterface {
   int id;
   Map<int, String> groupsInfo;
   String title;
   String description;
   String creatorName;
 
+  @override
   DateTime lastUpdate;
 
   int? teacherUserId;
