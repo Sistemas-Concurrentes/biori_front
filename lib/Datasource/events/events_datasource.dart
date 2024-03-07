@@ -1,4 +1,3 @@
-
 import 'package:biori/style/releases_widgets/button_widgets/model/categories_button_model.dart';
 
 import '../../main_screen/home/user_stories/events/model/event_model.dart';
@@ -8,41 +7,58 @@ class EventsDatasource {
     return [
       EventModel(
         id: 1,
-        title: "Evento 1",
-        categories: [categoria1, categoria2],
-        organizer: "Organizador 1",
-        description: "Descripcion 1",
-        date: DateTime.now(),
-        lastUpdate: DateTime.now(),
-        location: "Ubicacion 1",
-        isSubscribed: true,
+        title: "Asamblea estudiantil Frente de estudiantes",
+        categories: [concienciacion, frentedeestudiantes, estudiantado],
+        organizer: "-",
+        description:
+            "Con motivo de los últimos cambios en la cafetería y sus efectos sobre el estudiantado, desde el Frente de estudiantes se convoca esta asamblea donde se debatirá sobre el rumbo a tomar para afrontar esta problemática.",
+        date: DateTime(2024, 2, 1, 10, 30),
+        lastUpdate: DateTime(2024, 1, 12),
+        location: "Aula seminario ciencias políticas",
       ),
       EventModel(
         id: 2,
-        title: "Evento 2",
-        categories: [categoria1, categoria3],
-        organizer: "Organizador 2",
-        description: "Descripcion 2",
-        date: DateTime.now(),
-        lastUpdate: DateTime(2021, 10, 10),
-        location: "Ubicacion 2",
-        endInscription: DateTime.now(),
+        title:
+            "Prácticas itinerantes de alta montaña: las ciencias naturales «in situ» (IV ed.)",
+        categories: [montana, praticasCampo],
+        organizer: "-",
+        description:
+            "Este curso está especialmente diseñado para acercarnos al apasionante mundo de la alta montaña. Sierra Nevada, por sus condiciones biogeográficas, es refugio de multitud de endemismos vegetales y animales por lo que resulta un espacio inmejorable para llevar a cabo un curso multidisciplinar como el que se propone",
+        date: DateTime(2024, 7, 12, 9),
+        lastUpdate: DateTime(2024, 1, 3),
+        endInscription: DateTime(2024, 5, 10),
+        location: "Pampaneira, Alpujarra Granadina",
       ),
       EventModel(
         id: 3,
-        title: "Evento 3",
-        categories: [categoria1, categoria4],
+        title:
+            "II Edición del Ciclo de Talleres sobre Autocuidado y Salud Mental_Año 2024",
+        categories: [igualdad, talleres, saludMental],
+        organizer: "Organizador 2",
+        description:
+            "El objetivo de estos talleres es crear espacios en la universidad para poder dialogar sobre temas relacionados con el autocuidado y proporcionar herramientas prácticas para poderse cuidar mejor, abordando temas verdaderamente relevantes para el bienestar humano dentro y fuera de la universidad",
+        date: DateTime(2024, 1, 23, 17),
+        lastUpdate: DateTime(2024, 1, 2),
+        location: "Sala de Prensa. Hospital Real. ",
+        endInscription: DateTime(2024, 1, 10),
+      ),
+      EventModel(
+        id: 4,
+        title: "III CEEBI",
+        categories: [conferencias, seminario],
         organizer: "Organizador 3",
-        description: "Descripcion 3",
-        date: DateTime.now(),
-        lastUpdate: DateTime(2021, 10, 1),
-        location: "Ubicacion 3",
+        description:
+            "III Congreso Estatal de Estudiantes de Biociencias (CEEBI), 16 al 19 de julio de 2024 en la Facultad de Ciencias de la Universidad de Granada. Toda la información del congreso así como las novedades podrán encontrarla en nuestra página web (biociencias.es) así como en nuestras redes sociales (@BiocienciasGRX). ",
+        date: DateTime(2024, 7, 16),
+        lastUpdate: DateTime(2023, 12, 15),
+        location: "Facultad de Ciencias",
+        endInscription: DateTime(2023, 12, 31),
       ),
     ];
   }
 
   List<int> getCategoriesFollowedByUser() {
-    return [1 ,4];
+    return [1, 4];
   }
 }
 
@@ -72,3 +88,62 @@ CategoriesButtonsModel categoria5 = CategoriesButtonsModel(
   isFollowed: false,
 );
 
+CategoriesButtonsModel concienciacion = CategoriesButtonsModel(
+  id: 6,
+  name: "Concienciación",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel frentedeestudiantes = CategoriesButtonsModel(
+  id: 7,
+  name: "Frente de estudiantes",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel estudiantado = CategoriesButtonsModel(
+  id: 8,
+  name: "Estudiantado",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel praticasCampo = CategoriesButtonsModel(
+  id: 9,
+  name: "Partidas de campo",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel montana = CategoriesButtonsModel(
+  id: 10,
+  name: "Montaña",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel igualdad = CategoriesButtonsModel(
+  id: 11,
+  name: "Igualdad",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel saludMental = CategoriesButtonsModel(
+  id: 12,
+  name: "Salud mental",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel talleres = CategoriesButtonsModel(
+  id: 13,
+  name: "Talleres",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel conferencias = CategoriesButtonsModel(
+  id: 14,
+  name: "Conferencias",
+  isFollowed: false,
+);
+
+CategoriesButtonsModel seminario = CategoriesButtonsModel(
+  id: 15,
+  name: "Voluntariado",
+  isFollowed: false,
+);
