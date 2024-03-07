@@ -4,7 +4,7 @@ import 'package:biori/style/releases_widgets/button_widgets/model/categories_but
 import '../../main_screen/home/user_stories/events/model/event_model.dart';
 
 class EventsDatasource {
-  List<EventModel> getEvents() {
+  List<EventModel> getEventsOrderedByLastUpdate() {
     return [
       EventModel(
         id: 1,

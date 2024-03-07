@@ -5,7 +5,7 @@ import '../model/event_model.dart';
 class EventRepository {
   List<EventModel> getEvents() {
     EventsDatasource eventsDatasource = EventsDatasource();
-    return eventsDatasource.getEvents();
+    return eventsDatasource.getEventsOrderedByLastUpdate();
   }
 
   List<int> getCategoriesFollowedByUser() {
