@@ -7,6 +7,9 @@ import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dar
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
+import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
+import 'package:biori/main_screen/home/user_stories/reports/repository/report_repository.dart';
+import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../theme/pallete.dart';
@@ -21,13 +24,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> implements CardListenerInterface {
   late List<EventModel> eventsModels;
   late List<AdvertisementModel> advertisementModels;
+  late List<ReportModel> reportModels;
   late List<int> categoriesFollowedByUser;
   late List<int> groupsSubscribedByUser;
+
 
   @override
   void initState() {
     eventsModels = EventRepository().getEvents();
     advertisementModels = AdvertisementRepository().getAdvertisement();
+    reportModels = ReportRepository().getReports();
     categoriesFollowedByUser = EventRepository().getCategoriesFollowedByUser();
     groupsSubscribedByUser =
         AdvertisementRepository().getGroupsSusbcribedByUser();
@@ -87,6 +93,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
 
     allReleases.addAll(eventsModels);
     allReleases.addAll(advertisementModels);
+    allReleases.addAll(reportModels);
 
     allReleases.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
 
@@ -96,10 +103,16 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
           cardListenerInterface: this,
           eventModel: release,
         );
-      } else {
+      } else if (release is AdvertisementModel) {
         return AdvertisementCard(
-          advertisementModel: release as AdvertisementModel,
+          advertisementModel: release,
         );
+      } else if (release is ReportModel){
+        return ReportCard(
+          reportModel: release ,
+        );
+      } else {
+        return Container();
       }
     }).toList();
   }
