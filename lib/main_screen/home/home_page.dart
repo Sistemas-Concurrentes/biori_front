@@ -35,8 +35,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     advertisementModels = AdvertisementRepository().getAdvertisement();
     reportModels = ReportRepository().getReports();
     categoriesFollowedByUser = EventRepository().getCategoriesFollowedByUser();
-    groupsSubscribedByUser =
-        AdvertisementRepository().getGroupsSusbcribedByUser();
+
 
     super.initState();
   }
