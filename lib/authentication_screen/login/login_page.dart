@@ -24,17 +24,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: WidgetsJavi().progressHudJavi(
-            context,
-            isApiCallProcess,
-            Form(
-              key: globalFormKey,
-              child: _loginUI(context),
-            )),
-      ),
+        body: SafeArea(
+          child: WidgetsJavi().progressHudJavi(
+              context,
+              isApiCallProcess,
+              Form(
+                key: globalFormKey,
+                child: _loginUI(context),
+              )),
+        ),
     );
   }
 
