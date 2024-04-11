@@ -50,6 +50,8 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
                   isLiked: detailEventModel.isLiked,
                   likeEvent: likeEvent),
               _moreInfo(context),
+              ElevatedButton(onPressed: () {} , child: Text('Inscribirse')),
+
             ],
           ),
         ),

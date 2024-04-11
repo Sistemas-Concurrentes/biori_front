@@ -110,7 +110,11 @@ class ReleasesWidgets{
                   endInscription == null
                       ? const TextSpan(text: '')
                       : TextSpan(
-                      text: _dateToString(endInscription)),
+                      text: _dateToString(endInscription) + "\n"),
+                  endInscription == null
+                      ? const TextSpan(text: ''):
+                  const TextSpan(text: 'Inscribirse',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
