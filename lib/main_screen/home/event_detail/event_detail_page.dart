@@ -39,7 +39,7 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
           child: Column(
             children: [
               _eventCardRow(context),
-              CategoriesButtons(categories: detailEventModel.categories,
+              CategoriesButtons(categories: detailEventModel.tags,
                   subscribeEvent: subscribeCategory,
                   releaseType: ReleaseType.event),
               _eventCardDescription(context),
@@ -153,7 +153,7 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
    @override
    subscribeCategory(int idEvent, ReleaseType releaseType) {
      setState(() {
-       detailEventModel.categories = detailEventModel.categories.map((category) {
+       detailEventModel.tags = detailEventModel.tags.map((category) {
          if (category.id == idEvent) {
            category.isFollowed = !category.isFollowed;
          }

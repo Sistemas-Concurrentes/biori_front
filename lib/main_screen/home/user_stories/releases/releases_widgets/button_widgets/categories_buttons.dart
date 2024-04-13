@@ -7,7 +7,7 @@ import 'model/categories_button_model.dart';
 
 class CategoriesButtons extends StatelessWidget {
   final Function subscribeEvent;
-  final List<CategoriesButtonsModel> categories;
+  final List<TagsButtonsModel> categories;
   final ReleaseType releaseType;
   final scrollController = ScrollController();
 

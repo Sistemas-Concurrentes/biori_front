@@ -8,8 +8,8 @@ class EventRepository {
     return eventsDatasource.getEventsOrderedByLastUpdate();
   }
 
-  List<int> getCategoriesFollowedByUser() {
-    EventsDatasource eventsDatasource = EventsDatasource();
-    return eventsDatasource.getCategoriesFollowedByUser();
+  List<int> getTagsIdFollowedByUser() {
+    // EventsDatasource eventsDatasource = EventsDatasource();
+    return [1];
   }
 }

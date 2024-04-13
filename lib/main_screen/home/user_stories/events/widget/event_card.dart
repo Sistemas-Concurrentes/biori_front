@@ -29,7 +29,7 @@ class EventCard extends StatelessWidget {
             children: [
               ReleasesWidgets.releaseTitleRow(context, eventModel.title),
               CategoriesButtons(
-                categories: eventModel.categories,
+                categories: eventModel.tags,
                 subscribeEvent: cardListenerInterface.subscribeCategory,
                 releaseType: ReleaseType.event,
               ),

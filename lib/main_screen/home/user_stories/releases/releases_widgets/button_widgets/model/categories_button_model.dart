@@ -1,17 +1,17 @@
-class CategoriesButtonsModel {
+class TagsButtonsModel {
   final String name;
   final int id;
   bool isFollowed;
 
-  CategoriesButtonsModel({
+  TagsButtonsModel({
     required this.name,
     required this.id,
     this.isFollowed=false,
   });
 
-  static List<CategoriesButtonsModel> getCategoriesButtons() {
-    List<CategoriesButtonsModel> categories = [];
-    categories.add(CategoriesButtonsModel(name: "All", id: 9, isFollowed: true));
+  static List<TagsButtonsModel> getCategoriesButtons() {
+    List<TagsButtonsModel> categories = [];
+    categories.add(TagsButtonsModel(name: "All", id: 9, isFollowed: true));
 
     return categories;
   }

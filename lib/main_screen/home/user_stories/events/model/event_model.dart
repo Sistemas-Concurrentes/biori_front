@@ -9,6 +9,10 @@ class EventModel implements ReleaseModelInterface{
   String description;
   DateTime date;
   String location;
+  int numberLikes;
+  List<TagsButtonsModel> tags;
+
+  DateTime? endInscription;
   @override
   DateTime lastUpdate;
   bool isSubscribed;
