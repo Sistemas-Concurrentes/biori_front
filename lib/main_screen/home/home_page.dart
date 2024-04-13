@@ -1,16 +1,16 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/advertisement/model/advertisement_model.dart';
-import 'package:biori/main_screen/home/user_stories/advertisement/repository/advertisement_repository.dart';
 import 'package:biori/main_screen/home/user_stories/advertisement/widget/advertisement_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
+import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
 import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
-import 'package:biori/main_screen/home/user_stories/reports/repository/report_repository.dart';
 import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../theme/pallete.dart';
 
@@ -22,78 +22,84 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> implements CardListenerInterface {
-  late List<EventModel> eventsModels;
-  late List<AdvertisementModel> advertisementModels;
-  late List<ReportModel> reportModels;
   late List<int> categoriesFollowedByUser;
   late List<int> groupsSubscribedByUser;
 
+  late List<ReleaseModelInterface> allReleases;
 
   @override
   void initState() {
-    eventsModels = EventRepository().getEvents();
-    advertisementModels = AdvertisementRepository().getAdvertisement();
-    reportModels = ReportRepository().getReports();
-
-
     categoriesFollowedByUser = EventRepository().getTagsIdFollowedByUser();
+    allReleases = [];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _updateEventsSubscribed();
-    List<Widget> allEvents = _getAllEventsOrderedByDate();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home"),
       ),
       body: SafeArea(
-        child: Center(
-          child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: EventConstants.maxWidth,
-            ),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return Container(
-                    decoration: const BoxDecoration(
-                      color: Pallete.backgroundColor,
-                      border: Border(
-                        bottom: BorderSide(
-                            width: EventConstants.widthBorderSeparator,
-                            color: Pallete.primaryColor),
-                      ),
-                    ),
-                    child: allEvents[index]);
-              },
-              itemCount: allEvents.length,
-            ),
-          ),
+        child: FutureBuilder<List<ReleaseModelInterface>>(
+          future:
+              Provider.of<ReleasesRepository>(context).getReleases(allReleases),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              allReleases = snapshot.data!;
+              return Center(
+                child: Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: EventConstants.maxWidth,
+                  ),
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      final release =
+                          _getWidgetFromRelease(snapshot.data![index]);
+
+                      return Container(
+                        decoration: const BoxDecoration(
+                          color: Pallete.backgroundColor,
+                          border: Border(
+                            bottom: BorderSide(
+                                width: EventConstants.widthBorderSeparator,
+                                color: Pallete.primaryColor),
+                          ),
+                        ),
+                        child: release,
+                      );
+                    },
+                    itemCount: snapshot.data!.length,
+                  ),
+                ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
         ),
       ),
     );
   }
 
   _updateEventsSubscribed() {
-    eventsModels = eventsModels.map((eventModel) {
-      for (var category in eventModel.categories) {
-        categoriesFollowedByUser.contains(category.id)
-            ? category.isFollowed = true
-            : category.isFollowed = false;
+    allReleases = allReleases.map((allReleases) {
+      if (allReleases is EventModel) {
+        for (var category in allReleases.tags) {
+          categoriesFollowedByUser.contains(category.id)
+              ? category.isFollowed = true
+              : category.isFollowed = false;
+        }
       }
-      return eventModel;
+      return allReleases;
     }).toList();
   }
 
   List<Widget> _getAllEventsOrderedByDate() {
-    List<ReleaseModelInterface> allReleases = [];
-
-    allReleases.addAll(eventsModels);
-    allReleases.addAll(advertisementModels);
-    allReleases.addAll(reportModels);
-
     allReleases.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
 
     return allReleases.map((release) {
@@ -116,18 +122,35 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     }).toList();
   }
 
+  StatelessWidget _getWidgetFromRelease(ReleaseModelInterface release) {
+    if (release is EventModel) {
+      return EventCard(
+        cardListenerInterface: this,
+        eventModel: release,
+      );
+    } else if (release is AdvertisementModel) {
+      return AdvertisementCard(
+        advertisementModel: release,
+      );
+    } else if (release is ReportModel) {
+      return ReportCard(
+        reportModel: release,
+      );
+    } else {
+      return Container();
+    }
+  }
+
   @override
   likeEvent(int idEvent, ReleaseType releaseType) {
     setState(() {
       if (releaseType == ReleaseType.event) {
-        eventsModels = eventsModels.map((eventModel) {
-          if (eventModel.id == idEvent) {
-            eventModel.isLiked
-                ? eventModel.numberLikes--
-                : eventModel.numberLikes++;
-            eventModel.isLiked = !eventModel.isLiked;
+        allReleases = allReleases.map((release) {
+          if (release is EventModel && release.id == idEvent) {
+            release.isLiked ? release.numberLikes-- : release.numberLikes++;
+            release.isLiked = !release.isLiked;
           }
-          return eventModel;
+          return release;
         }).toList();
       } else {}
     });
@@ -146,7 +169,6 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
 
   restartEvents() {
     setState(() {
-      eventsModels = EventRepository().getEvents();
     });
   }
 }

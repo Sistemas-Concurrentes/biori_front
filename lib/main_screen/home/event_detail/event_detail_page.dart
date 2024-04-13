@@ -120,11 +120,12 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
                   const TextSpan(
                       text: 'Fecha del evento: ',
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: dateToString(detailEventModel.date)),
+                  TextSpan(text: allDatesToString(detailEventModel.dates)),
                   const TextSpan(
                       text: '\nLugar: ',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   TextSpan(text: detailEventModel.location),
+
                   detailEventModel.endInscription == null
                       ? const TextSpan(text: '')
                       : const TextSpan(
@@ -141,6 +142,16 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
         ),
       ],
     );
+  }
+
+  String allDatesToString (List<DateTime> dates){
+    String result = '';
+    for (DateTime date in dates){
+      bool withHour = (date.hour != 0 || date.minute != 0 || date.second != 0);
+
+      result += '${dateToString(date, withHour: withHour)}\n';
+    }
+    return result;
   }
 
   @override

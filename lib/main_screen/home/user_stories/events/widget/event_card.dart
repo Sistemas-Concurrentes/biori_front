@@ -59,7 +59,7 @@ class EventCard extends StatelessWidget {
             isLiked: eventModel.isLiked,
             likeEvent: cardListenerInterface.likeEvent),
         ReleasesWidgets.moreInfoButton(context, eventModel.location,
-            eventModel.date, eventModel.endInscription),
+            eventModel.dates[0], eventModel.endInscription),
       ],
     );
   }
