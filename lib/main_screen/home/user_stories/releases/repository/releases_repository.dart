@@ -11,7 +11,7 @@ import 'package:biori/main_screen/home/user_stories/reports/model/report_model.d
 class ReleasesRepository {
   final ApiReleasesDatasource apiReleasesDatasource = ApiReleasesDatasource();
 
-  Future<List<ReleaseModelInterface>> getReleases(
+  Future<List<ReleaseModelInterface>> getReleasesOrderedByUpdate(
       List<ReleaseModelInterface> allReleases) async {
     if (allReleases.isNotEmpty) {
       return getReleasesOrderedByLastUpdate(allReleases);
@@ -42,5 +42,11 @@ class ReleasesRepository {
     releases.addAll(advertisements);
     releases.addAll(reports);
     return releases;
+  }
+
+  List<ReleaseModelInterface> getReleasesOrderedByLastUpdate(
+      List<ReleaseModelInterface> allReleases) {
+    allReleases.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
+    return allReleases;
   }
 }

@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
       body: SafeArea(
         child: FutureBuilder<List<ReleaseModelInterface>>(
           future:
-              Provider.of<ReleasesRepository>(context).getReleases(allReleases),
+              Provider.of<ReleasesRepository>(context).getReleasesOrderedByUpdate(allReleases),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               allReleases = snapshot.data!;
@@ -96,29 +96,6 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
         }
       }
       return allReleases;
-    }).toList();
-  }
-
-  List<Widget> _getAllEventsOrderedByDate() {
-    allReleases.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
-
-    return allReleases.map((release) {
-      if (release is EventModel) {
-        return EventCard(
-          cardListenerInterface: this,
-          eventModel: release,
-        );
-      } else if (release is AdvertisementModel) {
-        return AdvertisementCard(
-          advertisementModel: release,
-        );
-      } else if (release is ReportModel){
-        return ReportCard(
-          reportModel: release ,
-        );
-      } else {
-        return Container();
-      }
     }).toList();
   }
 
