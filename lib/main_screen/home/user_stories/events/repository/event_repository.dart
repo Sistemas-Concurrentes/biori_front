@@ -1,11 +1,15 @@
-import 'package:biori/Datasource/events/events_datasource.dart';
+import 'package:biori/main_screen/home/user_stories/events/datasource/api_events_datasource.dart';
+import 'package:biori/main_screen/home/user_stories/events/datasource/local_events_datasource.dart';
 
 import '../model/event_model.dart';
 
 class EventRepository {
-  List<EventModel> getEvents() {
-    EventsDatasource eventsDatasource = EventsDatasource();
-    return eventsDatasource.getEventsOrderedByLastUpdate();
+  final ApiEventsDatasource apiEventsDatasource = ApiEventsDatasource() ;
+  final LocalEventsDatasource localEventsDatasource = LocalEventsDatasource();
+
+
+  Future<List<EventModel>> getEvents() async {
+    return await apiEventsDatasource.getEventsOrderedByLastUpdate();
   }
 
   List<int> getTagsIdFollowedByUser() {
