@@ -5,6 +5,8 @@ import 'package:biori/main_screen/home/user_stories/events/model/mapper.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
 import 'package:biori/main_screen/home/user_stories/releases/datasource/api_releases_datasource.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
+import 'package:biori/main_screen/home/user_stories/reports/model/mapper.dart';
+import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
 
 class ReleasesRepository {
   final ApiReleasesDatasource apiReleasesDatasource = ApiReleasesDatasource();
@@ -12,19 +14,20 @@ class ReleasesRepository {
   Future<List<ReleaseModelInterface>> getReleases(
       List<ReleaseModelInterface> allReleases) async {
     if (allReleases.isNotEmpty) {
-      return allReleases;
+      return getReleasesOrderedByLastUpdate(allReleases);
     }
 
     final releasesJson = await apiReleasesDatasource.getReleases();
-    return getReleasesFromJson(releasesJson);
+    return getReleasesOrderedByLastUpdate(getReleasesFromJson(releasesJson));
   }
 
   List<ReleaseModelInterface> getReleasesFromJson(Map<String, dynamic> json) {
     List<EventModel> events = EventMapper().fromJson(json['events']);
     List<AdvertisementModel> advertisements =
         AdvertisementMapper().fromJson(json['advertisements']);
+    List<ReportModel> reports = ReportMapper().fromJson(json['reports']);
 
-    return addAll(events, advertisements);
+    return addAll(events, advertisements, reports);
   }
 
   List<int> getCategoriesFollowedByUser() {
@@ -32,12 +35,12 @@ class ReleasesRepository {
     return eventRepository.getTagsIdFollowedByUser();
   }
 
-  List<ReleaseModelInterface> addAll(
-      List<EventModel> events, List<AdvertisementModel> advertisements) {
+  List<ReleaseModelInterface> addAll(List<EventModel> events,
+      List<AdvertisementModel> advertisements, List<ReportModel> reports) {
     List<ReleaseModelInterface> releases = [];
     releases.addAll(events);
     releases.addAll(advertisements);
-
+    releases.addAll(reports);
     return releases;
   }
 }
