@@ -1,18 +1,11 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
-import 'package:biori/main_screen/home/user_stories/advertisement/model/advertisement_model.dart';
-import 'package:biori/main_screen/home/user_stories/advertisement/widget/advertisement_card.dart';
-import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
-import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
-import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
-import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
+import 'package:biori/main_screen/home/widget/home_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../theme/pallete.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,6 +29,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
 
   @override
   Widget build(BuildContext context) {
+    HomeWidgets homeWidgets = HomeWidgets();
     _updateEventsSubscribed();
 
     return Scaffold(
@@ -44,36 +38,16 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
       ),
       body: SafeArea(
         child: FutureBuilder<List<ReleaseModelInterface>>(
-          future:
-              Provider.of<ReleasesRepository>(context).getReleasesOrderedByUpdate(allReleases),
+          future: Provider.of<ReleasesRepository>(context)
+              .getReleasesOrderedByUpdate(allReleases),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               allReleases = snapshot.data!;
-              return Center(
-                child: Container(
-                  constraints: const BoxConstraints(
-                    maxWidth: ReleasesConstants.maxWidth,
-                  ),
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      final release =
-                          _getWidgetFromRelease(snapshot.data![index]);
-
-                      return Container(
-                        decoration: const BoxDecoration(
-                          color: Pallete.backgroundColor,
-                          border: Border(
-                            bottom: BorderSide(
-                                width: ReleasesConstants.widthBorderSeparator,
-                                color: Pallete.primaryColor),
-                          ),
-                        ),
-                        child: release,
-                      );
-                    },
-                    itemCount: snapshot.data!.length,
-                  ),
-                ),
+              return Stack(
+                children: [
+                  homeWidgets.getCenterListBuilder(allReleases, this),
+                  homeWidgets.getFloatingActionButton(),
+                ],
               );
             } else {
               return const Center(
@@ -97,25 +71,6 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
       }
       return allReleases;
     }).toList();
-  }
-
-  StatelessWidget _getWidgetFromRelease(ReleaseModelInterface release) {
-    if (release is EventModel) {
-      return EventCard(
-        cardListenerInterface: this,
-        eventModel: release,
-      );
-    } else if (release is AdvertisementModel) {
-      return AdvertisementCard(
-        advertisementModel: release,
-      );
-    } else if (release is ReportModel) {
-      return ReportCard(
-        reportModel: release,
-      );
-    } else {
-      return Container();
-    }
   }
 
   @override
@@ -145,7 +100,6 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
   }
 
   restartEvents() {
-    setState(() {
-    });
+    setState(() {});
   }
 }
