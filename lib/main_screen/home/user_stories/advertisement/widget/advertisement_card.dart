@@ -45,9 +45,9 @@ class AdvertisementCard extends StatelessWidget {
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
               color: Pallete.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(EventConstants.margin),
+              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
-            padding: const EdgeInsets.fromLTRB(EventConstants.padding, 0, EventConstants.padding, 0),
+            padding: const EdgeInsets.fromLTRB(ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),
             child: Text(
               groups,
               textAlign: TextAlign.left,

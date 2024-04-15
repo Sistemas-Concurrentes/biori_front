@@ -11,9 +11,9 @@ class ReleasesWidgets{
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(EventConstants.borderRadius),
+              borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
             ),
-            margin: const EdgeInsets.all(EventConstants.margin),
+            margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: Text(
               title,
               textAlign: TextAlign.center,
@@ -32,10 +32,10 @@ class ReleasesWidgets{
           child: Container(
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(EventConstants.margin),
+              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
-            margin: const EdgeInsets.all(EventConstants.margin),
-            padding: const EdgeInsets.all(EventConstants.padding),
+            margin: const EdgeInsets.all(ReleasesConstants.margin),
+            padding: const EdgeInsets.all(ReleasesConstants.padding),
             child: Text(
               description,
               textAlign: TextAlign.justify,
@@ -52,7 +52,7 @@ class ReleasesWidgets{
       children: [
         Expanded(
           child: Container(
-            margin: const EdgeInsets.all(EventConstants.margin),
+            margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: RichText(text: TextSpan(
               text: '',
               style: DefaultTextStyle.of(context).style,

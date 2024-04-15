@@ -21,9 +21,9 @@ class CategoriesButtons extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            height: EventConstants.heightButtons,
+            height: ReleasesConstants.heightButtons,
             margin: const EdgeInsets.fromLTRB(
-                EventConstants.margin, 0, EventConstants.margin, 0),
+                ReleasesConstants.margin, 0, ReleasesConstants.margin, 0),
             child: Scrollbar(
               controller: scrollController,
               thumbVisibility: true,
@@ -36,7 +36,7 @@ class CategoriesButtons extends StatelessWidget {
                       : Pallete.scaffoldBackgroundColor;
                   return Container(
                     margin: const EdgeInsets.fromLTRB(
-                        0, 0, 0, EventConstants.margin),
+                        0, 0, 0, ReleasesConstants.margin),
                     child: ElevatedButton(
                       onPressed: () {
                         subscribeEvent(categories[index].id, releaseType);
@@ -45,7 +45,7 @@ class CategoriesButtons extends StatelessWidget {
                         backgroundColor: backgroundColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
-                              EventConstants.borderRadius),
+                              ReleasesConstants.borderRadius),
                         ),
                       ),
                       child: Text(categories[index].name),

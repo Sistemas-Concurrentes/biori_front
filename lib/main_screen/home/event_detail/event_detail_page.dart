@@ -67,9 +67,9 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Pallete.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(EventConstants.borderRadius),
+              borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
             ),
-            margin: const EdgeInsets.all(EventConstants.margin),
+            margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: Text(
               detailEventModel.title,
               textAlign: TextAlign.center,
@@ -89,10 +89,10 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
               color: Pallete.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(EventConstants.margin),
+              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
-            margin: const EdgeInsets.all(EventConstants.margin),
-            padding: const EdgeInsets.all(EventConstants.padding),
+            margin: const EdgeInsets.all(ReleasesConstants.margin),
+            padding: const EdgeInsets.all(ReleasesConstants.padding),
             child: Text(
               detailEventModel.description,
               textAlign: TextAlign.justify,
@@ -109,7 +109,7 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
       children: [
         Expanded(
           child: Container(
-            margin: const EdgeInsets.all(EventConstants.margin),
+            margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: RichText(
               text: TextSpan(
                 text: '',

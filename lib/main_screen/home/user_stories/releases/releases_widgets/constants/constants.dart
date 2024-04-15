@@ -1,4 +1,4 @@
-class EventConstants {
+class ReleasesConstants {
   static const double heightButtons = 30;
   static const double margin = 10;
   static const double heightTitle = 40;

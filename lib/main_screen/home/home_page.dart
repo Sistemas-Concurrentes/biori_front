@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
               return Center(
                 child: Container(
                   constraints: const BoxConstraints(
-                    maxWidth: EventConstants.maxWidth,
+                    maxWidth: ReleasesConstants.maxWidth,
                   ),
                   child: ListView.builder(
                     itemBuilder: (context, index) {
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
                           color: Pallete.backgroundColor,
                           border: Border(
                             bottom: BorderSide(
-                                width: EventConstants.widthBorderSeparator,
+                                width: ReleasesConstants.widthBorderSeparator,
                                 color: Pallete.primaryColor),
                           ),
                         ),
