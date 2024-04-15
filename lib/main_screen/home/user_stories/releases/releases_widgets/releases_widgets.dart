@@ -25,7 +25,8 @@ class ReleasesWidgets{
     );
   }
 
-  static Row releaseDescriptionRow(context, description) {
+  static Row releaseDescriptionRow(context, description,
+      {maxLimit = ReleasesConstants.maxLinesPerDescription}) {
     return Row(
       children: [
         Expanded(
@@ -39,6 +40,8 @@ class ReleasesWidgets{
             child: Text(
               description,
               textAlign: TextAlign.justify,
+              overflow: TextOverflow.ellipsis,
+              maxLines: maxLimit,
               style: JaviStyle.descripcion,
             ),
           ),

@@ -5,5 +5,7 @@ class ReleasesConstants {
   static const double padding = 10;
   static const double borderRadius = 16;
   static const double maxWidth = 600;
+  static const int maxLinesPerDescription = 100;
+  static const int maxLinesPerEventDescription = 6;
   static const double widthBorderSeparator = 2;
 }

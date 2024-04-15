@@ -5,6 +5,7 @@ import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/re
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/material.dart';
 import '../../../../../theme/pallete.dart';
+import '../../releases/releases_widgets/constants/constants.dart';
 import '../model/event_model.dart';
 
 class EventCard extends StatelessWidget {
@@ -34,7 +35,8 @@ class EventCard extends StatelessWidget {
                 releaseType: ReleaseType.event,
               ),
               ReleasesWidgets.releaseDescriptionRow(
-                  context, eventModel.description),
+                  context, eventModel.description,
+                  maxLimit: ReleasesConstants.maxLinesPerEventDescription),
               _ultimaLinea(context)
             ],
           ),
