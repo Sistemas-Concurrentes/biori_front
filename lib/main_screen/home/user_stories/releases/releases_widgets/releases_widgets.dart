@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../style/javi_edit_text.dart';
 import 'constants/constants.dart';
 
-class ReleasesWidgets{
+class ReleasesWidgets {
   static Row releaseTitleRow(context, title) {
     return Row(
       children: [
@@ -11,7 +11,8 @@ class ReleasesWidgets{
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
+              borderRadius:
+                  BorderRadius.circular(ReleasesConstants.borderRadius),
             ),
             margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: Text(
@@ -49,43 +50,46 @@ class ReleasesWidgets{
       ],
     );
   }
-  
-  static Row moreInfo(context, String location, DateTime date, DateTime? endInscription) {
+
+  static Row moreInfo(
+      context, String location, DateTime date, DateTime? endInscription) {
     return Row(
       children: [
         Expanded(
           child: Container(
             margin: const EdgeInsets.all(ReleasesConstants.margin),
-            child: RichText(text: TextSpan(
-              text: '',
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                const TextSpan(
-                    text: 'Fecha del evento: ',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                TextSpan(text: _dateToString(date)),
-                const TextSpan(
-                    text: '\nLugar: ',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                TextSpan(text: location),
-                endInscription == null
-                    ? const TextSpan(text: '')
-                    : const TextSpan(
-                    text: '\nFecha fin de inscripción: ',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                endInscription == null
-                    ? const TextSpan(text: '')
-                    : TextSpan(
-                    text: _dateToString(endInscription)),
-              ],
-            ),),
+            child: RichText(
+              text: TextSpan(
+                text: '',
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  const TextSpan(
+                      text: 'Fecha del evento: ',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(text: _dateToString(date)),
+                  const TextSpan(
+                      text: '\nLugar: ',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  TextSpan(text: location),
+                  endInscription == null
+                      ? const TextSpan(text: '')
+                      : const TextSpan(
+                          text: '\nFecha fin de inscripción: ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                  endInscription == null
+                      ? const TextSpan(text: '')
+                      : TextSpan(text: _dateToString(endInscription)),
+                ],
+              ),
+            ),
           ),
-        ),],
+        ),
+      ],
     );
   }
-  
-  static Expanded moreInfoButton(context, String location, DateTime date,
-      DateTime? endInscription) {
+
+  static Expanded moreInfoButton(
+      context, String location, DateTime date, DateTime? endInscription) {
     return Expanded(
       child: ExpansionTile(
         title: const Text(" "),
@@ -108,16 +112,16 @@ class ReleasesWidgets{
                   endInscription == null
                       ? const TextSpan(text: '')
                       : const TextSpan(
-                      text: '\nFecha fin de inscripción: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                          text: '\nFecha fin de inscripción: ',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                   endInscription == null
                       ? const TextSpan(text: '')
-                      : TextSpan(
-                      text: _dateToString(endInscription) + "\n"),
+                      : TextSpan(text: _dateToString(endInscription) + "\n"),
                   endInscription == null
-                      ? const TextSpan(text: ''):
-                  const TextSpan(text: 'Inscribirse',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                      ? const TextSpan(text: '')
+                      : const TextSpan(
+                          text: 'Inscribirse',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
