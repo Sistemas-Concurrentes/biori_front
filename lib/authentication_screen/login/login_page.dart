@@ -1,9 +1,9 @@
 import 'package:biori/authentication_screen/login/user_stories/do_login.dart';
+import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:biori/conection_to_backend/authentication_screen/output.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../style/widgets_javi.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,17 +24,17 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: WidgetsJavi().progressHudJavi(
-            context,
-            isApiCallProcess,
-            Form(
-              key: globalFormKey,
-              child: _loginUI(context),
-            )),
-      ),
+        body: SafeArea(
+          child: WidgetsJavi().progressHudJavi(
+              context,
+              isApiCallProcess,
+              Form(
+                key: globalFormKey,
+                child: _loginUI(context),
+              )),
+        ),
     );
   }
 
@@ -120,12 +120,9 @@ class _LoginPageState extends State<LoginPage> {
     _showLoading(false);
 
     if (output == Output.success) {
-      WidgetsJavi().snackbarScaffold("Login correcto");
-
-      // Enviar a mainpage
-    } else if (output == Output.userNotValidated && mounted) {
-      context.push(validationRoute);
-
+      CustomRouter.router.go(homePath);
+    } else if (output == Output.userNotValidated) {
+      CustomRouter.router.push(validationRoute);
     } else {
       _errorSesionSnackBar();
     }

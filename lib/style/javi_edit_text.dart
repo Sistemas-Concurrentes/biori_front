@@ -1,3 +1,4 @@
+import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
@@ -29,7 +30,8 @@ class JaviForms {
   }
 
   static Widget submitButton(
-      BuildContext context, String keyName, Function action, {double fontSize = 16}) {
+      BuildContext context, String keyName, Function action,
+      {double fontSize = 16}) {
     return FormHelper.submitButton(
       keyName,
       action,
@@ -90,12 +92,11 @@ class JaviForms {
   static Future _selectDate(
       BuildContext context, TextEditingController controller) async {
     DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2100),
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
     );
-
 
     if (picked != null) {
       controller.text = _dateToSpainFormat(picked);
@@ -113,8 +114,6 @@ class JaviForms {
     return "${date[2]}-${date[1]}-${date[0]}";
   }
 }
-
-
 
 class JaviPaddings {
   static const double S = 4;
@@ -143,5 +142,20 @@ class JaviStyle {
   static const TextStyle titulo = TextStyle(
     fontSize: 28.0,
     fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle tituloEvento = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    color: Pallete.secondaryColor,
+  );
+
+  static const TextStyle descripcion = TextStyle(
+    fontSize: 15.0,
+    color: Pallete.negro,
+  );
+  static const TextStyle informacionExtraCards = TextStyle(
+    fontSize: 14.0,
+    color: Pallete.secondaryColor,
   );
 }
