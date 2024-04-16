@@ -36,8 +36,8 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             label: 'home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'search',
+            icon: Icon(Icons.calendar_today),
+            label: 'calendar',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

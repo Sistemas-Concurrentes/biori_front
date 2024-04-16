@@ -74,7 +74,7 @@ class CustomRouter {
                 path: settingsRoute,
                 pageBuilder: (context, state) {
                   return getPage(
-                    child: const SettingsPage(),
+                    child: const CalendarPage(),
                     state: state,
                   );
                 },

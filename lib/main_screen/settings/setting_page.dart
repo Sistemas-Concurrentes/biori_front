@@ -1,18 +1,22 @@
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: const Text("Calendar"),
       ),
-      body: Center(
-        child: Text("settings")
+      body: TableCalendar(
+        firstDay: DateTime.utc(2010, 10, 16),
+        lastDay: DateTime.utc(2030, 3, 14),
+        focusedDay: DateTime.now(),
+        calendarFormat: CalendarFormat.month,
       ),
     );
   }
