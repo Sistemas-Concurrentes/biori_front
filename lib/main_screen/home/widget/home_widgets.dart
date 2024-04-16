@@ -46,6 +46,7 @@ class HomeWidgets {
       bottom: 16,
       right: 16,
       child: FloatingActionButton(
+        child: const Icon(Icons.add),
         onPressed: () {},
       ),
     );
