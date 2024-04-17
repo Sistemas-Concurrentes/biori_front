@@ -12,7 +12,6 @@ class WidgetsJavi {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height / 5,
       decoration: BoxDecoration(
-          color: Theme.of(context).secondaryHeaderColor,
           borderRadius: BorderRadius.circular(18.0),
           boxShadow: const [
             BoxShadow(
@@ -47,7 +46,6 @@ class WidgetsJavi {
           children: <TextSpan>[
             TextSpan(
               text: textoSinUrl,
-              style: JaviStyle.granada1,
             ),
             TextSpan(
               text: textoRedirigir,

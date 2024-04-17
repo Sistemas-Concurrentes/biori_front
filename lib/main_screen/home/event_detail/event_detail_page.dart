@@ -66,7 +66,6 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
             ),
             margin: const EdgeInsets.all(ReleasesConstants.margin),
@@ -88,7 +87,6 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
           child: Container(
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
             margin: const EdgeInsets.all(ReleasesConstants.margin),

@@ -25,11 +25,10 @@ class HomeWidgets {
 
             return Container(
               decoration: const BoxDecoration(
-                color: Pallete.backgroundColor,
                 border: Border(
                   bottom: BorderSide(
                       width: ReleasesConstants.widthBorderSeparator,
-                      color: Pallete.primaryColor),
+                  ),
                 ),
               ),
               child: release,
@@ -47,7 +46,9 @@ class HomeWidgets {
       right: 16,
       child: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+
+        },
       ),
     );
   }
