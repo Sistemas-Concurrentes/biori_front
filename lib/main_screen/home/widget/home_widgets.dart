@@ -7,7 +7,6 @@ import 'package:biori/main_screen/home/user_stories/releases/release_model_inter
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
 import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
 import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
-import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgets {
@@ -23,14 +22,13 @@ class HomeWidgets {
             final release = _getWidgetFromRelease(
                 allReleases[index], cardListenerInterfaceHomePage);
 
-            return Container(
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                      width: ReleasesConstants.widthBorderSeparator,
-                  ),
-                ),
+            return Card(
+              clipBehavior: Clip.hardEdge,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
               ),
+              elevation: ReleasesConstants.elevation,
+              margin: const EdgeInsets.all(ReleasesConstants.margin),
               child: release,
             );
           },
