@@ -10,9 +10,14 @@ class CategoriesButtons extends StatelessWidget {
   final List<TagsButtonsModel> categories;
   final ReleaseType releaseType;
   final scrollController = ScrollController();
+  final bool isEventDetailPage;
 
-  CategoriesButtons({super.key, required this.categories, required this.subscribeEvent, required this.releaseType});
-
+  CategoriesButtons(
+      {super.key,
+      required this.categories,
+      required this.subscribeEvent,
+      required this.releaseType,
+      this.isEventDetailPage = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,49 +25,45 @@ class CategoriesButtons extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            height: ReleasesConstants.heightButtons,
-            margin: const EdgeInsets.fromLTRB(
-                ReleasesConstants.margin, 0, ReleasesConstants.margin, 0),
-            child: Scrollbar(
-              controller: scrollController,
-              thumbVisibility: true,
-              child: ListView.separated(
-                controller: scrollController,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  Color backgroundColor = categories[index].isFollowed
-                      ? Pallete.primaryColor
-                      : Pallete.scaffoldBackgroundColor;
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(
-                        0, 0, 0, ReleasesConstants.margin),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        subscribeEvent(categories[index].id, releaseType);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: backgroundColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              ReleasesConstants.borderRadius),
-                        ),
-                      ),
-                      child: Text(categories[index].name),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    width: 10,
-                  );
-                },
-                itemCount: categories.length,
-              ),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.all(ReleasesConstants.padding),
+            child: isEventDetailPage
+                  ? _filterChip()
+                  : _showCategoriesWithScrollBar(),
           ),
-        ),
+          ),
       ],
+    );
+  }
+
+  Widget _showCategoriesWithScrollBar() {
+    return Scrollbar(
+      controller: scrollController,
+      thumbVisibility: true,
+      child: _filterShipWithScrollBar(),
+    );
+  }
+
+  Widget _filterShipWithScrollBar() {
+    return SingleChildScrollView(
+      controller: scrollController,
+      scrollDirection: Axis.horizontal,
+      child: _filterChip(),
+    );
+  }
+
+  Widget _filterChip() {
+    return Wrap(
+      spacing: 5.0,
+      children: categories.map((category) {
+        return FilterChip(
+          label: Text(category.name),
+          selected: category.isFollowed,
+          onSelected: (bool selected) {
+            subscribeEvent(category.id, releaseType);
+          },
+        );
+      }).toList(),
     );
   }
 }
