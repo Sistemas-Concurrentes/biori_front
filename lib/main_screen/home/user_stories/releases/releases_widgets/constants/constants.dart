@@ -1,5 +1,5 @@
 class ReleasesConstants {
-  static const double heightButtons = 30;
+  static const double heightButtons = 50;
   static const double margin = 10;
   static const double heightTitle = 40;
   static const double padding = 10;
@@ -8,4 +8,5 @@ class ReleasesConstants {
   static const int maxLinesPerDescription = 100;
   static const int maxLinesPerEventDescription = 6;
   static const double widthBorderSeparator = 2;
+  static const double elevation = 4;
 }
