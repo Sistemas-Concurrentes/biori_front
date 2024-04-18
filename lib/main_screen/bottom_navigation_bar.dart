@@ -22,17 +22,22 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
         child: widget.child,
       ),
       bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        height: 60,
         destinations: const <Widget>[
           NavigationDestination(
+            selectedIcon: Icon(Icons.home_filled),
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.calendar_today),
+            selectedIcon: Icon(Icons.calendar_today),
+            icon: Icon(Icons.calendar_today_outlined),
             label: 'Calendar',
           ),
           NavigationDestination(
-            icon: Icon(Icons.settings),
+            selectedIcon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
             label: 'Settings',
           ),
         ],
@@ -47,6 +52,7 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> {
             currentStateIndex = index;
           });
         },
+        animationDuration: const Duration(milliseconds: 200),
       ),
     );
   }
