@@ -15,18 +15,14 @@ class AdvertisementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
-            _groupsAffectedRow(),
-            ReleasesWidgets.releaseDescriptionRow(
-                context, advertisementModel.description),
+    return Column(
+      children: [
+        ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
+        _groupsAffectedRow(),
+        ReleasesWidgets.releaseDescriptionRow(
+            context, advertisementModel.description),
 
-          ],
-        ),
-      ),
+      ],
     );
 
   }
@@ -44,7 +40,6 @@ class AdvertisementCard extends StatelessWidget {
           child: Container(
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
             padding: const EdgeInsets.fromLTRB(ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),

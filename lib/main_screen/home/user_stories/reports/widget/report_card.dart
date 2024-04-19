@@ -15,23 +15,13 @@ class ReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Pallete.primaryColor.withOpacity(0.8),
-          ),
-          child: Column(
-            children: [
-              ReleasesWidgets.releaseTitleRow(context, reportModel.title),
-              creatorName(),
-              ReleasesWidgets.releaseDescriptionRow(
-                  context, reportModel.description),
-
-            ],
-          ),
-        ),
-      ),
+    return Column(
+      children: [
+        ReleasesWidgets.releaseTitleRow(context, reportModel.title),
+        creatorName(),
+        ReleasesWidgets.releaseDescriptionRow(
+            context, reportModel.description),
+      ],
     );
   }
 
@@ -41,10 +31,6 @@ class ReportCard extends StatelessWidget {
         Expanded(
           child: Container(
             alignment: Alignment.topLeft,
-            decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
-            ),
             padding: const EdgeInsets.fromLTRB(ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),
             child: Text(
               reportModel.creatorName,

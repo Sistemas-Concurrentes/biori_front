@@ -25,7 +25,6 @@ class _ValidationPageState extends State<ValidationPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: WidgetsJavi().progressHudJavi(
             context,
             isApiCallProcess,

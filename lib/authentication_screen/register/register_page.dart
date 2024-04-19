@@ -32,7 +32,6 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: WidgetsJavi().progressHudJavi(
           context,
           isApiCallProcess,
@@ -122,7 +121,6 @@ class _RegisterPageState extends State<RegisterPage> {
             hidePassword = !hidePassword;
           });
         },
-        color: Theme.of(context).primaryColor.withOpacity(0.4),
         icon: Icon(hidePassword ? Icons.visibility_off : Icons.visibility),
       ),
       obscureText: hidePassword,

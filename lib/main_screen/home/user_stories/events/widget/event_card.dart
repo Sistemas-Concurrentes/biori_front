@@ -3,8 +3,8 @@ import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/bu
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/releases_widgets.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import '../../../../../theme/pallete.dart';
 import '../../releases/releases_widgets/constants/constants.dart';
 import '../model/event_model.dart';
 
@@ -18,41 +18,42 @@ class EventCard extends StatelessWidget {
       required this.cardListenerInterface,
       required this.eventModel});
 
+  Future _goToEventDetail() {
+    return CustomRouter.router.push("/eventDetail/${eventModel.id}", extra: {
+      'eventModel': eventModel,
+      'cardListenerInterface': cardListenerInterface
+    }).then((value) => null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Pallete.primaryColor.withOpacity(0.5),
-          ),
-          child: Column(
-            children: [
-              ReleasesWidgets.releaseTitleRow(context, eventModel.title),
-              CategoriesButtons(
-                categories: eventModel.tags,
-                subscribeEvent: cardListenerInterface.subscribeCategory,
-                releaseType: ReleaseType.event,
-              ),
-              ReleasesWidgets.releaseDescriptionRow(
-                  context, eventModel.description,
-                  maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-              _ultimaLinea(context)
-            ],
-          ),
+      onTap: () {
+        _goToEventDetail();
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            ReleasesWidgets.releaseTitleRow(context, eventModel.title),
+            CategoriesButtons(
+              categories: eventModel.tags,
+              subscribeEvent: cardListenerInterface.subscribeCategory,
+              releaseType: ReleaseType.event,
+            ),
+            ReleasesWidgets.releaseDescriptionRow(
+                context, eventModel.description,
+                maxLimit: ReleasesConstants.maxLinesPerEventDescription),
+            _ultimaLinea(context, AppLocalizations.of(context)!.saberMas)
+          ],
         ),
       ),
-      onTap: () {
-        CustomRouter.router.push("/eventDetail/${eventModel.id}", extra: {
-          'eventModel': eventModel,
-          'cardListenerInterface': cardListenerInterface
-        }).then((value) => null);
-      },
     );
   }
 
-  Row _ultimaLinea(context) {
+  Row _ultimaLinea(context, saberMasText) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MyLikeButton(
             id: eventModel.id,
@@ -60,8 +61,15 @@ class EventCard extends StatelessWidget {
             numberLikes: eventModel.numberLikes,
             isLiked: eventModel.isLiked,
             likeEvent: cardListenerInterface.likeEvent),
-        ReleasesWidgets.moreInfoButton(context, eventModel.location,
-            eventModel.dates[0], eventModel.endInscription),
+        ElevatedButton(
+            onPressed: () {
+              _goToEventDetail();
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.onPrimary, // color de fondo
+              backgroundColor: Theme.of(context).colorScheme.primary, // color de texto
+            ),
+            child: Text(saberMasText)),
       ],
     );
   }

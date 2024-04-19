@@ -37,5 +37,7 @@
     "send": "Send",
     "resendCode": "Resend code",
     "codigoEnviado": "Code sent, check your email",
-    "spamValidation": "Did not receive the email? Check your spam folder"
+    "spamValidation": "Did not receive the email? Check your spam folder",
+
+    "saberMas": "Learn more"
 }

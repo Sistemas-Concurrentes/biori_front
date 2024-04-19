@@ -32,13 +32,16 @@ class JaviForms {
   static Widget submitButton(
       BuildContext context, String keyName, Function action,
       {double fontSize = 16}) {
-    return FormHelper.submitButton(
-      keyName,
-      action,
-      btnColor: Theme.of(context).primaryColor,
-      txtColor: Colors.white,
-      borderColor: Theme.of(context).primaryColor,
-      fontSize: fontSize,
+    return ElevatedButton(
+      onPressed: () {
+        action();
+      },
+      child: Text(
+        keyName,
+        style: TextStyle(
+          fontSize: fontSize,
+        ),
+      ),
     );
   }
 
@@ -71,15 +74,13 @@ class JaviForms {
           decoration: InputDecoration(
             labelText: label,
             filled: true,
-            prefixIcon: Icon(Icons.calendar_today),
-            fillColor: Theme.of(context).scaffoldBackgroundColor,
-            enabledBorder: OutlineInputBorder(
+            fillColor: Theme.of(context).dialogBackgroundColor,
+            prefixIcon: const Icon(Icons.calendar_today),
+            enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              borderSide: BorderSide(color: Theme.of(context).primaryColor),
             ),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              borderSide: BorderSide(color: Theme.of(context).primaryColor),
             ),
           ),
           onTap: () {
@@ -125,7 +126,7 @@ class JaviPaddings {
 class JaviStyle {
   static const TextStyle granada1 = TextStyle(
     fontSize: 14,
-    color: Colors.white,
+      color: Colors.white,
   );
 
   static const TextStyle subcomentarios = TextStyle(
@@ -134,25 +135,26 @@ class JaviStyle {
   );
 
   static const TextStyle url = TextStyle(
-    color: Colors.black,
     fontSize: 14.0,
     decoration: TextDecoration.underline,
+    fontWeight: FontWeight.bold,
   );
 
   static const TextStyle titulo = TextStyle(
     fontSize: 28.0,
     fontWeight: FontWeight.bold,
+    color: Pallete.naranja,
   );
 
   static const TextStyle tituloEvento = TextStyle(
-    fontSize: 18.0,
+    fontSize: 20.0,
     fontWeight: FontWeight.bold,
-    color: Pallete.secondaryColor,
+    color: Pallete.naranja,
+
   );
 
   static const TextStyle descripcion = TextStyle(
-    fontSize: 15.0,
-    color: Pallete.negro,
+    fontSize: 16.0,
   );
   static const TextStyle informacionExtraCards = TextStyle(
     fontSize: 14.0,

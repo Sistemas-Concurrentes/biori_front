@@ -25,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SafeArea(
           child: WidgetsJavi().progressHudJavi(
               context,
@@ -102,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
             hidePassword = !hidePassword;
           });
         },
-        color: Theme.of(context).primaryColor.withOpacity(0.4),
         icon: Icon(hidePassword ? Icons.visibility_off : Icons.visibility),
       ),
       obscureText: hidePassword,

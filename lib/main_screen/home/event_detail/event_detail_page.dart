@@ -4,7 +4,6 @@ import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/bu
 import 'package:flutter/material.dart';
 
 import '../../../style/javi_edit_text.dart';
-import '../../../theme/pallete.dart';
 import '../user_stories/events/model/event_model.dart';
 import '../user_stories/releases/releases_widgets/constants/constants.dart';
 
@@ -21,11 +20,11 @@ class EventDetailPage extends StatefulWidget {
 
 class _EventDetailPageState extends State<EventDetailPage> implements CardListenerInterface{
    late EventModel detailEventModel;
-  
+
    @override
   void initState() {
     detailEventModel = widget.eventModel;
-    
+
     super.initState();
   }
   @override
@@ -41,7 +40,9 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
               _eventCardRow(context),
               CategoriesButtons(categories: detailEventModel.tags,
                   subscribeEvent: subscribeCategory,
-                  releaseType: ReleaseType.event),
+                  releaseType: ReleaseType.event,
+                  isEventDetailPage: true
+              ),
               _eventCardDescription(context),
               MyLikeButton(
                   id: detailEventModel.id,
@@ -50,7 +51,11 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
                   isLiked: detailEventModel.isLiked,
                   likeEvent: likeEvent),
               _moreInfo(context),
-              ElevatedButton(onPressed: () {} , child: Text('Inscribirse')),
+              ElevatedButton(onPressed: () {} ,
+                  style: ElevatedButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onPrimary, // color de fondo
+                    backgroundColor: Theme.of(context).colorScheme.primary, // color de texto
+        ), child: const Text('Inscribirse'),),
 
             ],
           ),
@@ -66,14 +71,13 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
             ),
             margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: Text(
               detailEventModel.title,
               textAlign: TextAlign.center,
-              style: JaviStyle.tituloEvento,
+              style: JaviStyle.titulo,
             ),
           ),
         )
@@ -88,7 +92,6 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
           child: Container(
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
-              color: Pallete.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
             margin: const EdgeInsets.all(ReleasesConstants.margin),

@@ -14,36 +14,45 @@ class BottomNavigationPage extends StatefulWidget {
 }
 
 class _BottomNavigationPageState extends State<BottomNavigationPage> {
+  int currentStateIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: widget.child,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: widget.child.currentIndex,
-        onTap: (index) {
+      bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        height: 60,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.home_filled),
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.calendar_today),
+            icon: Icon(Icons.calendar_today_outlined),
+            label: 'Calendar',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
+            label: 'Settings',
+          ),
+        ],
+        selectedIndex: currentStateIndex,
+        onDestinationSelected: (index) {
           widget.child.goBranch(
             index,
             initialLocation: index == widget.child.currentIndex,
           );
-          setState(() {});
+
+          setState(() {
+            currentStateIndex = index;
+          });
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'settings',
-          ),
-        ],
+        animationDuration: const Duration(milliseconds: 200),
       ),
     );
   }
