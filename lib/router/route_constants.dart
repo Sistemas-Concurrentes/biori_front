@@ -7,5 +7,8 @@ const String homePath = "/home";
 const String settingsRoute = "/settings";
 const String profileRoute = "/profile";
 const String addReleasesRoute = "/addReleases";
+const String addEventRoute = "event";
+const String addAdvertisementRoute = "advertisement";
+const String addReportRoute = "report";
 
 const String eventDetailRoute = "/eventDetail/:id";

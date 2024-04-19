@@ -2,6 +2,9 @@ import 'package:biori/authentication_screen/login/login_page.dart';
 import 'package:biori/authentication_screen/login/validation/validation_page.dart';
 import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:biori/main_screen/add/add_page.dart';
+import 'package:biori/main_screen/add/user_stories/advertisement/add_advertisement_page.dart';
+import 'package:biori/main_screen/add/user_stories/events/add_event_page.dart';
+import 'package:biori/main_screen/add/user_stories/report/add_report_page.dart';
 import 'package:biori/main_screen/home/event_detail/event_detail_page.dart';
 import 'package:biori/main_screen/home/home_page.dart';
 import 'package:biori/main_screen/bottom_navigation_bar.dart';
@@ -72,6 +75,35 @@ class CustomRouter {
                     state: state,
                   );
                 },
+                routes: [
+                  GoRoute(
+                    path: addEventRoute,
+                    pageBuilder: (context, state) {
+                      return getPage(
+                        child: const AddEventPage(),
+                        state: state,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: addAdvertisementRoute,
+                    pageBuilder: (context, state) {
+                      return getPage(
+                        child: const AddAdvertisementPage(),
+                        state: state,
+                      );
+                    },
+                  ),
+                  GoRoute(
+                    path: addReportRoute,
+                    pageBuilder: (context, state) {
+                      return getPage(
+                        child: const AddReportPage(),
+                        state: state,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
