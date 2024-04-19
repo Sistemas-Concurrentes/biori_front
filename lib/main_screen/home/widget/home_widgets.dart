@@ -7,6 +7,8 @@ import 'package:biori/main_screen/home/user_stories/releases/release_model_inter
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
 import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
 import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
+import 'package:biori/router/custom_router.dart';
+import 'package:biori/router/route_constants.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgets {
@@ -45,7 +47,7 @@ class HomeWidgets {
       child: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-
+          CustomRouter.router.push(addReleasesRoute).then((value) => null);
         },
       ),
     );

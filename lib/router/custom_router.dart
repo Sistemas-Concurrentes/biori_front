@@ -1,6 +1,7 @@
 import 'package:biori/authentication_screen/login/login_page.dart';
 import 'package:biori/authentication_screen/login/validation/validation_page.dart';
 import 'package:biori/authentication_screen/register/register_page.dart';
+import 'package:biori/main_screen/add/add_page.dart';
 import 'package:biori/main_screen/home/event_detail/event_detail_page.dart';
 import 'package:biori/main_screen/home/home_page.dart';
 import 'package:biori/main_screen/bottom_navigation_bar.dart';
@@ -61,6 +62,15 @@ class CustomRouter {
                   return getPage(
                     child: EventDetailPage(
                         eventModel: eventModel, cardListenerInterface: cardListenerInterface),
+                    state: state,
+                  );
+                },
+              ),
+              GoRoute(
+                path: addReleasesRoute,
+                pageBuilder: (context, state) {
+                  return getPage(
+                    child: const AddPage(),
                     state: state,
                   );
                 },

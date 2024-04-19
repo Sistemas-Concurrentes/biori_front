@@ -6,5 +6,6 @@ const String validationRoute = "/validation";
 const String homePath = "/home";
 const String settingsRoute = "/settings";
 const String profileRoute = "/profile";
+const String addReleasesRoute = "/addReleases";
 
 const String eventDetailRoute = "/eventDetail/:id";
