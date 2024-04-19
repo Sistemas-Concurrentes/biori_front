@@ -39,5 +39,10 @@
     "codigoEnviado": "Code sent, check your email",
     "spamValidation": "Did not receive the email? Check your spam folder",
 
-    "saberMas": "Learn more"
+    "saberMas": "Learn more",
+
+    "anadir": "Add",
+    "evento": "Event",
+    "advertisement": "Advertisement",
+    "report": "Report"
 }
