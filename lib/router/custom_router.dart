@@ -53,8 +53,6 @@ class CustomRouter {
               GoRoute(
                 path: eventDetailRoute,
                 pageBuilder: (context, state) {
-                  final id = int.tryParse(state.pathParameters['id'] ?? '');
-
                   final extra = state.extra as Map<String, dynamic>;
                   EventModel eventModel = extra['eventModel'] as EventModel;
                   CardListenerInterface cardListenerInterface =
