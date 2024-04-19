@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: "Biori",
-        theme: const MaterialTheme(Typography.blackCupertino).light(),
+        theme: const MaterialTheme(Typography.blackCupertino).lightMediumContrast(),
         routerConfig: CustomRouter.router,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

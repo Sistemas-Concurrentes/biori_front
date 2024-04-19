@@ -7,4 +7,5 @@ class Pallete {
   static const Color scaffoldBackgroundColor = Color.fromRGBO(203, 186, 158, 1);
   static const Color negro = Color.fromRGBO(0, 0, 0, 1);
   static const Color negroConOpacidad = Color.fromRGBO(0, 0, 0, 0.5);
+  static const Color naranja = Color.fromRGBO(229, 136, 9, 1 );
 }
