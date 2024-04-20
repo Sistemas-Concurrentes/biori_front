@@ -35,29 +35,42 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _eventCardRow(context),
-              CategoriesButtons(categories: detailEventModel.tags,
-                  subscribeEvent: subscribeCategory,
-                  releaseType: ReleaseType.event,
-                  isEventDetailPage: true
-              ),
-              _eventCardDescription(context),
-              MyLikeButton(
-                  id: detailEventModel.id,
-                  releaseType: ReleaseType.event,
-                  numberLikes: detailEventModel.numberLikes,
-                  isLiked: detailEventModel.isLiked,
-                  likeEvent: likeEvent),
-              _moreInfo(context),
-              ElevatedButton(onPressed: () {} ,
-                  style: ElevatedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.onPrimary, // color de fondo
-                    backgroundColor: Theme.of(context).colorScheme.primary, // color de texto
-        ), child: const Text('Inscribirse'),),
+          child: Container(
+            padding: const EdgeInsets.all(JaviPaddings.L),
+            child: Column(
+              children: [
+                _eventCardRow(context),
+                Container(
+                  margin: const EdgeInsets.only(bottom: JaviPaddings.L),
+                  child: CategoriesButtons(categories: detailEventModel.tags,
+                      subscribeEvent: subscribeCategory,
+                      releaseType: ReleaseType.event,
+                      isEventDetailPage: true
+                  ),
+                ),
+                Container(
+                    margin: const EdgeInsets.only(bottom: JaviPaddings.L),
+                    child: _eventCardDescription(context)),
+                Container(
+                  margin: const EdgeInsets.only(bottom: JaviPaddings.L),
+                  child: MyLikeButton(
+                      id: detailEventModel.id,
+                      releaseType: ReleaseType.event,
+                      numberLikes: detailEventModel.numberLikes,
+                      isLiked: detailEventModel.isLiked,
+                      likeEvent: likeEvent),
+                ),
+                Container(
+                    margin: const EdgeInsets.only(bottom: JaviPaddings.L),
+                    child: _moreInfo(context)),
+                ElevatedButton(onPressed: () {} ,
+                    style: ElevatedButton.styleFrom(
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary, // color de fondo
+                      backgroundColor: Theme.of(context).colorScheme.primary, // color de texto
+                    ), child: const Text('Inscribirse'),),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -69,14 +82,14 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
       children: [
         Expanded(
           child: Container(
-            alignment: Alignment.center,
+            margin: const EdgeInsets.only(bottom: JaviPaddings.L),
+            alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
             ),
-            margin: const EdgeInsets.all(ReleasesConstants.margin),
             child: Text(
               detailEventModel.title,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               style: JaviStyle.titulo,
             ),
           ),
@@ -94,8 +107,6 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(ReleasesConstants.margin),
             ),
-            margin: const EdgeInsets.all(ReleasesConstants.margin),
-            padding: const EdgeInsets.all(ReleasesConstants.padding),
             child: Text(
               detailEventModel.description,
               textAlign: TextAlign.justify,
@@ -111,35 +122,32 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
     return Row(
       children: [
         Expanded(
-          child: Container(
-            margin: const EdgeInsets.all(ReleasesConstants.margin),
-            child: RichText(
-              text: TextSpan(
-                text: '',
-                style: DefaultTextStyle
-                    .of(context)
-                    .style,
-                children: <TextSpan>[
-                  const TextSpan(
-                      text: 'Fecha del evento: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: allDatesToString(detailEventModel.dates)),
-                  const TextSpan(
-                      text: '\nLugar: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: detailEventModel.location),
+          child: RichText(
+            text: TextSpan(
+              text: '',
+              style: DefaultTextStyle
+                  .of(context)
+                  .style,
+              children: <TextSpan>[
+                const TextSpan(
+                    text: 'Fecha del evento: ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(text: allDatesToString(detailEventModel.dates)),
+                const TextSpan(
+                    text: '\nLugar: ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(text: detailEventModel.location),
 
-                  detailEventModel.endInscription == null
-                      ? const TextSpan(text: '')
-                      : const TextSpan(
-                      text: '\nFecha fin de inscripción: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  detailEventModel.endInscription == null
-                      ? const TextSpan(text: '')
-                      : TextSpan(
-                      text: dateToString(detailEventModel.endInscription!)),
-                ],
-              ),
+                detailEventModel.endInscription == null
+                    ? const TextSpan(text: '')
+                    : const TextSpan(
+                    text: '\nFecha fin de inscripción: ',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                detailEventModel.endInscription == null
+                    ? const TextSpan(text: '')
+                    : TextSpan(
+                    text: dateToString(detailEventModel.endInscription!)),
+              ],
             ),
           ),
         ),

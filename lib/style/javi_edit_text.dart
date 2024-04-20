@@ -119,7 +119,7 @@ class JaviForms {
 class JaviPaddings {
   static const double S = 4;
   static const double M = 8;
-  static const double L = 12;
+  static const double L = 16;
   static const double XL = 20;
 }
 
