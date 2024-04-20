@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
 class JaviForms {
+  @Deprecated("Usa inputFieldWidget")
   static Widget inputBaseWidget(BuildContext context, String keyName,
       String hintText, Function onValidate, Function onSaved,
       {Icon? prefixIcon,
@@ -26,6 +27,34 @@ class JaviForms {
       hintColor: Theme.of(context).primaryColor,
       textColor: Theme.of(context).primaryColor,
       isNumeric: isNumeric,
+    );
+  }
+
+  static Widget inputFieldWidget(
+    BuildContext context,
+    String keyName,
+    String hintText,
+    Function onValidate,
+    Function onSaved, {
+    Icon? prefixIcon,
+    Widget? suffixIcon,
+    bool obscureText = false,
+    maxLines=1,
+    bool isNumeric = false,
+  }) {
+    return TextFormField(
+      maxLines: maxLines,
+      validator: (val) {
+        return onValidate(val!);
+      },
+      onSaved: (val) {
+        onSaved(val);
+      },
+      decoration: inputDecorationBiori(context, hintText,
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          obscureText: obscureText),
+      keyboardType: isNumeric ? TextInputType.number : null,
     );
   }
 
@@ -126,7 +155,7 @@ class JaviPaddings {
 class JaviStyle {
   static const TextStyle granada1 = TextStyle(
     fontSize: 14,
-      color: Colors.white,
+    color: Colors.white,
   );
 
   static const TextStyle subcomentarios = TextStyle(
@@ -150,7 +179,6 @@ class JaviStyle {
     fontSize: 22.5,
     fontWeight: FontWeight.bold,
     color: Pallete.naranja,
-
   );
 
   static const TextStyle subtitulo = TextStyle(
@@ -164,5 +192,31 @@ class JaviStyle {
   static const TextStyle informacionExtraCards = TextStyle(
     fontSize: 14.0,
     color: Pallete.secondaryColor,
+  );
+}
+
+inputDecorationBiori(BuildContext context, String hintText,
+    {Widget? suffixIcon, Icon? prefixIcon, bool obscureText = false}) {
+  return InputDecoration(
+    filled: true,
+    fillColor: Theme.of(context).dialogBackgroundColor,
+    enabledBorder: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
+    ),
+    border: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 3),
+    ),
+    hintText: hintText,
+    suffixIcon: suffixIcon,
+    prefixIcon: prefixIcon,
+    hintStyle: TextStyle(
+      color: Theme.of(context).hintColor,
+    ),
   );
 }
