@@ -9,15 +9,11 @@ class ReleasesWidgets {
       children: [
         Expanded(
           child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.circular(ReleasesConstants.borderRadius),
-            ),
-            margin: const EdgeInsets.all(ReleasesConstants.margin),
+            alignment: Alignment.topLeft,
+            margin: const EdgeInsets.only(bottom: 16),
             child: Text(
               title,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               style: JaviStyle.tituloEvento,
             ),
           ),
@@ -33,11 +29,7 @@ class ReleasesWidgets {
         Expanded(
           child: Container(
             alignment: Alignment.topLeft,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
-            ),
-            margin: const EdgeInsets.all(ReleasesConstants.margin),
-            padding: const EdgeInsets.all(ReleasesConstants.padding),
+            margin: const EdgeInsets.only(bottom: 16),
             child: Text(
               description,
               textAlign: TextAlign.justify,

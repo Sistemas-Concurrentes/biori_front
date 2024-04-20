@@ -147,14 +147,19 @@ class JaviStyle {
   );
 
   static const TextStyle tituloEvento = TextStyle(
-    fontSize: 20.0,
+    fontSize: 22.5,
     fontWeight: FontWeight.bold,
     color: Pallete.naranja,
 
   );
 
-  static const TextStyle descripcion = TextStyle(
+  static const TextStyle subtitulo = TextStyle(
     fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle descripcion = TextStyle(
+    fontSize: 14.0,
   );
   static const TextStyle informacionExtraCards = TextStyle(
     fontSize: 14.0,

@@ -25,12 +25,9 @@ class CategoriesButtons extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(ReleasesConstants.padding),
-            child: isEventDetailPage
-                  ? _filterChip()
-                  : _showCategoriesWithScrollBar(),
-          ),
+          child: isEventDetailPage
+                ? _filterChip()
+                : _showCategoriesWithScrollBar(),
           ),
       ],
     );
@@ -62,6 +59,9 @@ class CategoriesButtons extends StatelessWidget {
           onSelected: (bool selected) {
             subscribeEvent(category.id, releaseType);
           },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
         );
       }).toList(),
     );
