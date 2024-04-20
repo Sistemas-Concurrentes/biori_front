@@ -20,12 +20,12 @@ class _AddEventPageState extends State<AddEventPage> {
   String? categoria;
   String? localizacion;
   List<DateTime> datesFromEvent = [];
-  List<TagsButtonsModel> tags = [];
 
   @override
   Widget build(BuildContext context) {
     var formWidgets = [
       eventTitleEditText(_onValidateTitle),
+      descriptionBigEditText(_onValidateDescription),
 
     ];
 
@@ -63,7 +63,21 @@ class _AddEventPageState extends State<AddEventPage> {
 
     );
   }
+
+  descriptionBigEditText(Function onValidate) {
+    return JaviForms.inputFieldWidget(context, "eventDescription",
+        AppLocalizations.of(context)!.descripcion,
+        onValidate, (onSavedVal) => {descripcion = onSavedVal},
+        prefixIcon: const Icon(Icons.description),
+        maxLines: null);
+  }
+
   _onValidateTitle(String onValidateVal){
 
   }
+  _onValidateDescription(String onValidateVal){
+
+  }
+
+
 }

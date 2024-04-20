@@ -46,7 +46,6 @@
     "advertisement": "Aviso",
     "report": "Información general",
 
-    "titulo": "Título"
-
-
+    "titulo": "Título",
+    "descripcion": "Descripción"
 }
