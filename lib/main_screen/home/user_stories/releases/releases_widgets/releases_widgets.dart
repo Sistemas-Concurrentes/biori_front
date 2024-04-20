@@ -10,7 +10,7 @@ class ReleasesWidgets {
         Expanded(
           child: Container(
             alignment: Alignment.topLeft,
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: JaviPaddings.L),
             child: Text(
               title,
               textAlign: TextAlign.left,
@@ -29,7 +29,7 @@ class ReleasesWidgets {
         Expanded(
           child: Container(
             alignment: Alignment.topLeft,
-            margin: const EdgeInsets.only(bottom: 16),
+            margin: const EdgeInsets.only(bottom: JaviPaddings.L),
             child: Text(
               description,
               textAlign: TextAlign.justify,

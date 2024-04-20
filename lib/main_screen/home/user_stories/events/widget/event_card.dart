@@ -33,7 +33,7 @@ class EventCard extends StatelessWidget {
         _goToEventDetail();
       },
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(JaviPaddings.L  ),
         child: Column(
           children: [
             ReleasesWidgets.releaseTitleRow(context, eventModel.title),
@@ -43,7 +43,7 @@ class EventCard extends StatelessWidget {
             const Divider(),
             _tagsNameLinea(context),
             Container(
-              margin: const EdgeInsets.only(bottom: 8),
+              margin: const EdgeInsets.only(bottom: JaviPaddings.M),
               child: CategoriesButtons(
                 categories: eventModel.tags,
                 subscribeEvent: cardListenerInterface.subscribeCategory,
@@ -61,7 +61,7 @@ class EventCard extends StatelessWidget {
     return Row(children: [
       Expanded(
         child: Container(
-            margin: const EdgeInsets.only(bottom: 4),
+            margin: const EdgeInsets.only(bottom: JaviPaddings.S),
             child: const Text("Tags", style: JaviStyle.subtitulo)),
       ),
     ]);
