@@ -25,43 +25,46 @@ class _AddPageState extends State<AddPage> {
         title: Text(anadir),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              createCardToAdd(
-                context,
-                AddConstants().eventTag,
-                "$anadir $evento",
-                Icons.event,
-                () {
-                  CustomRouter.router
-                      .push("$addReleasesRoute/$addEventRoute")
-                      .then((value) => null);
-                },
-              ),
-              createCardToAdd(
-                context,
-                AddConstants().advertisementTag,
-                "$anadir $advertisement",
-                Icons.note_add,
-                () {
-                  CustomRouter.router
-                      .push("$addReleasesRoute/$addAdvertisementRoute")
-                      .then((value) => null);
-                },
-              ),
-              createCardToAdd(
-                context,
-                AddConstants().reportTag,
-                "$anadir $report",
-                Icons.folder_open,
-                () {
-                  CustomRouter.router
-                      .push("$addReleasesRoute/$addReportRoute")
-                      .then((value) => null);
-                },
-              ),
-            ],
+        child: Padding(
+          padding: const EdgeInsets.all(JaviPaddings.L),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                createCardToAdd(
+                  context,
+                  AddConstants().eventTag,
+                  "$anadir $evento",
+                  Icons.event,
+                  () {
+                    CustomRouter.router
+                        .push("$addReleasesRoute/$addEventRoute")
+                        .then((value) => null);
+                  },
+                ),
+                createCardToAdd(
+                  context,
+                  AddConstants().advertisementTag,
+                  "$anadir $advertisement",
+                  Icons.note_add,
+                  () {
+                    CustomRouter.router
+                        .push("$addReleasesRoute/$addAdvertisementRoute")
+                        .then((value) => null);
+                  },
+                ),
+                createCardToAdd(
+                  context,
+                  AddConstants().reportTag,
+                  "$anadir $report",
+                  Icons.folder_open,
+                  () {
+                    CustomRouter.router
+                        .push("$addReleasesRoute/$addReportRoute")
+                        .then((value) => null);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
