@@ -44,7 +44,9 @@
     "anadir": "Añadir",
     "evento": "Evento",
     "advertisement": "Aviso",
-    "report": "Información general"
+    "report": "Información general",
+
+    "titulo": "Título"
 
 
 }

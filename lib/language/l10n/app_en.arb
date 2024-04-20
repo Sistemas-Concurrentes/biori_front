@@ -44,5 +44,7 @@
     "anadir": "Add",
     "evento": "Event",
     "advertisement": "Advertisement",
-    "report": "Report"
+    "report": "Report",
+
+    "titulo": "Title"
 }
