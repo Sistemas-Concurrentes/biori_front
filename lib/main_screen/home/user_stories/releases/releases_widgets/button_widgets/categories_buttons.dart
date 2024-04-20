@@ -62,6 +62,9 @@ class CategoriesButtons extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
+          labelStyle: TextStyle(
+            color: category.isFollowed ? Colors.white : Colors.black,
+          ),
         );
       }).toList(),
     );
