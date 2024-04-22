@@ -97,6 +97,11 @@ class _AddEventPageState extends State<AddEventPage> {
   }
   _onValidateDescription(String onValidateVal){
 
+  _onValidateCategory(String? onValidateVal) {
+    if (onValidateVal == null || onValidateVal.isEmpty) {
+      return "Please select a category";
+    }
+    return null;
   }
 
   tagsCheckBoxes(Function onValidate) {
