@@ -46,7 +46,7 @@ class _AddEventPageState extends State<AddEventPage> {
       appBar: AppBar(
         title: Hero(
           tag: AddConstants().eventTag,
-          child: const Text('Add Event'),
+          child: Text("${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.evento}"),
         ),
       ),
       body: Padding(
@@ -93,7 +93,7 @@ class _AddEventPageState extends State<AddEventPage> {
   }
 
   submitButton(BuildContext context) {
-    return JaviForms.submitButton(context, "Crear Evento", () {
+    return JaviForms.submitButton(context, AppLocalizations.of(context)!.send, () {
       if (_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Evento creado correctamente!")));
         _formKey.currentState!.save();
@@ -104,17 +104,21 @@ class _AddEventPageState extends State<AddEventPage> {
     });
   }
 
-  _onValidateTitle(String onValidateVal){
-    return onValidateVal.isEmpty ? "Please enter a title" : null;
-
+  _onValidateTitle(String onValidateVal) {
+    return onValidateVal.isEmpty
+        ? "${AppLocalizations.of(context)!.titulo} ${AppLocalizations.of(context)!.cannotBeEmpty}"
+        : null;
   }
-  _onValidateDescription(String onValidateVal){
-    return onValidateVal.isEmpty ? "Please enter a title" : null;
+
+  _onValidateDescription(String onValidateVal) {
+    return onValidateVal.isEmpty
+        ? "${AppLocalizations.of(context)!.descripcion} ${AppLocalizations.of(context)!.cannotBeEmpty}"
+        : null;
   }
 
   _onValidateCategory(String? onValidateVal) {
     if (onValidateVal == null || onValidateVal.isEmpty) {
-      return "Please select a category";
+      return AppLocalizations.of(context)!.mustSelectOne;
     }
     return null;
   }
@@ -133,7 +137,9 @@ class _AddEventPageState extends State<AddEventPage> {
 
   String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
     return (onValidateVal == null || onValidateVal.isEmpty)
+        ? AppLocalizations.of(context)!.mustSelectOneOrMore
+        : null;
   }
-
+}
 
 }

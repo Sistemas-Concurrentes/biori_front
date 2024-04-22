@@ -47,5 +47,9 @@
     "report": "Información general",
 
     "titulo": "Título",
-    "descripcion": "Descripción"
+    "descripcion": "Descripción",
+
+    "cannotBeEmpty": "no puede estar vacía",
+    "mustSelectOne": "Debe seleccionar uno",
+    "mustSelectOneOrMore": "Debe seleccionar uno o más"
 }

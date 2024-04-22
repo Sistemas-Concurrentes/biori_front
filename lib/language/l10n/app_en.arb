@@ -47,5 +47,9 @@
     "report": "Report",
 
     "titulo": "Title",
-    "descripcion": "Description"
+    "descripcion": "Description",
+
+    "cannotBeEmpty": "cannot be empty",
+    "mustSelectOne": "Choose one option",
+    "mustSelectOneOrMore": "Choose one or more options"
 }
