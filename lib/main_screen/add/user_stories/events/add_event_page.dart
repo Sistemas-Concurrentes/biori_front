@@ -113,6 +113,8 @@ class _AddEventPageState extends State<AddEventPage> {
   String? _onValidateTags(List<TagsButtonsModel> onValidateVal) {
     return (onValidateVal.isEmpty)
          ? "Please select at least one tag" : null;
+  String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
+    return (onValidateVal == null || onValidateVal.isEmpty)
   }
 
 
