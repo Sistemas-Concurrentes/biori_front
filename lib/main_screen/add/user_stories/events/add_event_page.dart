@@ -11,13 +11,16 @@ enum CategoryLabel {
   clase("CLASE");
 
   const CategoryLabel(this.label);
+
   final String label;
 }
+
 class AddEventPage extends StatefulWidget {
   const AddEventPage({super.key});
 
   @override
-  State<AddEventPage> createState() => _AddEventPageState();}
+  State<AddEventPage> createState() => _AddEventPageState();
+}
 
 class _AddEventPageState extends State<AddEventPage> {
   final _formKey = GlobalKey<FormState>();
@@ -37,16 +40,15 @@ class _AddEventPageState extends State<AddEventPage> {
       descriptionBigEditText(_onValidateDescription),
       categoryChooser(_onValidateCategory),
       tagsCheckBoxes(_onValidateTags),
-
       submitButton(context),
-
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Hero(
           tag: AddConstants().eventTag,
-          child: Text("${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.evento}"),
+          child: Text(
+              "${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.evento}"),
         ),
       ),
       body: Padding(
@@ -57,7 +59,9 @@ class _AddEventPageState extends State<AddEventPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: formWidgets.map((widget) => widgetsJavi.paddedWidget(widget)).toList(),
+              children: formWidgets
+                  .map((widget) => widgetsJavi.paddedWidget(widget))
+                  .toList(),
             ),
           ),
         ),
@@ -71,31 +75,38 @@ class _AddEventPageState extends State<AddEventPage> {
       "eventTitle",
       "${AppLocalizations.of(context)!.titulo} ${AppLocalizations.of(context)!.evento}",
       onValidate,
-          (onSavedVal) => { titulo = onSavedVal},
+      (onSavedVal) => {titulo = onSavedVal},
       prefixIcon: const Icon(Icons.title),
-
     );
   }
 
   descriptionBigEditText(Function onValidate) {
-    return JaviForms.inputFieldWidget(context, "eventDescription",
+    return JaviForms.inputFieldWidget(
+        context,
+        "eventDescription",
         AppLocalizations.of(context)!.descripcion,
-        onValidate, (onSavedVal) => {descripcion = onSavedVal},
+        onValidate,
+        (onSavedVal) => {descripcion = onSavedVal},
         prefixIcon: const Icon(Icons.description),
         maxLines: null);
   }
 
   categoryChooser(Function onValidateVal) {
-    return JaviForms.dropDownMenu(context, TextEditingController(), CategoryLabel.actividad, CategoryLabel.values,
-            (onSavedVal) => {categoria = onSavedVal}, _onValidateCategory);
-
-
+    return JaviForms.dropDownMenu(
+        context,
+        TextEditingController(),
+        CategoryLabel.actividad,
+        CategoryLabel.values,
+        (onSavedVal) => {categoria = onSavedVal},
+        _onValidateCategory);
   }
 
   submitButton(BuildContext context) {
-    return JaviForms.submitButton(context, AppLocalizations.of(context)!.send, () {
+    return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
+        () {
       if (_formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Evento creado correctamente!")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Evento creado correctamente!")));
         _formKey.currentState!.save();
       } else {
         ScaffoldMessenger.of(context)
@@ -131,8 +142,8 @@ class _AddEventPageState extends State<AddEventPage> {
       TagsButtonsModel(name: "tag3", id: 3),
       TagsButtonsModel(name: "tag4", id: 4),
     ]);
-    return
-      JaviForms.chipsInputFieldWidget(context, myChips, onValidate, (onSavedVal) => {tagsButtons = onSavedVal});
+    return JaviForms.chipsInputFieldWidget(context, myChips, onValidate,
+        (onSavedVal) => {tagsButtons = onSavedVal});
   }
 
   String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
@@ -140,6 +151,4 @@ class _AddEventPageState extends State<AddEventPage> {
         ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
   }
-}
-
 }
