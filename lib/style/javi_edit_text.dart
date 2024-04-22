@@ -1,3 +1,5 @@
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
+import 'package:biori/style/widgets_javi.dart';
 import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
@@ -39,7 +41,7 @@ class JaviForms {
     Icon? prefixIcon,
     Widget? suffixIcon,
     bool obscureText = false,
-    maxLines=1,
+    maxLines = 1,
     bool isNumeric = false,
   }) {
     return TextFormField(
@@ -131,7 +133,7 @@ class JaviForms {
       onSaved: (val) {
         onSaved(val);
       },
-      validator: (val){
+      validator: (val) {
         return onValidate(val);
       },
       builder: (FormFieldState<dynamic> state) => Container(
@@ -153,9 +155,7 @@ class JaviForms {
           },
         ),
       ),
-
     );
-
   }
 
   static Future _selectDate(
@@ -181,6 +181,33 @@ class JaviForms {
   String stringSpainFormatToBdFormat(String spainFormat) {
     List<String> date = spainFormat.split("/");
     return "${date[2]}-${date[1]}-${date[0]}";
+  }
+
+  static chipsInputFieldWidget(BuildContext context,
+      List<TagsButtonsModel> chips, Function onValidate, Function onSaved) {
+    List<TagsButtonsModel> selectedChips = [];
+
+    return FormField(
+      onSaved: (val) {
+        onSaved(val);
+      },
+      validator: (val) {
+        return onValidate(val);
+      },
+      builder: (FormFieldState<dynamic> state) => SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: WidgetsJavi().filterChipForTags(
+          chips,
+          (actualChip) {
+            actualChip.isFollowed
+                ? selectedChips.remove(actualChip)
+                : selectedChips.add(actualChip);
+            actualChip.isFollowed = !actualChip.isFollowed;
+            state.didChange(selectedChips);
+          },
+        ),
+      ),
+    );
   }
 }
 

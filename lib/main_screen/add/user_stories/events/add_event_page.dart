@@ -1,4 +1,5 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _AddEventPageState extends State<AddEventPage> {
   String? categoria;
   String? localizacion;
   List<DateTime> datesFromEvent = [];
+  List<TagsButtonsModel> tagsButtons = [];
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,9 @@ class _AddEventPageState extends State<AddEventPage> {
       eventTitleEditText(_onValidateTitle),
       descriptionBigEditText(_onValidateDescription),
       categoryChooser(_onValidateCategory),
+      tagsCheckBoxes(_onValidateTags),
+
+      submitButton(context),
 
     ];
 
@@ -92,6 +97,22 @@ class _AddEventPageState extends State<AddEventPage> {
   }
   _onValidateDescription(String onValidateVal){
 
+  }
+
+  tagsCheckBoxes(Function onValidate) {
+    List<TagsButtonsModel> myChips = [];
+    myChips.addAll([
+      TagsButtonsModel(name: "tag1", id: 1),
+      TagsButtonsModel(name: "tag2", id: 2),
+      TagsButtonsModel(name: "tag3", id: 3),
+      TagsButtonsModel(name: "tag4", id: 4),
+    ]);
+    return JaviForms.chipsInputFieldWidget(context, myChips, onValidate, (onSavedVal) => {tagsButtons = onSavedVal});
+  }
+
+  String? _onValidateTags(List<TagsButtonsModel> onValidateVal) {
+    return (onValidateVal.isEmpty)
+         ? "Please select at least one tag" : null;
   }
 
 
