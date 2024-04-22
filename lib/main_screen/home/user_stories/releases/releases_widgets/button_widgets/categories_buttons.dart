@@ -1,8 +1,7 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
-import 'package:biori/theme/pallete.dart';
+import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/constants.dart';
 import 'model/categories_button_model.dart';
 
 class CategoriesButtons extends StatelessWidget {
@@ -50,23 +49,7 @@ class CategoriesButtons extends StatelessWidget {
   }
 
   Widget _filterChip() {
-    return Wrap(
-      spacing: 5.0,
-      children: categories.map((category) {
-        return FilterChip(
-          label: Text(category.name),
-          selected: category.isFollowed,
-          onSelected: (bool selected) {
-            subscribeEvent(category.id, releaseType);
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          labelStyle: TextStyle(
-            color: category.isFollowed ? Colors.white : Colors.black,
-          ),
-        );
-      }).toList(),
-    );
+    return WidgetsJavi().filterChipForTags(
+        categories, (category) => subscribeEvent(category.id, releaseType));
   }
 }

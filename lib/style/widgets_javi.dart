@@ -1,4 +1,5 @@
 import 'package:biori/keys/globals.dart';
+import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class WidgetsJavi {
               text: textoRedirigir,
               style: JaviStyle.url,
               recognizer: TapGestureRecognizer()
-                ..onTap = (){
+                ..onTap = () {
                   CustomRouter.router.push(rutaRedirigir);
                 },
             ),
@@ -83,5 +84,29 @@ class WidgetsJavi {
   snackbarScaffold(String message) {
     final SnackBar snackBar = SnackBar(content: Text(message));
     snackbarKey.currentState?.showSnackBar(snackBar);
+  }
+
+  Widget filterChipForTags(
+      List<TagsButtonsModel> tags,
+          Function(TagsButtonsModel)onSelected) {
+    return Wrap(
+      spacing: 5.0,
+      children: tags.map((actualTag) {
+        bool isActualChipSelected = actualTag.isFollowed;
+        return FilterChip(
+          label: Text(actualTag.name),
+          selected: isActualChipSelected,
+          onSelected: (bool selected){
+            onSelected(actualTag);
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          labelStyle: TextStyle(
+            color: isActualChipSelected ? Colors.white : Colors.black,
+          ),
+        );
+      }).toList(),
+    );
   }
 }
