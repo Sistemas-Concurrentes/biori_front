@@ -93,9 +93,12 @@ class _AddEventPageState extends State<AddEventPage> {
   }
 
   _onValidateTitle(String onValidateVal){
+    return onValidateVal.isEmpty ? "Please enter a title" : null;
 
   }
   _onValidateDescription(String onValidateVal){
+    return onValidateVal.isEmpty ? "Please enter a title" : null;
+  }
 
   _onValidateCategory(String? onValidateVal) {
     if (onValidateVal == null || onValidateVal.isEmpty) {
