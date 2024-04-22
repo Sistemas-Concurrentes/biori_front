@@ -115,12 +115,10 @@ class _AddEventPageState extends State<AddEventPage> {
       TagsButtonsModel(name: "tag3", id: 3),
       TagsButtonsModel(name: "tag4", id: 4),
     ]);
-    return JaviForms.chipsInputFieldWidget(context, myChips, onValidate, (onSavedVal) => {tagsButtons = onSavedVal});
+    return
+      JaviForms.chipsInputFieldWidget(context, myChips, onValidate, (onSavedVal) => {tagsButtons = onSavedVal});
   }
 
-  String? _onValidateTags(List<TagsButtonsModel> onValidateVal) {
-    return (onValidateVal.isEmpty)
-         ? "Please select at least one tag" : null;
   String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
     return (onValidateVal == null || onValidateVal.isEmpty)
   }
