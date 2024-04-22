@@ -230,6 +230,7 @@ class JaviForms {
                     },
                   ),
                 ),
+                if (state.hasError) Text(state.errorText ?? '', style: TextStyle(color: Theme.of(context).colorScheme.error),),
               ],
             ),
           ),
