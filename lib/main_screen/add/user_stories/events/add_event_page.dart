@@ -4,7 +4,14 @@ import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+enum CategoryLabel {
+  actividad("ACTIVIDAD"),
+  gestion("GESTION"),
+  clase("CLASE");
 
+  const CategoryLabel(this.label);
+  final String label;
+}
 class AddEventPage extends StatefulWidget {
   const AddEventPage({super.key});
 
@@ -26,6 +33,7 @@ class _AddEventPageState extends State<AddEventPage> {
     var formWidgets = [
       eventTitleEditText(_onValidateTitle),
       descriptionBigEditText(_onValidateDescription),
+      categoryChooser(_onValidateCategory),
 
     ];
 
@@ -70,6 +78,13 @@ class _AddEventPageState extends State<AddEventPage> {
         onValidate, (onSavedVal) => {descripcion = onSavedVal},
         prefixIcon: const Icon(Icons.description),
         maxLines: null);
+  }
+
+  categoryChooser(Function onValidateVal) {
+    return JaviForms.dropDownMenu(context, TextEditingController(), CategoryLabel.actividad, CategoryLabel.values,
+            (onSavedVal) => {categoria = onSavedVal}, _onValidateCategory);
+
+
   }
 
   _onValidateTitle(String onValidateVal){

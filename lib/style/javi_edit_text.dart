@@ -119,6 +119,45 @@ class JaviForms {
         ));
   }
 
+  static Widget dropDownMenu(
+      BuildContext context,
+      TextEditingController controller,
+      initialSelection,
+      List enumValues,
+      Function onSaved,
+      Function onValidate,
+      {enableSearch = false}) {
+    return FormField(
+      onSaved: (val) {
+        onSaved(val);
+      },
+      validator: (val){
+        return onValidate(val);
+      },
+      builder: (FormFieldState<dynamic> state) => Container(
+        width: MediaQuery.of(context).size.width,
+        child: DropdownMenu(
+          hintText: "Selecciona una opción",
+          controller: controller,
+          leadingIcon: const Icon(Icons.category),
+          inputDecorationTheme: inputDecorationThemeBiori(context, ""),
+          dropdownMenuEntries:
+              enumValues.map<DropdownMenuEntry<dynamic>>((value) {
+            return DropdownMenuEntry(
+              value: value,
+              label: value.label,
+            );
+          }).toList(),
+          onSelected: (value) {
+            state.didChange(value.label);
+          },
+        ),
+      ),
+
+    );
+
+  }
+
   static Future _selectDate(
       BuildContext context, TextEditingController controller) async {
     DateTime? picked = await showDatePicker(
@@ -215,6 +254,29 @@ inputDecorationBiori(BuildContext context, String hintText,
     hintText: hintText,
     suffixIcon: suffixIcon,
     prefixIcon: prefixIcon,
+    hintStyle: TextStyle(
+      color: Theme.of(context).hintColor,
+    ),
+  );
+}
+
+inputDecorationThemeBiori(BuildContext context, String hintText,
+    {Widget? suffixIcon, Icon? prefixIcon, bool obscureText = false}) {
+  return InputDecorationTheme(
+    filled: true,
+    fillColor: Theme.of(context).dialogBackgroundColor,
+    enabledBorder: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
+    ),
+    border: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 3),
+    ),
     hintStyle: TextStyle(
       color: Theme.of(context).hintColor,
     ),
