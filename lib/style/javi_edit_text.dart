@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
 class JaviForms {
+  static const double WIDTH_ERROR = 4;
+  static const double WIDTH_NORMAL = 1;
+  static const double WIDTH_FOCUS = 3;
+
   @Deprecated("Usa inputFieldWidget")
   static Widget inputBaseWidget(BuildContext context, String keyName,
       String hintText, Function onValidate, Function onSaved,
@@ -52,7 +56,7 @@ class JaviForms {
       onSaved: (val) {
         onSaved(val);
       },
-      decoration: inputDecorationBiori(context, hintText,
+      decoration: JaviInputDecorators().inputDecorationBiori(context, hintText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           obscureText: obscureText),
@@ -139,10 +143,11 @@ class JaviForms {
       builder: (FormFieldState<dynamic> state) => Container(
         width: MediaQuery.of(context).size.width,
         child: DropdownMenu(
+          errorText: state.errorText,
           hintText: "Selecciona una opción",
           controller: controller,
           leadingIcon: const Icon(Icons.category),
-          inputDecorationTheme: inputDecorationThemeBiori(context, ""),
+          inputDecorationTheme: JaviInputDecorators().inputDecorationThemeBiori(context, ""),
           dropdownMenuEntries:
               enumValues.map<DropdownMenuEntry<dynamic>>((value) {
             return DropdownMenuEntry(
@@ -194,19 +199,42 @@ class JaviForms {
       validator: (val) {
         return onValidate(val);
       },
-      builder: (FormFieldState<dynamic> state) => SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: WidgetsJavi().filterChipForTags(
-          chips,
-          (actualChip) {
-            actualChip.isFollowed
-                ? selectedChips.remove(actualChip)
-                : selectedChips.add(actualChip);
-            actualChip.isFollowed = !actualChip.isFollowed;
-            state.didChange(selectedChips);
-          },
-        ),
-      ),
+      builder: (FormFieldState<dynamic> state) {
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: state.hasError ? Theme.of(context).colorScheme.error : Theme.of(context).primaryColor,
+              width: state.hasError ? WIDTH_ERROR : WIDTH_NORMAL
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(JaviPaddings.M),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Selecciona las etiquetas",
+                  style: JaviStyle.subtitulo,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: WidgetsJavi().filterChipForTags(
+                    chips,
+                        (actualChip) {
+                      actualChip.isFollowed
+                          ? selectedChips.remove(actualChip)
+                          : selectedChips.add(actualChip);
+                      actualChip.isFollowed = !actualChip.isFollowed;
+                      state.didChange(selectedChips);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -261,51 +289,71 @@ class JaviStyle {
   );
 }
 
-inputDecorationBiori(BuildContext context, String hintText,
-    {Widget? suffixIcon, Icon? prefixIcon, bool obscureText = false}) {
-  return InputDecoration(
-    filled: true,
-    fillColor: Theme.of(context).dialogBackgroundColor,
-    enabledBorder: OutlineInputBorder(
+class JaviInputDecorators{
+  _inputBorderBiori(BuildContext context, borderColor, borderWith) {
+    return OutlineInputBorder(
       borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
-    ),
-    border: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 3),
-    ),
-    hintText: hintText,
-    suffixIcon: suffixIcon,
-    prefixIcon: prefixIcon,
-    hintStyle: TextStyle(
-      color: Theme.of(context).hintColor,
-    ),
-  );
-}
+      borderSide: BorderSide(color: borderColor, width: borderWith),
+    );
+  }
 
-inputDecorationThemeBiori(BuildContext context, String hintText,
-    {Widget? suffixIcon, Icon? prefixIcon, bool obscureText = false}) {
-  return InputDecorationTheme(
-    filled: true,
-    fillColor: Theme.of(context).dialogBackgroundColor,
-    enabledBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
-    ),
-    border: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 1),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 3),
-    ),
-    hintStyle: TextStyle(
-      color: Theme.of(context).hintColor,
-    ),
-  );
+  _inputErrorBorderBiori(BuildContext context) {
+    return _inputBorderBiori(context, Theme.of(context).colorScheme.error, JaviForms.WIDTH_ERROR);
+  }
+
+  _inputFocusBorderBiori(BuildContext context) {
+    return _inputBorderBiori(context, Theme.of(context).primaryColor, JaviForms.WIDTH_FOCUS);
+  }
+
+  _inputNormalBorderBiori(BuildContext context) {
+    return _inputBorderBiori(context, Theme.of(context).primaryColor, JaviForms.WIDTH_NORMAL);
+  }
+
+
+  InputDecoration inputDecorationBiori(BuildContext context, String hintText,
+      {Widget? suffixIcon, Icon? prefixIcon, bool obscureText = false}) {
+    return InputDecoration(
+      filled: true,
+      fillColor: Theme.of(context).dialogBackgroundColor,
+      enabledBorder: _inputNormalBorderBiori(context),
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        borderSide: BorderSide(color: Theme.of(context).primaryColor, width: JaviForms.WIDTH_NORMAL),
+      ),
+      focusedBorder: _inputFocusBorderBiori(context),
+      hintText: hintText,
+      errorBorder: _inputErrorBorderBiori(context),
+      suffixIcon: suffixIcon,
+      prefixIcon: prefixIcon,
+      hintStyle: TextStyle(
+        color: Theme.of(context).hintColor,
+      ),
+    );
+  }
+
+  InputDecorationTheme inputDecorationThemeBiori(BuildContext context, String hintText,
+      {Widget? suffixIcon, Icon? prefixIcon, bool obscureText = false}) {
+    return InputDecorationTheme(
+      filled: true,
+      fillColor: Theme
+          .of(context)
+          .dialogBackgroundColor,
+      enabledBorder: _inputNormalBorderBiori(context),
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+        borderSide: BorderSide(color: Theme
+            .of(context)
+            .primaryColor, width: 1),
+      ),
+      focusedBorder: _inputFocusBorderBiori(context),
+
+      hintStyle: TextStyle(
+        color: Theme
+            .of(context)
+            .hintColor,
+      ),
+
+      errorBorder: _inputErrorBorderBiori(context),
+    );
+  }
 }
