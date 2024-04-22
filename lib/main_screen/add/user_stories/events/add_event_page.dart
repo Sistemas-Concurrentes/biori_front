@@ -92,6 +92,18 @@ class _AddEventPageState extends State<AddEventPage> {
 
   }
 
+  submitButton(BuildContext context) {
+    return JaviForms.submitButton(context, "Crear Evento", () {
+      if (_formKey.currentState!.validate()) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Evento creado correctamente!")));
+        _formKey.currentState!.save();
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Evento creado mal!")));
+      }
+    });
+  }
+
   _onValidateTitle(String onValidateVal){
     return onValidateVal.isEmpty ? "Please enter a title" : null;
 
