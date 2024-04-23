@@ -80,6 +80,7 @@ class JaviForms {
     );
   }
 
+  @Deprecated("Usa selectDateTime")
   static Widget introducirFecha(
       BuildContext context,
       TextEditingController controller,
@@ -163,6 +164,7 @@ class JaviForms {
     );
   }
 
+  @Deprecated("Usa selectDateTime")
   static Future _selectDate(
       BuildContext context, TextEditingController controller) async {
     DateTime? picked = await showDatePicker(
@@ -237,6 +239,72 @@ class JaviForms {
         );
       },
     );
+  }
+
+  static TextFormField selectDateTime(
+    BuildContext context,
+    TextEditingController controller,
+    Function onValidate,
+    Function onSaved, {
+    bool needTime = false,
+    String hintText = "",
+    Icon? prefixIcon,
+  }) {
+    return TextFormField(
+      validator: (val) {
+        return onValidate(val);
+      },
+      onSaved: (val) {
+        onSaved(val);
+      },
+      controller: controller,
+      decoration: JaviInputDecorators().inputDecorationBiori(
+        context,
+        hintText,
+        prefixIcon: prefixIcon,
+      ),
+      onTap: () {
+        _showDateTimePicker(context, controller, needTime);
+      },
+      readOnly: true,
+    );
+  }
+
+  static _showDateTimePicker(BuildContext context,
+      TextEditingController controller, bool needTime) async {
+    String dateString = "";
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+    );
+
+    if (picked != null) {
+      dateString = _dateToSpainFormat(picked);
+    }
+
+    if (context.mounted && needTime) {
+      TextEditingController timeController = TextEditingController();
+      await _selectTime(context, timeController);
+      dateString += " ${timeController.text}";
+    }
+
+    controller.text = dateString;
+  }
+
+  static _selectTime(
+      BuildContext context, TextEditingController controller) async {
+    TimeOfDay? time = await showTimePicker(
+      context: context,
+      initialTime: const TimeOfDay(hour: 0, minute: 0),
+    );
+
+    if (time != null) {
+      controller.text =
+          "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:00";
+    }
   }
 }
 
