@@ -30,16 +30,23 @@ class _AddEventPageState extends State<AddEventPage> {
   String? descripcion;
   String? categoria;
   String? localizacion;
+  List<Widget> widgets = [];
+  List<String?> fechasEvento = [];
   List<DateTime> datesFromEvent = [];
   List<TagsButtonsModel> tagsButtons = [];
 
   @override
   Widget build(BuildContext context) {
+    if (widgets.isEmpty) {
+      widgets.add(addDate(TextEditingController(), _onValidateDates));
+    }
+
     var formWidgets = [
       eventTitleEditText(_onValidateTitle),
       descriptionBigEditText(_onValidateDescription),
       categoryChooser(_onValidateCategory),
       tagsCheckBoxes(_onValidateTags),
+      addDatesIntoWidget(),
       submitButton(context),
     ];
 
@@ -119,7 +126,7 @@ class _AddEventPageState extends State<AddEventPage> {
       controller,
       onValidate,
       (onSavedVal) => {
-        fechaNacimiento = JaviForms().stringSpainFormatToBdFormat(onSavedVal)
+        fechasEvento.add(JaviForms().stringSpainFormatToBdFormat(onSavedVal)),
       },
       prefixIcon: const Icon(Icons.calendar_today),
       hintText: "dd/mm/yyyy hh:mm:ss",
@@ -210,5 +217,12 @@ class _AddEventPageState extends State<AddEventPage> {
     return (onValidateVal == null || onValidateVal.isEmpty)
         ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
+  }
+
+  _onValidateDates(String? onValidate) {
+    if (onValidate == null || onValidate.isEmpty) {
+      return AppLocalizations.of(context)!.mustSelectOne;
+    }
+    return null;
   }
 }
