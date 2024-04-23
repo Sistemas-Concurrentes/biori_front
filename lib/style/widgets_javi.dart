@@ -87,8 +87,7 @@ class WidgetsJavi {
   }
 
   Widget filterChipForTags(
-      List<TagsButtonsModel> tags,
-          Function(TagsButtonsModel)onSelected) {
+      List<TagsButtonsModel> tags, Function(TagsButtonsModel) onSelected) {
     return Wrap(
       spacing: 5.0,
       children: tags.map((actualTag) {
@@ -96,7 +95,7 @@ class WidgetsJavi {
         return FilterChip(
           label: Text(actualTag.name),
           selected: isActualChipSelected,
-          onSelected: (bool selected){
+          onSelected: (bool selected) {
             onSelected(actualTag);
           },
           shape: RoundedRectangleBorder(
