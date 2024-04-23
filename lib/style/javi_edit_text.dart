@@ -133,7 +133,8 @@ class JaviForms {
       List enumValues,
       Function onSaved,
       Function onValidate,
-      {enableSearch = false}) {
+      {enableSearch = false,
+      hintText = ""}) {
     return FormField(
       onSaved: (val) {
         onSaved(val);
@@ -145,7 +146,7 @@ class JaviForms {
         width: MediaQuery.of(context).size.width,
         child: DropdownMenu(
           errorText: state.errorText,
-          hintText: "Selecciona una opción",
+          hintText: hintText,
           controller: controller,
           leadingIcon: const Icon(Icons.category),
           inputDecorationTheme: JaviInputDecorators().inputDecorationThemeBiori(context, ""),
@@ -191,7 +192,11 @@ class JaviForms {
   }
 
   static chipsInputFieldWidget(BuildContext context,
-      List<TagsButtonsModel> chips, Function onValidate, Function onSaved) {
+    List<TagsButtonsModel> chips,
+    Function onValidate,
+    Function onSaved, {
+    titleEvent = "",
+  }) {
     List<TagsButtonsModel> selectedChips = [];
 
     return FormField(
@@ -215,8 +220,8 @@ class JaviForms {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Selecciona las etiquetas",
+                Text(
+                  titleEvent,
                   style: JaviStyle.subtitulo,
                 ),
                 SizedBox(

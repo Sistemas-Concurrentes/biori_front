@@ -50,8 +50,8 @@ class _AddEventPageState extends State<AddEventPage> {
       tagsCheckBoxes(_onValidateTags),
       addDatesIntoWidget(),
       locationEditText(_onValidateLocation),
-      addCheckbox(
-          "¿Necesita Fecha de Inscripción?", _onValidateInscriptionDate),
+      addCheckbox(AppLocalizations.of(context)!.necesitaFechaInscripcion,
+          _onValidateInscriptionDate),
       submitButton(context),
     ];
 
@@ -110,7 +110,8 @@ class _AddEventPageState extends State<AddEventPage> {
         CategoryLabel.actividad,
         CategoryLabel.values,
         (onSavedVal) => {categoria = onSavedVal},
-        _onValidateCategory);
+        _onValidateCategory,
+        hintText: AppLocalizations.of(context)!.selectOne);
   }
 
   tagsCheckBoxes(Function onValidate) {
@@ -122,7 +123,8 @@ class _AddEventPageState extends State<AddEventPage> {
       TagsButtonsModel(name: "tag4", id: 4),
     ]);
     return JaviForms.chipsInputFieldWidget(context, myChips, onValidate,
-        (onSavedVal) => {tagsButtons = onSavedVal});
+        (onSavedVal) => {tagsButtons = onSavedVal},
+        titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
   }
 
   TextFormField addDate(TextEditingController controller, Function onValidate) {
@@ -155,11 +157,12 @@ class _AddEventPageState extends State<AddEventPage> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: JaviPaddings.M),
+            Padding(
+              padding: const EdgeInsets.only(top: JaviPaddings.M),
               child: Text(
-                "Fechas",
+                AppLocalizations.of(context)!.fechasEvento,
                 style: JaviStyle.subtitulo,
               ),
             ),
@@ -173,7 +176,8 @@ class _AddEventPageState extends State<AddEventPage> {
               padding: const EdgeInsets.only(top: JaviPaddings.M),
               child: ElevatedButton(
                 onPressed: addWidgetIfLastIsFilled,
-                child: const Text("Añadir fecha"),
+                child: Text(
+                    "${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.fecha}"),
               ),
             )
           ],
@@ -186,7 +190,7 @@ class _AddEventPageState extends State<AddEventPage> {
     return JaviForms.inputFieldWidget(
       context,
       "eventLocation",
-      "Localización",
+      AppLocalizations.of(context)!.localizacion,
       onValidate,
       (onSavedVal) => {localizacion = onSavedVal},
       prefixIcon: const Icon(Icons.location_on),

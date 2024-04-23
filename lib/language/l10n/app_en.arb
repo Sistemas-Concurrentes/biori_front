@@ -48,8 +48,15 @@
 
     "titulo": "Title",
     "descripcion": "Description",
+    "localizacion": "Location",
+    "seleccionaEtiquetas": "Select tags",
 
     "cannotBeEmpty": "cannot be empty",
     "mustSelectOne": "Choose one option",
-    "mustSelectOneOrMore": "Choose one or more options"
+    "mustSelectOneOrMore": "Choose one or more options",
+    "selectOne": "Select one",
+    "selectOneOrMore": "Select one or more",
+    "necesitaFechaInscripcion": "Do you need an end registration date?",
+    "fechasEvento": "Event dates",
+    "fecha": "Date"
 }
