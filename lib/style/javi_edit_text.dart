@@ -306,6 +306,31 @@ class JaviForms {
           "${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}:00";
     }
   }
+
+  Widget addCheckboxWithResponsiveWidget(BuildContext context, String title,
+      bool checked, Widget newWidget, Function onChanged) {
+    return Container(
+      decoration: JaviInputDecorators().boxDecorator(context),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CheckboxListTile(
+              value: checked,
+              title: Text(title),
+              controlAffinity: ListTileControlAffinity.leading,
+              contentPadding: const EdgeInsets.all(0),
+              onChanged: (bool? newValue) {
+                onChanged();
+              },
+            ),
+            if (checked) newWidget,
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class JaviPaddings {

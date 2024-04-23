@@ -35,6 +35,8 @@ class _AddEventPageState extends State<AddEventPage> {
   List<DateTime> datesFromEvent = [];
   List<TagsButtonsModel> tagsButtons = [];
 
+  bool _isCheckedForInscriptionDate = false;
+
   @override
   Widget build(BuildContext context) {
     if (widgets.isEmpty) {
@@ -47,6 +49,9 @@ class _AddEventPageState extends State<AddEventPage> {
       categoryChooser(_onValidateCategory),
       tagsCheckBoxes(_onValidateTags),
       addDatesIntoWidget(),
+      locationEditText(_onValidateLocation),
+      addCheckbox(
+          "¿Necesita Fecha de Inscripción?", _onValidateInscriptionDate),
       submitButton(context),
     ];
 
