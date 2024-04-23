@@ -425,4 +425,11 @@ class JaviInputDecorators{
       errorBorder: _inputErrorBorderBiori(context),
     );
   }
+
+  BoxDecoration boxDecorator(BuildContext context) {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(color: Theme.of(context).primaryColor),
+    );
+  }
 }

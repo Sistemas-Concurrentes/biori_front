@@ -146,10 +146,7 @@ class _AddEventPageState extends State<AddEventPage> {
 
   addDatesIntoWidget() {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Theme.of(context).primaryColor),
-      ),
+      decoration: JaviInputDecorators().boxDecorator(context),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
