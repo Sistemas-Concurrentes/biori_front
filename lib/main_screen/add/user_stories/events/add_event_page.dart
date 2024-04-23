@@ -101,6 +101,78 @@ class _AddEventPageState extends State<AddEventPage> {
         _onValidateCategory);
   }
 
+  tagsCheckBoxes(Function onValidate) {
+    List<TagsButtonsModel> myChips = [];
+    myChips.addAll([
+      TagsButtonsModel(name: "tag1", id: 1),
+      TagsButtonsModel(name: "tag2", id: 2),
+      TagsButtonsModel(name: "tag3", id: 3),
+      TagsButtonsModel(name: "tag4", id: 4),
+    ]);
+    return JaviForms.chipsInputFieldWidget(context, myChips, onValidate,
+        (onSavedVal) => {tagsButtons = onSavedVal});
+  }
+
+  TextFormField addDate(TextEditingController controller, Function onValidate) {
+    return JaviForms.selectDateTime(
+      context,
+      controller,
+      onValidate,
+      (onSavedVal) => {
+        fechaNacimiento = JaviForms().stringSpainFormatToBdFormat(onSavedVal)
+      },
+      prefixIcon: const Icon(Icons.calendar_today),
+      hintText: "dd/mm/yyyy hh:mm:ss",
+      needTime: true,
+    );
+  }
+
+  void addWidgetIfLastIsFilled() {
+    if (widgets.isNotEmpty) {
+      TextFormField lastWidget = widgets.last as TextFormField;
+      if (lastWidget.controller!.text.isNotEmpty) {
+        widgets.add(addDate(TextEditingController(), _onValidateDates));
+      }
+    }
+    setState(() {});
+  }
+
+  addDatesIntoWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Theme.of(context).primaryColor),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: JaviPaddings.M),
+              child: Text(
+                "Fechas",
+                style: JaviStyle.subtitulo,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: JaviPaddings.M),
+              child: Column(
+                children: widgets,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: JaviPaddings.M),
+              child: ElevatedButton(
+                onPressed: addWidgetIfLastIsFilled,
+                child: const Text("Añadir fecha"),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () {
@@ -132,18 +204,6 @@ class _AddEventPageState extends State<AddEventPage> {
       return AppLocalizations.of(context)!.mustSelectOne;
     }
     return null;
-  }
-
-  tagsCheckBoxes(Function onValidate) {
-    List<TagsButtonsModel> myChips = [];
-    myChips.addAll([
-      TagsButtonsModel(name: "tag1", id: 1),
-      TagsButtonsModel(name: "tag2", id: 2),
-      TagsButtonsModel(name: "tag3", id: 3),
-      TagsButtonsModel(name: "tag4", id: 4),
-    ]);
-    return JaviForms.chipsInputFieldWidget(context, myChips, onValidate,
-        (onSavedVal) => {tagsButtons = onSavedVal});
   }
 
   String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
