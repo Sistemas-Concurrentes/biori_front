@@ -177,6 +177,29 @@ class _AddEventPageState extends State<AddEventPage> {
     );
   }
 
+  locationEditText(Function onValidate) {
+    return JaviForms.inputFieldWidget(
+      context,
+      "eventLocation",
+      "Localización",
+      onValidate,
+      (onSavedVal) => {localizacion = onSavedVal},
+      prefixIcon: const Icon(Icons.location_on),
+    );
+  }
+
+  addCheckbox(String title, Function onValidate) {
+    return JaviForms().addCheckboxWithResponsiveWidget(
+        context,
+        title,
+        _isCheckedForInscriptionDate,
+        addDate(TextEditingController(), _onValidateDates), () {
+      setState(() {
+        _isCheckedForInscriptionDate = !_isCheckedForInscriptionDate;
+      });
+    });
+  }
+
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () {
@@ -218,6 +241,21 @@ class _AddEventPageState extends State<AddEventPage> {
 
   _onValidateDates(String? onValidate) {
     if (onValidate == null || onValidate.isEmpty) {
+      return AppLocalizations.of(context)!.mustSelectOne;
+    }
+    return null;
+  }
+
+  _onValidateLocation(String? onValidate) {
+    if (onValidate == null || onValidate.isEmpty) {
+      return "Localization ${AppLocalizations.of(context)!.cannotBeEmpty}";
+    }
+    return null;
+  }
+
+  _onValidateInscriptionDate(String? onValidate) {
+    if (_isCheckedForInscriptionDate &&
+        (onValidate == null || onValidate.isEmpty)) {
       return AppLocalizations.of(context)!.mustSelectOne;
     }
     return null;
