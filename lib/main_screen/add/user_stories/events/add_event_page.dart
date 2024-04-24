@@ -70,7 +70,7 @@ class _AddEventPageState extends State<AddEventPage> {
     return Scaffold(
       appBar: AppBar(
         title: Hero(
-          tag: AddConstants().eventTag,
+          tag: AddConstants().advertisementTag,
           child: Text(
               "${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.evento}"),
         ),

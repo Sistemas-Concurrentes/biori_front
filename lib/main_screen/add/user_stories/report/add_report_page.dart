@@ -31,7 +31,7 @@ class _AddReportPageState extends State<AddReportPage> {
     return Scaffold(
       appBar: AppBar(
         title: Hero(
-          tag: AddConstants().eventTag,
+          tag: AddConstants().reportTag,
           child: Text(
               "${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.report}"),
         ),
