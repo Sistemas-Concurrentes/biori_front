@@ -50,6 +50,7 @@
     "descripcion": "Description",
     "localizacion": "Location",
     "seleccionaEtiquetas": "Select tags",
+    "seleccionaGrupos": "Select groups",
 
     "cannotBeEmpty": "cannot be empty",
     "mustSelectOne": "Choose one option",
