@@ -1,6 +1,6 @@
 import 'package:biori/keys/globals.dart';
-import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:biori/style/model/chip_button_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -86,8 +86,8 @@ class WidgetsJavi {
     snackbarKey.currentState?.showSnackBar(snackBar);
   }
 
-  Widget filterChipForTags(
-      List<TagsButtonsModel> tags, Function(TagsButtonsModel) onSelected) {
+  Widget filterChipForTags(List<ChipButtonModel> tags,
+      Function(ChipButtonModel) onSelected) {
     return Wrap(
       spacing: 5.0,
       children: tags.map((actualTag) {
