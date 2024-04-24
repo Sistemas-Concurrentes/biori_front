@@ -34,8 +34,20 @@ class _AddEventPageState extends State<AddEventPage> {
   List<String?> fechasEvento = [];
   List<DateTime> datesFromEvent = [];
   List<TagsButtonsModel> tagsButtons = [];
+  List<TagsButtonsModel> allTagsButtons = [];
 
   bool _isCheckedForInscriptionDate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    allTagsButtons.addAll([
+      TagsButtonsModel(name: "tag1", id: 1),
+      TagsButtonsModel(name: "tag2", id: 2),
+      TagsButtonsModel(name: "tag3", id: 3),
+      TagsButtonsModel(name: "tag4", id: 4),
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,14 +127,7 @@ class _AddEventPageState extends State<AddEventPage> {
   }
 
   tagsCheckBoxes(Function onValidate) {
-    List<TagsButtonsModel> myChips = [];
-    myChips.addAll([
-      TagsButtonsModel(name: "tag1", id: 1),
-      TagsButtonsModel(name: "tag2", id: 2),
-      TagsButtonsModel(name: "tag3", id: 3),
-      TagsButtonsModel(name: "tag4", id: 4),
-    ]);
-    return JaviForms.chipsInputFieldWidget(context, myChips, onValidate,
+    return JaviForms.chipsInputFieldWidget(context, allTagsButtons, onValidate,
         (onSavedVal) => {tagsButtons = onSavedVal},
         titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
   }
