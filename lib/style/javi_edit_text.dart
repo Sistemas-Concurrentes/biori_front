@@ -1,4 +1,4 @@
-import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
+import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
@@ -192,12 +192,12 @@ class JaviForms {
   }
 
   static chipsInputFieldWidget(BuildContext context,
-    List<TagsButtonsModel> chips,
+    List<ChipButtonModel> chips,
     Function onValidate,
     Function onSaved, {
     titleEvent = "",
   }) {
-    List<TagsButtonsModel> selectedChips = [];
+    List<ChipButtonModel> selectedChips = [];
 
     return FormField(
       onSaved: (val) {
