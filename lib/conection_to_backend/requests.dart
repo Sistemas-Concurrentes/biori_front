@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:biori/style/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,7 +28,8 @@ class ApiService {
     }
   }
 
-  Future<http.Response> postRequestWithHeader(uri, token, data) async {
+  Future<http.Response> postRequestWithHeader(String uri, data) async {
+    String? token = await _getToken();
     try {
       return await http.post(
         Uri.parse(uri),
@@ -45,5 +47,10 @@ class ApiService {
   static _saveToken(token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
+  }
+
+  static _getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(Constants.TOKEN);
   }
 }
