@@ -13,8 +13,8 @@ class TagsButtonsModel extends ChipButtonModel {
   }
 
   @override
-  toJson() {
-    return '{ "name": "$name", "id": $id }';
+  Map<String, dynamic> toJson() {
+    return {"name": name, "id": id};
   }
 
   void changeSelected() {
