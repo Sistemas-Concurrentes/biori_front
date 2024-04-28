@@ -122,7 +122,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
         : null;
   }
 
-  String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
+  String? _onValidateTags(List<ChipButtonModel>? onValidateVal) {
     return (onValidateVal == null || onValidateVal.isEmpty)
         ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
