@@ -187,8 +187,18 @@ class JaviForms {
   }
 
   String stringSpainFormatToBdFormat(String spainFormat) {
-    List<String> date = spainFormat.split("/");
-    return "${date[2]}-${date[1]}-${date[0]}";
+    List<String> dateAndTime = spainFormat.split(" ");
+    if (dateAndTime.isEmpty) {
+      return "";
+    }
+
+    if (dateAndTime.length == 1) {
+      List<String> date = spainFormat.split("/");
+      return "${date[2]}-${date[1]}-${date[0]}";
+    } else {
+      List<String> date = dateAndTime[0].split("/");
+      return "${date[2]}-${date[1]}-${date[0]} ${dateAndTime[1]}";
+    }
   }
 
   static chipsInputFieldWidget(BuildContext context,
