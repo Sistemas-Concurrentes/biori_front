@@ -1,4 +1,5 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
+import 'package:biori/main_screen/add/user_stories/events/user_stories/add_event.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/model/chip_button_model.dart';
@@ -220,15 +221,22 @@ class _AddEventPageState extends State<AddEventPage> {
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () {
-      if (_formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Evento creado correctamente!")));
+        if (!_formKey.currentState!.validate()) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Evento creado mal!")));
+        }
+
         _formKey.currentState!.save();
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Evento creado mal!")));
-      }
-    });
+
+        AddEvent()
+            .run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento,
+                tagsButtons)
+            .then((value) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text("Evento creado!")));
+        });
+      },
+    );
   }
 
   _onValidateTitle(String onValidateVal) {
