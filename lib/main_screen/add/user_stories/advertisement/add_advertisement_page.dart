@@ -1,5 +1,5 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
-import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
+import 'package:biori/main_screen/add/user_stories/advertisement/user_stories/add_advertisement.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
@@ -99,14 +99,18 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () {
-      if (_formKey.currentState!.validate()) {
+      if (!_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Evento creado correctamente!")));
-        _formKey.currentState!.save();
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Evento creado mal!")));
+            SnackBar(content: Text("Aviso creado correctamente!")));
+        return;
       }
+
+      _formKey.currentState!.save();
+
+      AddAdvertisement().run(titulo!, descripcion!, tagsButtons).then((value) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Aviso creado!")));
+      });
     });
   }
 
