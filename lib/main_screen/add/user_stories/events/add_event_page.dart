@@ -1,6 +1,7 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/style/javi_edit_text.dart';
+import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -33,7 +34,7 @@ class _AddEventPageState extends State<AddEventPage> {
   List<Widget> widgets = [];
   List<String?> fechasEvento = [];
   List<DateTime> datesFromEvent = [];
-  List<TagsButtonsModel> tagsButtons = [];
+  List<ChipButtonModel> tagsButtons = [];
   List<TagsButtonsModel> allTagsButtons = [];
 
   bool _isCheckedForInscriptionDate = false;
@@ -247,7 +248,7 @@ class _AddEventPageState extends State<AddEventPage> {
     return null;
   }
 
-  String? _onValidateTags(List<TagsButtonsModel>? onValidateVal) {
+  String? _onValidateTags(List<ChipButtonModel>? onValidateVal) {
     return (onValidateVal == null || onValidateVal.isEmpty)
         ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
