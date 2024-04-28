@@ -5,4 +5,8 @@ class ChipButtonModel {
 
   ChipButtonModel(
       {required this.id, required this.name, this.isFollowed = false});
+
+  toJson() {
+    return '{ "name": "$name", "id": $id }';
+  }
 }

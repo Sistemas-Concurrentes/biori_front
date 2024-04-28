@@ -12,6 +12,11 @@ class TagsButtonsModel extends ChipButtonModel {
     return categories;
   }
 
+  @override
+  toJson() {
+    return '{ "name": "$name", "id": $id }';
+  }
+
   void changeSelected() {
     isFollowed = !isFollowed;
   }
