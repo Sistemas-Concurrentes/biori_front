@@ -33,7 +33,7 @@ class _AddEventPageState extends State<AddEventPage> {
   String? localizacion;
   List<Widget> widgets = [];
   List<String?> fechasEvento = [];
-  List<DateTime> datesFromEvent = [];
+  String? fechaFinInscripcion;
   List<ChipButtonModel> tagsButtons = [];
   List<TagsButtonsModel> allTagsButtons = [];
 
@@ -53,7 +53,8 @@ class _AddEventPageState extends State<AddEventPage> {
   @override
   Widget build(BuildContext context) {
     if (widgets.isEmpty) {
-      widgets.add(addDate(TextEditingController(), _onValidateDates));
+      widgets.add(
+          addDate(TextEditingController(), _onValidateDates, _onSavedValDates));
     }
 
     var formWidgets = [
@@ -133,14 +134,13 @@ class _AddEventPageState extends State<AddEventPage> {
         titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
   }
 
-  TextFormField addDate(TextEditingController controller, Function onValidate) {
+  TextFormField addDate(
+      TextEditingController controller, Function onValidate, onSavedVal) {
     return JaviForms.selectDateTime(
       context,
       controller,
       onValidate,
-      (onSavedVal) => {
-        fechasEvento.add(JaviForms().stringSpainFormatToBdFormat(onSavedVal)),
-      },
+      onSavedVal,
       prefixIcon: const Icon(Icons.calendar_today),
       hintText: "dd/mm/yyyy hh:mm:ss",
       needTime: true,
@@ -151,7 +151,8 @@ class _AddEventPageState extends State<AddEventPage> {
     if (widgets.isNotEmpty) {
       TextFormField lastWidget = widgets.last as TextFormField;
       if (lastWidget.controller!.text.isNotEmpty) {
-        widgets.add(addDate(TextEditingController(), _onValidateDates));
+        widgets.add(addDate(
+            TextEditingController(), _onValidateDates, _onSavedValDates));
       }
     }
     setState(() {});
@@ -208,7 +209,8 @@ class _AddEventPageState extends State<AddEventPage> {
         context,
         title,
         _isCheckedForInscriptionDate,
-        addDate(TextEditingController(), _onValidateDates), () {
+        addDate(TextEditingController(), _onValidateDates,
+            _onSavedValInscriptionDate), () {
       setState(() {
         _isCheckedForInscriptionDate = !_isCheckedForInscriptionDate;
       });
@@ -274,5 +276,14 @@ class _AddEventPageState extends State<AddEventPage> {
       return AppLocalizations.of(context)!.mustSelectOne;
     }
     return null;
+  }
+
+  _onSavedValDates(String? onSavedVal) {
+    fechasEvento.add(JaviForms().stringSpainFormatToBdFormat(onSavedVal!));
+  }
+
+  _onSavedValInscriptionDate(String? onSavedVal) {
+    fechaFinInscripcion =
+        (JaviForms().stringSpainFormatToBdFormat(onSavedVal!));
   }
 }
