@@ -35,4 +35,28 @@ class EventModel implements ReleaseModelInterface {
       this.isLiked = false,
       this.numberLikes = 0,
       this.endInscription});
+
+  factory EventModel.fromJson(Map<String, dynamic> json) {
+    return EventModel(
+      id: json['id'],
+      title: json['title'],
+      category: json['category'],
+      description: json['description'],
+      organiserId: json['organiser'],
+      organiserName: json['organiserName'],
+      dates: (json['dates'] as List<dynamic>)
+          .map((date) => DateTime.parse(date.toString()))
+          .toList(),
+      location: json['location'],
+      tags: (json['tags'] as List<dynamic>)
+          .map((tag) =>
+              TagsButtonsModel(name: tag['tagTitle'], id: tag['tagId']))
+          .toList(),
+      lastUpdate: DateTime.parse(json['updatedAt'].toString()),
+      numberLikes: json['likes'],
+      endInscription: json['endInscription'] != null
+          ? DateTime.parse(json['endInscription'].toString())
+          : null,
+    );
+  }
 }

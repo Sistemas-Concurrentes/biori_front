@@ -4,22 +4,17 @@ import 'event_model.dart';
 
 class EventMapper {
   List<EventModel> fromJson(List<dynamic> listEventsJson) {
-    return listEventsJson.map((eventJson) =>
-        EventModel(
-          id: eventJson['id'],
-          title: eventJson['title'],
-          category: eventJson['category'],
-          description: eventJson['description'],
-          organiserId: eventJson['organiser'],
-          organiserName: eventJson['organiserName'],
-          dates: getDatesFromJson(eventJson['dates']),
-          location: eventJson['location'],
-          tags: getTagsFromJson(eventJson['tags']),
-          lastUpdate: DateTime.parse(eventJson['updatedAt'].toString()),
-          numberLikes: eventJson['likes'],
-          endInscription: eventJson['endInscription'] != null ? DateTime.parse(eventJson['endInscription'].toString()) : null,
-        )
-    ).toList();
+    return listEventsJson
+        .where((eventJson) {
+          try {
+            EventModel.fromJson(eventJson);
+            return true;
+          } catch (e) {
+            return false;
+          }
+        })
+        .map((eventJson) => EventModel.fromJson(eventJson))
+        .toList();
   }
 
   List<DateTime> getDatesFromJson(List<dynamic> json) {
