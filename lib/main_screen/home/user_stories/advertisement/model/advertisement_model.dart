@@ -23,4 +23,21 @@ class AdvertisementModel implements ReleaseModelInterface {
       this.teacherUserId,
       this.delegateUserId});
 
+  factory AdvertisementModel.fromJson(Map<String, dynamic> json) {
+    final Map<int, String> groupsInfo = {};
+
+    for (var group in json['groups'] as List<dynamic>) {
+      groupsInfo[group['id']] = group['name'];
+    }
+
+    return AdvertisementModel(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      groupsInfo: groupsInfo,
+      creatorName: json['userName'],
+      lastUpdate: DateTime.parse(json['updatedAt'].toString()),
+      teacherUserId: json['userId'],
+    );
+  }
 }
