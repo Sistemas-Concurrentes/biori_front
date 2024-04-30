@@ -33,7 +33,7 @@ class _AddEventPageState extends State<AddEventPage> {
   String? categoria;
   String? localizacion;
   List<Widget> widgets = [];
-  List<String?> fechasEvento = [];
+  List<String> fechasEvento = [];
   String? fechaFinInscripcion;
   List<ChipButtonModel> tagsButtons = [];
   List<TagsButtonsModel> allTagsButtons = [];
@@ -235,6 +235,8 @@ class _AddEventPageState extends State<AddEventPage> {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("Evento creado!")));
         });
+
+        fechasEvento = [];
       },
     );
   }

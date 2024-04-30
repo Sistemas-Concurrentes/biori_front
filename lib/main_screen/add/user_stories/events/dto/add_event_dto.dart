@@ -5,7 +5,7 @@ class AddEventDto {
   String? descripcion;
   String? categoria;
   String? localizacion;
-  List<String?> fechas = [];
+  List<String> fechas = [];
   List<ChipButtonModel> tagsButtons = [];
   String? fechaFinInscripcion;
 

@@ -13,7 +13,7 @@ class AddEvent {
       String descripcion,
       String categoria,
       String localizacion,
-      List<String?> fechas,
+      List<String> fechas,
       List<ChipButtonModel> tags) async {
     Map<String, dynamic> data = AddEventDto(
       titulo: titulo,
