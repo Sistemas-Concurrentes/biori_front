@@ -28,12 +28,4 @@ class AddEventDto {
         'tagsButtons': tagsButtons.map((e) => e.toJson()).toList(),
         'fechaFinInscripcion': fechaFinInscripcion,
       };
-
-  _tagButtonsToJson() {
-    List<Map<String, dynamic>> tagsButtons = [];
-    for (var tag in tagsButtons) {
-      tagsButtons.add(tag);
-    }
-    return tagsButtons;
-  }
 }
