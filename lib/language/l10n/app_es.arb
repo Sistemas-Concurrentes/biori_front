@@ -59,5 +59,8 @@
     "selectOneOrMore": "Seleccione uno o más",
     "necesitaFechaInscripcion": "¿Necesita fecha fin de inscripción?",
     "fechasEvento": "Fechas del evento",
-    "fecha": "Fecha"
+    "fecha": "Fecha",
+    "eventoCreado": "Evento creado",
+    "errorCrearEvento": "Error al crear el evento",
+    "errorPermisos": "No tienes permisos para realizar esta acción"
 }

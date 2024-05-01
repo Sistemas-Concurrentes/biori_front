@@ -235,13 +235,13 @@ class _AddEventPageState extends State<AddEventPage> {
           String titleDialog = "";
           Icon? iconDialog;
           if (addEventOutput == AddEventOutput.created) {
-            titleDialog = "AppLocalizations.of(context)!.eventoCreado";
+            titleDialog = AppLocalizations.of(context)!.eventoCreado;
             iconDialog = const Icon(Icons.check);
           } else if (addEventOutput == AddEventOutput.forbidden) {
-            titleDialog = "AppLocalizations.of(context)!.sinPermisos";
+            titleDialog = AppLocalizations.of(context)!.errorPermisos;
             iconDialog = const Icon(Icons.sms_failed);
           } else {
-            titleDialog = "AppLocalizations.of(context)!.errorCreandoEvento";
+            titleDialog = AppLocalizations.of(context)!.errorCrearEvento;
             iconDialog = const Icon(Icons.error);
           }
           widgetsJavi.showDialogWithText(context, titleDialog,
