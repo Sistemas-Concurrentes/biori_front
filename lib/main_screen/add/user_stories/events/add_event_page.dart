@@ -229,8 +229,9 @@ class _AddEventPageState extends State<AddEventPage> {
       AppLocalizations.of(context)!.send,
       () {
         if (!_formKey.currentState!.validate()) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Evento creado mal!")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
+          return;
         }
         _showLoading(true);
         _formKey.currentState!.save();
