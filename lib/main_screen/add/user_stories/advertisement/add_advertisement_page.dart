@@ -22,6 +22,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
   List<ChipButtonModel> tagsButtons = [];
   List<ChipButtonModel> allTagsButtons = [];
 
+  bool _isApiCallProcess = false;
+
   @override
   void initState() {
     super.initState();
@@ -52,15 +54,19 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(JaviPaddings.L),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: formWidgets
-                  .map((widget) => widgetsJavi.paddedWidget(widget))
-                  .toList(),
+        child: WidgetsJavi().progressHudJavi(
+          context,
+          _isApiCallProcess,
+          Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: formWidgets
+                    .map((widget) => widgetsJavi.paddedWidget(widget))
+                    .toList(),
+              ),
             ),
           ),
         ),
@@ -104,7 +110,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
             SnackBar(content: Text("Aviso creado correctamente!")));
         return;
       }
-
+      _showLoading(true);
       _formKey.currentState!.save();
       AddAdvertisement()
           .run(titulo!, descripcion!, tagsButtons)
@@ -121,6 +127,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
           titleDialog = "AppLocalizations.of(context)!.errorCrearAdvertisement";
           iconDialog = const Icon(Icons.error);
         }
+        _showLoading(false);
+
         widgetsJavi.showDialogWithText(context, titleDialog, icon: iconDialog);
       });
     });
@@ -142,5 +150,11 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
     return (onValidateVal == null || onValidateVal.isEmpty)
         ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
+  }
+
+  _showLoading(bool showLoading) {
+    setState(() {
+      _isApiCallProcess = showLoading;
+    });
   }
 }

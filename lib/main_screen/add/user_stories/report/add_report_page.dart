@@ -19,6 +19,8 @@ class _AddReportPageState extends State<AddReportPage> {
   String? titulo;
   String? descripcion;
 
+  bool _isApiCallProcess = false;
+
   @override
   Widget build(BuildContext context) {
     var formWidgets = [
@@ -37,15 +39,19 @@ class _AddReportPageState extends State<AddReportPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(JaviPaddings.L),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: formWidgets
-                  .map((widget) => widgetsJavi.paddedWidget(widget))
-                  .toList(),
+        child: WidgetsJavi().progressHudJavi(
+          context,
+          _isApiCallProcess,
+          Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: formWidgets
+                    .map((widget) => widgetsJavi.paddedWidget(widget))
+                    .toList(),
+              ),
             ),
           ),
         ),
@@ -82,6 +88,8 @@ class _AddReportPageState extends State<AddReportPage> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Report mal creado")));
         return;
       }
+      _showLoading(true);
+
       _formKey.currentState!.save();
       AddReport().run(titulo!, descripcion!).then((addReportOutput) {
         String titleDialog = "";
@@ -96,6 +104,8 @@ class _AddReportPageState extends State<AddReportPage> {
           titleDialog = "AppLocalizations.of(context)!.errorCrearReport";
           iconDialog = const Icon(Icons.error);
         }
+        _showLoading(false);
+
         widgetsJavi.showDialogWithText(context, titleDialog, icon: iconDialog);
       });
     });
@@ -111,5 +121,11 @@ class _AddReportPageState extends State<AddReportPage> {
     return onValidateVal.isEmpty
         ? "${AppLocalizations.of(context)!.descripcion} ${AppLocalizations.of(context)!.cannotBeEmpty}"
         : null;
+  }
+
+  _showLoading(bool showLoading) {
+    setState(() {
+      _isApiCallProcess = showLoading;
+    });
   }
 }
