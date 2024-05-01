@@ -39,6 +39,7 @@ class _AddEventPageState extends State<AddEventPage> {
   List<TagsButtonsModel> allTagsButtons = [];
 
   bool _isCheckedForInscriptionDate = false;
+  bool _isApiCallProcess = false;
 
   @override
   void initState() {
@@ -80,15 +81,19 @@ class _AddEventPageState extends State<AddEventPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(JaviPaddings.L),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: formWidgets
-                  .map((widget) => widgetsJavi.paddedWidget(widget))
-                  .toList(),
+        child: WidgetsJavi().progressHudJavi(
+          context,
+          _isApiCallProcess,
+          Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: formWidgets
+                    .map((widget) => widgetsJavi.paddedWidget(widget))
+                    .toList(),
+              ),
             ),
           ),
         ),
@@ -219,19 +224,22 @@ class _AddEventPageState extends State<AddEventPage> {
   }
 
   submitButton(BuildContext context) {
-    return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
-        () {
+    return JaviForms.submitButton(
+      context,
+      AppLocalizations.of(context)!.send,
+      () {
         if (!_formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text("Evento creado mal!")));
         }
-
+        _showLoading(true);
         _formKey.currentState!.save();
 
         AddEvent()
             .run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento,
                 tagsButtons)
             .then((addEventOutput) {
+          fechasEvento = [];
           String titleDialog = "";
           Icon? iconDialog;
           if (addEventOutput == AddEventOutput.created) {
@@ -244,11 +252,10 @@ class _AddEventPageState extends State<AddEventPage> {
             titleDialog = AppLocalizations.of(context)!.errorCrearEvento;
             iconDialog = const Icon(Icons.error);
           }
+          _showLoading(false);
           widgetsJavi.showDialogWithText(context, titleDialog,
               icon: iconDialog);
         });
-
-        fechasEvento = [];
       },
     );
   }
@@ -307,5 +314,11 @@ class _AddEventPageState extends State<AddEventPage> {
   _onSavedValInscriptionDate(String? onSavedVal) {
     fechaFinInscripcion =
         (JaviForms().stringSpainFormatToBdFormat(onSavedVal!));
+  }
+
+  _showLoading(bool showLoading) {
+    setState(() {
+      _isApiCallProcess = showLoading;
+    });
   }
 }
