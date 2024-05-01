@@ -107,7 +107,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
         () {
       if (!_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Aviso creado correctamente!")));
+            SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
         return;
       }
       _showLoading(true);
@@ -118,13 +118,13 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
         String titleDialog = "";
         Icon? iconDialog;
         if (addAdvertisementOutput == AddAdvertisementOutput.created) {
-          titleDialog = "AppLocalizations.of(context)!.advertisementCreado";
+          titleDialog = AppLocalizations.of(context)!.avisoCreado;
           iconDialog = const Icon(Icons.check);
         } else if (addAdvertisementOutput == AddAdvertisementOutput.forbidden) {
           titleDialog = AppLocalizations.of(context)!.errorPermisos;
           iconDialog = const Icon(Icons.sms_failed);
         } else {
-          titleDialog = "AppLocalizations.of(context)!.errorCrearAdvertisement";
+          titleDialog = AppLocalizations.of(context)!.errorCrearAviso;
           iconDialog = const Icon(Icons.error);
         }
         _showLoading(false);

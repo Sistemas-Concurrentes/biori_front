@@ -61,7 +61,12 @@
     "necesitaFechaInscripcion": "Do you need an end registration date?",
     "fechasEvento": "Event dates",
     "fecha": "Date",
+
     "eventoCreado": "Event created",
+    "avisoCreado": "Advertisement created",
+    "reportCreado": "Report created",
+    "errorCreandoReport": "Error creating report",
+    "errorCreandoAviso": "Error creating advertisement",
     "errorCreandoEvento": "Error creating event",
     "errorPermisos": "You do not have permission to create an event"
 }

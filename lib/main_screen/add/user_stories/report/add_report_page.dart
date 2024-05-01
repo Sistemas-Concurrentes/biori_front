@@ -85,7 +85,8 @@ class _AddReportPageState extends State<AddReportPage> {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () {
       if (!_formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Report mal creado")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
         return;
       }
       _showLoading(true);
@@ -95,13 +96,13 @@ class _AddReportPageState extends State<AddReportPage> {
         String titleDialog = "";
         Icon? iconDialog;
         if (addReportOutput == AddReportOutput.created) {
-          titleDialog = "AppLocalizations.of(context)!.reportCreado";
+          titleDialog = AppLocalizations.of(context)!.reportCreado;
           iconDialog = const Icon(Icons.check);
         } else if (addReportOutput == AddReportOutput.forbidden) {
           titleDialog = AppLocalizations.of(context)!.errorPermisos;
           iconDialog = const Icon(Icons.sms_failed);
         } else {
-          titleDialog = "AppLocalizations.of(context)!.errorCrearReport";
+          titleDialog = AppLocalizations.of(context)!.errorCrearReport;
           iconDialog = const Icon(Icons.error);
         }
         _showLoading(false);

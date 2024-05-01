@@ -61,7 +61,12 @@
     "necesitaFechaInscripcion": "¿Necesita fecha fin de inscripción?",
     "fechasEvento": "Fechas del evento",
     "fecha": "Fecha",
+
     "eventoCreado": "Evento creado",
+    "avisoCreado": "Evento creado",
+    "reportCreado": "Evento creado",
+    "errorCrearAviso": "Error al crear el evento",
+    "errorCrearReport": "Error al crear el evento",
     "errorCrearEvento": "Error al crear el evento",
     "errorPermisos": "No tienes permisos para realizar esta acción"
 }
