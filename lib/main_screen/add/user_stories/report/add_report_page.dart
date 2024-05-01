@@ -82,11 +82,22 @@ class _AddReportPageState extends State<AddReportPage> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Report mal creado")));
         return;
       }
-
       _formKey.currentState!.save();
-      AddReport().run(titulo!, descripcion!).then((value) =>
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Report creado correctamente"))));
+      AddReport().run(titulo!, descripcion!).then((addReportOutput) {
+        String titleDialog = "";
+        Icon? iconDialog;
+        if (addReportOutput == AddReportOutput.created) {
+          titleDialog = "AppLocalizations.of(context)!.reportCreado";
+          iconDialog = const Icon(Icons.check);
+        } else if (addReportOutput == AddReportOutput.forbidden) {
+          titleDialog = AppLocalizations.of(context)!.errorPermisos;
+          iconDialog = const Icon(Icons.sms_failed);
+        } else {
+          titleDialog = "AppLocalizations.of(context)!.errorCrearReport";
+          iconDialog = const Icon(Icons.error);
+        }
+        widgetsJavi.showDialogWithText(context, titleDialog, icon: iconDialog);
+      });
     });
   }
 
