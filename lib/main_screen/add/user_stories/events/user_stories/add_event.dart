@@ -4,11 +4,17 @@ import 'package:biori/style/model/chip_button_model.dart';
 
 import '../dto/add_event_dto.dart';
 
+enum AddEventOutput {
+  created,
+  error,
+  forbidden,
+}
+
 class AddEvent {
   static String uri = Constants.URI;
   static String addEventUri = '$uri/releases/addEvent';
 
-  Future<dynamic> run(
+  Future<AddEventOutput> run(
       String titulo,
       String descripcion,
       String categoria,
@@ -24,6 +30,14 @@ class AddEvent {
       tagsButtons: tags,
     ).toJson();
 
-    return await ApiService().postRequestWithHeader(addEventUri, data);
+    var response = await ApiService().postRequestWithHeader(addEventUri, data);
+
+    if (response.statusCode == 201) {
+      return AddEventOutput.created;
+    } else if (response.statusCode == 403) {
+      return AddEventOutput.forbidden;
+    } else {
+      return AddEventOutput.error;
+    }
   }
 }

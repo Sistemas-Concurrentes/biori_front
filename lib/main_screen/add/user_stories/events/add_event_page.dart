@@ -231,9 +231,21 @@ class _AddEventPageState extends State<AddEventPage> {
         AddEvent()
             .run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento,
                 tagsButtons)
-            .then((value) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Evento creado!")));
+            .then((addEventOutput) {
+          String titleDialog = "";
+          Icon? iconDialog;
+          if (addEventOutput == AddEventOutput.created) {
+            titleDialog = "AppLocalizations.of(context)!.eventoCreado";
+            iconDialog = const Icon(Icons.check);
+          } else if (addEventOutput == AddEventOutput.forbidden) {
+            titleDialog = "AppLocalizations.of(context)!.sinPermisos";
+            iconDialog = const Icon(Icons.sms_failed);
+          } else {
+            titleDialog = "AppLocalizations.of(context)!.errorCreandoEvento";
+            iconDialog = const Icon(Icons.error);
+          }
+          widgetsJavi.showDialogWithText(context, titleDialog,
+              icon: iconDialog);
         });
 
         fechasEvento = [];
