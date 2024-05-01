@@ -1,5 +1,6 @@
 import 'package:biori/keys/globals.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/model/chip_button_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,30 @@ class WidgetsJavi {
           ),
         );
       }).toList(),
+    );
+  }
+
+  showDialogWithText(BuildContext context, String title,
+      {Icon? icon, String nextPath = homePath, bool pushToNextPath = true}) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: icon,
+          title: Text(title),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                if (pushToNextPath) {
+                  CustomRouter.router.push(nextPath);
+                }
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
