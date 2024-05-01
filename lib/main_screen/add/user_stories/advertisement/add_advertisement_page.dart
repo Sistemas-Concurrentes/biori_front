@@ -106,10 +106,22 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
       }
 
       _formKey.currentState!.save();
-
-      AddAdvertisement().run(titulo!, descripcion!, tagsButtons).then((value) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Aviso creado!")));
+      AddAdvertisement()
+          .run(titulo!, descripcion!, tagsButtons)
+          .then((addAdvertisementOutput) {
+        String titleDialog = "";
+        Icon? iconDialog;
+        if (addAdvertisementOutput == AddAdvertisementOutput.created) {
+          titleDialog = "AppLocalizations.of(context)!.advertisementCreado";
+          iconDialog = const Icon(Icons.check);
+        } else if (addAdvertisementOutput == AddAdvertisementOutput.forbidden) {
+          titleDialog = AppLocalizations.of(context)!.errorPermisos;
+          iconDialog = const Icon(Icons.sms_failed);
+        } else {
+          titleDialog = "AppLocalizations.of(context)!.errorCrearAdvertisement";
+          iconDialog = const Icon(Icons.error);
+        }
+        widgetsJavi.showDialogWithText(context, titleDialog, icon: iconDialog);
       });
     });
   }
