@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:biori/style/constants.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +38,7 @@ class ApiService {
           'Content-Type': 'application/json',
           'Authorization': "Bearer $token",
         },
-        body: data,
+        body: jsonEncode(data),
       );
     } catch (e) {
       return http.Response('Conection failed', HttpStatus.internalServerError);
