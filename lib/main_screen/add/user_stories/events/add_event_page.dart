@@ -228,8 +228,8 @@ class _AddEventPageState extends State<AddEventPage> {
     return JaviForms.submitButton(
       context,
       AppLocalizations.of(context)!.send,
-      () {
-        if (!_formKey.currentState!.validate()) {
+        () async {
+      if (!_formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
           return;
@@ -238,11 +238,9 @@ class _AddEventPageState extends State<AddEventPage> {
 
         _formKey.currentState?.save();
 
-        AddEvent()
-            .run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento,
-                tagsButtons)
-            .then((addEventOutput) {
-          fechasEvento = [];
+      AddEventOutput addEventOutput = await AddEvent().run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento, tagsButtons);
+
+      fechasEvento = [];
           String titleDialog = "";
           Icon? iconDialog;
           Function onPressed = () {
@@ -250,22 +248,26 @@ class _AddEventPageState extends State<AddEventPage> {
           };
 
           if (addEventOutput == AddEventOutput.created) {
-            titleDialog = AppLocalizations.of(context)!.eventoCreado;
-            iconDialog = const Icon(Icons.check);
+        titleDialog =
+            mounted ? AppLocalizations.of(context)?.eventoCreado ?? "" : "";
+        iconDialog = const Icon(Icons.check);
           } else if (addEventOutput == AddEventOutput.forbidden) {
-            titleDialog = AppLocalizations.of(context)!.errorPermisos;
-            iconDialog = const Icon(Icons.sms_failed);
+        titleDialog =
+            mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
+        iconDialog = const Icon(Icons.sms_failed);
           } else {
-            titleDialog = AppLocalizations.of(context)!.errorCrearEvento;
-            iconDialog = const Icon(Icons.error);
+        titleDialog =
+            mounted ? AppLocalizations.of(context)?.errorCrearEvento ?? "" : "";
+        iconDialog = const Icon(Icons.error);
             onPressed = () {};
           }
           _showLoading(false);
-          widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
-              icon: iconDialog);
-        });
-      },
-    );
+
+      if (mounted) {
+        widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
+            icon: iconDialog);
+      }
+    });
   }
 
   _onValidateTitle(String onValidateVal) {

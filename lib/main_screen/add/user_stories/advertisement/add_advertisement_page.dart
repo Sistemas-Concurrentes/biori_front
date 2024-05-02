@@ -105,7 +105,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
 
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
-        () {
+        () async {
       if (!_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
@@ -113,31 +113,36 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
       }
       _showLoading(true);
       _formKey.currentState!.save();
-      AddAdvertisement()
-          .run(titulo!, descripcion!, tagsButtons)
-          .then((addAdvertisementOutput) {
-        String titleDialog = "";
+
+      AddAdvertisementOutput addAdvertisementOutput =
+          await AddAdvertisement().run(titulo!, descripcion!, tagsButtons);
+
+      String titleDialog = "";
         Icon? iconDialog;
         Function onPressed = () {
           CustomRouter.router.pop();
         };
 
         if (addAdvertisementOutput == AddAdvertisementOutput.created) {
-          titleDialog = AppLocalizations.of(context)!.avisoCreado;
-          iconDialog = const Icon(Icons.check);
+        titleDialog =
+            mounted ? AppLocalizations.of(context)?.avisoCreado ?? "" : "";
+        iconDialog = const Icon(Icons.check);
         } else if (addAdvertisementOutput == AddAdvertisementOutput.forbidden) {
-          titleDialog = AppLocalizations.of(context)!.errorPermisos;
-          iconDialog = const Icon(Icons.sms_failed);
+        titleDialog =
+            mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
+        iconDialog = const Icon(Icons.sms_failed);
         } else {
-          titleDialog = AppLocalizations.of(context)!.errorCrearAviso;
-          iconDialog = const Icon(Icons.error);
+        titleDialog =
+            mounted ? AppLocalizations.of(context)?.errorCrearAviso ?? "" : "";
+        iconDialog = const Icon(Icons.error);
           onPressed = () {};
         }
         _showLoading(false);
 
+      if (mounted) {
         widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
             icon: iconDialog);
-      });
+      }
     });
   }
 
