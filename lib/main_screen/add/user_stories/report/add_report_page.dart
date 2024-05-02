@@ -17,8 +17,8 @@ class _AddReportPageState extends State<AddReportPage> {
   final _formKey = GlobalKey<FormState>();
   final widgetsJavi = WidgetsJavi();
 
-  String? titulo;
-  String? descripcion;
+  String titulo = "";
+  String descripcion = "";
 
   bool _isApiCallProcess = false;
 
@@ -93,7 +93,7 @@ class _AddReportPageState extends State<AddReportPage> {
       _formKey.currentState!.save();
 
       _showLoading(true);
-      var addReportOutput = await AddReport().run(titulo!, descripcion!);
+      var addReportOutput = await AddReport().run(titulo, descripcion);
 
       String titleDialog = "";
       Icon? iconDialog;

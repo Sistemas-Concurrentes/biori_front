@@ -18,8 +18,8 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
   final _formKey = GlobalKey<FormState>();
   final widgetsJavi = WidgetsJavi();
 
-  String? titulo;
-  String? descripcion;
+  String titulo = "";
+  String descripcion = "";
   List<ChipButtonModel> tagsButtons = [];
   List<ChipButtonModel> allTagsButtons = [];
 
@@ -115,7 +115,7 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
       _formKey.currentState!.save();
 
       AddAdvertisementOutput addAdvertisementOutput =
-          await AddAdvertisement().run(titulo!, descripcion!, tagsButtons);
+          await AddAdvertisement().run(titulo, descripcion, tagsButtons);
 
       String titleDialog = "";
         Icon? iconDialog;

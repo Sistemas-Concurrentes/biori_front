@@ -29,10 +29,10 @@ class _AddEventPageState extends State<AddEventPage> {
   final _formKey = GlobalKey<FormState>();
   final widgetsJavi = WidgetsJavi();
 
-  String? titulo;
-  String? descripcion;
-  String? categoria;
-  String? localizacion;
+  String titulo = "";
+  String descripcion = "";
+  String categoria = "";
+  String localizacion = "";
   List<Widget> widgets = [];
   List<String> fechasEvento = [];
   String? fechaFinInscripcion;
@@ -238,7 +238,8 @@ class _AddEventPageState extends State<AddEventPage> {
 
         _formKey.currentState?.save();
 
-      AddEventOutput addEventOutput = await AddEvent().run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento, tagsButtons);
+      AddEventOutput addEventOutput = await AddEvent().run(titulo, descripcion,
+          categoria, localizacion, fechasEvento, tagsButtons);
 
       fechasEvento = [];
           String titleDialog = "";
