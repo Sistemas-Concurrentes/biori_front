@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               allReleases = snapshot.data!;
+              _updateEventsSubscribed();
               return Stack(
                 children: [
                   homeWidgets.getCenterListBuilder(allReleases, this),
