@@ -1,6 +1,7 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/main_screen/add/user_stories/events/user_stories/add_event.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
+import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
@@ -105,7 +106,7 @@ class _AddEventPageState extends State<AddEventPage> {
     return JaviForms.inputFieldWidget(
       context,
       "eventTitle",
-      "${AppLocalizations.of(context)!.titulo} ${AppLocalizations.of(context)!.evento}",
+      "${AppLocalizations.of(context)?.titulo} ${AppLocalizations.of(context)!.evento}",
       onValidate,
       (onSavedVal) => {titulo = onSavedVal},
       prefixIcon: const Icon(Icons.title),
@@ -234,7 +235,8 @@ class _AddEventPageState extends State<AddEventPage> {
           return;
         }
         _showLoading(true);
-        _formKey.currentState!.save();
+
+        _formKey.currentState?.save();
 
         AddEvent()
             .run(titulo!, descripcion!, categoria!, localizacion!, fechasEvento,
@@ -243,6 +245,10 @@ class _AddEventPageState extends State<AddEventPage> {
           fechasEvento = [];
           String titleDialog = "";
           Icon? iconDialog;
+          Function onPressed = () {
+            CustomRouter.router.pop();
+          };
+
           if (addEventOutput == AddEventOutput.created) {
             titleDialog = AppLocalizations.of(context)!.eventoCreado;
             iconDialog = const Icon(Icons.check);
@@ -252,9 +258,10 @@ class _AddEventPageState extends State<AddEventPage> {
           } else {
             titleDialog = AppLocalizations.of(context)!.errorCrearEvento;
             iconDialog = const Icon(Icons.error);
+            onPressed = () {};
           }
           _showLoading(false);
-          widgetsJavi.showDialogWithText(context, titleDialog,
+          widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
               icon: iconDialog);
         });
       },

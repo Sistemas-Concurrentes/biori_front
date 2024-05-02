@@ -1,5 +1,6 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/main_screen/add/user_stories/advertisement/user_stories/add_advertisement.dart';
+import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
@@ -117,6 +118,10 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
           .then((addAdvertisementOutput) {
         String titleDialog = "";
         Icon? iconDialog;
+        Function onPressed = () {
+          CustomRouter.router.pop();
+        };
+
         if (addAdvertisementOutput == AddAdvertisementOutput.created) {
           titleDialog = AppLocalizations.of(context)!.avisoCreado;
           iconDialog = const Icon(Icons.check);
@@ -126,10 +131,12 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
         } else {
           titleDialog = AppLocalizations.of(context)!.errorCrearAviso;
           iconDialog = const Icon(Icons.error);
+          onPressed = () {};
         }
         _showLoading(false);
 
-        widgetsJavi.showDialogWithText(context, titleDialog, icon: iconDialog);
+        widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
+            icon: iconDialog);
       });
     });
   }

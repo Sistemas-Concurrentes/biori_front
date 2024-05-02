@@ -110,8 +110,11 @@ class WidgetsJavi {
     );
   }
 
-  showDialogWithText(BuildContext context, String title,
-      {Icon? icon, String nextPath = homePath, bool pushToNextPath = true}) {
+  showDialogWithText(BuildContext context, String title, Function onPressed,
+      {Icon? icon,
+      String nextPath = homePath,
+      bool pushToNextPath = true,
+      String buttonText = "OK"}) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -122,11 +125,9 @@ class WidgetsJavi {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                if (pushToNextPath) {
-                  CustomRouter.router.push(nextPath);
-                }
+                onPressed();
               },
-              child: const Text("OK"),
+              child: Text(buttonText),
             ),
           ],
         );
