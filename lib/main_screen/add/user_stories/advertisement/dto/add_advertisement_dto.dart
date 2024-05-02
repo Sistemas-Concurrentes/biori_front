@@ -14,6 +14,6 @@ class AddAdvertisementDto {
   Map<String, dynamic> toJson() => {
         'titulo': titulo,
         'descripcion': descripcion,
-        'tagsButtons': tagsButtons.map((e) => e.toJson()).toList(),
+        'groups': tagsButtons.map((e) => e.toJson()).toList(),
       };
 }
