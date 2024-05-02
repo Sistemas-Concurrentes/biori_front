@@ -9,6 +9,7 @@ import 'package:biori/main_screen/home/user_stories/reports/model/report_model.d
 import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
+import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgets {
@@ -30,7 +31,8 @@ class HomeWidgets {
                 borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
               ),
               elevation: ReleasesConstants.elevation,
-              margin: const EdgeInsets.all(ReleasesConstants.margin),
+              margin: const EdgeInsets.fromLTRB(JaviPaddings.L, JaviPaddings.M,
+                  JaviPaddings.L, JaviPaddings.M),
               child: release,
             );
           },
