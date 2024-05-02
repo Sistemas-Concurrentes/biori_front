@@ -1,5 +1,6 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/main_screen/add/user_stories/report/user_stories/add_report.dart';
+import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
@@ -83,13 +84,16 @@ class _AddReportPageState extends State<AddReportPage> {
 
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
-        () {
+        () async {
       if (!_formKey.currentState!.validate()) {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
         return;
       }
+      _formKey.currentState!.save();
+
       _showLoading(true);
+      var addReportOutput = await AddReport().run(titulo!, descripcion!);
 
       String titleDialog = "";
       Icon? iconDialog;
