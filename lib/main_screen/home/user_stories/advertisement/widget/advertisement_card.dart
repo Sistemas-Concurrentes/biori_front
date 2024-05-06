@@ -2,7 +2,6 @@ import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/co
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/releases_widgets.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
-import '../../../../../theme/pallete.dart';
 import '../model/advertisement_model.dart';
 
 class AdvertisementCard extends StatelessWidget {
@@ -15,14 +14,16 @@ class AdvertisementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
-        _groupsAffectedRow(),
-        ReleasesWidgets.releaseDescriptionRow(
-            context, advertisementModel.description),
-
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(JaviPaddings.L),
+      child: Column(
+        children: [
+          ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
+          _groupsAffectedRow(),
+          ReleasesWidgets.releaseDescriptionRow(
+              context, advertisementModel.description),
+        ],
+      ),
     );
 
   }

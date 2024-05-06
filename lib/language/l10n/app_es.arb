@@ -39,5 +39,34 @@
     "codigoEnviado": "Código enviado, compruebe su email",
     "spamValidation": "¿No has recibido el código? Comprueba la carpeta de spam",
 
-    "saberMas": "Saber más"
+    "saberMas": "Saber más",
+    "errorForm": "Error en el formulario",
+
+    "anadir": "Añadir",
+    "evento": "Evento",
+    "advertisement": "Aviso",
+    "report": "Información general",
+
+    "titulo": "Título",
+    "descripcion": "Descripción",
+    "localizacion": "Localización",
+    "seleccionaEtiquetas": "Selecciona las etiquetas",
+    "seleccionaGrupos": "Selecciona los grupos",
+
+    "cannotBeEmpty": "no puede estar vacía",
+    "mustSelectOne": "Debe seleccionar uno",
+    "mustSelectOneOrMore": "Debe seleccionar uno o más",
+    "selectOne": "Seleccione uno",
+    "selectOneOrMore": "Seleccione uno o más",
+    "necesitaFechaInscripcion": "¿Necesita fecha fin de inscripción?",
+    "fechasEvento": "Fechas del evento",
+    "fecha": "Fecha",
+
+    "eventoCreado": "Evento creado",
+    "avisoCreado": "Evento creado",
+    "reportCreado": "Evento creado",
+    "errorCrearAviso": "Error al crear el evento",
+    "errorCrearReport": "Error al crear el evento",
+    "errorCrearEvento": "Error al crear el evento",
+    "errorPermisos": "No tienes permisos para realizar esta acción"
 }

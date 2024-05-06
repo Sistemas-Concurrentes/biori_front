@@ -20,4 +20,14 @@ class ReportModel implements ReleaseModelInterface {
       required this.teacherUserId,
       });
 
+  factory ReportModel.fromJson(Map<String, dynamic> json) {
+    return ReportModel(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      creatorName: json['teacherName'],
+      lastUpdate: DateTime.parse(json['updatedAt']),
+      teacherUserId: json['teacherId'],
+    );
+  }
 }

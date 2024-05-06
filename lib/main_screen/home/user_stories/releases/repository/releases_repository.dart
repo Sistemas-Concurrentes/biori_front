@@ -2,7 +2,6 @@ import 'package:biori/main_screen/home/user_stories/advertisement/model/advertis
 import 'package:biori/main_screen/home/user_stories/advertisement/model/mapper.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/mapper.dart';
-import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
 import 'package:biori/main_screen/home/user_stories/releases/datasource/api_releases_datasource.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/reports/model/mapper.dart';
@@ -28,11 +27,6 @@ class ReleasesRepository {
     List<ReportModel> reports = ReportMapper().fromJson(json['reports']);
 
     return addAll(events, advertisements, reports);
-  }
-
-  List<int> getCategoriesFollowedByUser() {
-    EventRepository eventRepository = EventRepository();
-    return eventRepository.getTagsIdFollowedByUser();
   }
 
   List<ReleaseModelInterface> addAll(List<EventModel> events,

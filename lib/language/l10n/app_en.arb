@@ -39,5 +39,34 @@
     "codigoEnviado": "Code sent, check your email",
     "spamValidation": "Did not receive the email? Check your spam folder",
 
-    "saberMas": "Learn more"
+    "saberMas": "Learn more",
+    "errorForm": "There are errors in the form",
+
+    "anadir": "Add",
+    "evento": "Event",
+    "advertisement": "Advertisement",
+    "report": "Report",
+
+    "titulo": "Title",
+    "descripcion": "Description",
+    "localizacion": "Location",
+    "seleccionaEtiquetas": "Select tags",
+    "seleccionaGrupos": "Select groups",
+
+    "cannotBeEmpty": "cannot be empty",
+    "mustSelectOne": "Choose one option",
+    "mustSelectOneOrMore": "Choose one or more options",
+    "selectOne": "Select one",
+    "selectOneOrMore": "Select one or more",
+    "necesitaFechaInscripcion": "Do you need an end registration date?",
+    "fechasEvento": "Event dates",
+    "fecha": "Date",
+
+    "eventoCreado": "Event created",
+    "avisoCreado": "Advertisement created",
+    "reportCreado": "Report created",
+    "errorCreandoReport": "Error creating report",
+    "errorCreandoAviso": "Error creating advertisement",
+    "errorCreandoEvento": "Error creating event",
+    "errorPermisos": "You do not have permission to create an event"
 }

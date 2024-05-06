@@ -1,7 +1,6 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
-import 'package:biori/main_screen/home/user_stories/events/repository/event_repository.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
 import 'package:biori/main_screen/home/widget/home_widgets.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
 
   @override
   void initState() {
-    categoriesFollowedByUser = EventRepository().getTagsIdFollowedByUser();
+    categoriesFollowedByUser = [1];
     allReleases = [];
     super.initState();
   }
@@ -43,6 +42,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               allReleases = snapshot.data!;
+              _updateEventsSubscribed();
               return Stack(
                 children: [
                   homeWidgets.getCenterListBuilder(allReleases, this),

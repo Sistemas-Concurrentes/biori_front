@@ -1,5 +1,7 @@
 import 'package:biori/keys/globals.dart';
 import 'package:biori/router/custom_router.dart';
+import 'package:biori/router/route_constants.dart';
+import 'package:biori/style/model/chip_button_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -51,7 +53,7 @@ class WidgetsJavi {
               text: textoRedirigir,
               style: JaviStyle.url,
               recognizer: TapGestureRecognizer()
-                ..onTap = (){
+                ..onTap = () {
                   CustomRouter.router.push(rutaRedirigir);
                 },
             ),
@@ -83,5 +85,53 @@ class WidgetsJavi {
   snackbarScaffold(String message) {
     final SnackBar snackBar = SnackBar(content: Text(message));
     snackbarKey.currentState?.showSnackBar(snackBar);
+  }
+
+  Widget filterChipForTags(List<ChipButtonModel> tags,
+      Function(ChipButtonModel) onSelected) {
+    return Wrap(
+      spacing: 5.0,
+      children: tags.map((actualTag) {
+        bool isActualChipSelected = actualTag.isFollowed;
+        return FilterChip(
+          label: Text(actualTag.name),
+          selected: isActualChipSelected,
+          onSelected: (bool selected) {
+            onSelected(actualTag);
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          labelStyle: TextStyle(
+            color: isActualChipSelected ? Colors.white : Colors.black,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  showDialogWithText(BuildContext context, String title, Function onPressed,
+      {Icon? icon,
+      String nextPath = homePath,
+      bool pushToNextPath = true,
+      String buttonText = "OK"}) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          icon: icon,
+          title: Text(title),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                onPressed();
+              },
+              child: Text(buttonText),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
