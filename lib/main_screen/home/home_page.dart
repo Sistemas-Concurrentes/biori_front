@@ -1,4 +1,5 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/main_screen/home/user_stories/do_like.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
@@ -74,18 +75,9 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
   }
 
   @override
-  likeEvent(int idEvent, ReleaseType releaseType) {
-    setState(() {
-      if (releaseType == ReleaseType.event) {
-        allReleases = allReleases.map((release) {
-          if (release is EventModel && release.id == idEvent) {
-            release.isLiked ? release.numberLikes-- : release.numberLikes++;
-            release.isLiked = !release.isLiked;
-          }
-          return release;
-        }).toList();
-      } else {}
-    });
+  likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
+    DoLikeEvent().run(idEvent, userSetLike: userSetLike);
+    _updateLikes(idEvent, releaseType);
   }
 
   @override
@@ -101,5 +93,19 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
 
   restartEvents() {
     setState(() {});
+  }
+
+  _updateLikes(int idEvent, ReleaseType releaseType) {
+    setState(() {
+      if (releaseType == ReleaseType.event) {
+        allReleases = allReleases.map((release) {
+          if (release is EventModel && release.id == idEvent) {
+            release.isLiked ? release.numberLikes-- : release.numberLikes++;
+            release.isLiked = !release.isLiked;
+          }
+          return release;
+        }).toList();
+      } else {}
+    });
   }
 }

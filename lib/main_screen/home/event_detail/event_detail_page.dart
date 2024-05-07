@@ -166,9 +166,9 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
   }
 
   @override
-  likeEvent(int idEvent, ReleaseType  releaseType) {
+  likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
     setState(() {
-      widget.cardListenerInterface.likeEvent(idEvent, releaseType);
+      widget.cardListenerInterface.likeEvent(idEvent, releaseType, userSetLike);
     });
   }
 

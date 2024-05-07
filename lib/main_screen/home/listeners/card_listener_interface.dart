@@ -3,6 +3,6 @@ enum ReleaseType {
   advertisement,
 }
 abstract class CardListenerInterface {
-  likeEvent(int id, ReleaseType releaseType);
+  likeEvent(int id, ReleaseType releaseType, bool isLiked);
   subscribeCategory(int id, ReleaseType releaseType);
 }
