@@ -239,7 +239,11 @@ class _AddEventPageState extends State<AddEventPage> {
         _formKey.currentState?.save();
 
       AddEventOutput addEventOutput = await AddEvent().run(titulo, descripcion,
-          categoria, localizacion, fechasEvento, tagsButtons);
+          categoria,
+          localizacion,
+          fechasEvento,
+          tagsButtons,
+          fechaFinInscripcion);
 
       fechasEvento = [];
           String titleDialog = "";

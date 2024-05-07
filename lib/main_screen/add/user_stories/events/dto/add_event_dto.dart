@@ -16,7 +16,7 @@ class AddEventDto {
     required this.localizacion,
     required this.fechas,
     required this.tagsButtons,
-    fechaFinInscripcion,
+    required this.fechaFinInscripcion,
   });
 
   Map<String, dynamic> toJson() => {

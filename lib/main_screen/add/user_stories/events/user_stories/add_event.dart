@@ -20,7 +20,8 @@ class AddEvent {
       String categoria,
       String localizacion,
       List<String> fechas,
-      List<ChipButtonModel> tags) async {
+      List<ChipButtonModel> tags,
+      String? fechaFinInscripcion) async {
     Map<String, dynamic> data = AddEventDto(
       titulo: titulo,
       descripcion: descripcion,
@@ -28,6 +29,7 @@ class AddEvent {
       localizacion: localizacion,
       fechas: fechas,
       tagsButtons: tags,
+      fechaFinInscripcion: fechaFinInscripcion,
     ).toJson();
 
     var response = await ApiService().postRequestWithHeader(addEventUri, data);
