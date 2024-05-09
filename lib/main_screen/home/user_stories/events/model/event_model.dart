@@ -54,8 +54,8 @@ class EventModel implements ReleaseModelInterface {
           .toList(),
       lastUpdate: DateTime.parse(json['updatedAt'].toString()),
       numberLikes: json['likes'],
-      endInscription: json['endInscription'] != null
-          ? DateTime.parse(json['endInscription'].toString())
+      endInscription: json['dateEndInscription'] != null
+          ? DateTime.parse(json['dateEndInscription'].toString())
           : null,
     );
   }
