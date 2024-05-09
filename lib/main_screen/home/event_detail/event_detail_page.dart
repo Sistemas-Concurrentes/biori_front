@@ -160,22 +160,31 @@ class _EventDetailPageState extends State<EventDetailPage>
   }
 
   Widget subscribeButtonIfNeeded() {
-    return detailEventModel.endInscription != null
-        ? ElevatedButton(
-            onPressed: detailEventModel.isSubscribed
-                ? null
-                : () {
-                    subscribeEvent(detailEventModel.id);
-                  },
-            style: ElevatedButton.styleFrom(
-              foregroundColor:
-                  Theme.of(context).colorScheme.onPrimary, // color de fondo
-              backgroundColor:
-                  Theme.of(context).colorScheme.primary, // color de texto
-            ),
-            child: Text(AppLocalizations.of(context)?.inscribirse ?? ''),
-          )
-        : const SizedBox();
+    if (detailEventModel.endInscription == null) {
+      return const SizedBox();
+    } else {
+      String buttonText = "";
+      void Function()? onPressed;
+      if (detailEventModel.isSubscribed) {
+        buttonText = AppLocalizations.of(context)?.inscrito ?? '';
+      } else {
+        buttonText = AppLocalizations.of(context)?.inscribirse ?? '';
+        onPressed = () {
+          subscribeEvent(detailEventModel.id);
+        };
+      }
+
+      return ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          foregroundColor:
+              Theme.of(context).colorScheme.onPrimary, // color de fondo
+          backgroundColor:
+              Theme.of(context).colorScheme.primary, // color de texto
+        ),
+        child: Text(buttonText),
+      );
+    }
   }
 
   String allDatesToString(List<DateTime> dates) {
