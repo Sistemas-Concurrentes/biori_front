@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
   @override
   Widget build(BuildContext context) {
     HomeWidgets homeWidgets = HomeWidgets();
-    _updateEventsSubscribed();
+    _updateCategoriesSubscribed();
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               allReleases = snapshot.data!;
-              _updateEventsSubscribed();
+              _updateCategoriesSubscribed();
               return Stack(
                 children: [
                   homeWidgets.getCenterListBuilder(allReleases, this),
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     );
   }
 
-  _updateEventsSubscribed() {
+  _updateCategoriesSubscribed() {
     allReleases = allReleases.map((allReleases) {
       if (allReleases is EventModel) {
         for (var category in allReleases.tags) {
