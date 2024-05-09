@@ -2,6 +2,7 @@ import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/categories_buttons.dart';
 import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/my_like_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../style/javi_edit_text.dart';
 import '../user_stories/events/model/event_model.dart';
@@ -74,7 +75,8 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
                     foregroundColor: Theme.of(context).colorScheme.onPrimary, // color de fondo
                       backgroundColor: Theme.of(context).colorScheme.primary, // color de texto
                         ),
-                        child: const Text('Inscribirse'),
+                        child: Text(
+                            AppLocalizations.of(context)?.inscribirse ?? ''),
                       )
                     : const SizedBox(),
               ],

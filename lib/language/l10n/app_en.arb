@@ -68,5 +68,8 @@
     "errorCreandoReport": "Error creating report",
     "errorCreandoAviso": "Error creating advertisement",
     "errorCreandoEvento": "Error creating event",
-    "errorPermisos": "You do not have permission to create an event"
+    "errorPermisos": "You do not have permission to create an event",
+    "inscribirse": "Sign up",
+    "inscrito": "Signed up!",
+    "errorInscripcion": "Error signing up"
 }

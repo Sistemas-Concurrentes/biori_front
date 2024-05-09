@@ -9,6 +9,7 @@ import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -100,14 +101,15 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     if (response == SubscribeOutput.success) {
       _updateEventSubscribed(idEvent);
       if (mounted) {
-        WidgetsJavi().showDialogWithText(context, "Inscrito", () {
+        WidgetsJavi().showDialogWithText(
+            context, AppLocalizations.of(context)?.inscrito ?? '', () {
           CustomRouter.router.pop();
         }, icon: const Icon(Icons.check));
       }
     } else {
       if (mounted) {
-        WidgetsJavi().showDialogWithText(
-            context, "Ha ocurrido un error, inténtelo más tarde", () {},
+        WidgetsJavi().showDialogWithText(context,
+            AppLocalizations.of(context)?.errorInscripcion ?? '', () {},
             icon: const Icon(Icons.error), error: true);
       }
     }

@@ -68,5 +68,8 @@
     "errorCrearAviso": "Error al crear el aviso",
     "errorCrearReport": "Error al crear el report",
     "errorCrearEvento": "Error al crear el evento",
-    "errorPermisos": "No tienes permisos para realizar esta acción"
+    "errorPermisos": "No tienes permisos para realizar esta acción",
+    "inscribirse": "Inscribirse",
+    "inscrito": "¡Inscrito correctamente!",
+    "errorInscripcion": "Error al inscribirse"
 }
