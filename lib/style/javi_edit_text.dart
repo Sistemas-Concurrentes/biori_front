@@ -1,6 +1,5 @@
 import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
-import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
@@ -396,8 +395,9 @@ class JaviStyle {
     fontWeight: FontWeight.w500,
   );
   static const TextStyle informacionExtraCards = TextStyle(
-    fontSize: 14.0,
-    color: Pallete.secondaryColor,
+    fontSize: 18.0,
+    color: Color(4283000622),
+    fontWeight: FontWeight.w600,
   );
 }
 
