@@ -1,4 +1,5 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -31,9 +32,8 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(detailEventModel.title),
-      ),
+      appBar:
+          WidgetsJavi().myAppBar(AppLocalizations.of(context)?.evento ?? ''),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(

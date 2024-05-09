@@ -38,9 +38,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     _updateCategoriesSubscribed();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-      ),
+      appBar: WidgetsJavi().myAppBar("Home"),
       body: SafeArea(
         child: FutureBuilder<List<ReleaseModelInterface>>(
           future: Provider.of<ReleasesRepository>(context)
