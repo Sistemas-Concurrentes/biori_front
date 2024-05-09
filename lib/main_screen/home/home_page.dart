@@ -1,8 +1,12 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/main_screen/home/user_stories/do_like.dart';
+import 'package:biori/main_screen/home/user_stories/do_subscribe_event.dart';
 import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
 import 'package:biori/main_screen/home/widget/home_widgets.dart';
+import 'package:biori/router/custom_router.dart';
+import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +33,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
   @override
   Widget build(BuildContext context) {
     HomeWidgets homeWidgets = HomeWidgets();
-    _updateEventsSubscribed();
+    _updateCategoriesSubscribed();
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +46,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               allReleases = snapshot.data!;
-              _updateEventsSubscribed();
+              _updateCategoriesSubscribed();
               return Stack(
                 children: [
                   homeWidgets.getCenterListBuilder(allReleases, this),
@@ -60,7 +64,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     );
   }
 
-  _updateEventsSubscribed() {
+  _updateCategoriesSubscribed() {
     allReleases = allReleases.map((allReleases) {
       if (allReleases is EventModel) {
         for (var category in allReleases.tags) {
@@ -74,18 +78,9 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
   }
 
   @override
-  likeEvent(int idEvent, ReleaseType releaseType) {
-    setState(() {
-      if (releaseType == ReleaseType.event) {
-        allReleases = allReleases.map((release) {
-          if (release is EventModel && release.id == idEvent) {
-            release.isLiked ? release.numberLikes-- : release.numberLikes++;
-            release.isLiked = !release.isLiked;
-          }
-          return release;
-        }).toList();
-      } else {}
-    });
+  likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
+    DoLikeEvent().run(idEvent, userSetLike: userSetLike);
+    _updateLikes(idEvent, releaseType);
   }
 
   @override
@@ -99,7 +94,49 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     });
   }
 
+  @override
+  subscribeEvent(int idEvent) async {
+    SubscribeOutput response = await DoSubscribeEvent().run(idEvent);
+    if (response == SubscribeOutput.success) {
+      _updateEventSubscribed(idEvent);
+      if (mounted) {
+        WidgetsJavi().showDialogWithText(context, "Inscrito", () {
+          CustomRouter.router.pop();
+        }, icon: const Icon(Icons.check));
+      }
+    } else {
+      if (mounted) {
+        WidgetsJavi().showDialogWithText(
+            context, "Ha ocurrido un error, inténtelo más tarde", () {},
+            icon: const Icon(Icons.error), error: true);
+      }
+    }
+  }
+
   restartEvents() {
     setState(() {});
+  }
+
+  _updateEventSubscribed(int idEvent) {
+    allReleases = allReleases.map((release) {
+      if (release is EventModel && release.id == idEvent) {
+        release.isSubscribed = true;
+      }
+      return release;
+    }).toList();
+  }
+
+  _updateLikes(int idEvent, ReleaseType releaseType) {
+    setState(() {
+      if (releaseType == ReleaseType.event) {
+        allReleases = allReleases.map((release) {
+          if (release is EventModel && release.id == idEvent) {
+            release.isLiked ? release.numberLikes-- : release.numberLikes++;
+            release.isLiked = !release.isLiked;
+          }
+          return release;
+        }).toList();
+      } else {}
+    });
   }
 }

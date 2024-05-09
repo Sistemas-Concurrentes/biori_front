@@ -63,12 +63,20 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
                 Container(
                     margin: const EdgeInsets.only(bottom: JaviPaddings.L),
                     child: _moreInfo(context)),
-                ElevatedButton(onPressed: () {} ,
-                    style: ElevatedButton.styleFrom(
+                detailEventModel.endInscription != null
+                    ? ElevatedButton(
+                        onPressed: detailEventModel.isSubscribed
+                            ? null
+                            : () {
+                                subscribeEvent(detailEventModel.id);
+                              },
+                        style: ElevatedButton.styleFrom(
                     foregroundColor: Theme.of(context).colorScheme.onPrimary, // color de fondo
                       backgroundColor: Theme.of(context).colorScheme.primary, // color de texto
-                    ), child: const Text('Inscribirse'),),
-
+                        ),
+                        child: const Text('Inscribirse'),
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -166,9 +174,9 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
   }
 
   @override
-  likeEvent(int idEvent, ReleaseType  releaseType) {
+  likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
     setState(() {
-      widget.cardListenerInterface.likeEvent(idEvent, releaseType);
+      widget.cardListenerInterface.likeEvent(idEvent, releaseType, userSetLike);
     });
   }
 
@@ -185,6 +193,11 @@ class _EventDetailPageState extends State<EventDetailPage> implements CardListen
         widget.cardListenerInterface.subscribeCategory(idEvent, releaseType);
      });
    }
+
+  @override
+  subscribeEvent(int idEvent) {
+    widget.cardListenerInterface.subscribeEvent(idEvent);
+  }
 }
 
 String dateToString(DateTime date, {bool withHour = true}) {

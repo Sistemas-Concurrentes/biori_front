@@ -114,7 +114,8 @@ class WidgetsJavi {
       {Icon? icon,
       String nextPath = homePath,
       bool pushToNextPath = true,
-      String buttonText = "OK"}) {
+      String buttonText = "OK",
+      bool error = false}) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -130,6 +131,9 @@ class WidgetsJavi {
               child: Text(buttonText),
             ),
           ],
+          backgroundColor:
+              error ? Theme.of(context).colorScheme.onErrorContainer : null,
+          iconColor: error ? Theme.of(context).colorScheme.error : null,
         );
       },
     );

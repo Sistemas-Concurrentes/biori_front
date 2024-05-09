@@ -7,7 +7,7 @@ class MyLikeButton extends StatelessWidget {
   final bool isLiked;
   final int id;
   final ReleaseType releaseType;
-  final Function(int, ReleaseType) likeEvent;
+  final Function(int, ReleaseType, bool) likeEvent;
 
   const MyLikeButton(
       {super.key,
@@ -18,13 +18,7 @@ class MyLikeButton extends StatelessWidget {
       required this.likeEvent});
 
   Future<bool> onLikeButtonTapped(bool isLiked) async {
-    likeEvent(id, releaseType);
-    /// send your request here
-    // final bool success= await sendRequest();
-
-    /// if failed, you can do nothing
-    // return success? !isLiked:isLiked;
-
+    likeEvent(id, releaseType, !isLiked);
     return !isLiked;
   }
 
