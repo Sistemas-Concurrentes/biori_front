@@ -1,4 +1,4 @@
-import '../../releases/release_model_interface.dart';
+import '../../releases_widgets/release_model_interface.dart';
 
 class AdvertisementModel implements ReleaseModelInterface {
   int id;

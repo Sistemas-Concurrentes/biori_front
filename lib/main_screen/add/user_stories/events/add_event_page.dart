@@ -1,6 +1,6 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/main_screen/add/user_stories/events/user_stories/add_event.dart';
-import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/button_widgets/model/categories_button_model.dart';
+import 'package:biori/main_screen/home/widget/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:biori/style/model/chip_button_model.dart';

@@ -1,11 +1,12 @@
-import 'package:biori/main_screen/home/user_stories/advertisement/model/advertisement_model.dart';
-import 'package:biori/main_screen/home/user_stories/advertisement/model/mapper.dart';
-import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
-import 'package:biori/main_screen/home/user_stories/events/model/mapper.dart';
 import 'package:biori/main_screen/home/user_stories/releases/datasource/api_releases_datasource.dart';
-import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
-import 'package:biori/main_screen/home/user_stories/reports/model/mapper.dart';
-import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
+import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
+
+import '../../../widget/advertisement/model/advertisement_model.dart';
+import '../../../widget/advertisement/model/mapper.dart';
+import '../../../widget/events/model/event_model.dart';
+import '../../../widget/events/model/mapper.dart';
+import '../../../widget/reports/model/mapper.dart';
+import '../../../widget/reports/model/report_model.dart';
 
 class ReleasesRepository {
   final ApiReleasesDatasource apiReleasesDatasource = ApiReleasesDatasource();

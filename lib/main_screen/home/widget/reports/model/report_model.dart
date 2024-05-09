@@ -1,4 +1,4 @@
-import '../../releases/release_model_interface.dart';
+import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 
 class ReportModel implements ReleaseModelInterface {
   int id;
