@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: "Biori",
-        theme: const MaterialTheme(Typography.blackCupertino).lightMediumContrast(),
+        theme: MaterialTheme(
+                Typography.material2021(platform: Theme.of(context).platform)
+                    .englishLike)
+            .lightMediumContrast(),
         routerConfig: CustomRouter.router,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
@@ -34,4 +37,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

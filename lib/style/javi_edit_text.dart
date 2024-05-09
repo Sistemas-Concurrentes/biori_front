@@ -373,24 +373,27 @@ class JaviStyle {
   );
 
   static const TextStyle titulo = TextStyle(
-    fontSize: 28.0,
+    fontSize: 24.0,
     fontWeight: FontWeight.bold,
-    color: Pallete.naranja,
+    color: Color(4287254562),
   );
 
   static const TextStyle tituloEvento = TextStyle(
-    fontSize: 22.5,
-    fontWeight: FontWeight.bold,
-    color: Pallete.naranja,
+    fontSize: 21.0,
+    fontWeight: FontWeight.w800,
+    color: Color(4287254562),
   );
 
   static const TextStyle subtitulo = TextStyle(
-    fontSize: 16.0,
+    fontSize: 18.0,
     fontWeight: FontWeight.bold,
+    color: Color(4279050240),
   );
 
   static const TextStyle descripcion = TextStyle(
-    fontSize: 14.0,
+    fontSize: 16.0,
+    color: Color(4280424981),
+    fontWeight: FontWeight.w500,
   );
   static const TextStyle informacionExtraCards = TextStyle(
     fontSize: 14.0,
