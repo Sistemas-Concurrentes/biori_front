@@ -6,13 +6,12 @@ import 'releases_datasource.dart';
 
 class ApiReleasesDatasource implements ReleasesDatasource {
   final ApiService apiService = ApiService();
-  static String uri = Constants.URI;
-  static String getAllUri = '$uri/releases/getAll';
+  final getAllUri = '${Constants().URI}/releases/getAll';
 
   @override
   Future<Map<String, dynamic>> getReleases() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString(Constants.TOKEN);
+    final String? token = prefs.getString(Constants().TOKEN);
 
     final object = await apiService.getRequestWithHeader(getAllUri, token);
     return jsonDecode(object.body) as Map<String, dynamic>;

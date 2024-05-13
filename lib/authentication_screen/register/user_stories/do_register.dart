@@ -14,6 +14,6 @@ class DoRegister {
             phone: telefono)
         .toJson();
 
-    return await Requests.registerRequestReturnsOutput(data);
+    return await Requests().registerRequestReturnsOutput(data);
   }
 }

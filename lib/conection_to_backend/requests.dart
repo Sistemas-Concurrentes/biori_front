@@ -48,11 +48,11 @@ class ApiService {
 
   static _saveToken(token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', token);
+    await prefs.setString(Constants().TOKEN, token);
   }
 
   static _getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(Constants.TOKEN);
+    return prefs.getString(Constants().TOKEN);
   }
 }

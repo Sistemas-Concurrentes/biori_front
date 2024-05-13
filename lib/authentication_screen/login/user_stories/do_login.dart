@@ -7,6 +7,6 @@ class DoLogin {
     Map<String, dynamic> data =
         LoginDto(username: username, password: password).toJson();
 
-    return await Requests.loginRequestReturnsOutput(data);
+    return await Requests().loginRequestReturnsOutput(data);
   }
 }

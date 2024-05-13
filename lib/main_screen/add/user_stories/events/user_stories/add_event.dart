@@ -11,8 +11,7 @@ enum AddEventOutput {
 }
 
 class AddEvent {
-  static String uri = Constants.URI;
-  static String addEventUri = '$uri/releases/addEvent';
+  final addEventUri = '${Constants().URI}/releases/addEvent';
 
   Future<AddEventOutput> run(
       String titulo,

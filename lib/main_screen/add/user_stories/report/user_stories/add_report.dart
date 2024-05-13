@@ -9,8 +9,7 @@ enum AddReportOutput {
 }
 
 class AddReport {
-  static String uri = Constants.URI;
-  static String addEventUri = '$uri/releases/addReport';
+  final addEventUri = '${Constants().URI}/releases/addReport';
 
   Future<AddReportOutput> run(
     String titulo,

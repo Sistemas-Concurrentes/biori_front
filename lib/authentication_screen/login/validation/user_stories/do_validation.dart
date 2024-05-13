@@ -8,6 +8,6 @@ class DoValidation {
     Map<String, dynamic> data =
       ValidationDto(register_code: register_code, token: token).toJson();
 
-    return await Requests.validationRequestReturnsOutput(data, token);
+    return await Requests().validationRequestReturnsOutput(data, token);
   }
 }

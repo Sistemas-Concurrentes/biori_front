@@ -10,8 +10,7 @@ enum AddAdvertisementOutput {
 }
 
 class AddAdvertisement {
-  static String uri = Constants.URI;
-  static String addAdvertisementUri = '$uri/releases/addAdvertisement';
+  final addAdvertisementUri = '${Constants().URI}/releases/addAdvertisement';
 
   Future<AddAdvertisementOutput> run(
       String titulo, String descripcion, List<ChipButtonModel> tags) async {

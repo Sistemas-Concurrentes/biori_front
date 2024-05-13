@@ -6,7 +6,7 @@ enum SubscribeOutput { success, error }
 class DoSubscribeEvent {
   Future<SubscribeOutput> run(int idEvent) async {
     var apiResponse = await ApiService().postRequestWithHeader(
-        '${Constants.URI}/releases/event/subscribe', {'idEvent': idEvent});
+        '${Constants().URI}/releases/event/subscribe', {'idEvent': idEvent});
 
     if (apiResponse.statusCode == 200) {
       return SubscribeOutput.success;
