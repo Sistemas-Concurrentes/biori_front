@@ -11,7 +11,7 @@ enum AddEventOutput {
 }
 
 class AddEvent {
-  final addEventUri = '${Constants().URI}/releases/addEvent';
+  final addEventUri = '${Constants().URI}/releases/event/addEvent';
 
   Future<AddEventOutput> run(
       String titulo,
