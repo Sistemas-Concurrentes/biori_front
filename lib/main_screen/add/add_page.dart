@@ -66,7 +66,7 @@ class _AddPageState extends State<AddPage> {
                   Icons.event,
                   () {
                     CustomRouter.router
-                        .push("$addReleasesRoute/$addEventRoute")
+                        .push("$addReleasesRoute/$addEventGroupRoute")
                         .then((value) => null);
                   },
                 ),

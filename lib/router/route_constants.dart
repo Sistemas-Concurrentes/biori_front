@@ -10,5 +10,6 @@ const String addReleasesRoute = "/addReleases";
 const String addEventRoute = "event";
 const String addAdvertisementRoute = "advertisement";
 const String addReportRoute = "report";
+const String addEventGroupRoute = "eventGroup";
 
 const String eventDetailRoute = "/eventDetail/:id";
