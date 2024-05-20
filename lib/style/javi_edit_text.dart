@@ -207,6 +207,8 @@ class JaviForms {
     titleEvent = "",
   }) {
     List<ChipButtonModel> selectedChips = [];
+    List<ChipButtonModel> filteredChips = chips;
+    SearchController searchController = SearchController();
 
     return FormField(
       onSaved: (val) {
@@ -233,11 +235,42 @@ class JaviForms {
                   titleEvent,
                   style: JaviStyle.subtitulo,
                 ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                      0, JaviPaddings.M, 0, JaviPaddings.M),
+                  child: WidgetsJavi().mySearchBar(
+                    (value) {
+                      if (value.isEmpty) {
+                        filteredChips = chips;
+                      } else {
+                        filteredChips = chips
+                            .where((element) => element.name
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                            .toList();
+                      }
+                      state.didChange(filteredChips);
+                    },
+                    searchController,
+                    leadingIcon: const Icon(Icons.search),
+                    trailingWidget: <Widget>[
+                      if (searchController.text.isNotEmpty)
+                        IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            searchController.clear();
+                            filteredChips = chips;
+                            state.didChange(filteredChips);
+                          },
+                        ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: WidgetsJavi().filterChipForTags(
-                    chips,
-                        (actualChip) {
+                    filteredChips,
+                    (actualChip) {
                       actualChip.isFollowed
                           ? selectedChips.remove(actualChip)
                           : selectedChips.add(actualChip);

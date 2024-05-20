@@ -87,8 +87,45 @@ class WidgetsJavi {
     snackbarKey.currentState?.showSnackBar(snackBar);
   }
 
-  Widget filterChipForTags(List<ChipButtonModel> tags,
-      Function(ChipButtonModel) onSelected) {
+  Widget mySearchBar(
+    Function onChangedFunction,
+    SearchController controller, {
+    String hintText = "Buscar",
+    Icon? leadingIcon,
+    Iterable<Widget>? trailingWidget,
+    Color bacgroundColor = Colors.white,
+  }) {
+    return SearchAnchor(builder: (context, _) {
+      return SizedBox(
+        height: 40,
+        child: SearchBar(
+          controller: controller,
+          hintText: hintText,
+          onChanged: (String value) {
+            onChangedFunction(value);
+          },
+          leading: leadingIcon,
+          trailing: trailingWidget,
+          backgroundColor: MaterialStateProperty.all(bacgroundColor),
+        ),
+      );
+    }, suggestionsBuilder: (context, SearchController controller) {
+      return List<ListTile>.generate(
+        0,
+        (int index) {
+          final String item = 'item $index';
+          return ListTile(
+              title: Text(item),
+              onTap: () {
+                controller.closeView(item);
+              });
+        },
+      );
+    });
+  }
+
+  Widget filterChipForTags(
+      List<ChipButtonModel> tags, Function(ChipButtonModel) onSelected) {
     return Wrap(
       spacing: 5.0,
       children: tags.map((actualTag) {
