@@ -3,16 +3,16 @@ import 'package:biori/style/constants.dart';
 
 import '../dto/add_event_group_dto.dart';
 
-enum AddEventOutput {
+enum AddEventGroupOutput {
   created,
   error,
   forbidden,
 }
 
 class AddEventGroup {
-  final addEventUri = '${Constants().URI}/releases/addEvent';
+  final addEventUri = '${Constants().URI}/releases/event/addEvent';
 
-  Future<AddEventOutput> run(
+  Future<AddEventGroupOutput> run(
       String titulo,
       String descripcion,
       String categoria,
@@ -33,11 +33,11 @@ class AddEventGroup {
     var response = await ApiService().postRequestWithHeader(addEventUri, data);
 
     if (response.statusCode == 201) {
-      return AddEventOutput.created;
+      return AddEventGroupOutput.created;
     } else if (response.statusCode == 403) {
-      return AddEventOutput.forbidden;
+      return AddEventGroupOutput.forbidden;
     } else {
-      return AddEventOutput.error;
+      return AddEventGroupOutput.error;
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
-import 'package:biori/main_screen/add/user_stories/events_group/user_stories/add_event_group.dart';
+import 'package:biori/main_screen/add/user_stories/event/events_general/user_stories/add_event.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
@@ -18,14 +18,14 @@ enum CategoryLabel {
   final String label;
 }
 
-class AddEventGroupPage extends StatefulWidget {
-  const AddEventGroupPage({super.key});
+class AddEventPage extends StatefulWidget {
+  const AddEventPage({super.key});
 
   @override
-  State<AddEventGroupPage> createState() => _AddEventGroupPageState();
+  State<AddEventPage> createState() => _AddEventPageState();
 }
 
-class _AddEventGroupPageState extends State<AddEventGroupPage> {
+class _AddEventPageState extends State<AddEventPage> {
   final _formKey = GlobalKey<FormState>();
   final widgetsJavi = WidgetsJavi();
 
@@ -36,7 +36,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
   List<Widget> widgets = [];
   List<String> fechasEvento = [];
   String? fechaFinInscripcion;
-  List<int> groupsId = [];
+  List<ChipButtonModel> tagsButtons = [];
   List<TagsButtonsModel> allTagsButtons = [];
 
   bool _isCheckedForInscriptionDate = false;
@@ -46,10 +46,10 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
   void initState() {
     super.initState();
     allTagsButtons.addAll([
-      TagsButtonsModel(name: "Group1", id: 1),
-      TagsButtonsModel(name: "Group2", id: 2),
-      TagsButtonsModel(name: "Group3", id: 3),
-      TagsButtonsModel(name: "Group4", id: 4),
+      TagsButtonsModel(name: "tag1", id: 1),
+      TagsButtonsModel(name: "tag2", id: 2),
+      TagsButtonsModel(name: "tag3", id: 3),
+      TagsButtonsModel(name: "tag4", id: 4),
     ]);
   }
 
@@ -75,7 +75,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
     return Scaffold(
       appBar: AppBar(
         title: Hero(
-          tag: AddConstants().advertisementTag,
+          tag: AddConstants().eventTag,
           child: Text(
               "${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.evento}"),
         ),
@@ -137,7 +137,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
 
   tagsCheckBoxes(Function onValidate) {
     return JaviForms.chipsInputFieldWidget(context, allTagsButtons, onValidate,
-        (onSavedVal) => {groupsId = onSavedVal.map((e) => e.id).toList()},
+        (onSavedVal) => {tagsButtons = onSavedVal},
         titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
   }
 
@@ -225,48 +225,48 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
   }
 
   submitButton(BuildContext context) {
-    return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
+    return JaviForms.submitButton(
+      context,
+      AppLocalizations.of(context)!.send,
         () async {
       if (!_formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
-        return;
-      }
-      _showLoading(true);
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
+          return;
+        }
+        _showLoading(true);
 
-      _formKey.currentState?.save();
+        _formKey.currentState?.save();
 
-      AddEventOutput addEventOutput = await AddEventGroup().run(
-          titulo,
-          descripcion,
+      AddEventOutput addEventOutput = await AddEvent().run(titulo, descripcion,
           categoria,
           localizacion,
           fechasEvento,
-          groupsId,
+          tagsButtons,
           fechaFinInscripcion);
 
       fechasEvento = [];
-      String titleDialog = "";
-      Icon? iconDialog;
-      Function onPressed = () {
-        CustomRouter.router.pop();
-      };
+          String titleDialog = "";
+          Icon? iconDialog;
+          Function onPressed = () {
+            CustomRouter.router.pop();
+          };
 
-      if (addEventOutput == AddEventOutput.created) {
+          if (addEventOutput == AddEventOutput.created) {
         titleDialog =
             mounted ? AppLocalizations.of(context)?.eventoCreado ?? "" : "";
         iconDialog = const Icon(Icons.check);
-      } else if (addEventOutput == AddEventOutput.forbidden) {
+          } else if (addEventOutput == AddEventOutput.forbidden) {
         titleDialog =
             mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
         iconDialog = const Icon(Icons.sms_failed);
-      } else {
+          } else {
         titleDialog =
             mounted ? AppLocalizations.of(context)?.errorCrearEvento ?? "" : "";
         iconDialog = const Icon(Icons.error);
-        onPressed = () {};
-      }
-      _showLoading(false);
+            onPressed = () {};
+          }
+          _showLoading(false);
 
       if (mounted) {
         widgetsJavi.showDialogWithText(context, titleDialog, onPressed,

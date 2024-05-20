@@ -3,8 +3,8 @@ import 'package:biori/authentication_screen/login/validation/validation_page.dar
 import 'package:biori/authentication_screen/register/register_page.dart';
 import 'package:biori/main_screen/add/add_page.dart';
 import 'package:biori/main_screen/add/user_stories/advertisement/add_advertisement_page.dart';
-import 'package:biori/main_screen/add/user_stories/events/add_event_page.dart';
-import 'package:biori/main_screen/add/user_stories/events_group/add_event_group_page.dart';
+import 'package:biori/main_screen/add/user_stories/event/events_general/add_event_page.dart';
+import 'package:biori/main_screen/add/user_stories/event/events_group/add_event_group_page.dart';
 import 'package:biori/main_screen/add/user_stories/report/add_report_page.dart';
 import 'package:biori/main_screen/home/event_detail/event_detail_page.dart';
 import 'package:biori/main_screen/home/home_page.dart';
