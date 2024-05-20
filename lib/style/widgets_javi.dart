@@ -176,6 +176,21 @@ class WidgetsJavi {
     );
   }
 
+  Padding titleWithDivider(String title, {double topPadding = JaviPaddings.L}) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, topPadding, 0, 0),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: JaviStyle.titulo,
+          ),
+          const Divider(),
+        ],
+      ),
+    );
+  }
+
   AppBar myAppBar(String title) {
     return AppBar(
       title: Text(title),
