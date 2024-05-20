@@ -3,11 +3,13 @@ import 'package:biori/main_screen/home/user_stories/releases/repository/releases
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
   CustomRouter.instance; // Initialize the router
+  await dotenv.load();
   runApp(const MyApp());
 }
 
@@ -25,7 +27,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: "Biori",
-        theme: const MaterialTheme(Typography.blackCupertino).lightMediumContrast(),
+        theme: MaterialTheme(
+                Typography.material2021(platform: Theme.of(context).platform)
+                    .englishLike)
+            .lightMediumContrast(),
         routerConfig: CustomRouter.router,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
@@ -34,4 +39,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

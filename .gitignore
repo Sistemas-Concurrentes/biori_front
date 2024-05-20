@@ -44,3 +44,5 @@ app.*.map.json
 
 # constants que serían el .env
 /lib/style/constants.dart
+
+*.env

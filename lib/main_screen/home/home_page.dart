@@ -1,8 +1,6 @@
-import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/user_stories/do_like.dart';
 import 'package:biori/main_screen/home/user_stories/do_subscribe_event.dart';
-import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
-import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
+import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
 import 'package:biori/main_screen/home/widget/home_widgets.dart';
 import 'package:biori/router/custom_router.dart';
@@ -10,6 +8,9 @@ import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'listeners/card_listener_interface.dart';
+import 'widget/events/model/event_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,9 +38,7 @@ class _HomePageState extends State<HomePage> implements CardListenerInterface {
     _updateCategoriesSubscribed();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-      ),
+      appBar: WidgetsJavi().myAppBar("Home"),
       body: SafeArea(
         child: FutureBuilder<List<ReleaseModelInterface>>(
           future: Provider.of<ReleasesRepository>(context)

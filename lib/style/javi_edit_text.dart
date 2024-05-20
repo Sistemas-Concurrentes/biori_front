@@ -1,6 +1,5 @@
 import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
-import 'package:biori/theme/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 
@@ -373,28 +372,32 @@ class JaviStyle {
   );
 
   static const TextStyle titulo = TextStyle(
-    fontSize: 28.0,
+    fontSize: 24.0,
     fontWeight: FontWeight.bold,
-    color: Pallete.naranja,
+    color: Color(4287254562),
   );
 
   static const TextStyle tituloEvento = TextStyle(
-    fontSize: 22.5,
-    fontWeight: FontWeight.bold,
-    color: Pallete.naranja,
+    fontSize: 21.0,
+    fontWeight: FontWeight.w800,
+    color: Color(4287254562),
   );
 
   static const TextStyle subtitulo = TextStyle(
-    fontSize: 16.0,
+    fontSize: 18.0,
     fontWeight: FontWeight.bold,
+    color: Color(4279050240),
   );
 
   static const TextStyle descripcion = TextStyle(
-    fontSize: 14.0,
+    fontSize: 16.0,
+    color: Color(4280424981),
+    fontWeight: FontWeight.w500,
   );
   static const TextStyle informacionExtraCards = TextStyle(
-    fontSize: 14.0,
-    color: Pallete.secondaryColor,
+    fontSize: 18.0,
+    color: Color(4283000622),
+    fontWeight: FontWeight.w600,
   );
 }
 

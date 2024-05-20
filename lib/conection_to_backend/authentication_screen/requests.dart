@@ -10,11 +10,10 @@ import 'package:biori/conection_to_backend/authentication_screen/output.dart';
 import '../../authentication_screen/login/dto/login_dto_result.dart';
 
 class Requests {
-  static String url = Constants.URI;
-  static String login = "$url/auth/login";
-  static String register = "$url/auth/register";
-  static String validation = "$url/auth/validation";
-  static String resend = "$url/auth/resend";
+  final login = "${Constants().URI}/auth/login";
+  final register = "${Constants().URI}/auth/register";
+  final validation = "${Constants().URI}/auth/validation";
+  final resend = "${Constants().URI}/auth/resend";
 
   static Future<http.Response> postRequest(uri, data) async {
     try {
@@ -41,7 +40,7 @@ class Requests {
     }
   }
 
-  static Future<Output> loginRequestReturnsOutput(data) async {
+  Future<Output> loginRequestReturnsOutput(data) async {
     Output output = Output.error;
 
     http.Response response = await postRequest(login, data);
@@ -57,13 +56,13 @@ class Requests {
     return output;
   }
 
-  static Future<Output> registerRequestReturnsOutput(data) async {
+  Future<Output> registerRequestReturnsOutput(data) async {
     http.Response response = await postRequest(register, data);
     return _outputByStatusCode(response.statusCode);
 
   }
 
-  static Future<Output> validationRequestReturnsOutput(data, token) async {
+  Future<Output> validationRequestReturnsOutput(data, token) async {
     http.Response response = await postRequestWithHeader(validation, token, data);
     if (response.statusCode == 200) {
       ValidationDtoResult validationDtoResult = ValidationDtoResult.fromJson(
@@ -74,7 +73,7 @@ class Requests {
     return _outputByStatusCode(response.statusCode);
   }
 
-  static Future<Output> doRequestResendReturnsOutput(String token) async {
+  Future<Output> doRequestResendReturnsOutput(String token) async {
     http.Response response = await postRequestWithHeader(resend, token, {});
     return _outputByStatusCode(response.statusCode);
   }

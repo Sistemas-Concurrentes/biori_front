@@ -1,16 +1,17 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
-import 'package:biori/main_screen/home/user_stories/advertisement/model/advertisement_model.dart';
-import 'package:biori/main_screen/home/user_stories/advertisement/widget/advertisement_card.dart';
-import 'package:biori/main_screen/home/user_stories/events/model/event_model.dart';
-import 'package:biori/main_screen/home/user_stories/events/widget/event_card.dart';
-import 'package:biori/main_screen/home/user_stories/releases/release_model_interface.dart';
-import 'package:biori/main_screen/home/user_stories/releases/releases_widgets/constants/constants.dart';
-import 'package:biori/main_screen/home/user_stories/reports/model/report_model.dart';
-import 'package:biori/main_screen/home/user_stories/reports/widget/report_card.dart';
+import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
+
+import 'advertisement/model/advertisement_model.dart';
+import 'advertisement/widget/advertisement_card.dart';
+import 'events/model/event_model.dart';
+import 'events/widget/event_card.dart';
+import 'releases_widgets/constants/constants.dart';
+import 'reports/model/report_model.dart';
+import 'reports/widget/report_card.dart';
 
 class HomeWidgets {
   Center getCenterListBuilder(

@@ -138,4 +138,11 @@ class WidgetsJavi {
       },
     );
   }
+
+  AppBar myAppBar(String title) {
+    return AppBar(
+      title: Text(title),
+      titleTextStyle: JaviStyle.titulo,
+    );
+  }
 }
