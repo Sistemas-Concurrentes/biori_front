@@ -71,5 +71,6 @@
     "errorPermisos": "You do not have permission to create an event",
     "inscribirse": "Sign up",
     "inscrito": "Signed up!",
-    "errorInscripcion": "Error signing up"
+    "errorInscripcion": "Error signing up",
+    "buscar": "Search"
 }

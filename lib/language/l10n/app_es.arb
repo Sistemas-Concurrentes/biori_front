@@ -71,5 +71,6 @@
     "errorPermisos": "No tienes permisos para realizar esta acción",
     "inscribirse": "Inscribirse",
     "inscrito": "¡Inscrito correctamente!",
-    "errorInscripcion": "Error al inscribirse"
+    "errorInscripcion": "Error al inscribirse",
+    "buscar": "Buscar"
 }
