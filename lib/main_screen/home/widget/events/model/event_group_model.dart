@@ -49,8 +49,8 @@ class EventGroupModel implements ReleaseModelInterface {
           .toList(),
       location: json['location'],
       groups: (json['groups'] as List<dynamic>)
-          .map((tag) =>
-              ChipButtonModel(name: tag['groupsId'], id: tag['groupsName']))
+          .map((group) =>
+              ChipButtonModel(name: group['groupTitle'], id: group['groupId']))
           .toList(),
       lastUpdate: DateTime.parse(json['updatedAt'].toString()),
       numberLikes: json['likes'],
