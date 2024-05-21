@@ -36,7 +36,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
   List<Widget> widgets = [];
   List<String> fechasEvento = [];
   String? fechaFinInscripcion;
-  List<int> groupsId = [];
+  List<ChipButtonModel> groupsChips = [];
   List<TagsButtonsModel> allTagsButtons = [];
 
   bool _isCheckedForInscriptionDate = false;
@@ -137,7 +137,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
 
   tagsCheckBoxes(Function onValidate) {
     return JaviForms.chipsInputFieldWidget(context, allTagsButtons, onValidate,
-        (onSavedVal) => {groupsId = onSavedVal.map((e) => e.id).toList()},
+        (onSavedVal) => {groupsChips = onSavedVal},
         titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
   }
 
@@ -232,8 +232,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
             SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
         return;
       }
-      _showLoading(true);
-
+      _showLoading(false);
       _formKey.currentState?.save();
 
       AddEventGroupOutput addEventOutput = await AddEventGroup().run(
@@ -242,7 +241,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
           categoria,
           localizacion,
           fechasEvento,
-          groupsId,
+          groupsChips,
           fechaFinInscripcion);
 
       fechasEvento = [];

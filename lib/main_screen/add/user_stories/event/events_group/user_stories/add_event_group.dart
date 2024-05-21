@@ -1,5 +1,6 @@
 import 'package:biori/conection_to_backend/requests.dart';
 import 'package:biori/style/constants.dart';
+import 'package:biori/style/model/chip_button_model.dart';
 
 import '../dto/add_event_group_dto.dart';
 
@@ -10,7 +11,7 @@ enum AddEventGroupOutput {
 }
 
 class AddEventGroup {
-  final addEventUri = '${Constants().URI}/releases/event/addEvent';
+  final addEventUri = '${Constants().URI}/releases/event/addGroupEvent';
 
   Future<AddEventGroupOutput> run(
       String titulo,
@@ -18,7 +19,7 @@ class AddEventGroup {
       String categoria,
       String localizacion,
       List<String> fechas,
-      List<int> groupsId,
+      List<ChipButtonModel> groupsChips,
       String? fechaFinInscripcion) async {
     Map<String, dynamic> data = AddEventGroupDto(
       titulo: titulo,
@@ -26,7 +27,7 @@ class AddEventGroup {
       categoria: categoria,
       localizacion: localizacion,
       fechas: fechas,
-      groupsId: groupsId,
+      groupsId: groupsChips.map((e) => e.id).toList(),
       fechaFinInscripcion: fechaFinInscripcion,
     ).toJson();
 
