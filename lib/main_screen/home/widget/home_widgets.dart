@@ -1,4 +1,5 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+import 'package:biori/main_screen/home/widget/events/widget/event_group_card.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'advertisement/model/advertisement_model.dart';
 import 'advertisement/widget/advertisement_card.dart';
+import 'events/model/event_group_model.dart';
 import 'events/model/event_model.dart';
 import 'events/widget/event_card.dart';
 import 'releases_widgets/constants/constants.dart';
@@ -70,6 +72,11 @@ class HomeWidgets {
     } else if (release is ReportModel) {
       return ReportCard(
         reportModel: release,
+      );
+    } else if (release is EventGroupModel) {
+      return EventGroupCard(
+        cardListenerInterface: cardListenerInterfaceHomePage,
+        eventGroupModel: release,
       );
     } else {
       return Container();
