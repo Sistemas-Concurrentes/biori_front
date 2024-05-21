@@ -10,18 +10,19 @@ import '../../releases_widgets/releases_widgets.dart';
 
 class EventGroupCard extends StatelessWidget {
   final scrollController = ScrollController();
-  final EventGroupModel eventModel;
+  final EventGroupModel eventGroupModel;
   final CardListenerInterface cardListenerInterface;
 
   EventGroupCard(
       {super.key,
       required this.cardListenerInterface,
-      required this.eventModel});
+      required this.eventGroupModel});
 
   Future _goToEventDetail() {
-    return CustomRouter.router.push("/eventDetail/${eventModel.id}", extra: {
-      'eventModel': eventModel,
-      'cardListenerInterface': cardListenerInterface
+    return CustomRouter.router.push("/eventDetail/${eventGroupModel.id}",
+        extra: {
+          'eventModel': eventGroupModel,
+          'cardListenerInterface': cardListenerInterface
     }).then((value) => null);
   }
 
@@ -35,9 +36,9 @@ class EventGroupCard extends StatelessWidget {
         padding: const EdgeInsets.all(JaviPaddings.L),
         child: Column(
           children: [
-            ReleasesWidgets.releaseTitleRow(context, eventModel.title),
+            ReleasesWidgets.releaseTitleRow(context, eventGroupModel.title),
             ReleasesWidgets.releaseDescriptionRow(
-                context, eventModel.description,
+                context, eventGroupModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
             const Divider(),
             _tagsNameLinea(context),
@@ -63,10 +64,10 @@ class EventGroupCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MyLikeButton(
-            id: eventModel.id,
+            id: eventGroupModel.id,
             releaseType: ReleaseType.event,
-            numberLikes: eventModel.numberLikes,
-            isLiked: eventModel.isLiked,
+            numberLikes: eventGroupModel.numberLikes,
+            isLiked: eventGroupModel.isLiked,
             likeEvent: cardListenerInterface.likeEvent),
         ElevatedButton(
             onPressed: () {

@@ -8,26 +8,26 @@ import '../../../style/javi_edit_text.dart';
 import '../widget/releases_widgets/button_widgets/my_like_button.dart';
 import '../widget/releases_widgets/constants/constants.dart';
 
-class EventDetailPage extends StatefulWidget {
-  final EventGroupModel eventModel;
+class EventGroupDetailPage extends StatefulWidget {
+  final EventGroupModel eventGroupModel;
   final CardListenerInterface cardListenerInterface;
 
-  const EventDetailPage(
+  const EventGroupDetailPage(
       {super.key,
-      required this.eventModel,
+      required this.eventGroupModel,
       required this.cardListenerInterface});
 
   @override
-  State<EventDetailPage> createState() => _EventDetailPageState();
+  State<EventGroupDetailPage> createState() => _EventGroupDetailPageState();
 }
 
-class _EventDetailPageState extends State<EventDetailPage>
+class _EventGroupDetailPageState extends State<EventGroupDetailPage>
     implements CardListenerInterface {
   late EventGroupModel detailEventModel;
 
   @override
   void initState() {
-    detailEventModel = widget.eventModel;
+    detailEventModel = widget.eventGroupModel;
 
     super.initState();
   }
