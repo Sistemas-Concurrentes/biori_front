@@ -23,7 +23,7 @@ class AddEventGroupDto {
         'categoria': categoria,
         'localizacion': localizacion,
         'fechas': fechas,
-        'groupsId': groupsId,
+        'associatedIds': groupsId,
         'fechaFinInscripcion': fechaFinInscripcion,
       };
 }
