@@ -1,6 +1,5 @@
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
-import '../../releases_widgets/constants/constants.dart';
 import '../../releases_widgets/releases_widgets.dart';
 import '../model/advertisement_model.dart';
 
@@ -19,7 +18,8 @@ class AdvertisementCard extends StatelessWidget {
       child: Column(
         children: [
           ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
-          _groupsAffectedRow(),
+          ReleasesWidgets.releaseGroupsNameRow(
+              context, advertisementModel.groupsInfo),
           ReleasesWidgets.releaseDescriptionRow(
               context, advertisementModel.description),
         ],
@@ -27,32 +27,4 @@ class AdvertisementCard extends StatelessWidget {
     );
 
   }
-
-  String _groupsToString(){
-    String groups = "";
-    advertisementModel.groupsInfo.forEach((k,v) => groups += "$v, ");
-    return groups.substring(0, groups.length - 2);
-  }
-  Row _groupsAffectedRow(){
-    String groups = _groupsToString();
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            alignment: Alignment.topLeft,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
-            ),
-            padding: const EdgeInsets.fromLTRB(ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),
-            child: Text(
-              groups,
-              textAlign: TextAlign.left,
-              style: JaviStyle.informacionExtraCards,
-            ),
-          ),
-        )
-      ],
-    );
-  }
-
 }

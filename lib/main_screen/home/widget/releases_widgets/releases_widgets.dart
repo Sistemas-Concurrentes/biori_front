@@ -42,4 +42,33 @@ class ReleasesWidgets {
       ],
     );
   }
+
+  static Row releaseGroupsNameRow(context, Map<int, String> groups) {
+    String groupsName = _groupsToString(groups);
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            alignment: Alignment.topLeft,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
+            ),
+            padding: const EdgeInsets.fromLTRB(
+                ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),
+            child: Text(
+              groupsName,
+              textAlign: TextAlign.left,
+              style: JaviStyle.informacionExtraCards,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  static String _groupsToString(Map<int, String> groupsInfo) {
+    String groups = "";
+    groupsInfo.forEach((k, v) => groups += "$v, ");
+    return groups.substring(0, groups.length - 2);
+  }
 }
