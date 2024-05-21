@@ -28,6 +28,10 @@ class EventGroupCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<int, String> groupsInfo = {};
+    for (var element in eventGroupModel.groups) {
+      groupsInfo[element.id] = element.name;
+    }
     return InkWell(
       onTap: () {
         _goToEventDetail();
@@ -41,7 +45,8 @@ class EventGroupCard extends StatelessWidget {
                 context, eventGroupModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
             const Divider(),
-            _tagsNameLinea(context),
+            _groupsName(context),
+            ReleasesWidgets.releaseGroupsNameRow(context, groupsInfo),
             _ultimaLinea(context, AppLocalizations.of(context)!.saberMas)
           ],
         ),
@@ -49,12 +54,12 @@ class EventGroupCard extends StatelessWidget {
     );
   }
 
-  Row _tagsNameLinea(context) {
+  Row _groupsName(context) {
     return Row(children: [
       Expanded(
         child: Container(
             margin: const EdgeInsets.only(bottom: JaviPaddings.S),
-            child: const Text("Tags", style: JaviStyle.subtitulo)),
+            child: const Text("Groups", style: JaviStyle.subtitulo)),
       ),
     ]);
   }
