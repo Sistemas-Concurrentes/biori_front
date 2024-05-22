@@ -61,7 +61,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
     }
 
     var formWidgets = [
-      eventTitleEditText(_onValidateTitle),
+      eventTitleEditText(onValidateTitle),
       descriptionBigEditText(_onValidateDescription),
       categoryChooser(_onValidateCategory),
       tagsCheckBoxes(_onValidateTags),
@@ -252,32 +252,29 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
       };
 
       if (addEventOutput == AddEventGroupOutput.created) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.eventoCreado ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.eventoCreado ?? ""
+            : "";
         iconDialog = const Icon(Icons.check);
       } else if (addEventOutput == AddEventGroupOutput.forbidden) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorPermisos ?? ""
+            : "";
         iconDialog = const Icon(Icons.sms_failed);
       } else {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorCrearEvento ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorCrearEvento ?? ""
+            : "";
         iconDialog = const Icon(Icons.error);
         onPressed = () {};
       }
       _showLoading(false);
 
-      if (mounted) {
+      if (context.mounted) {
         widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
             icon: iconDialog);
       }
     });
-  }
-
-  _onValidateTitle(String onValidateVal) {
-    return onValidateVal.isEmpty
-        ? "${AppLocalizations.of(context)!.titulo} ${AppLocalizations.of(context)!.cannotBeEmpty}"
-        : null;
   }
 
   _onValidateDescription(String onValidateVal) {

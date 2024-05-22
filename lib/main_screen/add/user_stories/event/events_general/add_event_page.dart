@@ -253,22 +253,25 @@ class _AddEventPageState extends State<AddEventPage> {
           };
 
           if (addEventOutput == AddEventOutput.created) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.eventoCreado ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.eventoCreado ?? ""
+            : "";
         iconDialog = const Icon(Icons.check);
           } else if (addEventOutput == AddEventOutput.forbidden) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorPermisos ?? ""
+            : "";
         iconDialog = const Icon(Icons.sms_failed);
           } else {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorCrearEvento ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorCrearEvento ?? ""
+            : "";
         iconDialog = const Icon(Icons.error);
             onPressed = () {};
           }
           _showLoading(false);
 
-      if (mounted) {
+      if (context.mounted) {
         widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
             icon: iconDialog);
       }
