@@ -7,16 +7,7 @@ import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-enum CategoryLabel {
-  actividad("ACTIVIDAD"),
-  gestion("GESTION"),
-  clase("CLASE");
-
-  const CategoryLabel(this.label);
-
-  final String label;
-}
+import '../event_common_widgets.dart';
 
 class AddEventGroupPage extends StatefulWidget {
   const AddEventGroupPage({super.key});

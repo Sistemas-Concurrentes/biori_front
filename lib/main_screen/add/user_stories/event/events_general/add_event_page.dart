@@ -8,12 +8,12 @@ import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum CategoryLabel {
+enum CategoryLabelGroup {
   actividad("ACTIVIDAD"),
   gestion("GESTION"),
   clase("CLASE");
 
-  const CategoryLabel(this.label);
+  const CategoryLabelGroup(this.label);
 
   final String label;
 }
@@ -128,8 +128,7 @@ class _AddEventPageState extends State<AddEventPage> {
     return JaviForms.dropDownMenu(
         context,
         TextEditingController(),
-        CategoryLabel.actividad,
-        CategoryLabel.values,
+        CategoryLabelGroup.values,
         (onSavedVal) => {categoria = onSavedVal},
         _onValidateCategory,
         hintText: AppLocalizations.of(context)!.selectOne);
