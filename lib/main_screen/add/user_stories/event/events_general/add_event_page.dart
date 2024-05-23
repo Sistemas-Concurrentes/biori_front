@@ -41,6 +41,7 @@ class _AddEventPageState extends State<AddEventPage> {
 
   bool _isCheckedForInscriptionDate = false;
   bool _isApiCallProcess = false;
+  final TextEditingController categoryController = TextEditingController();
 
   @override
   void initState() {
@@ -127,7 +128,7 @@ class _AddEventPageState extends State<AddEventPage> {
   categoryChooser(Function onValidateVal) {
     return JaviForms.dropDownMenu(
         context,
-        TextEditingController(),
+        categoryController,
         CategoryLabelGroup.values,
         (onSavedVal) => {categoria = onSavedVal},
         _onValidateCategory,
