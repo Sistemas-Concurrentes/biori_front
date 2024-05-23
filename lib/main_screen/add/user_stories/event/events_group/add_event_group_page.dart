@@ -1,5 +1,6 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/main_screen/add/user_stories/event/events_group/user_stories/add_event_group.dart';
+import 'package:biori/main_screen/add/user_stories/event/validators/event_validators.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/button_widgets/model/categories_button_model.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
@@ -32,6 +33,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
 
   bool _isCheckedForInscriptionDate = false;
   bool _isApiCallProcess = false;
+  final TextEditingController categoryController = TextEditingController();
 
   @override
   void initState() {
@@ -47,19 +49,33 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
   @override
   Widget build(BuildContext context) {
     if (widgets.isEmpty) {
-      widgets.add(
-          addDate(TextEditingController(), _onValidateDates, _onSavedValDates));
+      widgets.add(EventCommonWidgets().addDate(
+          TextEditingController(), context, onValidateDates, _onSavedValDates));
     }
 
     var formWidgets = [
-      eventTitleEditText(onValidateTitle),
-      descriptionBigEditText(_onValidateDescription),
-      categoryChooser(_onValidateCategory),
-      tagsCheckBoxes(_onValidateTags),
-      addDatesIntoWidget(),
-      locationEditText(_onValidateLocation),
-      addCheckbox(AppLocalizations.of(context)!.necesitaFechaInscripcion,
-          _onValidateInscriptionDate),
+      EventCommonWidgets().eventTitleEditText(
+          context, onValidateTitle, (onSavedVal) => {titulo = onSavedVal}),
+      EventCommonWidgets().descriptionBigEditText(context,
+          onValidateDescription, (onSavedVal) => {descripcion = onSavedVal}),
+      EventCommonWidgets().categoryChooser(context, onValidateCategory,
+          (onSavedVal) => {categoria = onSavedVal}, categoryController),
+      groupsCheckBoxes(_onValidateTags),
+      EventCommonWidgets().addDatesIntoWidget(context, widgets, () {
+        setState(() {});
+      }, onValidateDates, _onSavedValDates),
+      EventCommonWidgets().locationEditText(context, onValidateLocation,
+          (onSavedVal) => {localizacion = onSavedVal}),
+      EventCommonWidgets().addCheckbox(
+          context,
+          AppLocalizations.of(context)!.necesitaFechaInscripcion,
+          onValidateInscriptionDate,
+          _onSavedValInscriptionDate,
+          _isCheckedForInscriptionDate, () {
+        setState(() {
+          _isCheckedForInscriptionDate = !_isCheckedForInscriptionDate;
+        });
+      }),
       submitButton(context),
     ];
 
@@ -93,126 +109,10 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
     );
   }
 
-  eventTitleEditText(Function onValidate) {
-    return JaviForms.inputFieldWidget(
-      context,
-      "eventTitle",
-      "${AppLocalizations.of(context)?.titulo} ${AppLocalizations.of(context)!.evento}",
-      onValidate,
-      (onSavedVal) => {titulo = onSavedVal},
-      prefixIcon: const Icon(Icons.title),
-    );
-  }
-
-  descriptionBigEditText(Function onValidate) {
-    return JaviForms.inputFieldWidget(
-        context,
-        "eventDescription",
-        AppLocalizations.of(context)!.descripcion,
-        onValidate,
-        (onSavedVal) => {descripcion = onSavedVal},
-        prefixIcon: const Icon(Icons.description),
-        maxLines: null);
-  }
-
-  categoryChooser(Function onValidateVal) {
-    return JaviForms.dropDownMenu(
-        context,
-        TextEditingController(),
-        CategoryLabel.actividad,
-        CategoryLabel.values,
-        (onSavedVal) => {categoria = onSavedVal},
-        _onValidateCategory,
-        hintText: AppLocalizations.of(context)!.selectOne);
-  }
-
-  tagsCheckBoxes(Function onValidate) {
+  groupsCheckBoxes(Function onValidate) {
     return JaviForms.chipsInputFieldWidget(context, allTagsButtons, onValidate,
         (onSavedVal) => {groupsChips = onSavedVal},
         titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
-  }
-
-  TextFormField addDate(
-      TextEditingController controller, Function onValidate, onSavedVal) {
-    return JaviForms.selectDateTime(
-      context,
-      controller,
-      onValidate,
-      onSavedVal,
-      prefixIcon: const Icon(Icons.calendar_today),
-      hintText: "dd/mm/yyyy hh:mm:ss",
-      needTime: true,
-    );
-  }
-
-  void addWidgetIfLastIsFilled() {
-    if (widgets.isNotEmpty) {
-      TextFormField lastWidget = widgets.last as TextFormField;
-      if (lastWidget.controller!.text.isNotEmpty) {
-        widgets.add(addDate(
-            TextEditingController(), _onValidateDates, _onSavedValDates));
-      }
-    }
-    setState(() {});
-  }
-
-  addDatesIntoWidget() {
-    return Container(
-      decoration: JaviInputDecorators().boxDecorator(context),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: JaviPaddings.M),
-              child: Text(
-                AppLocalizations.of(context)!.fechasEvento,
-                style: JaviStyle.subtitulo,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: JaviPaddings.M),
-              child: Column(
-                children: widgets,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: JaviPaddings.M),
-              child: ElevatedButton(
-                onPressed: addWidgetIfLastIsFilled,
-                child: Text(
-                    "${AppLocalizations.of(context)!.anadir} ${AppLocalizations.of(context)!.fecha}"),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  locationEditText(Function onValidate) {
-    return JaviForms.inputFieldWidget(
-      context,
-      "eventLocation",
-      AppLocalizations.of(context)!.localizacion,
-      onValidate,
-      (onSavedVal) => {localizacion = onSavedVal},
-      prefixIcon: const Icon(Icons.location_on),
-    );
-  }
-
-  addCheckbox(String title, Function onValidate) {
-    return JaviForms().addCheckboxWithResponsiveWidget(
-        context,
-        title,
-        _isCheckedForInscriptionDate,
-        addDate(TextEditingController(), _onValidateDates,
-            _onSavedValInscriptionDate), () {
-      setState(() {
-        _isCheckedForInscriptionDate = !_isCheckedForInscriptionDate;
-      });
-    });
   }
 
   submitButton(BuildContext context) {
@@ -268,45 +168,10 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
     });
   }
 
-  _onValidateDescription(String onValidateVal) {
-    return onValidateVal.isEmpty
-        ? "${AppLocalizations.of(context)!.descripcion} ${AppLocalizations.of(context)!.cannotBeEmpty}"
-        : null;
-  }
-
-  _onValidateCategory(String? onValidateVal) {
-    if (onValidateVal == null || onValidateVal.isEmpty) {
-      return AppLocalizations.of(context)!.mustSelectOne;
-    }
-    return null;
-  }
-
   String? _onValidateTags(List<ChipButtonModel>? onValidateVal) {
     return (onValidateVal == null || onValidateVal.isEmpty)
         ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
-  }
-
-  _onValidateDates(String? onValidate) {
-    if (onValidate == null || onValidate.isEmpty) {
-      return AppLocalizations.of(context)!.mustSelectOne;
-    }
-    return null;
-  }
-
-  _onValidateLocation(String? onValidate) {
-    if (onValidate == null || onValidate.isEmpty) {
-      return "Localization ${AppLocalizations.of(context)!.cannotBeEmpty}";
-    }
-    return null;
-  }
-
-  _onValidateInscriptionDate(String? onValidate) {
-    if (_isCheckedForInscriptionDate &&
-        (onValidate == null || onValidate.isEmpty)) {
-      return AppLocalizations.of(context)!.mustSelectOne;
-    }
-    return null;
   }
 
   _onSavedValDates(String? onSavedVal) {
