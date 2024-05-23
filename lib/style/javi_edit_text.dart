@@ -129,7 +129,6 @@ class JaviForms {
   static Widget dropDownMenu(
       BuildContext context,
       TextEditingController controller,
-      initialSelection,
       List enumValues,
       Function onSaved,
       Function onValidate,
@@ -142,7 +141,7 @@ class JaviForms {
       validator: (val) {
         return onValidate(val);
       },
-      builder: (FormFieldState<dynamic> state) => Container(
+      builder: (FormFieldState<dynamic> state) => SizedBox(
         width: MediaQuery.of(context).size.width,
         child: DropdownMenu(
           errorText: state.errorText,
@@ -157,8 +156,8 @@ class JaviForms {
               label: value.label,
             );
           }).toList(),
-          onSelected: (value) {
-            state.didChange(value.label);
+          onSelected: (initialSelection) {
+            state.didChange(initialSelection.label);
           },
         ),
       ),
