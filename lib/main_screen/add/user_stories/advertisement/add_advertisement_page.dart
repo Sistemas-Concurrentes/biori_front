@@ -124,22 +124,25 @@ class _AddAdvertisementPageState extends State<AddAdvertisementPage> {
         };
 
         if (addAdvertisementOutput == AddAdvertisementOutput.created) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.avisoCreado ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.avisoCreado ?? ""
+            : "";
         iconDialog = const Icon(Icons.check);
         } else if (addAdvertisementOutput == AddAdvertisementOutput.forbidden) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorPermisos ?? ""
+            : "";
         iconDialog = const Icon(Icons.sms_failed);
         } else {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorCrearAviso ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorCrearAviso ?? ""
+            : "";
         iconDialog = const Icon(Icons.error);
           onPressed = () {};
         }
         _showLoading(false);
 
-      if (mounted) {
+      if (context.mounted) {
         widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
             icon: iconDialog);
       }

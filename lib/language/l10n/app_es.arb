@@ -72,5 +72,9 @@
     "inscribirse": "Inscribirse",
     "inscrito": "¡Inscrito correctamente!",
     "errorInscripcion": "Error al inscribirse",
-    "buscar": "Buscar"
+    "buscar": "Buscar",
+    "grupo": "Grupo",
+    "general": "General",
+    "anadirEventoGrupo": "Añadir Evento de Grupo",
+    "anadirEventoGeneral": "Añadir Evento General"
 }

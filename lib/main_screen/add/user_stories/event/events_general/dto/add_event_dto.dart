@@ -25,7 +25,7 @@ class AddEventDto {
         'categoria': categoria,
         'localizacion': localizacion,
         'fechas': fechas,
-        'tagsButtons': tagsButtons.map((e) => e.toJson()).toList(),
+        'associatedIds': tagsButtons.map((e) => e.id).toList(),
         'fechaFinInscripcion': fechaFinInscripcion,
       };
 }

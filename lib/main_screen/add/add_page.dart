@@ -2,6 +2,7 @@ import 'package:biori/main_screen/add/constants/add_constants.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
+import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,10 +16,14 @@ class AddPage extends StatefulWidget {
 class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
-    String evento = AppLocalizations.of(context)!.evento,
-        anadir = AppLocalizations.of(context)!.anadir,
-        advertisement = AppLocalizations.of(context)!.advertisement,
-        report = AppLocalizations.of(context)!.report;
+    String anadir = AppLocalizations.of(context)?.anadir ?? "",
+        advertisement = AppLocalizations.of(context)?.advertisement ?? "",
+        report = AppLocalizations.of(context)?.report ?? "",
+        grupo = AppLocalizations.of(context)?.grupo ?? "",
+        general = AppLocalizations.of(context)?.general ?? "",
+        addGeneralEvent =
+            AppLocalizations.of(context)?.anadirEventoGeneral ?? "",
+        addGroupEvent = AppLocalizations.of(context)?.anadirEventoGrupo ?? "";
 
     return Scaffold(
       appBar: AppBar(
@@ -30,25 +35,15 @@ class _AddPageState extends State<AddPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                WidgetsJavi().titleWithDivider(general, topPadding: 0),
                 createCardToAdd(
                   context,
                   AddConstants().eventTag,
-                  "$anadir $evento",
+                  addGeneralEvent,
                   Icons.event,
                   () {
                     CustomRouter.router
                         .push("$addReleasesRoute/$addEventRoute")
-                        .then((value) => null);
-                  },
-                ),
-                createCardToAdd(
-                  context,
-                  AddConstants().advertisementTag,
-                  "$anadir $advertisement",
-                  Icons.note_add,
-                  () {
-                    CustomRouter.router
-                        .push("$addReleasesRoute/$addAdvertisementRoute")
                         .then((value) => null);
                   },
                 ),
@@ -60,6 +55,29 @@ class _AddPageState extends State<AddPage> {
                   () {
                     CustomRouter.router
                         .push("$addReleasesRoute/$addReportRoute")
+                        .then((value) => null);
+                  },
+                ),
+                WidgetsJavi().titleWithDivider(grupo),
+                createCardToAdd(
+                  context,
+                  AddConstants().eventGroupTag,
+                  addGroupEvent,
+                  Icons.event,
+                  () {
+                    CustomRouter.router
+                        .push("$addReleasesRoute/$addEventGroupRoute")
+                        .then((value) => null);
+                  },
+                ),
+                createCardToAdd(
+                  context,
+                  AddConstants().advertisementTag,
+                  "$anadir $advertisement",
+                  Icons.note_add,
+                  () {
+                    CustomRouter.router
+                        .push("$addReleasesRoute/$addAdvertisementRoute")
                         .then((value) => null);
                   },
                 ),

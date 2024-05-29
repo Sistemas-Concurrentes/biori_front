@@ -43,90 +43,32 @@ class ReleasesWidgets {
     );
   }
 
-  static Row moreInfo(
-      context, String location, DateTime date, DateTime? endInscription) {
+  static Row releaseGroupsNameRow(context, Map<int, String> groups) {
+    String groupsName = _groupsToString(groups);
     return Row(
       children: [
         Expanded(
           child: Container(
-            margin: const EdgeInsets.all(ReleasesConstants.margin),
-            child: RichText(
-              text: TextSpan(
-                text: '',
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  const TextSpan(
-                      text: 'Fecha del evento: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: _dateToString(date)),
-                  const TextSpan(
-                      text: '\nLugar: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: location),
-                  endInscription == null
-                      ? const TextSpan(text: '')
-                      : const TextSpan(
-                          text: '\nFecha fin de inscripción: ',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                  endInscription == null
-                      ? const TextSpan(text: '')
-                      : TextSpan(text: _dateToString(endInscription)),
-                ],
-              ),
+            alignment: Alignment.topLeft,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
+            ),
+            padding: const EdgeInsets.fromLTRB(
+                ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),
+            child: Text(
+              groupsName,
+              textAlign: TextAlign.left,
+              style: JaviStyle.informacionExtraCards,
             ),
           ),
-        ),
+        )
       ],
     );
   }
 
-  static Expanded moreInfoButton(
-      context, String location, DateTime date, DateTime? endInscription) {
-    return Expanded(
-      child: ExpansionTile(
-        title: const Text(" "),
-        expandedAlignment: Alignment.topLeft,
-        children: [
-          IntrinsicWidth(
-            child: RichText(
-              text: TextSpan(
-                text: '',
-                style: DefaultTextStyle.of(context).style,
-                children: <TextSpan>[
-                  const TextSpan(
-                      text: 'Fecha del evento: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: _dateToString(date)),
-                  const TextSpan(
-                      text: '\nLugar: ',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  TextSpan(text: location),
-                  endInscription == null
-                      ? const TextSpan(text: '')
-                      : const TextSpan(
-                          text: '\nFecha fin de inscripción: ',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                  endInscription == null
-                      ? const TextSpan(text: '')
-                      : TextSpan(text: _dateToString(endInscription) + "\n"),
-                  endInscription == null
-                      ? const TextSpan(text: '')
-                      : const TextSpan(
-                          text: 'Inscribirse',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  static String _dateToString(DateTime date, {bool withHour = true}) {
-    if (withHour) {
-      return "${date.day}/${date.month}/${date.year}. ${date.hour}h";
-    }
-    return "${date.day}/${date.month}/${date.year}";
+  static String _groupsToString(Map<int, String> groupsInfo) {
+    String groups = "";
+    groupsInfo.forEach((k, v) => groups += "$v, ");
+    return groups.substring(0, groups.length - 2);
   }
 }

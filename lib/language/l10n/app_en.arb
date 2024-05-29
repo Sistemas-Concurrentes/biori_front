@@ -72,5 +72,9 @@
     "inscribirse": "Sign up",
     "inscrito": "Signed up!",
     "errorInscripcion": "Error signing up",
-    "buscar": "Search"
+    "buscar": "Search",
+    "grupo": "Group",
+    "general": "General",
+    "anadirEventoGrupo": "Add Group Event",
+    "anadirEventoGeneral": "Add General Event"
 }

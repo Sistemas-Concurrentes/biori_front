@@ -102,21 +102,24 @@ class _AddReportPageState extends State<AddReportPage> {
       };
 
       if (addReportOutput == AddReportOutput.created) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.reportCreado ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.reportCreado ?? ""
+            : "";
         iconDialog = const Icon(Icons.check);
       } else if (addReportOutput == AddReportOutput.forbidden) {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorPermisos ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorPermisos ?? ""
+            : "";
         iconDialog = const Icon(Icons.sms_failed);
       } else {
-        titleDialog =
-            mounted ? AppLocalizations.of(context)?.errorCrearReport ?? "" : "";
+        titleDialog = context.mounted
+            ? AppLocalizations.of(context)?.errorCrearReport ?? ""
+            : "";
         iconDialog = const Icon(Icons.error);
         onPressed = () {};
       }
       _showLoading(false);
-      if (mounted) {
+      if (context.mounted) {
         widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
             icon: iconDialog);
       }
