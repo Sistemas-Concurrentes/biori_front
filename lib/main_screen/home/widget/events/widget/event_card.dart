@@ -40,8 +40,7 @@ class EventCard extends StatelessWidget {
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-            const Divider(),
-            _tagsNameLinea(context),
+            ReleasesWidgets().dividerAndSubtitleName(context, "Tags"),
             Container(
               margin: const EdgeInsets.only(bottom: JaviPaddings.M),
               child: CategoriesButtons(
@@ -55,16 +54,6 @@ class EventCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Row _tagsNameLinea(context) {
-    return Row(children: [
-      Expanded(
-        child: Container(
-            margin: const EdgeInsets.only(bottom: JaviPaddings.S),
-            child: const Text("Tags", style: JaviStyle.subtitulo)),
-      ),
-    ]);
   }
 
   Row _ultimaLinea(context, saberMasText) {

@@ -18,10 +18,11 @@ class AdvertisementCard extends StatelessWidget {
       child: Column(
         children: [
           ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
-          ReleasesWidgets.releaseGroupsNameRow(
-              context, advertisementModel.groupsInfo),
           ReleasesWidgets.releaseDescriptionRow(
               context, advertisementModel.description),
+          ReleasesWidgets().dividerAndSubtitleName(context, "Grupos"),
+          ReleasesWidgets.releaseGroupsNameRow(
+              context, advertisementModel.groupsInfo),
         ],
       ),
     );

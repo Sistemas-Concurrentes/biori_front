@@ -44,24 +44,13 @@ class EventGroupCard extends StatelessWidget {
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventGroupModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-            const Divider(),
-            _groupsName(context),
+            ReleasesWidgets().dividerAndSubtitleName(context, "Groups"),
             ReleasesWidgets.releaseGroupsNameRow(context, groupsInfo),
             _ultimaLinea(context, AppLocalizations.of(context)!.saberMas)
           ],
         ),
       ),
     );
-  }
-
-  Row _groupsName(context) {
-    return Row(children: [
-      Expanded(
-        child: Container(
-            margin: const EdgeInsets.only(bottom: JaviPaddings.S),
-            child: const Text("Groups", style: JaviStyle.subtitulo)),
-      ),
-    ]);
   }
 
   Row _ultimaLinea(context, saberMasText) {
