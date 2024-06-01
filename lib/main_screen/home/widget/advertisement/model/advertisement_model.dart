@@ -6,12 +6,11 @@ class AdvertisementModel implements ReleaseModelInterface {
   String title;
   String description;
   String creatorName;
+  int creatorId;
 
   @override
   DateTime lastUpdate;
 
-  int? teacherUserId;
-  int? delegateUserId;
 
   AdvertisementModel(
       {required this.id,
@@ -20,8 +19,7 @@ class AdvertisementModel implements ReleaseModelInterface {
       required this.description,
       required this.creatorName,
       required this.lastUpdate,
-      this.teacherUserId,
-      this.delegateUserId});
+      required this.creatorId});
 
   factory AdvertisementModel.fromJson(Map<String, dynamic> json) {
     final Map<int, String> groupsInfo = {};
@@ -37,7 +35,7 @@ class AdvertisementModel implements ReleaseModelInterface {
       groupsInfo: groupsInfo,
       creatorName: json['userName'],
       lastUpdate: DateTime.parse(json['updatedAt'].toString()),
-      teacherUserId: json['userId'],
+      creatorId: json['userId'],
     );
   }
 }
