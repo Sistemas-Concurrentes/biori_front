@@ -94,35 +94,8 @@ class _AddReportPageState extends State<AddReportPage> {
 
       _showLoading(true);
       var addReportOutput = await AddReport().run(titulo, descripcion);
-
-      String titleDialog = "";
-      Icon? iconDialog;
-      Function onPressed = () {
-        CustomRouter.router.pop();
-      };
-
-      if (addReportOutput == AddReportOutput.created) {
-        titleDialog = context.mounted
-            ? AppLocalizations.of(context)?.reportCreado ?? ""
-            : "";
-        iconDialog = const Icon(Icons.check);
-      } else if (addReportOutput == AddReportOutput.forbidden) {
-        titleDialog = context.mounted
-            ? AppLocalizations.of(context)?.errorPermisos ?? ""
-            : "";
-        iconDialog = const Icon(Icons.sms_failed);
-      } else {
-        titleDialog = context.mounted
-            ? AppLocalizations.of(context)?.errorCrearReport ?? ""
-            : "";
-        iconDialog = const Icon(Icons.error);
-        onPressed = () {};
-      }
       _showLoading(false);
-      if (context.mounted) {
-        widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
-            icon: iconDialog);
-      }
+      _showDialogAfterApiCall(addReportOutput);
     });
   }
 
@@ -142,5 +115,36 @@ class _AddReportPageState extends State<AddReportPage> {
     setState(() {
       _isApiCallProcess = showLoading;
     });
+  }
+
+  _showDialogAfterApiCall(AddReportOutput addReportOutput) {
+    String titleDialog = "";
+    Icon? iconDialog;
+    Function onPressed = () {
+      CustomRouter.router.pop();
+    };
+
+    if (addReportOutput == AddReportOutput.created) {
+      titleDialog = context.mounted
+          ? AppLocalizations.of(context)?.reportCreado ?? ""
+          : "";
+      iconDialog = const Icon(Icons.check);
+    } else if (addReportOutput == AddReportOutput.forbidden) {
+      titleDialog = context.mounted
+          ? AppLocalizations.of(context)?.errorPermisos ?? ""
+          : "";
+      iconDialog = const Icon(Icons.sms_failed);
+    } else {
+      titleDialog = context.mounted
+          ? AppLocalizations.of(context)?.errorCrearReport ?? ""
+          : "";
+      iconDialog = const Icon(Icons.error);
+      onPressed = () {};
+    }
+
+    if (context.mounted) {
+      widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
+          icon: iconDialog);
+    }
   }
 }
