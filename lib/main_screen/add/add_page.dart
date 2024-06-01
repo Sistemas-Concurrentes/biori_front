@@ -72,7 +72,7 @@ class _AddPageState extends State<AddPage> {
                 ),
                 createCardToAdd(
                   context,
-                  AddConstants().advertisementTag,
+                  AddConstants().noticeTag,
                   "$anadir $advertisement",
                   Icons.note_add,
                   () {

@@ -1,6 +1,6 @@
 import '../../releases_widgets/release_model_interface.dart';
 
-class AdvertisementModel implements ReleaseModelInterface {
+class NoticesModel implements ReleaseModelInterface {
   int id;
   Map<int, String> groupsInfo;
   String title;
@@ -11,8 +11,7 @@ class AdvertisementModel implements ReleaseModelInterface {
   @override
   DateTime lastUpdate;
 
-
-  AdvertisementModel(
+  NoticesModel(
       {required this.id,
       required this.groupsInfo,
       required this.title,
@@ -21,14 +20,14 @@ class AdvertisementModel implements ReleaseModelInterface {
       required this.lastUpdate,
       required this.creatorId});
 
-  factory AdvertisementModel.fromJson(Map<String, dynamic> json) {
+  factory NoticesModel.fromJson(Map<String, dynamic> json) {
     final Map<int, String> groupsInfo = {};
 
     for (var group in json['groups'] as List<dynamic>) {
       groupsInfo[group['id']] = group['name'];
     }
 
-    return AdvertisementModel(
+    return NoticesModel(
       id: json['id'],
       title: json['title'],
       description: json['description'],

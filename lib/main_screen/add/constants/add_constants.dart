@@ -1,6 +1,6 @@
 class AddConstants{
   String eventTag = "name-tile-event";
   String eventGroupTag = "name-tile-event-group";
-  String advertisementTag = "name-tile-advertisement";
+  String noticeTag = "name-tile-notices";
   String reportTag = "name-tile-report";
 }

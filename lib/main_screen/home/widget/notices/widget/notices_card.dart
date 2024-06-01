@@ -1,15 +1,13 @@
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import '../../releases_widgets/releases_widgets.dart';
-import '../model/advertisement_model.dart';
+import '../model/notices_model.dart';
 
-class AdvertisementCard extends StatelessWidget {
+class NoticesCard extends StatelessWidget {
   final scrollController = ScrollController();
-  final AdvertisementModel advertisementModel;
+  final NoticesModel noticeModel;
 
-  AdvertisementCard(
-      {super.key,
-      required this.advertisementModel});
+  NoticesCard({super.key, required this.noticeModel});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +15,11 @@ class AdvertisementCard extends StatelessWidget {
       padding: const EdgeInsets.all(JaviPaddings.L),
       child: Column(
         children: [
-          ReleasesWidgets.releaseTitleRow(context, advertisementModel.title),
+          ReleasesWidgets.releaseTitleRow(context, noticeModel.title),
           ReleasesWidgets.releaseDescriptionRow(
-              context, advertisementModel.description),
+              context, noticeModel.description),
           ReleasesWidgets().dividerAndSubtitleName(context, "Grupos"),
-          ReleasesWidgets.releaseGroupsNameRow(
-              context, advertisementModel.groupsInfo),
+          ReleasesWidgets.releaseGroupsNameRow(context, noticeModel.groupsInfo),
         ],
       ),
     );
