@@ -5,19 +5,22 @@ class ReportModel implements ReleaseModelInterface {
   String title;
   String description;
   String creatorName;
+  int creatorId;
+  List<int> courses;
+  bool toTeachers;
 
   @override
   DateTime lastUpdate;
-
-  int teacherUserId;
 
   ReportModel(
       {required this.id,
       required this.title,
       required this.description,
       required this.creatorName,
-      required this.lastUpdate,
-      required this.teacherUserId,
+    required this.creatorId,
+    required this.courses,
+    required this.toTeachers,
+    required this.lastUpdate,
       });
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
@@ -25,9 +28,13 @@ class ReportModel implements ReleaseModelInterface {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      creatorName: json['teacherName'],
+      creatorName: json['userName'],
+      creatorId: json['userId'],
+      courses: (json['courses'] as List<dynamic>)
+          .map((course) => course as int)
+          .toList(),
+      toTeachers: json['toTeachers'] == 1,
       lastUpdate: DateTime.parse(json['updatedAt']),
-      teacherUserId: json['teacherId'],
     );
   }
 }
