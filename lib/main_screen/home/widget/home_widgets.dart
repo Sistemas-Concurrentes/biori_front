@@ -27,8 +27,12 @@ class HomeWidgets {
           itemBuilder: (context, index) {
             final release = _getWidgetFromRelease(
                 allReleases[index], cardListenerInterfaceHomePage);
+            final backgroundColor = allReleases[index] is ReportModel
+                ? Colors.red[100]
+                : Theme.of(context).cardColor;
 
             return Card(
+              color: backgroundColor,
               clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
