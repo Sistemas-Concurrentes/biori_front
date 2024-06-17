@@ -1,7 +1,13 @@
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 
+import '../../../listeners/card_listener_interface.dart';
+
 class ReportModel implements ReleaseModelInterface {
+  @override
   int id;
+
+  @override
+  ReleaseType get releaseType => ReleaseType.report;
   String title;
   String description;
   String creatorName;

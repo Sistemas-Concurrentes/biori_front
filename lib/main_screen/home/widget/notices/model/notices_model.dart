@@ -1,7 +1,14 @@
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+
 import '../../releases_widgets/release_model_interface.dart';
 
 class NoticesModel implements ReleaseModelInterface {
+  @override
   int id;
+
+  @override
+  ReleaseType get releaseType => ReleaseType.notice;
+
   Map<int, String> groupsInfo;
   String title;
   String description;

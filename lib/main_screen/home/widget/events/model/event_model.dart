@@ -1,8 +1,13 @@
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
+import '../../../listeners/card_listener_interface.dart';
 import '../../releases_widgets/button_widgets/model/categories_button_model.dart';
 
 class EventModel implements ReleaseModelInterface {
+  @override
   int id;
+
+  @override
+  ReleaseType get releaseType => ReleaseType.event;
   String title;
   String category;
   String description;
