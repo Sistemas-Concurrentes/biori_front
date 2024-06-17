@@ -19,6 +19,9 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
   late List<int> categoriesFollowedByUser;
   late List<int> groupsSubscribedByUser;
   final viewModel = HomePageViewModel();
@@ -76,7 +79,13 @@ class HomePageState extends State<HomePage> {
     } else {
       return Stack(
         children: [
-          homeWidgets.getCenterListBuilder(allReleases, cardListener),
+          RefreshIndicator(
+              key: _refreshIndicatorKey,
+              onRefresh: () async {
+                viewModel.loadReleases();
+              },
+              child:
+                  homeWidgets.getCenterListBuilder(allReleases, cardListener)),
           homeWidgets.getFloatingActionButton(),
         ],
       );
