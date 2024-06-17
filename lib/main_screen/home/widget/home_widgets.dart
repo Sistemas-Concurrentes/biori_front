@@ -16,35 +16,34 @@ import 'reports/model/report_model.dart';
 import 'reports/widget/report_card.dart';
 
 class HomeWidgets {
-  Center getCenterListBuilder(
+  Container getCenterListBuilder(
       allReleases, CardListenerInterface cardListenerInterfaceHomePage) {
-    return Center(
-      child: Container(
-        constraints: const BoxConstraints(
-          maxWidth: ReleasesConstants.maxWidth,
-        ),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            final release = _getWidgetFromRelease(
-                allReleases[index], cardListenerInterfaceHomePage);
-            final backgroundColor = allReleases[index] is ReportModel
-                ? Colors.red[100]
-                : Theme.of(context).cardColor;
+    return Container(
+      constraints: const BoxConstraints(
+        maxWidth: ReleasesConstants.maxWidth,
+      ),
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          final release = _getWidgetFromRelease(
+              allReleases[index], cardListenerInterfaceHomePage);
+          final backgroundColor = allReleases[index] is ReportModel
+              ? Colors.red[100]
+              : Theme.of(context).cardColor;
 
-            return Card(
-              color: backgroundColor,
-              clipBehavior: Clip.hardEdge,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
-              ),
-              elevation: ReleasesConstants.elevation,
-              margin: const EdgeInsets.fromLTRB(JaviPaddings.L, JaviPaddings.M,
-                  JaviPaddings.L, JaviPaddings.M),
-              child: release,
-            );
-          },
-          itemCount: allReleases.length,
-        ),
+          return Card(
+            color: backgroundColor,
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(ReleasesConstants.borderRadius),
+            ),
+            elevation: ReleasesConstants.elevation,
+            margin: const EdgeInsets.fromLTRB(
+                JaviPaddings.L, JaviPaddings.M, JaviPaddings.L, JaviPaddings.M),
+            child: release,
+          );
+        },
+        itemCount: allReleases.length,
       ),
     );
   }
