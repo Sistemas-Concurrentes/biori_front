@@ -13,14 +13,11 @@ import '../../../widget/reports/model/report_model.dart';
 class ReleasesRepository {
   final ApiReleasesDatasource apiReleasesDatasource = ApiReleasesDatasource();
 
-  Future<List<ReleaseModelInterface>> getReleasesOrderedByUpdate(
-      List<ReleaseModelInterface> allReleases) async {
-    if (allReleases.isNotEmpty) {
-      return getReleasesOrderedByLastUpdate(allReleases);
-    }
-
+  Future<List<ReleaseModelInterface>> getReleasesOrderedByUpdate() async {
     final releasesJson = await apiReleasesDatasource.getReleases();
-    return getReleasesOrderedByLastUpdate(getReleasesFromJson(releasesJson));
+    final releasesSorted = getReleasesFromJson(releasesJson);
+    releasesSorted.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
+    return releasesSorted;
   }
 
   List<ReleaseModelInterface> getReleasesFromJson(Map<String, dynamic> json) {
@@ -43,11 +40,5 @@ class ReleasesRepository {
     releases.addAll(reports);
     releases.addAll(eventsGroup);
     return releases;
-  }
-
-  List<ReleaseModelInterface> getReleasesOrderedByLastUpdate(
-      List<ReleaseModelInterface> allReleases) {
-    allReleases.sort((a, b) => b.lastUpdate.compareTo(a.lastUpdate));
-    return allReleases;
   }
 }
