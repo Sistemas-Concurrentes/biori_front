@@ -1,7 +1,9 @@
 import 'package:biori/main_screen/add/constants/add_constants.dart';
+import 'package:biori/main_screen/add/user_stories/report/repository/add_report_repository.dart';
 import 'package:biori/main_screen/add/user_stories/report/user_stories/add_report.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
+import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +21,8 @@ class _AddReportPageState extends State<AddReportPage> {
 
   String titulo = "";
   String descripcion = "";
+  List<ChipButtonModel> courses = [];
+  bool toTeachers = false;
 
   bool _isApiCallProcess = false;
 
@@ -27,6 +31,7 @@ class _AddReportPageState extends State<AddReportPage> {
     var formWidgets = [
       eventTitleEditText(_onValidateTitle),
       descriptionBigEditText(_onValidateDescription),
+      tagsCheckBoxes(_onValidateTags),
       submitButton(context),
     ];
 
@@ -82,6 +87,32 @@ class _AddReportPageState extends State<AddReportPage> {
         maxLines: null);
   }
 
+  Widget tagsCheckBoxes(Function onValidate) {
+    return FutureBuilder<List<ChipButtonModel>>(
+      future: AddReportRepository().getAllCourses(),
+      builder: (BuildContext context,
+          AsyncSnapshot<List<ChipButtonModel>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return const Text('Error al cargar los datos');
+        } else {
+          return JaviForms.chipsInputFieldWidget(
+              context,
+              snapshot.data!,
+              onValidate,
+              (onSavedVal) => {
+                    courses = onSavedVal,
+                    toTeachers = courses.any((element) => element.id == 0),
+                    if (toTeachers)
+                      courses.removeWhere((element) => element.id == 0)
+                  },
+              titleEvent: AppLocalizations.of(context)?.seleccionaGrupos ?? "");
+        }
+      },
+    );
+  }
+
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () async {
@@ -93,7 +124,8 @@ class _AddReportPageState extends State<AddReportPage> {
       _formKey.currentState!.save();
 
       _showLoading(true);
-      var addReportOutput = await AddReport().run(titulo, descripcion);
+      var addReportOutput =
+          await AddReport().run(titulo, descripcion, courses, toTeachers);
       _showLoading(false);
       _showDialogAfterApiCall(addReportOutput);
     });
@@ -108,6 +140,12 @@ class _AddReportPageState extends State<AddReportPage> {
   _onValidateDescription(String onValidateVal) {
     return onValidateVal.isEmpty
         ? "${AppLocalizations.of(context)!.descripcion} ${AppLocalizations.of(context)!.cannotBeEmpty}"
+        : null;
+  }
+
+  String? _onValidateTags(List<ChipButtonModel>? onValidateVal) {
+    return (onValidateVal == null || onValidateVal.isEmpty)
+        ? AppLocalizations.of(context)!.mustSelectOneOrMore
         : null;
   }
 
