@@ -15,15 +15,9 @@ class HomePageViewModel {
   BehaviorSubject<List<int>> categoriesFollowed = BehaviorSubject.seeded([]);
 
   void loadReleases() async {
-    final currentReleases = releases.valueOrNull ?? [];
-
-    if (currentReleases.isNotEmpty) {
-      releases.add(currentReleases);
-      return;
-    }
-
+    final currentCategories = categoriesFollowed.valueOrNull ?? [];
     final newReleases = await releaseRepository.getReleasesOrderedByUpdate();
-    releases.add(newReleases);
+    releases.add(subscribeToEvents(newReleases, currentCategories));
   }
 
   void likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
@@ -86,18 +80,22 @@ class HomePageViewModel {
 
   void subscribeCategory(int idEvent) {
     final currentCategories = categoriesFollowed.valueOrNull ?? [];
+    final currentReleases = releases.valueOrNull ?? [];
     if (currentCategories.contains(idEvent)) {
       currentCategories.remove(idEvent);
     } else {
       currentCategories.add(idEvent);
     }
 
-    final currentReleases = releases.valueOrNull ?? [];
+    releases.add(subscribeToEvents(currentReleases, currentCategories));
+  }
 
-    final newReleases = currentReleases.map((allReleases) {
+  List<ReleaseModelInterface> subscribeToEvents(
+      List<ReleaseModelInterface> releases, List<int> categoriesFollowed) {
+    final newReleases = releases.map((allReleases) {
       if (allReleases is EventModel) {
         for (var category in allReleases.tags) {
-          currentCategories.contains(category.id)
+          categoriesFollowed.contains(category.id)
               ? category.isFollowed = true
               : category.isFollowed = false;
         }
@@ -105,6 +103,6 @@ class HomePageViewModel {
       return allReleases;
     }).toList();
 
-    releases.add(newReleases);
+    return newReleases;
   }
 }
