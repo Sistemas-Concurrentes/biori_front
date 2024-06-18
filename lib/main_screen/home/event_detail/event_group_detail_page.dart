@@ -141,7 +141,6 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
             children: [
               MyLikeButton(
                   id: detailEventModel.id,
-                  releaseType: ReleaseType.event,
                   numberLikes: detailEventModel.numberLikes,
                   isLiked: detailEventModel.isLiked,
                   likeEvent: likeEvent),
@@ -193,9 +192,9 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
   }
 
   @override
-  likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
+  likeEvent(int idEvent, bool userSetLike) {
     setState(() {
-      widget.cardListenerInterface.likeEvent(idEvent, releaseType, userSetLike);
+      widget.cardListenerInterface.likeEvent(idEvent, userSetLike);
     });
   }
 

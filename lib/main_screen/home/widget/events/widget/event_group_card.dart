@@ -59,7 +59,6 @@ class EventGroupCard extends StatelessWidget {
       children: [
         MyLikeButton(
             id: eventGroupModel.id,
-            releaseType: ReleaseType.event,
             numberLikes: eventGroupModel.numberLikes,
             isLiked: eventGroupModel.isLiked,
             likeEvent: cardListenerInterface.likeEvent),
