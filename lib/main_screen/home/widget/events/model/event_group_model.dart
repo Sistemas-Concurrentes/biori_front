@@ -1,30 +1,41 @@
+import 'package:biori/main_screen/home/widget/events/model/event_model_interface.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:biori/style/model/chip_button_model.dart';
 
 import '../../../listeners/card_listener_interface.dart';
 
-class EventGroupModel implements ReleaseModelInterface {
+class EventGroupModel implements ReleaseModelInterface, EventModelInterface {
   @override
   int id;
 
   @override
   ReleaseType get releaseType => ReleaseType.eventGroup;
+  @override
   String title;
+  @override
   String category;
+  @override
   String description;
+  @override
   int organiserId;
+  @override
   String organiserName;
+  @override
   List<DateTime> dates;
+  @override
   String location;
+  @override
   int numberLikes;
-  List<ChipButtonModel> groups;
-
+  @override
   DateTime? endInscription;
   @override
   DateTime lastUpdate;
-
+  @override
   bool isSubscribed;
+  @override
   bool isLiked = false;
+
+  List<ChipButtonModel> groups;
 
   EventGroupModel(
       {required this.id,

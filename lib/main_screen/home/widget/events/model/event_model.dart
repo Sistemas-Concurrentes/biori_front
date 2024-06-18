@@ -1,28 +1,40 @@
+import 'package:biori/main_screen/home/widget/events/model/event_model_interface.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import '../../../listeners/card_listener_interface.dart';
 import '../../releases_widgets/button_widgets/model/categories_button_model.dart';
 
-class EventModel implements ReleaseModelInterface {
+class EventModel implements ReleaseModelInterface, EventModelInterface {
   @override
   int id;
 
   @override
   ReleaseType get releaseType => ReleaseType.event;
+  @override
   String title;
+  @override
   String category;
+  @override
   String description;
+  @override
   int organiserId;
+  @override
   String organiserName;
+  @override
   List<DateTime> dates;
+  @override
   String location;
+  @override
   int numberLikes;
   List<TagsButtonsModel> tags;
 
+  @override
   DateTime? endInscription;
   @override
   DateTime lastUpdate;
 
+  @override
   bool isSubscribed;
+  @override
   bool isLiked = false;
 
   EventModel(
