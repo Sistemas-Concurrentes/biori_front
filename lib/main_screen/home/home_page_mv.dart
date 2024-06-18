@@ -23,14 +23,7 @@ class HomePageViewModel {
 
   void likeEvent(int idEvent, bool userSetLike) {
     final currentReleases = releases.valueOrNull ?? [];
-    final findRelease = currentReleases
-        .where((element) =>
-            (ReleaseType.event == element.releaseType ||
-                ReleaseType.eventGroup == element.releaseType) &&
-            element.id == idEvent)
-        .firstOrNull;
-
-    final event = findRelease as EventModelInterface?;
+    final event = _getEventById(idEvent);
     if (event == null) {
       return;
     }
@@ -52,14 +45,7 @@ class HomePageViewModel {
 
   void subscribeEvent(int idEvent) async {
     final currentReleases = releases.valueOrNull ?? [];
-    final findRelease = currentReleases
-        .where((element) =>
-            (ReleaseType.event == element.releaseType ||
-                ReleaseType.eventGroup == element.releaseType) &&
-            element.id == idEvent)
-        .firstOrNull;
-
-    final event = findRelease as EventModelInterface?;
+    final event = _getEventById(idEvent);
     if (event == null) {
       return;
     }
@@ -108,5 +94,17 @@ class HomePageViewModel {
     }).toList();
 
     return newReleases;
+  }
+
+  EventModelInterface? _getEventById(int idEvent) {
+    final currentReleases = releases.valueOrNull ?? [];
+    final findRelease = currentReleases
+        .where((element) =>
+            (ReleaseType.event == element.releaseType ||
+                ReleaseType.eventGroup == element.releaseType) &&
+            element.id == idEvent)
+        .firstOrNull;
+
+    return findRelease as EventModelInterface?;
   }
 }
