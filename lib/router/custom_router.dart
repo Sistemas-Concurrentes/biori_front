@@ -17,6 +17,8 @@ import 'package:biori/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../main_screen/home/event_detail/event_group_detail_page.dart';
+import '../main_screen/home/widget/events/model/event_group_model.dart';
 
 class CustomRouter {
   static final CustomRouter _instance = CustomRouter._internal();
@@ -58,14 +60,28 @@ class CustomRouter {
                 path: eventDetailRoute,
                 pageBuilder: (context, state) {
                   final extra = state.extra as Map<String, dynamic>;
-                  EventModel eventModel = extra['eventModel'] as EventModel;
+                  ReleaseType releaseType = extra['releaseType'] as ReleaseType;
                   CardListenerInterface cardListenerInterface =
                       extra['cardListenerInterface'] as CardListenerInterface;
-                  return getPage(
-                    child: EventDetailPage(
-                        eventModel: eventModel, cardListenerInterface: cardListenerInterface),
-                    state: state,
-                  );
+
+                  if (releaseType == ReleaseType.event) {
+                    EventModel eventModel = extra['eventModel'] as EventModel;
+                    return getPage(
+                      child: EventDetailPage(
+                          eventModel: eventModel,
+                          cardListenerInterface: cardListenerInterface),
+                      state: state,
+                    );
+                  } else {
+                    EventGroupModel eventGroupModel =
+                        extra['eventModel'] as EventGroupModel;
+                    return getPage(
+                      child: EventGroupDetailPage(
+                          eventGroupModel: eventGroupModel,
+                          cardListenerInterface: cardListenerInterface),
+                      state: state,
+                    );
+                  }
                 },
               ),
               GoRoute(

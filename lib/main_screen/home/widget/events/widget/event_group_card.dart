@@ -21,7 +21,8 @@ class EventGroupCard extends StatelessWidget {
   Future _goToEventDetail() {
     return CustomRouter.router.push("/eventDetail/${eventGroupModel.id}",
         extra: {
-          'eventModel': eventGroupModel,
+      'releaseType': ReleaseType.eventGroup,
+      'eventModel': eventGroupModel,
           'cardListenerInterface': cardListenerInterface
     }).then((value) => null);
   }
