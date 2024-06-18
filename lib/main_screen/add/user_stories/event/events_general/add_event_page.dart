@@ -12,9 +12,11 @@ import '../event_common_widgets.dart';
 import '../validators/event_validators.dart';
 
 enum CategoryLabelGroup {
-  actividad("ACTIVIDAD"),
-  gestion("GESTION"),
-  clase("CLASE");
+  becas("Becas y empleo"),
+  jornadas("Jornadas y cursos"),
+  conferencias("Conferencias"),
+  voluntariado("Voluntariado"),
+  exposiciones("Exposiciones y Concursos");
 
   const CategoryLabelGroup(this.label);
 
