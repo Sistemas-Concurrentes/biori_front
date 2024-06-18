@@ -34,6 +34,11 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    Map<int, String> groupsInfo = {};
+    for (var element in detailEventModel.groups) {
+      groupsInfo[element.id] = element.name;
+    }
+
     return Scaffold(
       appBar:
           WidgetsJavi().myAppBar(AppLocalizations.of(context)?.evento ?? ''),
@@ -47,7 +52,7 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
                 WidgetsJavi().paddedWidget(_eventCardDescription(context)),
                 WidgetsJavi().paddedWidget(_moreInfo(context)),
                 WidgetsJavi().paddedWidget(const Divider()),
-                WidgetsJavi().paddedWidget(userInteractionsRow(),
+                WidgetsJavi().paddedWidget(userInteractionsRow(groupsInfo),
                     topPadding: JaviPaddings.S),
               ],
             ),
@@ -126,7 +131,7 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
     );
   }
 
-  Widget userInteractionsRow() {
+  Widget userInteractionsRow(Map<int, String> groups) {
     return Column(
       children: [
         const Row(children: [
@@ -135,6 +140,7 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
           ),
           //
         ]),
+        releaseGroupsNameRow(context, groups),
         WidgetsJavi().paddedWidget(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,6 +197,29 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
     return result;
   }
 
+  static Row releaseGroupsNameRow(context, Map<int, String> groups) {
+    String groupsName = _groupsToString(groups);
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            alignment: Alignment.topLeft,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(ReleasesConstants.margin),
+            ),
+            padding: const EdgeInsets.fromLTRB(
+                ReleasesConstants.padding, 0, ReleasesConstants.padding, 0),
+            child: Text(
+              groupsName,
+              textAlign: TextAlign.left,
+              style: JaviStyle.informacionExtraCards,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   likeEvent(int idEvent, bool userSetLike) {
     setState(() {
@@ -215,6 +244,12 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
   @override
   subscribeEvent(int idEvent) {
     widget.cardListenerInterface.subscribeEvent(idEvent);
+  }
+
+  static String _groupsToString(Map<int, String> groupsInfo) {
+    String groups = "";
+    groupsInfo.forEach((k, v) => groups += "$v, ");
+    return groups.substring(0, groups.length - 2);
   }
 }
 
