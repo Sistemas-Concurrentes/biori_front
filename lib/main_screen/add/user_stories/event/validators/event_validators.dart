@@ -14,7 +14,7 @@ String? onValidateCategory(String? onValidateVal, String? error) {
 }
 
 String? onValidateDates(String? onValidate, String? error) {
-  if (onValidate == null || onValidate.isEmpty) {
+  if (onValidate == null || onValidate.isEmpty || onValidate == " ") {
     return error ?? "Error";
   }
   return null;
