@@ -2,7 +2,7 @@ import 'package:biori/main_screen/home/user_stories/do_like.dart';
 import 'package:biori/main_screen/home/user_stories/do_subscribe_event.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
 import 'package:biori/main_screen/home/widget/events/model/event_model.dart';
-import 'package:biori/main_screen/home/widget/events/model/event_model_interface.dart';
+import 'package:biori/main_screen/home/widget/events/interface/event_model_interface.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:rxdart/rxdart.dart';
 

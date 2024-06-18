@@ -1,4 +1,4 @@
-import 'package:biori/main_screen/home/widget/events/model/event_model_interface.dart';
+import 'package:biori/main_screen/home/widget/events/interface/event_model_interface.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:biori/style/model/chip_button_model.dart';
 
