@@ -2,6 +2,7 @@ import 'package:biori/main_screen/home/user_stories/do_like.dart';
 import 'package:biori/main_screen/home/user_stories/do_subscribe_event.dart';
 import 'package:biori/main_screen/home/user_stories/releases/repository/releases_repository.dart';
 import 'package:biori/main_screen/home/widget/events/model/event_model.dart';
+import 'package:biori/main_screen/home/widget/events/model/event_model_interface.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -20,7 +21,7 @@ class HomePageViewModel {
     releases.add(subscribeToEvents(newReleases, currentCategories));
   }
 
-  void likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
+  void likeEvent(int idEvent, bool userSetLike) {
     final currentReleases = releases.valueOrNull ?? [];
     final findRelease = currentReleases
         .where((element) =>
@@ -29,7 +30,7 @@ class HomePageViewModel {
             element.id == idEvent)
         .firstOrNull;
 
-    final event = findRelease as EventModel?;
+    final event = findRelease as EventModelInterface?;
     if (event == null) {
       return;
     }
@@ -37,11 +38,11 @@ class HomePageViewModel {
     DoLikeEvent().run(idEvent, userSetLike: !event.isLiked);
 
     final newReleases = currentReleases.map((element) {
-      if (element == event) {
+      if (element.id == idEvent) {
         event.isLiked = !event.isLiked;
         event.numberLikes =
             event.isLiked ? event.numberLikes + 1 : event.numberLikes - 1;
-        return event;
+        return event as ReleaseModelInterface;
       }
       return element;
     }).toList();

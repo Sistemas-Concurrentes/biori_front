@@ -115,7 +115,7 @@ class _CardListenerInterface implements CardListenerInterface {
 
   @override
   likeEvent(int idEvent, ReleaseType releaseType, bool userSetLike) {
-    viewModel.likeEvent(idEvent, releaseType, userSetLike);
+    viewModel.likeEvent(idEvent, userSetLike);
   }
 
   @override
