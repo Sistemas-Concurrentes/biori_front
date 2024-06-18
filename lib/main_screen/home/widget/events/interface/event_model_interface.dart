@@ -24,4 +24,6 @@ abstract class EventModelInterface {
   set isLiked(bool value);
 
   set numberLikes(int value);
+
+  set isSubscribed(bool value);
 }

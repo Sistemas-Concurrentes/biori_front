@@ -54,19 +54,22 @@ class HomePageViewModel {
     final currentReleases = releases.valueOrNull ?? [];
     final findRelease = currentReleases
         .where((element) =>
-            (ReleaseType.event == element.releaseType) && element.id == idEvent)
+            (ReleaseType.event == element.releaseType ||
+                ReleaseType.eventGroup == element.releaseType) &&
+            element.id == idEvent)
         .firstOrNull;
 
-    final event = findRelease as EventModel?;
+    final event = findRelease as EventModelInterface?;
     if (event == null) {
       return;
     }
 
     SubscribeOutput response = await DoSubscribeEvent().run(idEvent);
+
     final newReleases = currentReleases.map((element) {
-      if (element == event) {
+      if (element.id == idEvent) {
         event.isSubscribed = true;
-        return event;
+        return event as ReleaseModelInterface;
       }
       return element;
     }).toList();
