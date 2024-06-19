@@ -1,14 +1,12 @@
+import 'dart:async';
+
 import 'package:biori/main_screen/add/constants/add_constants.dart';
-import 'package:biori/main_screen/add/user_stories/event/events_group/user_stories/add_event_group.dart';
-import 'package:biori/main_screen/add/user_stories/event/validators/event_validators.dart';
-import 'package:biori/main_screen/home/widget/releases_widgets/button_widgets/model/categories_button_model.dart';
-import 'package:biori/router/custom_router.dart';
 import 'package:biori/style/javi_edit_text.dart';
-import 'package:biori/style/model/chip_button_model.dart';
 import 'package:biori/style/widgets_javi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../event_common_widgets.dart';
+import 'add_event_group_page_mv.dart';
 
 class AddEventGroupPage extends StatefulWidget {
   const AddEventGroupPage({super.key});
@@ -18,18 +16,12 @@ class AddEventGroupPage extends StatefulWidget {
 }
 
 class _AddEventGroupPageState extends State<AddEventGroupPage> {
-  final _formKey = GlobalKey<FormState>();
   final widgetsJavi = WidgetsJavi();
+  final viewModel = AddEventGroupPageVM();
+  final List<StreamSubscription> subscriptions = [];
+  final EventCommonWidgets eventWidgets = EventCommonWidgets();
 
-  String titulo = "";
-  String descripcion = "";
-  String categoria = "";
-  String localizacion = "";
   List<Widget> widgets = [];
-  List<String> fechasEvento = [];
-  String? fechaFinInscripcion;
-  List<ChipButtonModel> groupsChips = [];
-  List<TagsButtonsModel> allTagsButtons = [];
 
   bool _isCheckedForInscriptionDate = false;
   bool _isApiCallProcess = false;
@@ -38,43 +30,43 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
   @override
   void initState() {
     super.initState();
-    allTagsButtons.addAll([
-      TagsButtonsModel(name: "Group1", id: 1),
-      TagsButtonsModel(name: "Group2", id: 2),
-      TagsButtonsModel(name: "Group3", id: 3),
-      TagsButtonsModel(name: "Group4", id: 4),
-    ]);
+    _subscribeAllToViewModel();
+
+    viewModel.loadTags();
+    viewModel.loadCategories();
   }
 
   @override
   Widget build(BuildContext context) {
     if (widgets.isEmpty) {
-      widgets.add(EventCommonWidgets().addDate(
-          TextEditingController(), context, onValidateDates, _onSavedValDates));
+      widgets.add(eventWidgets.addDate(TextEditingController(), context,
+          viewModel.onValidateDates, viewModel.onSavedValDates));
     }
 
     var formWidgets = [
-      EventCommonWidgets().eventTitleEditText(
-          context, onValidateTitle, (onSavedVal) => {titulo = onSavedVal}),
-      EventCommonWidgets().descriptionBigEditText(context,
-          onValidateDescription, (onSavedVal) => {descripcion = onSavedVal}),
-      EventCommonWidgets().categoryChooser(context, onValidateCategory,
-          (onSavedVal) => {categoria = onSavedVal}, categoryController),
-      groupsCheckBoxes(_onValidateTags),
-      EventCommonWidgets().addDatesIntoWidget(context, widgets, () {
+      eventWidgets.eventTitleEditText(
+          context, viewModel.onValidateTitle, viewModel.onSavedValTitle),
+      eventWidgets.descriptionBigEditText(context,
+          viewModel.onValidateDescription, viewModel.onSavedValDescription),
+      eventWidgets.categoryChooser(
+          context,
+          viewModel.onValidateCategory,
+          viewModel.onSavedValCategory,
+          categoryController,
+          viewModel.categories),
+      groupsCheckBoxes(viewModel.onValidateTags, viewModel.onSavedValTags),
+      eventWidgets.addDatesIntoWidget(context, widgets, () {
         setState(() {});
-      }, onValidateDates, _onSavedValDates),
-      EventCommonWidgets().locationEditText(context, onValidateLocation,
-          (onSavedVal) => {localizacion = onSavedVal}),
-      EventCommonWidgets().addCheckbox(
+      }, viewModel.onValidateDates, viewModel.onSavedValDates),
+      eventWidgets.locationEditText(
+          context, viewModel.onValidateLocation, viewModel.onSavedValLocation),
+      eventWidgets.addCheckbox(
           context,
           AppLocalizations.of(context)!.necesitaFechaInscripcion,
-          onValidateInscriptionDate,
-          _onSavedValInscriptionDate,
+          viewModel.onValidateInscriptionDate,
+          viewModel.onSavedValInscriptionDate,
           _isCheckedForInscriptionDate, () {
-        setState(() {
-          _isCheckedForInscriptionDate = !_isCheckedForInscriptionDate;
-        });
+        viewModel.onCheckedInscriptionDate(_isCheckedForInscriptionDate);
       }),
       submitButton(context),
     ];
@@ -93,7 +85,7 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
           context,
           _isApiCallProcess,
           Form(
-            key: _formKey,
+            key: viewModel.formKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -109,83 +101,45 @@ class _AddEventGroupPageState extends State<AddEventGroupPage> {
     );
   }
 
-  groupsCheckBoxes(Function onValidate) {
-    return JaviForms.chipsInputFieldWidget(context, allTagsButtons, onValidate,
-        (onSavedVal) => {groupsChips = onSavedVal},
+  groupsCheckBoxes(Function onValidate, Function onSavedVal) {
+    return JaviForms.chipsInputFieldWidget(
+        context, viewModel.allGroups, onValidate, onSavedVal,
         titleEvent: AppLocalizations.of(context)!.seleccionaEtiquetas);
   }
 
   submitButton(BuildContext context) {
     return JaviForms.submitButton(context, AppLocalizations.of(context)!.send,
         () async {
-      if (!_formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context)!.errorForm)));
-        return;
-      }
-      _showLoading(false);
-      _formKey.currentState?.save();
-
-      AddEventGroupOutput addEventOutput = await AddEventGroup().run(
-          titulo,
-          descripcion,
-          categoria,
-          localizacion,
-          fechasEvento,
-          groupsChips,
-          fechaFinInscripcion);
-
-      fechasEvento = [];
-      String titleDialog = "";
-      Icon? iconDialog;
-      Function onPressed = () {
-        CustomRouter.router.pop();
-      };
-
-      if (addEventOutput == AddEventGroupOutput.created) {
-        titleDialog = context.mounted
-            ? AppLocalizations.of(context)?.eventoCreado ?? ""
-            : "";
-        iconDialog = const Icon(Icons.check);
-      } else if (addEventOutput == AddEventGroupOutput.forbidden) {
-        titleDialog = context.mounted
-            ? AppLocalizations.of(context)?.errorPermisos ?? ""
-            : "";
-        iconDialog = const Icon(Icons.sms_failed);
-      } else {
-        titleDialog = context.mounted
-            ? AppLocalizations.of(context)?.errorCrearEvento ?? ""
-            : "";
-        iconDialog = const Icon(Icons.error);
-        onPressed = () {};
-      }
-      _showLoading(false);
-
-      if (context.mounted) {
-        widgetsJavi.showDialogWithText(context, titleDialog, onPressed,
-            icon: iconDialog);
-      }
+      viewModel.submitButton(context);
     });
   }
 
-  String? _onValidateTags(List<ChipButtonModel>? onValidateVal) {
-    return (onValidateVal == null || onValidateVal.isEmpty)
-        ? AppLocalizations.of(context)!.mustSelectOneOrMore
-        : null;
+  void _subscribeAllToViewModel() {
+    subscriptions
+        .add(viewModel.isApiCallProcess.stream.listen((isApiCallProcess) {
+      setState(() {
+        _isApiCallProcess = isApiCallProcess;
+      });
+    }));
+
+    subscriptions.add(viewModel.responseDialog.listen((responseDialog) {
+      widgetsJavi.showDialogWithText(
+          context, responseDialog.title, responseDialog.onPressed,
+          icon: responseDialog.icon);
+    }));
+
+    subscriptions.add(viewModel.isChecked.stream.listen((check) {
+      setState(() {
+        _isCheckedForInscriptionDate = check;
+      });
+    }));
   }
 
-  _onSavedValDates(String? onSavedVal) {
-    fechasEvento.add(JaviForms().stringSpainFormatToBdFormat(onSavedVal!));
-  }
-
-  _onSavedValInscriptionDate(String? onSavedVal) {
-    fechaFinInscripcion =
-        (JaviForms().stringSpainFormatToBdFormat(onSavedVal!));
-  }
-
-  _showLoading(bool showLoading) {
-    setState(() {
-      _isApiCallProcess = showLoading;
-    });
+  @override
+  void dispose() {
+    for (var element in subscriptions) {
+      element.cancel();
+    }
+    super.dispose();
   }
 }

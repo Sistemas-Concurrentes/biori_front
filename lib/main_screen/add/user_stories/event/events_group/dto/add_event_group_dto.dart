@@ -1,20 +1,20 @@
 class AddEventGroupDto {
-  String? titulo;
-  String? descripcion;
-  String? categoria;
-  String? localizacion;
-  List<String> fechas = [];
-  List<int> groupsId = [];
+  String titulo;
+  String descripcion;
+  String categoria;
+  String localizacion;
+  List<String> fechas;
+  List<int> groupsId;
   String? fechaFinInscripcion;
 
   AddEventGroupDto({
-    required this.titulo,
-    required this.descripcion,
-    required this.categoria,
-    required this.localizacion,
+    this.titulo = "",
+    this.descripcion = "",
+    this.categoria = "",
+    this.localizacion = "",
     required this.fechas,
-    required this.groupsId,
-    required this.fechaFinInscripcion,
+    this.groupsId = const [],
+    this.fechaFinInscripcion,
   });
 
   Map<String, dynamic> toJson() => {
