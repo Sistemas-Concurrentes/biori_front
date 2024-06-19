@@ -32,11 +32,11 @@ class EventCommonWidgets {
   }
 
   categoryChooser(BuildContext context, Function onValidate,
-      Function onSavedVal, TextEditingController controller) {
+      Function onSavedVal, TextEditingController controller, List values) {
     return JaviForms.dropDownMenu(
         context,
         controller,
-        CategoryLabelGroup.values,
+        values,
         onSavedVal,
         (onValidateVal) => onValidate(
             onValidateVal, "${AppLocalizations.of(context)?.mustSelectOne}"),
