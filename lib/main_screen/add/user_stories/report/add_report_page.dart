@@ -100,9 +100,7 @@ class _AddReportPageState extends State<AddReportPage> {
     } else {
       return JaviForms.chipsInputFieldWidget(
           context,
-          courses,
-          (onValidateVal) => onValidate(onValidateVal, context),
-          (onSavedVal) => onSaved(onSavedVal),
+          courses, onValidate, (onSavedVal) => onSaved(onSavedVal),
           titleEvent: AppLocalizations.of(context)?.seleccionaGrupos ?? "");
     }
   }
