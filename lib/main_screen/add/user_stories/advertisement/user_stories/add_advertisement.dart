@@ -1,7 +1,6 @@
 import 'package:biori/conection_to_backend/requests.dart';
 import 'package:biori/main_screen/add/user_stories/advertisement/dto/add_advertisement_dto.dart';
 import 'package:biori/style/constants.dart';
-import 'package:biori/style/model/chip_button_model.dart';
 
 enum AddAdvertisementOutput {
   created,
@@ -12,13 +11,8 @@ enum AddAdvertisementOutput {
 class AddAdvertisement {
   final addAdvertisementUri = '${Constants().URI}/releases/notice/addNotice';
 
-  Future<AddAdvertisementOutput> run(
-      String titulo, String descripcion, List<ChipButtonModel> tags) async {
-    Map<String, dynamic> data = AddAdvertisementDto(
-      titulo: titulo,
-      descripcion: descripcion,
-      tagsButtons: tags,
-    ).toJson();
+  Future<AddAdvertisementOutput> run(AddAdvertisementDto model) async {
+    Map<String, dynamic> data = model.toJson();
 
     var response =
         await ApiService().postRequestWithHeader(addAdvertisementUri, data);

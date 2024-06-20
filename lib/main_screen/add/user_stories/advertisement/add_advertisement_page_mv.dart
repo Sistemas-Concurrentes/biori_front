@@ -1,3 +1,4 @@
+import 'package:biori/main_screen/add/user_stories/advertisement/dto/add_advertisement_dto.dart';
 import 'package:biori/main_screen/add/user_stories/advertisement/repository/add_advertisement_repository.dart';
 import 'package:biori/main_screen/add/user_stories/advertisement/user_stories/add_advertisement.dart';
 import 'package:biori/router/custom_router.dart';
@@ -15,9 +16,7 @@ class AddAdvertisementPageVM {
   final formKey = GlobalKey<FormState>();
   List<ChipButtonModel> allGroups = [];
 
-  String titulo = "";
-  String descripcion = "";
-  List<ChipButtonModel> coursesToSend = [];
+  AddAdvertisementDto model = AddAdvertisementDto(groupsButtons: []);
   bool isApiCallProcess = false;
 
   void loadGroups() async {
@@ -44,15 +43,15 @@ class AddAdvertisementPageVM {
   }
 
   onSavedValTags(List<ChipButtonModel> onSavedVal) {
-    coursesToSend = onSavedVal;
+    model.groupsButtons = onSavedVal;
   }
 
   onSavedValTitle(String onSavedVal) {
-    titulo = onSavedVal;
+    model.titulo = onSavedVal;
   }
 
   onSavedValDescription(String onSavedVal) {
-    descripcion = onSavedVal;
+    model.descripcion = onSavedVal;
   }
 
   void submitButton(BuildContext context) async {
@@ -64,8 +63,7 @@ class AddAdvertisementPageVM {
     formKey.currentState!.save();
 
     reload.add(isApiCallProcess = true);
-    var addAdvertismentOutput =
-        await AddAdvertisement().run(titulo, descripcion, coursesToSend);
+    var addAdvertismentOutput = await AddAdvertisement().run(model);
 
     reload.add(isApiCallProcess = false);
 
