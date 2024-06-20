@@ -45,7 +45,8 @@ class EventGroupCard extends StatelessWidget {
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventGroupModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-            ReleasesWidgets().dividerAndSubtitleName(context, "Groups"),
+            ReleasesWidgets().dividerAndSubtitleName(
+                context, AppLocalizations.of(context)?.grupos ?? 'Groups'),
             ReleasesWidgets.releaseGroupsNameRow(context, groupsInfo),
             _ultimaLinea(context, AppLocalizations.of(context)!.saberMas)
           ],

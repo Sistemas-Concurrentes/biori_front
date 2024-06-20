@@ -2,6 +2,7 @@ import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import '../../releases_widgets/releases_widgets.dart';
 import '../model/notices_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NoticesCard extends StatelessWidget {
   final scrollController = ScrollController();
@@ -18,7 +19,8 @@ class NoticesCard extends StatelessWidget {
           ReleasesWidgets.releaseTitleRow(context, noticeModel.title),
           ReleasesWidgets.releaseDescriptionRow(
               context, noticeModel.description),
-          ReleasesWidgets().dividerAndSubtitleName(context, "Grupos"),
+          ReleasesWidgets().dividerAndSubtitleName(
+              context, AppLocalizations.of(context)?.grupos ?? 'Groups'),
           ReleasesWidgets.releaseGroupsNameRow(context, noticeModel.groupsInfo),
         ],
       ),

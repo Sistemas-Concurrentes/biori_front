@@ -74,6 +74,7 @@
     "errorInscripcion": "Error signing up",
     "buscar": "Search",
     "grupo": "Group",
+    "grupos": "Groups",
     "general": "General",
     "anadirEventoGrupo": "Add Group Event",
     "anadirEventoGeneral": "Add General Event"
