@@ -24,6 +24,7 @@ class EventGroupDetailPage extends StatefulWidget {
 class _EventGroupDetailPageState extends State<EventGroupDetailPage>
     implements CardListenerInterface {
   late EventGroupModel detailEventModel;
+  final generalWidgets = WidgetsJavi();
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
 
     return Scaffold(
       appBar:
-          WidgetsJavi().myAppBar(AppLocalizations.of(context)?.evento ?? ''),
+          generalWidgets.myAppBar(AppLocalizations.of(context)?.evento ?? ''),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -49,10 +50,10 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
             child: Column(
               children: [
                 _eventCardRow(context),
-                WidgetsJavi().paddedWidget(_eventCardDescription(context)),
-                WidgetsJavi().paddedWidget(_moreInfo(context)),
-                WidgetsJavi().paddedWidget(const Divider()),
-                WidgetsJavi().paddedWidget(userInteractionsRow(groupsInfo),
+                generalWidgets.paddedWidget(_eventCardDescription(context)),
+                generalWidgets.paddedWidget(_moreInfo(context)),
+                generalWidgets.paddedWidget(const Divider()),
+                generalWidgets.paddedWidget(userInteractionsRow(groupsInfo),
                     topPadding: JaviPaddings.S),
               ],
             ),
@@ -103,14 +104,24 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          complementaryInfo(
-              "Fecha del evento", allDatesToString(detailEventModel.dates)),
-          WidgetsJavi().paddedWidget(
-              complementaryInfo("Lugar", detailEventModel.location),
+          complementaryInfo(AppLocalizations.of(context)?.fechasEvento ?? '',
+              allDatesToString(detailEventModel.dates)),
+          generalWidgets.paddedWidget(
+              complementaryInfo(AppLocalizations.of(context)?.autor ?? '',
+                  detailEventModel.organiserName),
+              topPadding: JaviPaddings.M),
+          generalWidgets.paddedWidget(
+              complementaryInfo(AppLocalizations.of(context)?.categoria ?? '',
+                  detailEventModel.category),
+              topPadding: JaviPaddings.M),
+          generalWidgets.paddedWidget(
+              complementaryInfo(AppLocalizations.of(context)?.lugar ?? '',
+                  detailEventModel.location),
               topPadding: JaviPaddings.M),
           if (detailEventModel.endInscription != null)
-            WidgetsJavi().paddedWidget(
-                complementaryInfo("Fecha fin de inscripción",
+            generalWidgets.paddedWidget(
+                complementaryInfo(
+                    AppLocalizations.of(context)?.fechaFinInscripcion ?? '',
                     dateToString(detailEventModel.endInscription!)),
                 topPadding: JaviPaddings.M),
         ],
@@ -141,7 +152,7 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
           //
         ]),
         releaseGroupsNameRow(context, groups),
-        WidgetsJavi().paddedWidget(
+        generalWidgets.paddedWidget(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

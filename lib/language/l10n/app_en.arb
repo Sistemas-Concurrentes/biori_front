@@ -60,7 +60,11 @@
     "selectOneOrMore": "Select one or more",
     "necesitaFechaInscripcion": "Do you need an end registration date?",
     "fechasEvento": "Event dates",
+    "autor": "Author",
+    "categoria": "Category",
     "fecha": "Date",
+    "lugar": "Place",
+    "fechaFinInscripcion": "End registration date",
 
     "eventoCreado": "Event created",
     "avisoCreado": "Notice created",
