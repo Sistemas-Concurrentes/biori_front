@@ -71,6 +71,8 @@ class EventGroupModel implements ReleaseModelInterface, EventModelInterface {
           .toList(),
       lastUpdate: DateTime.parse(json['updatedAt'].toString()),
       numberLikes: json['likes'],
+      isLiked: json['isLiked'] == 1,
+      isSubscribed: json['isRegistered'] == 1,
       endInscription: json['dateEndInscription'] != null
           ? DateTime.parse(json['dateEndInscription'].toString())
           : null,

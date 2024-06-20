@@ -23,7 +23,6 @@ class HomePageState extends State<HomePage> {
       GlobalKey<RefreshIndicatorState>();
 
   late List<int> categoriesFollowedByUser;
-  late List<int> groupsSubscribedByUser;
   final viewModel = HomePageViewModel();
   final List<StreamSubscription> subscriptions = [];
   final homeWidgets = HomeWidgets();
@@ -36,7 +35,6 @@ class HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     cardListener = _CardListenerInterface(viewModel);
-    groupsSubscribedByUser = [1];
 
     subscriptions.add(viewModel.releases.stream.listen((releases) {
       setState(() {
