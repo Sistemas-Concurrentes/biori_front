@@ -1,8 +1,7 @@
-enum ReleaseType {
-  event,
-  advertisement, report }
+enum ReleaseType { event, notice, report, eventGroup }
+
 abstract class CardListenerInterface {
-  likeEvent(int id, ReleaseType releaseType, bool isLiked);
+  likeEvent(int id, bool isLiked);
   subscribeCategory(int id, ReleaseType releaseType);
 
   subscribeEvent(int id);

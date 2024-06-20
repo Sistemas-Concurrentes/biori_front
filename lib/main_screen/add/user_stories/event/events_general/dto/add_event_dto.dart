@@ -1,22 +1,22 @@
 import 'package:biori/style/model/chip_button_model.dart';
 
 class AddEventDto {
-  String? titulo;
-  String? descripcion;
-  String? categoria;
-  String? localizacion;
-  List<String> fechas = [];
-  List<ChipButtonModel> tagsButtons = [];
+  String titulo;
+  String descripcion;
+  String categoria;
+  String localizacion;
+  List<String> fechas;
+  List<ChipButtonModel> tagsButtons;
   String? fechaFinInscripcion;
 
   AddEventDto({
-    required this.titulo,
-    required this.descripcion,
-    required this.categoria,
-    required this.localizacion,
+    this.titulo = "",
+    this.descripcion = "",
+    this.categoria = "",
+    this.localizacion = "",
     required this.fechas,
-    required this.tagsButtons,
-    required this.fechaFinInscripcion,
+    this.tagsButtons = const [],
+    this.fechaFinInscripcion,
   });
 
   Map<String, dynamic> toJson() => {

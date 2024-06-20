@@ -1,13 +1,13 @@
 import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
 import 'package:biori/main_screen/home/widget/events/widget/event_group_card.dart';
+import 'package:biori/main_screen/home/widget/notices/model/notices_model.dart';
+import 'package:biori/main_screen/home/widget/notices/widget/notices_card.dart';
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:biori/router/custom_router.dart';
 import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 
-import 'advertisement/model/advertisement_model.dart';
-import 'advertisement/widget/advertisement_card.dart';
 import 'events/model/event_group_model.dart';
 import 'events/model/event_model.dart';
 import 'events/widget/event_card.dart';
@@ -16,31 +16,34 @@ import 'reports/model/report_model.dart';
 import 'reports/widget/report_card.dart';
 
 class HomeWidgets {
-  Center getCenterListBuilder(
+  Container getCenterListBuilder(
       allReleases, CardListenerInterface cardListenerInterfaceHomePage) {
-    return Center(
-      child: Container(
-        constraints: const BoxConstraints(
-          maxWidth: ReleasesConstants.maxWidth,
-        ),
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            final release = _getWidgetFromRelease(
-                allReleases[index], cardListenerInterfaceHomePage);
+    return Container(
+      constraints: const BoxConstraints(
+        maxWidth: ReleasesConstants.maxWidth,
+      ),
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          final release = _getWidgetFromRelease(
+              allReleases[index], cardListenerInterfaceHomePage);
+          final backgroundColor = allReleases[index] is ReportModel
+              ? Colors.red[100]
+              : Theme.of(context).cardColor;
 
-            return Card(
-              clipBehavior: Clip.hardEdge,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(ReleasesConstants.borderRadius),
-              ),
-              elevation: ReleasesConstants.elevation,
-              margin: const EdgeInsets.fromLTRB(JaviPaddings.L, JaviPaddings.M,
-                  JaviPaddings.L, JaviPaddings.M),
-              child: release,
-            );
-          },
-          itemCount: allReleases.length,
-        ),
+          return Card(
+            color: backgroundColor,
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(ReleasesConstants.borderRadius),
+            ),
+            elevation: ReleasesConstants.elevation,
+            margin: const EdgeInsets.fromLTRB(
+                JaviPaddings.L, JaviPaddings.M, JaviPaddings.L, JaviPaddings.M),
+            child: release,
+          );
+        },
+        itemCount: allReleases.length,
       ),
     );
   }
@@ -65,9 +68,9 @@ class HomeWidgets {
         cardListenerInterface: cardListenerInterfaceHomePage,
         eventModel: release,
       );
-    } else if (release is AdvertisementModel) {
-      return AdvertisementCard(
-        advertisementModel: release,
+    } else if (release is NoticesModel) {
+      return NoticesCard(
+        noticeModel: release,
       );
     } else if (release is ReportModel) {
       return ReportCard(

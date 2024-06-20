@@ -44,7 +44,7 @@
 
     "anadir": "Add",
     "evento": "Event",
-    "advertisement": "Advertisement",
+    "advertisement": "Notice",
     "report": "Report",
 
     "titulo": "Title",
@@ -60,13 +60,17 @@
     "selectOneOrMore": "Select one or more",
     "necesitaFechaInscripcion": "Do you need an end registration date?",
     "fechasEvento": "Event dates",
+    "autor": "Author",
+    "categoria": "Category",
     "fecha": "Date",
+    "lugar": "Place",
+    "fechaFinInscripcion": "End registration date",
 
     "eventoCreado": "Event created",
-    "avisoCreado": "Advertisement created",
+    "avisoCreado": "Notice created",
     "reportCreado": "Report created",
     "errorCreandoReport": "Error creating report",
-    "errorCreandoAviso": "Error creating advertisement",
+    "errorCreandoAviso": "Error creating notice",
     "errorCreandoEvento": "Error creating event",
     "errorPermisos": "You do not have permission to create an event",
     "inscribirse": "Sign up",
@@ -74,6 +78,7 @@
     "errorInscripcion": "Error signing up",
     "buscar": "Search",
     "grupo": "Group",
+    "grupos": "Groups",
     "general": "General",
     "anadirEventoGrupo": "Add Group Event",
     "anadirEventoGeneral": "Add General Event"

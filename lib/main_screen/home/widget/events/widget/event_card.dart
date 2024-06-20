@@ -21,6 +21,7 @@ class EventCard extends StatelessWidget {
 
   Future _goToEventDetail() {
     return CustomRouter.router.push("/eventDetail/${eventModel.id}", extra: {
+      'releaseType': ReleaseType.event,
       'eventModel': eventModel,
       'cardListenerInterface': cardListenerInterface
     }).then((value) => null);
@@ -40,8 +41,7 @@ class EventCard extends StatelessWidget {
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-            const Divider(),
-            _tagsNameLinea(context),
+            ReleasesWidgets().dividerAndSubtitleName(context, "Tags"),
             Container(
               margin: const EdgeInsets.only(bottom: JaviPaddings.M),
               child: CategoriesButtons(
@@ -57,23 +57,12 @@ class EventCard extends StatelessWidget {
     );
   }
 
-  Row _tagsNameLinea(context) {
-    return Row(children: [
-      Expanded(
-        child: Container(
-            margin: const EdgeInsets.only(bottom: JaviPaddings.S),
-            child: const Text("Tags", style: JaviStyle.subtitulo)),
-      ),
-    ]);
-  }
-
   Row _ultimaLinea(context, saberMasText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MyLikeButton(
             id: eventModel.id,
-            releaseType: ReleaseType.event,
             numberLikes: eventModel.numberLikes,
             isLiked: eventModel.isLiked,
             likeEvent: cardListenerInterface.likeEvent),

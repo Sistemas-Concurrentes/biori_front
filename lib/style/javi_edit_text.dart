@@ -214,9 +214,7 @@ class JaviForms {
       onSaved: (val) {
         onSaved(val);
       },
-      validator: (val) {
-        return onValidate(val);
-      },
+      validator: (onValidateVal) => onValidate(onValidateVal, context),
       builder: (FormFieldState<dynamic> state) {
         return Container(
           decoration: BoxDecoration(

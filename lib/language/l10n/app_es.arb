@@ -61,6 +61,10 @@
     "necesitaFechaInscripcion": "¿Necesita fecha fin de inscripción?",
     "fechasEvento": "Fechas del evento",
     "fecha": "Fecha",
+    "autor": "Author",
+    "categoria": "Category",
+    "lugar": "Place",
+    "fechaFinInscripcion": "End registration date",
 
     "eventoCreado": "Evento creado",
     "avisoCreado": "Evento creado",
@@ -74,6 +78,7 @@
     "errorInscripcion": "Error al inscribirse",
     "buscar": "Buscar",
     "grupo": "Grupo",
+    "grupos": "Grupos",
     "general": "General",
     "anadirEventoGrupo": "Añadir Evento de Grupo",
     "anadirEventoGeneral": "Añadir Evento General"

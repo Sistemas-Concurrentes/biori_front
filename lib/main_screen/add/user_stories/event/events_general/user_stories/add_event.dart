@@ -13,23 +13,8 @@ enum AddEventOutput {
 class AddEvent {
   final addEventUri = '${Constants().URI}/releases/event/addEvent';
 
-  Future<AddEventOutput> run(
-      String titulo,
-      String descripcion,
-      String categoria,
-      String localizacion,
-      List<String> fechas,
-      List<ChipButtonModel> tags,
-      String? fechaFinInscripcion) async {
-    Map<String, dynamic> data = AddEventDto(
-      titulo: titulo,
-      descripcion: descripcion,
-      categoria: categoria,
-      localizacion: localizacion,
-      fechas: fechas,
-      tagsButtons: tags,
-      fechaFinInscripcion: fechaFinInscripcion,
-    ).toJson();
+  Future<AddEventOutput> run(AddEventDto model) async {
+    Map<String, dynamic> data = model.toJson();
 
     var response = await ApiService().postRequestWithHeader(addEventUri, data);
 

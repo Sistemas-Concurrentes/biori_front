@@ -4,13 +4,13 @@ import '../../../../../style/javi_edit_text.dart';
 import 'constants/constants.dart';
 
 class ReleasesWidgets {
-  static Row releaseTitleRow(context, title) {
+  static Row releaseTitleRow(context, title, {bottomPadding = JaviPaddings.L}) {
     return Row(
       children: [
         Expanded(
           child: Container(
             alignment: Alignment.topLeft,
-            margin: const EdgeInsets.only(bottom: JaviPaddings.L),
+            margin: EdgeInsets.only(bottom: bottomPadding),
             child: Text(
               title,
               textAlign: TextAlign.left,
@@ -70,5 +70,20 @@ class ReleasesWidgets {
     String groups = "";
     groupsInfo.forEach((k, v) => groups += "$v, ");
     return groups.substring(0, groups.length - 2);
+  }
+
+  Column dividerAndSubtitleName(context, String subtitle) {
+    return Column(
+      children: [
+        const Divider(),
+        Row(children: [
+          Expanded(
+            child: Container(
+                margin: const EdgeInsets.only(bottom: JaviPaddings.S),
+                child: Text(subtitle, style: JaviStyle.subtitulo)),
+          ),
+        ]),
+      ],
+    );
   }
 }

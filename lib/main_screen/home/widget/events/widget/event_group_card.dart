@@ -21,7 +21,8 @@ class EventGroupCard extends StatelessWidget {
   Future _goToEventDetail() {
     return CustomRouter.router.push("/eventDetail/${eventGroupModel.id}",
         extra: {
-          'eventModel': eventGroupModel,
+      'releaseType': ReleaseType.eventGroup,
+      'eventModel': eventGroupModel,
           'cardListenerInterface': cardListenerInterface
     }).then((value) => null);
   }
@@ -44,8 +45,8 @@ class EventGroupCard extends StatelessWidget {
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventGroupModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-            const Divider(),
-            _groupsName(context),
+            ReleasesWidgets().dividerAndSubtitleName(
+                context, AppLocalizations.of(context)?.grupos ?? 'Groups'),
             ReleasesWidgets.releaseGroupsNameRow(context, groupsInfo),
             _ultimaLinea(context, AppLocalizations.of(context)!.saberMas)
           ],
@@ -54,23 +55,12 @@ class EventGroupCard extends StatelessWidget {
     );
   }
 
-  Row _groupsName(context) {
-    return Row(children: [
-      Expanded(
-        child: Container(
-            margin: const EdgeInsets.only(bottom: JaviPaddings.S),
-            child: const Text("Groups", style: JaviStyle.subtitulo)),
-      ),
-    ]);
-  }
-
   Row _ultimaLinea(context, saberMasText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MyLikeButton(
             id: eventGroupModel.id,
-            releaseType: ReleaseType.event,
             numberLikes: eventGroupModel.numberLikes,
             isLiked: eventGroupModel.isLiked,
             likeEvent: cardListenerInterface.likeEvent),

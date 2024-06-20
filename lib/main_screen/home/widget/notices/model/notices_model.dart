@@ -1,43 +1,47 @@
+import 'package:biori/main_screen/home/listeners/card_listener_interface.dart';
+
 import '../../releases_widgets/release_model_interface.dart';
 
-class AdvertisementModel implements ReleaseModelInterface {
+class NoticesModel implements ReleaseModelInterface {
+  @override
   int id;
+
+  @override
+  ReleaseType get releaseType => ReleaseType.notice;
+
   Map<int, String> groupsInfo;
   String title;
   String description;
   String creatorName;
+  int creatorId;
 
   @override
   DateTime lastUpdate;
 
-  int? teacherUserId;
-  int? delegateUserId;
-
-  AdvertisementModel(
+  NoticesModel(
       {required this.id,
       required this.groupsInfo,
       required this.title,
       required this.description,
       required this.creatorName,
       required this.lastUpdate,
-      this.teacherUserId,
-      this.delegateUserId});
+      required this.creatorId});
 
-  factory AdvertisementModel.fromJson(Map<String, dynamic> json) {
+  factory NoticesModel.fromJson(Map<String, dynamic> json) {
     final Map<int, String> groupsInfo = {};
 
     for (var group in json['groups'] as List<dynamic>) {
       groupsInfo[group['id']] = group['name'];
     }
 
-    return AdvertisementModel(
+    return NoticesModel(
       id: json['id'],
       title: json['title'],
       description: json['description'],
       groupsInfo: groupsInfo,
       creatorName: json['userName'],
       lastUpdate: DateTime.parse(json['updatedAt'].toString()),
-      teacherUserId: json['userId'],
+      creatorId: json['userId'],
     );
   }
 }

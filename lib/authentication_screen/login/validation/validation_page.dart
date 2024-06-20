@@ -1,5 +1,7 @@
 import 'package:biori/authentication_screen/login/validation/user_stories/do_request_resend.dart';
 import 'package:biori/authentication_screen/login/validation/user_stories/do_validation.dart';
+import 'package:biori/router/custom_router.dart';
+import 'package:biori/router/route_constants.dart';
 import 'package:biori/style/javi_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:biori/conection_to_backend/authentication_screen/output.dart';
@@ -116,7 +118,7 @@ class _ValidationPageState extends State<ValidationPage> {
         ),
       );
 
-      // Enviar a mainpage
+      CustomRouter.router.go(homePath);
     }
     else{
       _errorSesionSnackBar();
