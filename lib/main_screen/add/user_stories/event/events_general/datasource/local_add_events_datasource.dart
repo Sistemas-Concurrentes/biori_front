@@ -6,11 +6,11 @@ class LocalAddEventDatasource implements AddEventsDatasource {
   @override
   Future<List<ChipButtonModel>> getTeacherTags() async {
     List<ChipButtonModel> courses = [];
-    courses.add(ChipButtonModel(id: 1, name: '1º'));
-    courses.add(ChipButtonModel(id: 2, name: '2º'));
-    courses.add(ChipButtonModel(id: 3, name: '3º'));
-    courses.add(ChipButtonModel(id: 4, name: '4º'));
-    courses.add(ChipButtonModel(id: 0, name: 'Profesores'));
+    courses.add(ChipButtonModel(id: 1, name: 'Zoología'));
+    courses.add(ChipButtonModel(id: 2, name: 'Biología Celular'));
+    courses.add(ChipButtonModel(id: 3, name: 'Bioquímica'));
+    courses.add(ChipButtonModel(id: 4, name: 'Internacional'));
+    courses.add(ChipButtonModel(id: 5, name: 'Complementario/ECTS'));
     await Future.delayed(const Duration(milliseconds: 1), () {});
     return courses;
   }
