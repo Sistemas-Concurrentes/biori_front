@@ -10,7 +10,7 @@ class ApiAddEventsDatasource implements AddEventsDatasource {
   final getAllUri = '${Constants().URI}releases/report/getAllCourses';
 
   @override
-  Future<List<ChipButtonModel>> getEvents() async {
+  Future<List<ChipButtonModel>> getTeacherTags() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString(Constants().TOKEN);
 

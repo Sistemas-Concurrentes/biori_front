@@ -4,7 +4,7 @@ import 'add_events_datasource.dart';
 
 class LocalAddEventDatasource implements AddEventsDatasource {
   @override
-  Future<List<ChipButtonModel>> getEvents() async {
+  Future<List<ChipButtonModel>> getTeacherTags() async {
     List<ChipButtonModel> courses = [];
     courses.add(ChipButtonModel(id: 1, name: '1º'));
     courses.add(ChipButtonModel(id: 2, name: '2º'));
