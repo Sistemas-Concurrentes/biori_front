@@ -50,9 +50,9 @@ class AddReportPageVM {
 
   onSavedValTags(List<ChipButtonModel> onSavedVal) {
     coursesToSend = onSavedVal;
-    toTeachers = coursesToSend.any((element) => element == 0);
+    toTeachers = coursesToSend.any((element) => element.id == 0);
     if (toTeachers) {
-      coursesToSend.removeWhere((course) => course == 0);
+      coursesToSend.removeWhere((course) => course.id == 0);
     }
   }
 
