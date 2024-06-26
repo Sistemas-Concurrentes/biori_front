@@ -141,13 +141,14 @@ class JaviForms {
       validator: (val) {
         return onValidate(val);
       },
-      builder: (FormFieldState<dynamic> state) => SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: DropdownMenu(
+      builder: (FormFieldState<dynamic> state) => LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return DropdownMenu(
           errorText: state.errorText,
           hintText: hintText,
           controller: controller,
           leadingIcon: const Icon(Icons.category),
+          width: constraints.maxWidth,
           inputDecorationTheme: JaviInputDecorators().inputDecorationThemeBiori(context, ""),
           dropdownMenuEntries:
               enumValues.map<DropdownMenuEntry<dynamic>>((value) {
@@ -159,8 +160,8 @@ class JaviForms {
           onSelected: (initialSelection) {
             state.didChange(initialSelection.label);
           },
-        ),
-      ),
+        );
+      }),
     );
   }
 

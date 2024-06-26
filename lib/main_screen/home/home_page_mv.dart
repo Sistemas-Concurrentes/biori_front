@@ -10,19 +10,21 @@ import 'listeners/card_listener_interface.dart';
 
 class HomePageViewModel {
   final releaseRepository = ReleasesRepository();
-  BehaviorSubject<List<ReleaseModelInterface>> releases =
+  List<ReleaseModelInterface> releasesList = [];
+
+  BehaviorSubject<List<ReleaseModelInterface>> releasesStream =
       BehaviorSubject.seeded([]);
   BehaviorSubject<SubscribeOutput> responseDialog = BehaviorSubject();
   BehaviorSubject<List<int>> categoriesFollowed = BehaviorSubject.seeded([]);
 
   void loadReleases() async {
     final currentCategories = categoriesFollowed.valueOrNull ?? [];
-    final newReleases = await releaseRepository.getReleasesOrderedByUpdate();
-    releases.add(subscribeToEvents(newReleases, currentCategories));
+    releasesList = await releaseRepository.getReleasesOrderedByUpdate();
+    releasesStream.add(subscribeToEventsAndSortByTags(currentCategories));
   }
 
   void likeEvent(int idEvent, bool userSetLike) {
-    final currentReleases = releases.valueOrNull ?? [];
+    final currentReleases = releasesStream.valueOrNull ?? [];
     final event = _getEventById(idEvent);
     if (event == null) {
       return;
@@ -40,11 +42,11 @@ class HomePageViewModel {
       return element;
     }).toList();
 
-    releases.add(newReleases);
+    releasesStream.add(newReleases);
   }
 
   void subscribeEvent(int idEvent) async {
-    final currentReleases = releases.valueOrNull ?? [];
+    final currentReleases = releasesStream.valueOrNull ?? [];
     final event = _getEventById(idEvent);
     if (event == null) {
       return;
@@ -60,7 +62,7 @@ class HomePageViewModel {
       return element;
     }).toList();
 
-    releases.add(newReleases);
+    releasesStream.add(newReleases);
     responseDialog.add(response);
   }
 
@@ -70,34 +72,34 @@ class HomePageViewModel {
 
   void subscribeCategory(int idEvent) {
     final currentCategories = categoriesFollowed.valueOrNull ?? [];
-    final currentReleases = releases.valueOrNull ?? [];
+    releasesList = releasesStream.valueOrNull ?? [];
     if (currentCategories.contains(idEvent)) {
       currentCategories.remove(idEvent);
     } else {
       currentCategories.add(idEvent);
     }
 
-    releases.add(subscribeToEvents(currentReleases, currentCategories));
+    releasesStream.add(subscribeToEventsAndSortByTags(currentCategories));
   }
 
-  List<ReleaseModelInterface> subscribeToEvents(
-      List<ReleaseModelInterface> releases, List<int> categoriesFollowed) {
-    final newReleases = releases.map((allReleases) {
-      if (allReleases is EventModel) {
-        for (var category in allReleases.tags) {
+  List<ReleaseModelInterface> subscribeToEventsAndSortByTags(
+      List<int> categoriesFollowed) {
+    final newReleases = releasesList.map((actualRelease) {
+      if (actualRelease is EventModel) {
+        for (var category in actualRelease.tags) {
           categoriesFollowed.contains(category.id)
               ? category.isFollowed = true
               : category.isFollowed = false;
         }
       }
-      return allReleases;
+      return actualRelease;
     }).toList();
 
     return newReleases;
   }
 
   EventModelInterface? _getEventById(int idEvent) {
-    final currentReleases = releases.valueOrNull ?? [];
+    final currentReleases = releasesStream.valueOrNull ?? [];
     final findRelease = currentReleases
         .where((element) =>
             (ReleaseType.event == element.releaseType ||

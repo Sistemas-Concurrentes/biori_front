@@ -25,7 +25,6 @@ class _AddEventPageState extends State<AddEventPage> {
 
   List<Widget> widgets = [];
 
-  bool _isCheckedForInscriptionDate = false;
   bool _isApiCallProcess = false;
   final TextEditingController categoryController = TextEditingController();
 
@@ -66,8 +65,8 @@ class _AddEventPageState extends State<AddEventPage> {
           AppLocalizations.of(context)!.necesitaFechaInscripcion,
           viewModel.onValidateInscriptionDate,
           viewModel.onSavedValInscriptionDate,
-          _isCheckedForInscriptionDate, () {
-        viewModel.onCheckedInscriptionDate(_isCheckedForInscriptionDate);
+          viewModel.isCheckedRegistrationDate, () {
+        viewModel.onCheckedInscriptionDate();
       }),
       submitButton(context),
     ];
@@ -133,10 +132,8 @@ class _AddEventPageState extends State<AddEventPage> {
           icon: responseDialog.icon);
     }));
 
-    subscriptions.add(viewModel.isChecked.stream.listen((check) {
-      setState(() {
-        _isCheckedForInscriptionDate = check;
-      });
+    subscriptions.add(viewModel.reloadPage.stream.listen((check) {
+      setState(() {});
     }));
   }
 

@@ -4,16 +4,15 @@ import 'package:biori/style/model/chip_button_model.dart';
 import '../datasource/local_add_events_datasource.dart';
 
 class AddEventRepository {
-  final ApiAddEventsDatasource apiAddReportsDatasource =
-      ApiAddEventsDatasource();
-  final LocalAddEventDatasource localAddReportDatasource =
+  final ApiAddEventsDatasource apiAddEventDatasource = ApiAddEventsDatasource();
+  final LocalAddEventDatasource localAddEventDatasource =
       LocalAddEventDatasource();
 
   Future<List<ChipButtonModel>> getTeacherTags() async {
     if (true) {
-      return await localAddReportDatasource.getEvents();
+      return await localAddEventDatasource.getTeacherTags();
     } else {
-      final courses = await apiAddReportsDatasource.getEvents();
+      return await apiAddEventDatasource.getTeacherTags();
     }
   }
 }

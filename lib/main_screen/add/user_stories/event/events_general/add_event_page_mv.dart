@@ -13,8 +13,9 @@ class AddEventPageVM {
   final eventRepository = AddEventRepository();
   List<ChipButtonModel> allTags = [];
   List<CategoryLabelGroup> categories = [];
+  bool isCheckedRegistrationDate = false;
   BehaviorSubject<bool> isApiCallProcess = BehaviorSubject.seeded(false);
-  BehaviorSubject<bool> isChecked = BehaviorSubject.seeded(false);
+  BehaviorSubject<bool> reloadPage = BehaviorSubject.seeded(false);
   BehaviorSubject<ResponseDialog> responseDialog = BehaviorSubject();
 
   final formKey = GlobalKey<FormState>();
@@ -24,14 +25,18 @@ class AddEventPageVM {
 
   void loadTags() async {
     allTags = await eventRepository.getTeacherTags();
+    reloadPage.add(isCheckedRegistrationDate);
   }
 
-  void loadCategories() {
+  void loadCategories() async {
     categories.addAll(CategoryLabelGroup.values);
+
+    reloadPage.add(isCheckedRegistrationDate);
   }
 
-  void onCheckedInscriptionDate(bool actualValue) {
-    isChecked.add(!actualValue);
+  void onCheckedInscriptionDate() {
+    isCheckedRegistrationDate = !isCheckedRegistrationDate;
+    reloadPage.add(isCheckedRegistrationDate);
   }
 
   onValidateTitle(String onValidateVal, String? error) {
