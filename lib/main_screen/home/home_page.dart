@@ -36,7 +36,7 @@ class HomePageState extends State<HomePage> {
     super.initState();
     cardListener = _CardListenerInterface(viewModel);
 
-    subscriptions.add(viewModel.releases.stream.listen((releases) {
+    subscriptions.add(viewModel.releasesStream.stream.listen((releases) {
       setState(() {
         allReleases = releases;
       });
