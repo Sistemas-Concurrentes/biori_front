@@ -84,15 +84,15 @@ class HomePageViewModel {
 
   List<ReleaseModelInterface> subscribeToEventsAndSortByTags(
       List<int> categoriesFollowed) {
-    final newReleases = releasesList.map((allReleases) {
-      if (allReleases is EventModel) {
-        for (var category in allReleases.tags) {
+    final newReleases = releasesList.map((actualRelease) {
+      if (actualRelease is EventModel) {
+        for (var category in actualRelease.tags) {
           categoriesFollowed.contains(category.id)
               ? category.isFollowed = true
               : category.isFollowed = false;
         }
       }
-      return allReleases;
+      return actualRelease;
     }).toList();
 
     return newReleases;
