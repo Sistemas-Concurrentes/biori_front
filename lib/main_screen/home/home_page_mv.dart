@@ -20,7 +20,7 @@ class HomePageViewModel {
   void loadReleases() async {
     final currentCategories = categoriesFollowed.valueOrNull ?? [];
     releasesList = await releaseRepository.getReleasesOrderedByUpdate();
-    releasesStream.add(subscribeToEvents(currentCategories));
+    releasesStream.add(subscribeToEventsAndSortByTags(currentCategories));
   }
 
   void likeEvent(int idEvent, bool userSetLike) {
@@ -79,10 +79,11 @@ class HomePageViewModel {
       currentCategories.add(idEvent);
     }
 
-    releasesStream.add(subscribeToEvents(currentCategories));
+    releasesStream.add(subscribeToEventsAndSortByTags(currentCategories));
   }
 
-  List<ReleaseModelInterface> subscribeToEvents(List<int> categoriesFollowed) {
+  List<ReleaseModelInterface> subscribeToEventsAndSortByTags(
+      List<int> categoriesFollowed) {
     final newReleases = releasesList.map((allReleases) {
       if (allReleases is EventModel) {
         for (var category in allReleases.tags) {
