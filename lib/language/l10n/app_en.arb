@@ -65,6 +65,7 @@
     "fecha": "Date",
     "lugar": "Place",
     "fechaFinInscripcion": "End registration date",
+    "tags": "Tags",
 
     "eventoCreado": "Event created",
     "avisoCreado": "Notice created",

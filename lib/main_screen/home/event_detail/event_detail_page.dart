@@ -48,7 +48,9 @@ class _EventDetailPageState extends State<EventDetailPage>
                 generalWidgets.paddedWidget(_eventCardDescription(context)),
                 generalWidgets.paddedWidget(_moreInfo(context)),
                 generalWidgets.paddedWidget(const Divider()),
-                generalWidgets.paddedWidget(userInteractionsRow(),
+                generalWidgets.paddedWidget(
+                    userInteractionsRow(
+                        AppLocalizations.of(context)?.tags ?? ''),
                     topPadding: JaviPaddings.S),
               ],
             ),
@@ -115,7 +117,8 @@ class _EventDetailPageState extends State<EventDetailPage>
               topPadding: JaviPaddings.M),
           if (detailEventModel.endInscription != null)
             generalWidgets.paddedWidget(
-                complementaryInfo("Fecha fin de inscripción",
+                complementaryInfo(
+                    AppLocalizations.of(context)?.fechaFinInscripcion ?? '',
                     dateToString(detailEventModel.endInscription!)),
                 topPadding: JaviPaddings.M),
         ],
@@ -136,12 +139,12 @@ class _EventDetailPageState extends State<EventDetailPage>
     );
   }
 
-  Widget userInteractionsRow() {
+  Widget userInteractionsRow(String tags) {
     return Column(
       children: [
-        const Row(children: [
+        Row(children: [
           Expanded(
-            child: Text("Tags", style: JaviStyle.subtitulo),
+            child: Text(tags, style: JaviStyle.subtitulo),
           ),
         ]),
         generalWidgets.paddedWidget(
@@ -217,13 +220,6 @@ class _EventDetailPageState extends State<EventDetailPage>
   @override
   subscribeCategory(int idEvent, ReleaseType releaseType) {
     setState(() {
-      detailEventModel.tags = detailEventModel.tags.map((category) {
-        if (category.id == idEvent) {
-          category.isFollowed = !category.isFollowed;
-        }
-        return category;
-      }).toList();
-
       widget.cardListenerInterface.subscribeCategory(idEvent, releaseType);
     });
   }

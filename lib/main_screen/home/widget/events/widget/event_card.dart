@@ -41,7 +41,8 @@ class EventCard extends StatelessWidget {
             ReleasesWidgets.releaseDescriptionRow(
                 context, eventModel.description,
                 maxLimit: ReleasesConstants.maxLinesPerEventDescription),
-            ReleasesWidgets().dividerAndSubtitleName(context, "Tags"),
+            ReleasesWidgets().dividerAndSubtitleName(
+                context, AppLocalizations.of(context)?.tags ?? ''),
             Container(
               margin: const EdgeInsets.only(bottom: JaviPaddings.M),
               child: CategoriesButtons(

@@ -65,6 +65,8 @@
     "categoria": "Category",
     "lugar": "Place",
     "fechaFinInscripcion": "End registration date",
+    "tags": "Etiquetas",
+
 
     "eventoCreado": "Evento creado",
     "avisoCreado": "Evento creado",

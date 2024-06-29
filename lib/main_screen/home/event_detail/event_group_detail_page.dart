@@ -53,7 +53,9 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
                 generalWidgets.paddedWidget(_eventCardDescription(context)),
                 generalWidgets.paddedWidget(_moreInfo(context)),
                 generalWidgets.paddedWidget(const Divider()),
-                generalWidgets.paddedWidget(userInteractionsRow(groupsInfo),
+                generalWidgets.paddedWidget(
+                    userInteractionsRow(
+                        groupsInfo, AppLocalizations.of(context)?.grupos ?? ''),
                     topPadding: JaviPaddings.S),
               ],
             ),
@@ -142,12 +144,12 @@ class _EventGroupDetailPageState extends State<EventGroupDetailPage>
     );
   }
 
-  Widget userInteractionsRow(Map<int, String> groups) {
+  Widget userInteractionsRow(Map<int, String> groups, String groupString) {
     return Column(
       children: [
-        const Row(children: [
+        Row(children: [
           Expanded(
-            child: Text("Groups", style: JaviStyle.subtitulo),
+            child: Text(groupString, style: JaviStyle.subtitulo),
           ),
           //
         ]),
