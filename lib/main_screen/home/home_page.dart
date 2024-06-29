@@ -29,6 +29,7 @@ class HomePageState extends State<HomePage> {
 
   late final cardListener;
 
+  bool showButton = false;
   List<ReleaseModelInterface> allReleases = [];
 
   @override
@@ -41,6 +42,13 @@ class HomePageState extends State<HomePage> {
         allReleases = releases;
       });
     }));
+
+    subscriptions.add(viewModel.showButton.stream.listen((show) {
+      setState(() {
+        showButton = show;
+      });
+    }));
+
     subscriptions.add(viewModel.responseDialog.stream.listen((response) {
       if (response == SubscribeOutput.success) {
         if (mounted) {
@@ -59,6 +67,7 @@ class HomePageState extends State<HomePage> {
     }));
 
     viewModel.loadReleases();
+    viewModel.showButtonToAddComunications();
   }
 
   @override
@@ -84,7 +93,7 @@ class HomePageState extends State<HomePage> {
               },
               child:
                   homeWidgets.getCenterListBuilder(allReleases, cardListener)),
-          homeWidgets.getFloatingActionButton(),
+          if (showButton) homeWidgets.getFloatingActionButton(),
         ],
       );
     }

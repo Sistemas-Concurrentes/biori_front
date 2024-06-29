@@ -6,16 +6,19 @@ import 'package:biori/main_screen/home/widget/events/interface/event_model_inter
 import 'package:biori/main_screen/home/widget/releases_widgets/release_model_interface.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../conection_to_backend/user_data.dart';
 import 'listeners/card_listener_interface.dart';
 
 class HomePageViewModel {
   final releaseRepository = ReleasesRepository();
   List<ReleaseModelInterface> releasesList = [];
+  final userRepository = UserDataRepository();
 
   BehaviorSubject<List<ReleaseModelInterface>> releasesStream =
       BehaviorSubject.seeded([]);
   BehaviorSubject<SubscribeOutput> responseDialog = BehaviorSubject();
   BehaviorSubject<List<int>> categoriesFollowed = BehaviorSubject.seeded([]);
+  BehaviorSubject<bool> showButton = BehaviorSubject.seeded(false);
 
   void loadReleases() async {
     final currentCategories = categoriesFollowed.valueOrNull ?? [];
@@ -70,32 +73,69 @@ class HomePageViewModel {
     categoriesFollowed.add([1]);
   }
 
-  void subscribeCategory(int idEvent) {
+  void subscribeCategory(int idCategory) {
     final currentCategories = categoriesFollowed.valueOrNull ?? [];
     releasesList = releasesStream.valueOrNull ?? [];
-    if (currentCategories.contains(idEvent)) {
-      currentCategories.remove(idEvent);
+    if (currentCategories.contains(idCategory)) {
+      currentCategories.remove(idCategory);
     } else {
-      currentCategories.add(idEvent);
+      currentCategories.add(idCategory);
     }
-
-    releasesStream.add(subscribeToEventsAndSortByTags(currentCategories));
+    releasesStream.add(updateCategoryOnEvents(idCategory));
   }
 
-  List<ReleaseModelInterface> subscribeToEventsAndSortByTags(
-      List<int> categoriesFollowed) {
-    final newReleases = releasesList.map((actualRelease) {
-      if (actualRelease is EventModel) {
+  List<ReleaseModelInterface> updateCategoryOnEvents(int idCategory) {
+    return releasesList.map((actualRelease) {
+      bool isEvent = actualRelease is EventModel;
+      if (isEvent) {
         for (var category in actualRelease.tags) {
-          categoriesFollowed.contains(category.id)
-              ? category.isFollowed = true
-              : category.isFollowed = false;
+          if (category.id == idCategory) {
+            category.isFollowed = !category.isFollowed;
+            return actualRelease;
+          }
         }
       }
       return actualRelease;
     }).toList();
+  }
 
-    return newReleases;
+  List<ReleaseModelInterface> subscribeToEventsAndSortByTags(
+      List<int> categoriesFollowed) {
+    List<ReleaseModelInterface> releasesNotInterested = [];
+    final List<ReleaseModelInterface> newReleases = releasesList
+        .map((actualRelease) {
+          bool isUserInterested = false;
+          bool isEvent = actualRelease is EventModel;
+          if (isEvent) {
+            for (var category in actualRelease.tags) {
+              if (categoriesFollowed.contains(category.id)) {
+                isUserInterested = true;
+                category.isFollowed = true;
+              } else {
+                category.isFollowed = false;
+              }
+            }
+          }
+          if (!isUserInterested && isEvent) {
+            releasesNotInterested.add(actualRelease);
+          } else {
+            return actualRelease;
+          }
+        })
+        .nonNulls
+        .toList();
+
+    return newReleases + releasesNotInterested;
+  }
+
+  void showButtonToAddComunications() async {
+    bool show = false;
+    UserModel user = await userRepository.getUserData();
+
+    if (user.rol == UserRol.admin) {
+      show = true;
+    }
+    showButton.add(show);
   }
 
   EventModelInterface? _getEventById(int idEvent) {
